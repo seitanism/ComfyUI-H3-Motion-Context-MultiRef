@@ -33,6 +33,9 @@ import json
 import logging
 import os
 
+import torch
+
+import comfy.nested_tensor
 import comfy.utils
 import folder_paths
 import node_helpers
@@ -48,6 +51,10 @@ from .existing_video_extension import (
     MiniMaxH3GeneratedAVMaskedContext,
     MiniMaxH3StartMaskedContext,
     MiniMaxH3AssembleExtension,
+    MiniMaxH3AssembleInterior,
+    MiniMaxH3SetAVNoiseMask,
+    MiniMaxH3ClearAVNoiseMask,
+    _require_h3_mask_support,
 )
 from .h3_masked_bridge import MiniMaxH3MaskedAVBridge
 from .h3_song_audio_context import MiniMaxH3SongMaskedAVContext
@@ -1180,6 +1187,292 @@ class MiniMaxH3OptionalReferenceImage:
     def select(self, enabled=False, image=None):
         return (image if bool(enabled) else None,)
 
+class MiniMaxH3CustomKeyframesMasked:
+    """Write still-image H3 keyframes as hard-preserved latent tokens via noise mask.
+
+    Hard-preserves one latent step per keyframe (up to 4 frames of static hold for
+    interior frames; exactly 1 frame at phase-0 positions). Phase-0 positions are
+    1, 18, 35, 52, ... in the default 1-based mode; 0, 17, 34, 51, ... in 0-based
+    mode. Use the soft keyframe node for suggestions; use this node when the frame
+    must appear verbatim. Audio is not masked and will be fully generated.
+
+    If the decoded output shows still-frame artifacts, encode a 5-frame static run
+    (native, 2 steps) and take step 1 (the 4-frame token) as the contingency path.
+    """
+
+    MAX_KEYFRAMES = 32
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "latent": (
+                    "LATENT",
+                    {
+                        "tooltip": (
+                            "Target MiniMax H3 AV latent; defines resolution "
+                            "and exact frame count."
+                        )
+                    },
+                ),
+                "vae": (
+                    "VAE",
+                    {
+                        "tooltip": (
+                            "MiniMax H3 video VAE used to encode each still."
+                        )
+                    },
+                ),
+                "keyframe_state": (
+                    "STRING",
+                    {
+                        "default": (
+                            '{"count":3,"positions":[1,22,79]}'
+                        ),
+                        "multiline": False,
+                        "tooltip": (
+                            "Internal UI state. Normally managed by the "
+                            "keyframe position controls."
+                        ),
+                    },
+                ),
+                "indexing": (
+                    ["1-based", "0-based"],
+                    {"default": "1-based"},
+                ),
+                "crop": (
+                    ["disabled", "center"],
+                    {"default": "disabled"},
+                ),
+            },
+            "optional": _DynamicKeyframeInputs(),
+        }
+
+    RETURN_TYPES = ("LATENT",)
+    RETURN_NAMES = ("latent",)
+    FUNCTION = "apply"
+    CATEGORY = "conditioning/minimax"
+    DESCRIPTION = (
+        "Hard-preserve still-image keyframes by writing each encoded still directly "
+        "into the target AV latent and masking those steps from denoising. "
+        "Pinned positions must be phase-0 to pin exactly one frame: 1, 18, 35, 52, "
+        "... in the default 1-based mode; 0, 17, 34, 51, ... in 0-based mode. "
+        "Interior positions pin the full containing latent step (up to 4 "
+        "frames of static hold). Incoming latent must not already have a noise_mask. "
+        "Audio is not masked and will be generated freely."
+    )
+
+    def apply(
+        self,
+        latent,
+        vae,
+        keyframe_state,
+        indexing="1-based",
+        crop="disabled",
+        **kwargs,
+    ):
+        _require_h3_mask_support()
+
+        if "noise_mask" in latent:
+            raise ValueError(
+                "h3_motion_context: incoming latent already has a noise_mask. "
+                "MiniMaxH3CustomKeyframesMasked builds a fresh mask and would "
+                "silently clobber it. Mask merging is not yet supported."
+            )
+
+        try:
+            state = json.loads(keyframe_state or "{}")
+        except Exception as exc:
+            raise ValueError(
+                "h3_motion_context: invalid H3 Custom Keyframes UI state"
+            ) from exc
+
+        positions = state.get("positions", [])
+        count = int(state.get("count", len(positions)))
+
+        if count < 1 or count > self.MAX_KEYFRAMES:
+            raise ValueError(
+                "h3_motion_context: Custom Keyframes count must be 1..%d"
+                % self.MAX_KEYFRAMES
+            )
+        if len(positions) < count:
+            raise ValueError(
+                "h3_motion_context: %d keyframe slots but only %d saved "
+                "positions" % (count, len(positions))
+            )
+
+        video = _video_from_latent(latent)
+        latent_t = int(video.shape[2])
+        width = int(video.shape[4]) * 16
+        height = int(video.shape[3]) * 16
+        frame_count = _pixel_frames(latent_t)
+
+        offsets = _step_offsets(latent_t)
+
+        anchors = []
+        for slot in range(1, count + 1):
+            raw_position = int(positions[slot - 1])
+            pixel_index = (
+                raw_position - 1
+                if indexing == "1-based"
+                else raw_position
+            )
+
+            if pixel_index < 0 or pixel_index >= frame_count:
+                low, high = (
+                    (1, frame_count)
+                    if indexing == "1-based"
+                    else (0, frame_count - 1)
+                )
+                raise ValueError(
+                    "h3_motion_context: keyframe %d position %d is "
+                    "outside %d..%d"
+                    % (slot, raw_position, low, high)
+                )
+
+            # Find the latent step containing this pixel frame.
+            step_k = None
+            for k, off in enumerate(offsets):
+                span_k = FRAME_PER_TOKEN[k % 5]
+                if off <= pixel_index < off + span_k:
+                    step_k = k
+                    step_start = off
+                    step_span = span_k
+                    break
+
+            if step_k is None:
+                raise ValueError(
+                    "h3_motion_context: keyframe %d pixel index %d could not "
+                    "be mapped to a latent step" % (slot, pixel_index)
+                )
+
+            if step_span > 1:
+                phase0_lower = (pixel_index // 17) * 17
+                phase0_upper = phase0_lower + 17
+                disp_lower = (
+                    phase0_lower + 1 if indexing == "1-based" else phase0_lower
+                )
+                disp_upper = (
+                    phase0_upper + 1 if indexing == "1-based" else phase0_upper
+                )
+                _LOG.info(
+                    "h3_motion_context: keyframe %d requests pixel frame %d "
+                    "(inside latent step %d, frames %d-%d); the full %d-frame "
+                    "step will be pinned as a static hold. Nearest phase-0 "
+                    "positions (%s indexing): %d and %d",
+                    slot,
+                    pixel_index,
+                    step_k,
+                    step_start,
+                    step_start + step_span - 1,
+                    step_span,
+                    indexing,
+                    disp_lower,
+                    disp_upper,
+                )
+
+            image = kwargs.get("keyframe_image_%d" % slot)
+            if image is None:
+                raise ValueError(
+                    "h3_motion_context: keyframe %d has no image connected"
+                    % slot
+                )
+            if getattr(image, "ndim", 0) != 4:
+                raise ValueError(
+                    "h3_motion_context: keyframe %d expected IMAGE "
+                    "[B,H,W,C]" % slot
+                )
+            if int(image.shape[0]) != 1:
+                raise ValueError(
+                    "h3_motion_context: keyframe %d must receive exactly "
+                    "one image, not a batch of %d"
+                    % (slot, int(image.shape[0]))
+                )
+
+            anchors.append((step_k, slot, image, pixel_index, step_start, step_span))
+
+        anchors.sort(key=lambda item: item[0])
+
+        for i in range(1, len(anchors)):
+            if anchors[i - 1][0] == anchors[i][0]:
+                slot_a, px_a = anchors[i - 1][1], anchors[i - 1][3]
+                slot_b, px_b = anchors[i][1], anchors[i][3]
+                disp_a = px_a + 1 if indexing == "1-based" else px_a
+                disp_b = px_b + 1 if indexing == "1-based" else px_b
+                raise ValueError(
+                    "h3_motion_context: keyframe %d (position %d) and "
+                    "keyframe %d (position %d) both map to latent step %d "
+                    "after quantization"
+                    % (slot_a, disp_a, slot_b, disp_b, anchors[i][0])
+                )
+
+        # Extract the audio stream from the AV latent.
+        parts = _streams_from_latent(latent)
+        target_video_tensor = parts[0]
+        if target_video_tensor.ndim == 4:
+            target_video_tensor = target_video_tensor.unsqueeze(0)
+        target_audio_tensor = parts[1] if len(parts) > 1 else None
+        if target_audio_tensor is not None and target_audio_tensor.ndim == 3:
+            target_audio_tensor = target_audio_tensor.unsqueeze(0)
+
+        out_video = target_video_tensor.clone()
+
+        video_mask = torch.ones(
+            (1, 1, latent_t, int(target_video_tensor.shape[3]), int(target_video_tensor.shape[4])),
+            device=target_video_tensor.device,
+            dtype=torch.float32,
+        )
+
+        for step_k, slot, image, pixel_index, step_start, step_span in anchors:
+            resized = _resize(image, width, height, crop)
+            encoded = vae.encode(resized)
+
+            if (
+                getattr(encoded, "ndim", 0) != 5
+                or int(encoded.shape[2]) != 1
+            ):
+                raise ValueError(
+                    "h3_motion_context: keyframe %d encoded to %s; "
+                    "expected one H3 still latent [B,C,1,H,W]"
+                    % (
+                        slot,
+                        tuple(getattr(encoded, "shape", ())),
+                    )
+                )
+
+            encoded = encoded[:1].to(device=out_video.device, dtype=out_video.dtype)
+            out_video[:, :, step_k : step_k + 1] = encoded
+            video_mask[:, :, step_k] = 0.0
+
+        out = latent.copy()
+        if target_audio_tensor is not None:
+            audio_mask = torch.ones(
+                (1, 1, int(target_audio_tensor.shape[2]), int(target_audio_tensor.shape[3])),
+                device=target_audio_tensor.device,
+                dtype=torch.float32,
+            )
+            out["samples"] = comfy.nested_tensor.NestedTensor(
+                (out_video, target_audio_tensor.clone())
+            )
+            out["noise_mask"] = comfy.nested_tensor.NestedTensor(
+                (video_mask, audio_mask)
+            )
+        else:
+            out["samples"] = out_video
+            out["noise_mask"] = video_mask
+
+        pinned_steps = [a[0] for a in anchors]
+        _LOG.info(
+            "h3_motion_context: Custom Keyframes (Masked) pinned %d keyframes "
+            "at latent steps %s in a %d-frame %dx%d target",
+            len(anchors),
+            pinned_steps,
+            frame_count,
+            width,
+            height,
+        )
+        return (out,)
+
 
 NODE_CLASS_MAPPINGS = {
     "MiniMaxH3MotionContext": MiniMaxH3MotionContext,
@@ -1187,6 +1480,7 @@ NODE_CLASS_MAPPINGS = {
     "MiniMaxH3MotionContextSaveLatent": MiniMaxH3MotionContextSaveLatent,
     "MiniMaxH3MotionContextLoadLatent": MiniMaxH3MotionContextLoadLatent,
     "MiniMaxH3CustomKeyframes": MiniMaxH3CustomKeyframes,
+    "MiniMaxH3CustomKeyframesMasked": MiniMaxH3CustomKeyframesMasked,
     "MiniMaxH3ExistingVideoMaskedContext": MiniMaxH3ExistingVideoMaskedContext,
     "MiniMaxH3GeneratedAVMaskedContext": MiniMaxH3GeneratedAVMaskedContext,
     "MiniMaxH3StartMaskedContext": MiniMaxH3StartMaskedContext,
@@ -1196,6 +1490,9 @@ NODE_CLASS_MAPPINGS = {
     "MiniMaxH3StreamLiveExtensionAVToVHS": MiniMaxH3StreamLiveExtensionAVToVHS,
     "MiniMaxH3StreamLiveMusicVideoToVHS": MiniMaxH3StreamLiveMusicVideoToVHS,
     "MiniMaxH3FinalizeVHSOutput": MiniMaxH3FinalizeVHSOutput,
+    "MiniMaxH3AssembleInterior": MiniMaxH3AssembleInterior,
+    "MiniMaxH3SetAVNoiseMask": MiniMaxH3SetAVNoiseMask,
+    "MiniMaxH3ClearAVNoiseMask": MiniMaxH3ClearAVNoiseMask,
     "MiniMaxH3CropTo32": MiniMaxH3CropTo32,
     "MiniMaxH3StartCanvasSelector": MiniMaxH3StartCanvasSelector,
     "MiniMaxH3OptionalReferenceImage": MiniMaxH3OptionalReferenceImage,
@@ -1210,6 +1507,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "MiniMaxH3MotionContextSaveLatent": "H3 Motion Context Save Latent",
     "MiniMaxH3MotionContextLoadLatent": "H3 Motion Context Load Latent",
     "MiniMaxH3CustomKeyframes": "H3 Custom Keyframes",
+    "MiniMaxH3CustomKeyframesMasked": "H3 Custom Keyframes (Masked)",
     "MiniMaxH3ExistingVideoMaskedContext": "H3 Existing Video Masked Context",
     "MiniMaxH3GeneratedAVMaskedContext": "H3 Generated AV Masked Context",
     "MiniMaxH3StartMaskedContext": "H3 Start Masked Context",
@@ -1219,6 +1517,9 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "MiniMaxH3StreamLiveExtensionAVToVHS": "H3 Stream Final AV Extension to VHS",
     "MiniMaxH3StreamLiveMusicVideoToVHS": "H3 Stream Final Music Video to VHS",
     "MiniMaxH3FinalizeVHSOutput": "H3 Final Stream Output Sink",
+    "MiniMaxH3AssembleInterior": "H3 Assemble Interior Insert",
+    "MiniMaxH3SetAVNoiseMask": "H3 Set AV Noise Mask",
+    "MiniMaxH3ClearAVNoiseMask": "H3 Clear AV Noise Mask",
     "MiniMaxH3CropTo32": "H3 Crop Source To /32",
     "MiniMaxH3StartCanvasSelector": "H3 Start Canvas Selector",
     "MiniMaxH3OptionalReferenceImage": "H3 Optional Reference Image",

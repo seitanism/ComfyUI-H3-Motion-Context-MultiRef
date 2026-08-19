@@ -272,7 +272,12 @@ def _snap_context_length(requested, available, target_frames):
     # endpoint (73/24*40 = 121.666... ticks). That cannot be represented as
     # one exact protected AV seam and can cause either an encoder-length
     # mismatch or an audio/video phase shift.
-    cap = min(int(requested), int(available), int(target_frames) - 1)
+    #
+    # Context length is allowed to cover the full target (a fully preserved
+    # latent with no generate rows); prepare() logs a warning for that case
+    # since sampling it directly is a no-op unless the noise_mask is replaced
+    # downstream (e.g. by a graduated fade mask).
+    cap = min(int(requested), int(available), int(target_frames))
     run = largest_h3_video_run(cap)
     while run >= 5 and not is_exact_av_boundary(run):
         run = largest_h3_video_run(run - 1)
@@ -292,18 +297,20 @@ def _snap_context_length(requested, available, target_frames):
     return run
 
 
-def _apply_audio_context_feather(audio_mask, audio_steps, feather_ticks):
+def _apply_audio_context_feather(audio_mask, audio_steps, feather_ticks, start=0):
     """Protect an audio prefix with an optional half-cosine 0->1 release.
 
     H3 mask semantics are 0=preserve and 1=generate. The total protected
     context duration is unchanged; only the final ``feather_ticks`` latent
-    positions transition fractionally toward generation.
+    positions transition fractionally toward generation. ``start`` offsets the
+    protected window for interior inserts (default 0 = prefix at the origin).
     """
     audio_steps = int(audio_steps)
+    start = int(start)
     feather = max(0, min(int(feather_ticks), audio_steps))
     hard = audio_steps - feather
     if hard > 0:
-        audio_mask[..., :hard] = 0.0
+        audio_mask[..., start:start + hard] = 0.0
     if feather > 0:
         i = torch.arange(
             1, feather + 1, device=audio_mask.device, dtype=audio_mask.dtype
@@ -311,7 +318,7 @@ def _apply_audio_context_feather(audio_mask, audio_steps, feather_ticks):
         ramp = 0.5 - 0.5 * torch.cos(torch.pi * i / float(feather))
         shape = [1] * audio_mask.ndim
         shape[-1] = feather
-        audio_mask[..., hard:audio_steps] = ramp.view(*shape)
+        audio_mask[..., start + hard:start + audio_steps] = ramp.view(*shape)
     return audio_mask
 
 
@@ -394,18 +401,36 @@ class MiniMaxH3ExistingVideoMaskedContext:
                     "default": 8, "min": 0, "max": 256,
                     "tooltip": "Half-cosine release across the final audio-latent context ticks. 0 = hard audio mask; 8 = 0.2 s at H3's 40 Hz audio latent rate."
                 }),
-            }
+            },
+            "optional": {
+                "insert_frame": ("INT", {
+                    "default": 0, "min": 0,
+                    "tooltip": (
+                        "Pixel frame where the preserved segment begins in the target "
+                        "latent. Snaps down to the nearest multiple of 17 (latent phase grid). "
+                        "Multiples of 51 also align the audio clock exactly. "
+                        "0 is the original prefix behavior."
+                    ),
+                }),
+            },
         }
 
-    RETURN_TYPES = ("LATENT", "INT")
-    RETURN_NAMES = ("latent", "trim_frames")
+    RETURN_TYPES = ("LATENT", "INT", "INT", "INT")
+    RETURN_NAMES = ("latent", "trim_frames", "insert_frame", "preserved_frames")
+    OUTPUT_TOOLTIPS = (
+        "Target AV latent with the preserved source segment written in and a denoise mask applied. Connect to the H3 sampler.",
+        "Frames to trim from the start of the generated output. Equals preserved_frames for prefix inserts (insert_frame=0); 0 for interior inserts. Wire to H3 Assemble Existing Video Extension.",
+        "Actual insert position used after snapping to the nearest multiple of 17. Wire to H3 Assemble Interior Insert.",
+        "Number of source frames preserved in the latent. Wire to H3 Assemble Interior Insert.",
+    )
     FUNCTION = "prepare"
     CATEGORY = "conditioning/minimax"
     DESCRIPTION = (
-        "Prepare an existing decoded video as an exact preserved H3 AV prefix. "
+        "Prepare an existing decoded video as an exact preserved H3 AV segment. "
         "The source tail is normalized to H3 timing, VAE-encoded into the target "
-        "latent, and protected with a per-stream denoise mask so H3 generates "
-        "only the future portion."
+        "latent at insert_frame, and protected with a per-stream denoise mask so "
+        "H3 generates only the surrounding portions. Use H3 Assemble Interior "
+        "Insert as the output path for interior inserts."
     )
 
     def prepare(
@@ -419,8 +444,19 @@ class MiniMaxH3ExistingVideoMaskedContext:
         context_length=39,
         crop="disabled",
         audio_feather_ticks=8,
+        insert_frame=0,
     ):
         _require_h3_mask_support()
+
+        insert_frame = int(insert_frame)
+        if insert_frame % 17 != 0:
+            snapped = (insert_frame // 17) * 17
+            _LOG.warning(
+                "h3_masked_extension: insert_frame %d is not a multiple of 17; "
+                "snapping down to %d", insert_frame, snapped
+            )
+            insert_frame = snapped
+
         target_video, target_audio = _streams_from_latent(latent)
         if int(target_video.shape[0]) != 1 or int(target_audio.shape[0]) != 1:
             raise ValueError(
@@ -473,9 +509,13 @@ class MiniMaxH3ExistingVideoMaskedContext:
                 "latent steps covering %d frames; refusing a phase-shifted seam"
                 % (n, video_steps, covered)
             )
-        if video_steps >= int(target_video.shape[2]):
+
+        s = insert_frame // 17 * 5
+        if s + video_steps > int(target_video.shape[2]):
             raise ValueError(
-                "h3_masked_extension: video context consumes the whole target latent"
+                "h3_masked_extension: insert at frame %d (%d video steps) + "
+                "%d context steps = %d exceeds target %d video steps"
+                % (insert_frame, s, video_steps, s + video_steps, int(target_video.shape[2]))
             )
 
         # Audio prefix: exact same physical interval, end-aligned to source end.
@@ -520,9 +560,26 @@ class MiniMaxH3ExistingVideoMaskedContext:
             )
             audio_prefix = audio_prefix[..., -expected_audio_steps:]
         audio_steps = expected_audio_steps
-        if audio_steps >= int(target_audio.shape[-1]):
+
+        exact_a_start = insert_frame / FPS * AUDIO_HZ
+        a_start = int(round(exact_a_start))
+        if insert_frame % 51 != 0:
+            error_ms = abs(exact_a_start - a_start) / AUDIO_HZ * 1000.0
+            _LOG.warning(
+                "h3_masked_extension: insert_frame %d is not a multiple of 51 "
+                "(joint AV boundary). Audio insert rounded from %.6f to %d steps "
+                "(error %.3f ms). Use a multiple of 51 for exact AV alignment.",
+                insert_frame,
+                exact_a_start,
+                a_start,
+                error_ms,
+            )
+
+        if a_start + audio_steps > int(target_audio.shape[-1]):
             raise ValueError(
-                "h3_masked_extension: audio context consumes the whole target latent"
+                "h3_masked_extension: insert at frame %d (audio step %d) + "
+                "%d audio steps = %d exceeds target %d audio steps"
+                % (insert_frame, a_start, audio_steps, a_start + audio_steps, int(target_audio.shape[-1]))
             )
 
         # Fill the clean prefix of the actual target streams.
@@ -542,8 +599,8 @@ class MiniMaxH3ExistingVideoMaskedContext:
                 "h3_masked_extension: encoded audio prefix shape %s does not match target %s"
                 % (tuple(ap.shape), tuple(out_audio.shape))
             )
-        out_video[:, :, :video_steps] = vp
-        out_audio[..., :audio_steps] = ap
+        out_video[:, :, s : s + video_steps] = vp
+        out_audio[..., a_start : a_start + audio_steps] = ap
 
         # ComfyUI PR #15375 unbinds this nested mask, expands each stream to the
         # corresponding latent shape, then H3 turns the two masks into per-row
@@ -558,29 +615,375 @@ class MiniMaxH3ExistingVideoMaskedContext:
             device=out_audio.device,
             dtype=torch.float32,
         )
-        video_mask[:, :, :video_steps] = 0.0
-        _apply_audio_context_feather(audio_mask, audio_steps, audio_feather_ticks)
+        video_mask[:, :, s : s + video_steps] = 0.0
+        _apply_audio_context_feather(
+            audio_mask, audio_steps, audio_feather_ticks, start=a_start
+        )
+
+        if not bool((video_mask > 0).any()):
+            _LOG.warning(
+                "h3_masked_extension: the target timeline is fully covered by the "
+                "preserved context (no generate rows). Sampling this directly is a "
+                "no-op; set a new latent noise_mask (e.g. a graduated fade) before "
+                "generating."
+            )
 
         out = latent.copy()
         out["samples"] = comfy.nested_tensor.NestedTensor((out_video, out_audio))
         out["noise_mask"] = comfy.nested_tensor.NestedTensor((video_mask, audio_mask))
 
+        trim = n if insert_frame == 0 else 0
         _LOG.info(
             "h3_masked_extension: source %.6g fps -> %d canonical 24fps frames at "
-            "%dx%d; preserved prefix %d frames = %d video steps / %d audio "
-            "steps (%.3fs); audio feather %d ticks; target %d frames",
+            "%dx%d; preserved segment %d frames at insert frame %d "
+            "(video steps [%d:%d] / audio steps [%d:%d], %.3fs); "
+            "audio feather %d ticks; target %d frames",
             float(source_fps),
             available,
             width,
             height,
             n,
-            video_steps,
-            audio_steps,
+            insert_frame,
+            s,
+            s + video_steps,
+            a_start,
+            a_start + audio_steps,
             n / FPS,
             max(0, min(int(audio_feather_ticks), audio_steps)),
             target_frames,
         )
-        return (out, n)
+        return (out, trim, insert_frame, n)
+
+
+def _normalize_frame_mask(mask):
+    """Coerce a ComfyUI MASK to [F, H, W] float32."""
+    m = mask if torch.is_tensor(mask) else torch.as_tensor(mask)
+    m = m.to(dtype=torch.float32)
+    if m.ndim == 2:            # [H, W]
+        m = m.unsqueeze(0)
+    elif m.ndim == 4:          # [F, C, H, W] -> average channels away
+        m = m.mean(dim=1)
+    elif m.ndim != 3:          # want [F, H, W]
+        raise ValueError(
+            "h3_av_noise_mask: MASK must be [H,W], [F,H,W] or [F,C,H,W], got %s"
+            % (tuple(m.shape),)
+        )
+    return m
+
+
+def _mask_to_video_stream(mask, t, h, w):
+    """Frame-space MASK -> [1,1,T,H,W] video noise-mask stream at latent res."""
+    m = _normalize_frame_mask(mask)
+    m = m.reshape(1, 1, m.shape[0], m.shape[1], m.shape[2])
+    m = torch.nn.functional.interpolate(
+        m, size=(int(t), int(h), int(w)), mode="trilinear", align_corners=False
+    )
+    return m.clamp_(0.0, 1.0)
+
+
+def _mask_to_audio_stream(mask, t):
+    """Frame-space MASK -> [1,1,2,T] audio noise-mask stream (spatial reduced).
+
+    Audio latent time is uniform 40 Hz, so a plain linear resample of the
+    spatially-averaged frame mask suffices (no phase handling), broadcast to the
+    two audio channels.
+    """
+    m = _normalize_frame_mask(mask)
+    m = m.mean(dim=(1, 2)).reshape(1, 1, -1)          # [1, 1, F]
+    m = torch.nn.functional.interpolate(
+        m, size=int(t), mode="linear", align_corners=False
+    )                                                  # [1, 1, T]
+    m = m.reshape(1, 1, 1, int(t)).expand(1, 1, 2, int(t)).contiguous()
+    return m.clamp_(0.0, 1.0)
+
+
+def _existing_mask_streams(latent):
+    """Return (video_mask, audio_mask) from a latent's nested noise_mask, else (None, None)."""
+    existing = latent.get("noise_mask")
+    if existing is None:
+        return None, None
+    if hasattr(existing, "unbind"):
+        parts = list(existing.unbind())
+    elif isinstance(existing, (tuple, list)):
+        parts = list(existing)
+    else:
+        return None, None
+    if len(parts) < 2:
+        return None, None
+    return parts[0], parts[1]
+
+
+class MiniMaxH3SetAVNoiseMask:
+    """Set a nested H3 AV noise mask (video + audio) on an AV latent.
+
+    ComfyUI's stock ``Set Latent Noise Mask`` overwrites ``noise_mask`` with a
+    single plain tensor, which H3 unpacks to only the video stream — the audio
+    denoise-mask becomes ``None`` and preserved insert audio is silently
+    regenerated.  This node writes a proper two-stream ``NestedTensor`` so both
+    streams keep their intended per-step protection.  Provide masks in frame
+    space; the node resizes each to the latent's stream resolution.
+    """
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {"latent": ("LATENT",)},
+            "optional": {
+                "video_mask": ("MASK",),
+                "audio_mask": ("MASK",),
+            },
+        }
+
+    RETURN_TYPES = ("LATENT",)
+    RETURN_NAMES = ("latent",)
+    FUNCTION = "set_mask"
+    CATEGORY = "conditioning/minimax"
+
+    def set_mask(self, latent, video_mask=None, audio_mask=None):
+        if video_mask is None and audio_mask is None:
+            raise ValueError(
+                "h3_av_noise_mask: both video_mask and audio_mask are None. To "
+                "remove the noise mask entirely use MiniMaxH3ClearAVNoiseMask; to "
+                "discard just one stream, zero that mask and set it."
+            )
+
+        video, audio = _streams_from_latent(latent)
+        ex_video, ex_audio = _existing_mask_streams(latent)
+
+        # For a missing stream: keep the latent's existing one if present,
+        # otherwise default to all-generate (all-ones). H3 treats an all-ones
+        # stream identically to an absent mask -- a stream is only installed as a
+        # denoise condition when its min < 1 (h3_mask_payload_compat) -- so this
+        # is exactly "that stream fully generates", the same state a Clear leaves.
+        if video_mask is not None:
+            out_video = _mask_to_video_stream(
+                video_mask, video.shape[2], video.shape[3], video.shape[4]
+            ).to(device=video.device)
+        elif ex_video is not None:
+            out_video = ex_video
+        else:
+            out_video = torch.ones(
+                (1, 1, int(video.shape[2]), int(video.shape[3]), int(video.shape[4])),
+                device=video.device,
+                dtype=torch.float32,
+            )
+
+        if audio_mask is not None:
+            out_audio = _mask_to_audio_stream(audio_mask, audio.shape[-1]).to(
+                device=audio.device
+            )
+        elif ex_audio is not None:
+            out_audio = ex_audio
+        else:
+            out_audio = torch.ones(
+                (1, 1, 2, int(audio.shape[-1])),
+                device=audio.device,
+                dtype=torch.float32,
+            )
+
+        out = latent.copy()
+        out["noise_mask"] = comfy.nested_tensor.NestedTensor((out_video, out_audio))
+        _LOG.info(
+            "h3_av_noise_mask: set nested AV noise mask (video %s / audio %s)",
+            tuple(out_video.shape),
+            tuple(out_audio.shape),
+        )
+        return (out,)
+
+
+class MiniMaxH3ClearAVNoiseMask:
+    """Remove any noise mask from an H3 AV latent (nested-aware).
+
+    The essentials 'remove mask' node is an external dependency; this ships the
+    same capability and correctly drops a nested AV noise mask so the sampler
+    treats the whole latent as fully generated.
+    """
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {"required": {"latent": ("LATENT",)}}
+
+    RETURN_TYPES = ("LATENT",)
+    RETURN_NAMES = ("latent",)
+    FUNCTION = "clear_mask"
+    CATEGORY = "conditioning/minimax"
+
+    def clear_mask(self, latent):
+        out = latent.copy()
+        out.pop("noise_mask", None)
+        return (out,)
+
+
+class MiniMaxH3AssembleInterior:
+    """Frame/sample-exact assembly for an interior existing-video insert.
+
+    The model was conditioned to preserve the insert region via a noise mask, so
+    the seams here are the same nature as the prefix seam that MiniMaxH3AssembleExtension
+    ships hard-cut. No crossfade is applied; use the soft keyframe node for soft anchoring.
+
+    This node is the required output path for interior inserts: the VAE-decoded
+    output around an interior preserved region does not pixel-match the source
+    because of the causal VAE, so without this node interior inserts have no
+    correct output path.
+    """
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "continuation_images": ("IMAGE", {
+                    "tooltip": "Decoded H3 output frames (full timeline, all frames)."
+                }),
+                "continuation_audio": ("AUDIO", {
+                    "tooltip": "Decoded H3 output audio (full timeline)."
+                }),
+                "source_frames": ("IMAGE", {
+                    "tooltip": "Decoded source video frames. Normalized using the same 24-fps mapping the context node used."
+                }),
+                "source_audio": ("AUDIO", {
+                    "tooltip": "Audio from the source video."
+                }),
+                "source_fps": ("FLOAT", {
+                    "default": 24.0, "min": 1.0, "max": 240.0, "step": 0.001,
+                }),
+                "insert_frame": ("INT", {
+                    "default": 0, "min": 0,
+                    "tooltip": "Wire from the insert_frame output of H3 Existing Video Masked Context."
+                }),
+                "preserved_frames": ("INT", {
+                    "default": 39, "min": 1,
+                    "tooltip": "Wire from the preserved_frames output of H3 Existing Video Masked Context."
+                }),
+                "fps": ("FLOAT", {
+                    "default": 24.0, "min": 1.0, "max": 240.0, "step": 0.001,
+                    "tooltip": "Use 24 for MiniMax H3."
+                }),
+                "crop": (["disabled", "center"], {
+                    "default": "disabled",
+                    "tooltip": "Must match the crop setting used by H3 Existing Video Masked Context."
+                }),
+            }
+        }
+
+    RETURN_TYPES = ("IMAGE", "AUDIO")
+    RETURN_NAMES = ("images", "audio")
+    FUNCTION = "assemble"
+    CATEGORY = "conditioning/minimax"
+    DESCRIPTION = (
+        "Splice the canonical source frames and audio back over the interior "
+        "preserved interval in the decoded H3 continuation. Hard-cut splice with "
+        "exact AV accounting. Required output path for interior inserts because the "
+        "causal VAE cannot exactly round-trip interior latent regions."
+    )
+
+    def assemble(
+        self,
+        continuation_images,
+        continuation_audio,
+        source_frames,
+        source_audio,
+        source_fps,
+        insert_frame,
+        preserved_frames,
+        fps=24.0,
+        crop="disabled",
+    ):
+        fps = float(fps)
+        if fps <= 0:
+            raise ValueError("h3_masked_extension: fps must be > 0")
+
+        insert_frame = int(insert_frame)
+        preserved_frames = int(preserved_frames)
+        n = preserved_frames
+
+        if getattr(continuation_images, "ndim", 0) != 4 or int(continuation_images.shape[0]) < 1:
+            raise ValueError("h3_masked_extension: continuation_images is empty")
+
+        cont_frames = int(continuation_images.shape[0])
+        if insert_frame + n > cont_frames:
+            raise ValueError(
+                "h3_masked_extension: insert_frame %d + preserved_frames %d = %d "
+                "exceeds continuation length %d"
+                % (insert_frame, n, insert_frame + n, cont_frames)
+            )
+
+        height = int(continuation_images.shape[1])
+        width = int(continuation_images.shape[2])
+
+        # Normalize source to 24 fps using the same mapping the context node used,
+        # then take the last n canonical frames.
+        idx = _cfr_index_map(
+            int(source_frames.shape[0]), float(source_fps), source_frames.device, FPS
+        )
+        available = int(idx.numel())
+        if available < n:
+            raise ValueError(
+                "h3_masked_extension: canonical source has %d frames, need %d"
+                % (available, n)
+            )
+        tail_idx = idx[-n:]
+        src_images = source_frames.index_select(0, tail_idx)
+        src_images = _resize_images(src_images, width, height, crop)
+
+        # Splice source images into the continuation.
+        out_images = continuation_images.clone()
+        out_images[insert_frame : insert_frame + n] = src_images
+
+        # Audio splice: split continuation audio, replace insert interval with source.
+        cont_sr = int(continuation_audio["sample_rate"])
+        cont_wave = _stereo_first_batch(continuation_audio["waveform"], "continuation_audio")
+
+        src_wave = _stereo_first_batch(source_audio["waveform"], "source_audio")
+        src_wave = _resample_waveform(
+            src_wave, int(source_audio["sample_rate"]), cont_sr, "source_audio"
+        )
+
+        # Compute exact sample boundaries for each region.
+        total_want = int(round(cont_frames / fps * cont_sr))
+        before_want = int(round(insert_frame / fps * cont_sr))
+        insert_end = insert_frame + n
+        insert_end_want = int(round(insert_end / fps * cont_sr))
+        src_want = insert_end_want - before_want  # samples for the n source frames
+
+        before_wave = _fit_waveform(cont_wave[..., :before_want], before_want, "continuation before-insert")
+        after_want = total_want - insert_end_want
+        after_wave = _fit_waveform(cont_wave[..., insert_end_want:], after_want, "continuation after-insert")
+
+        # Mirror _canonical_audio: fit the resampled source to the full canonical sample
+        # count before taking the tail. This matches what the context node does — short
+        # source audio is padded with silence so the splice agrees with what H3 was
+        # conditioned to preserve.
+        src_canonical_samples = int(round(available / FPS * cont_sr))
+        canonical_src_wave = _fit_waveform(src_wave, src_canonical_samples, "source audio (canonical)")
+        needed_from_src = int(round(n / FPS * cont_sr))
+        src_segment = canonical_src_wave[..., -needed_from_src:]
+        src_segment = _fit_waveform(src_segment, src_want, "source insert audio")
+
+        waveform = torch.cat((before_wave, src_segment, after_wave), dim=-1)
+        waveform = _fit_waveform(waveform, total_want, "assembled audio")
+
+        audio = {"waveform": waveform, "sample_rate": cont_sr}
+
+        expected = int(round(cont_frames / fps * cont_sr))
+        if int(waveform.shape[-1]) != expected:
+            raise RuntimeError(
+                "h3_masked_extension: internal AV accounting failed: got %d audio "
+                "samples, expected %d for %d frames"
+                % (int(waveform.shape[-1]), expected, cont_frames)
+            )
+
+        _LOG.info(
+            "h3_masked_extension: interior splice at frames [%d:%d] of %d-frame "
+            "continuation; source %d canonical frames; %d audio samples at %d Hz "
+            "(drift 0 samples by construction)",
+            insert_frame,
+            insert_frame + n,
+            cont_frames,
+            n,
+            int(waveform.shape[-1]),
+            cont_sr,
+        )
+        return (out_images, audio)
 
 
 class MiniMaxH3GeneratedAVMaskedContext:

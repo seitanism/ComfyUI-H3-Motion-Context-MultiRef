@@ -204,6 +204,32 @@ AUDIO MASK: entire master-song audio latent = 0
 
 The song is therefore treated as authoritative target content rather than something H3 must reconstruct through denoising.
 
+### Hard-preserved keyframes: `H3 Custom Keyframes (Masked)`
+
+Class:
+
+```text
+MiniMaxH3CustomKeyframesMasked
+```
+
+The masked keyframes node applies the same mask semantics to still-image anchors: it VAE-encodes each still, writes it directly into the target AV latent at its quantized latent step, and zeros the video noise mask at exactly those steps so the sampler never denoises them. Audio is not masked; it is fully generated.
+
+Hard vs soft:
+
+| | Soft (`H3 Custom Keyframes`) | Hard (`H3 Custom Keyframes (Masked)`) |
+|---|---|---|
+| Mechanism | conditioning rows | latent write + mask |
+| Adherence | H3 uses image as suggestion | exact preservation (no denoising) |
+| Input | `conditioning` | `latent` + `vae` |
+| Output | `CONDITIONING` | `LATENT` |
+| Audio | follows conditioning | fully generated (not masked) |
+
+Phase-0 vs interior positions: phase-0 positions (`1, 18, 35, 52, ...` in the default 1-based indexing mode; `0, 17, 34, 51, ...` in 0-based mode) map to the single still-token step (1 pinned frame). Interior positions map to the containing 4-frame latent step, pinning a static hold for up to 4 frames; the node logs the frame, the full pinned span, and the nearest phase-0 positions when this happens.
+
+Duplicate positions that resolve to the same latent step after quantization raise with both slot numbers named. The incoming latent must not already have a `noise_mask`; the node raises rather than silently clobbering an existing mask.
+
+Both `H3 Custom Keyframes` and `H3 Custom Keyframes (Masked)` share the same JS keyframe-position widget.
+
 ---
 
 ## 6. `H3 Existing Video Masked Context`
@@ -224,11 +250,46 @@ The node:
 4. resizes/crops source frames to the target H3 geometry;
 5. VAE-encodes the source video tail;
 6. takes the matching physical audio interval and audio-VAE encodes it;
-7. writes both encoded streams into the beginning of the fresh target AV latent;
-8. creates video/audio masks protecting that prefix;
+7. writes both encoded streams into the fresh target AV latent at `insert_frame`;
+8. creates video/audio masks protecting that segment;
 9. leaves the rest of the target denoisable.
 
 This node is normally used only for the **first** generated extension after an arbitrary uploaded video.
+
+### `insert_frame` — the 17/51 grid rule
+
+`insert_frame` specifies the pixel frame where the preserved segment begins in the target latent. At `0` the behavior is byte-identical to the original prefix path. Valid positions are multiples of 17 (the H3 latent phase grid: one still-token step + four 4-frame steps = 17 frames). A non-multiple is snapped down to the nearest multiple of 17, with the snap logged.
+
+Multiples of 51 additionally land on a joint video+audio clock boundary (lcm of the 17-frame video grid and the 3-frame audio-frame boundary at 24 fps / 40 Hz). Using a non-multiple-of-51 insert introduces a sub-25 ms audio rounding that is logged as a warning.
+
+```text
+insert_frame 0:    prefix, trim_frames = n         (original behavior, byte-identical)
+insert_frame 17:   interior, audio rounded by ~8 ms (log warning)
+insert_frame 51:   interior, exact AV boundary
+insert_frame 102:  interior, exact AV boundary
+...
+```
+
+The node returns four outputs: `latent`, `trim_frames`, `insert_frame`, `preserved_frames`. Wire `insert_frame` and `preserved_frames` to `H3 Assemble Interior Insert`.
+
+### Interior inserts: `H3 Assemble Interior Insert`
+
+Class:
+
+```text
+MiniMaxH3AssembleInterior
+```
+
+**For interior inserts (`insert_frame > 0`), this node is the required output path.** The causal VAE cannot exactly round-trip interior latent regions, so the decoded output needs pixel-correct source splicing. It splices canonical source frames and audio back over the interior preserved interval in the decoded H3 output.
+
+Wire inputs:
+
+- `continuation_images` / `continuation_audio` — the full decoded H3 output (all frames);
+- `source_frames` / `source_audio` / `source_fps` — the same source used in the context node;
+- `insert_frame` / `preserved_frames` — wire directly from the context node's new outputs;
+- `fps` / `crop` — must match the context node.
+
+The node uses the same CFR index map and resize call the context node used, so the spliced pixels are identical to what the mask was built around. Hard-cut splice with exact AV accounting; no crossfade, matching `H3 Assemble Existing Video Extension`.
 
 ---
 
@@ -678,7 +739,8 @@ The workflow-facing mask contract is unchanged: `0 = preserve`, `1 = generate`, 
 
 | Display name | Purpose |
 |---|---|
-| H3 Existing Video Masked Context | Start masked continuation from ordinary decoded source AV |
+| H3 Existing Video Masked Context | Start masked continuation from ordinary decoded source AV, at an arbitrary `insert_frame` |
+| H3 Custom Keyframes (Masked) | Hard-preserve still-image keyframes via latent write + noise mask |
 | H3 Generated AV Masked Context | Continue from a previous generated H3 AV latent directly |
 | H3 Masked AV Bridge | Protect source A/B endpoints and generate the middle |
 | H3 Song Audio + Masked Video Context | Put the master-song interval into target audio latent and optionally protect previous visual context |
@@ -697,6 +759,8 @@ The workflow-facing mask contract is unchanged: `0 = preserve`, `1 = generate`, 
 | H3 Final Stream Output Sink | Terminal `VHS_FILENAMES` sink used by Music Video to keep clip-preview scheduling ahead of the all-clips final-stream dependency chain |
 | H3 AV Extension Controller | Start mode, active extension count, audio feather, and preview policy |
 | H3 Music Video Controller | Active clip count and preview policy |
+| H3 Assemble Existing Video Extension | Single-extension source + continuation assembly helper |
+| H3 Assemble Interior Insert | Required pixel-correct output path for interior inserts |
 
 The Update-5 checkpoint/resume nodes are no longer registered in Update 6. The historical sections above remain only to document the previous implementation and migration context.
 
@@ -747,7 +811,11 @@ The tests cover, among other things:
 - exact decoded-audio timebase conformance and no-silence-tail regression;
 - streamed-frame equivalence against the former full-buffer seam math;
 - one-shot VHS frame-sequence behavior;
-- workflow JSON consistency.
+- workflow JSON consistency;
+- `insert_frame` offsets: zero is byte-identical to the prefix path, non-multiples of 17 snap down to the grid, video/audio step ranges for inserts at 17, 51, 102 match hand-computed values;
+- `H3 Assemble Interior Insert`: frame count unchanged, audio samples match, splice interval equals canonical source, same CFR index map as the context node;
+- `H3 Custom Keyframes (Masked)`: frame-to-step mapping across all five phases, duplicate quantized steps raise, existing `noise_mask` raises, video mask zeros exactly at pinned steps, audio mask all-ones;
+- the JS keyframe widget covering both keyframe node names.
 
 Run the standalone repository regressions with:
 

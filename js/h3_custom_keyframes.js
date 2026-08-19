@@ -1,6 +1,9 @@
 import { app } from "../../scripts/app.js";
 
-const NODE_NAME = "MiniMaxH3CustomKeyframes";
+const NODE_NAMES = new Set([
+    "MiniMaxH3CustomKeyframes",
+    "MiniMaxH3CustomKeyframesMasked",
+]);
 const DEFAULT_POSITIONS = [1, 22, 79];
 const MIN_KEYFRAMES = 1;
 const MAX_KEYFRAMES = 32;
@@ -298,7 +301,7 @@ app.registerExtension({
     name: "seitanism.H3CustomKeyframes",
 
     async beforeRegisterNodeDef(nodeType, nodeData) {
-        if (nodeData.name !== NODE_NAME) return;
+        if (!NODE_NAMES.has(nodeData.name)) return;
 
         const originalCreated =
             nodeType.prototype.onNodeCreated;

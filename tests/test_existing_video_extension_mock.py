@@ -136,7 +136,7 @@ def test_39_frame_prefix_and_exact_assembly():
     }
 
     node = module.MiniMaxH3ExistingVideoMaskedContext()
-    out, n = node.prepare(
+    out, trim, insert_frame_out, n = node.prepare(
         latent,
         VideoVAE(),
         AudioVAE(),
@@ -149,6 +149,8 @@ def test_39_frame_prefix_and_exact_assembly():
     )
 
     assert n == 39
+    assert trim == 39  # prefix insert: trim_frames == n
+    assert insert_frame_out == 0
     ov, oa = out["samples"].unbind()
     vm, am = out["noise_mask"].unbind()
 
@@ -228,7 +230,7 @@ def test_audio_feather_uses_half_cosine_without_changing_context_length():
     latent = {"samples": NestedTensor((video, audio))}
     source_frames = torch.rand((120, 32, 64, 3))
     source_audio = {"waveform": torch.rand((1, 2, 160000)), "sample_rate": 32000}
-    out, n = module.MiniMaxH3ExistingVideoMaskedContext().prepare(
+    out, _trim, _insert_frame, n = module.MiniMaxH3ExistingVideoMaskedContext().prepare(
         latent, VideoVAE(), AudioVAE(), source_frames, source_audio,
         24.0, 39, "disabled", 8,
     )

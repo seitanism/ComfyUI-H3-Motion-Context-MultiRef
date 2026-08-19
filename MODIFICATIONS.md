@@ -309,3 +309,16 @@ ComfyUI PR #15375 changed its native H3 mask integration on 2026-08-15: mask-gri
 ### Compatibility note
 
 Update-5 disk-checkpoint long-form nodes are no longer registered in Update 6. Saved workflows containing those historical checkpoint nodes must be migrated to the current direct-latent workflows.
+
+---
+
+## Update 7 — Arbitrary-position latent inserts and keyframes — 2026-08-18
+
+Update 7 adds **arbitrary-position latent inserts** and **hard-preserved masked keyframes**.
+
+Main changes:
+
+- `H3 Existing Video Masked Context` gains an optional `insert_frame` input. The preserved segment can now be placed at any multiple-of-17 pixel frame in the target latent, not only the prefix. At 0 the behavior is byte-identical to the original prefix path. Multiples of 51 also align the audio clock exactly; non-51 inserts produce a sub-25 ms audio rounding that is logged as a warning.
+- New `H3 Assemble Interior Insert` node — the required output path for interior inserts. The causal VAE cannot exactly round-trip an interior preserved region, so without this node interior inserts have no pixel-correct output. Splices the canonical source frames and audio back over the decoded H3 output at the preserved interval using exact AV accounting, matching the no-crossfade philosophy of `H3 Assemble Existing Video Extension`.
+- New `H3 Custom Keyframes (Masked)` node — hard-preserves keyframes by writing each encoded still directly into the target AV latent and masking those steps from denoising, unlike the original soft node which uses conditioning rows. Audio is not masked. Phase-0 positions (1, 18, 35, ... in the default 1-based indexing) pin exactly one frame; interior positions pin the full containing latent step (up to 4 frames of static hold). The JS keyframe-position widget now attaches to both node types.
+- A non-multiple-of-17 `insert_frame` is snapped down to the grid with a log; all other new failure modes raise with exact numeric accounting.
