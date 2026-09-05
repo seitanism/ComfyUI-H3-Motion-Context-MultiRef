@@ -212,7 +212,7 @@ class MiniMaxH3SongMaskedAVContext:
                     "tooltip": "Optional preserved visual prefix from the previous clip. Uses exact H3 runs 5/22/39/56/...; 0 disables visual prefixing entirely."
                 }),
                 "source_fps": ("FLOAT", {
-                    "default": 24.0, "min": 1.0, "max": 240.0, "step": 0.001,
+                    "default": 24.0, "min": 24.0, "max": 24.0, "step": 0.001,
                     "tooltip": "FPS of source_frames when visual context is connected."
                 }),
                 "crop": (["disabled", "center"], {"default": "disabled"}),

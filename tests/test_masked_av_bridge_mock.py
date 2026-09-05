@@ -203,35 +203,18 @@ def test_rejects_non_h3_preserve_length():
     try:
         node.prepare(latent, VideoVAE(), AudioVAE(), frames, a, frames, a, 24.0, 24.0, 40, "disabled")
     except ValueError as exc:
-        assert "exact H3 video run" in str(exc)
+        assert "shared AV boundary" in str(exc)
     else:
         raise AssertionError("40-frame preserve length should have been rejected")
 
 
-def test_56_frame_bridge_uses_exact_grid_and_keeps_both_seams_fixed():
-    # 56 frames is a valid H3 video-VAE run but NOT a shared 24/40-Hz boundary:
-    # 56/24*40 = 93.333... -> 93 audio ticks = 74,400 samples.
-    video = torch.zeros((1, 24, 57, 2, 4))
-    audio = torch.zeros((1, 32, 2, 320))
-    latent = {"samples": NestedTensor((video, audio))}
-    frames = torch.zeros((100, 32, 64, 3))
-    full = round(100 / 24 * 32000)
-    start_wave = torch.arange(full, dtype=torch.float32).reshape(1, 1, -1).repeat(1, 2, 1)
-    end_wave = (torch.arange(full, dtype=torch.float32) + 1000000).reshape(1, 1, -1).repeat(1, 2, 1)
-    start_audio = {"waveform": start_wave, "sample_rate": 32000}
-    end_audio = {"waveform": end_wave, "sample_rate": 32000}
-    av = AudioVAE()
-
-    bridge.MiniMaxH3MaskedAVBridge().prepare(
-        latent, VideoVAE(), av, frames, start_audio, frames, end_audio,
-        24.0, 24.0, 56, "disabled",
-    )
-
-    assert len(av.calls) == 2
-    tail, head = av.calls
-    assert tail["length"] == head["length"] == 93 * 800 == 74400
-    assert tail["crop_offset"] == head["crop_offset"] == 0
-    # Tail window is end-aligned to the start->generated seam.
-    assert tail["last"] == float(full - 1)
-    # Head window is start-aligned to the generated->end seam.
-    assert head["first"] == 1000000.0
+def test_nonshared_bridge_context_is_rejected():
+    for n in (5, 22, 56, 73):
+        try:
+            bridge._validate_preserve_frames(n, 500, 500, 1000)
+        except ValueError as exc:
+            assert "39 + 51*k" in str(exc)
+        else:
+            raise AssertionError(f"{n} is not an exact shared AV context")
+    for n in (39, 90, 141, 192):
+        assert bridge._validate_preserve_frames(n, 500, 500, 1000) == n

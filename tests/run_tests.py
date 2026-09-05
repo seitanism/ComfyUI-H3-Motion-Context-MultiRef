@@ -1,53 +1,46 @@
-"""Run the repository CPU/static regressions without a ComfyUI installation.
+"""Run each CPU/static test module in a fresh pytest process.
 
-Several test modules intentionally install different lightweight ``comfy`` mocks.
-Loading and executing one test module at a time avoids pytest collection conflicts
-between those mocks while still exercising every ``test_*`` function in the suite.
+ComfyUI mocks cannot leak between modules, and pytest fixtures retain their
+normal behavior. No ComfyUI installation or H3 weights are needed.
 """
-
 from __future__ import annotations
-
-import importlib.util
-import sys
+import os
 from pathlib import Path
+import re
+import subprocess
+import sys
 
 TESTS = Path(__file__).resolve().parent
 ROOT = TESTS.parent
-if str(ROOT) not in sys.path:
-    sys.path.insert(0, str(ROOT))
-
-
-def load(path: Path):
-    name = f"_h3_repo_test_{path.stem}"
-    spec = importlib.util.spec_from_file_location(name, path)
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[name] = module
-    spec.loader.exec_module(module)
-    return module
 
 
 def run_all() -> int:
     passed = 0
+    failures = []
+    env = os.environ.copy()
+    # The outer aggregate pytest test may be active; child runs are independent.
+    env.pop("PYTEST_CURRENT_TEST", None)
     for path in sorted(TESTS.glob("test_*.py")):
         if path.name == "test_repo_suite.py":
             continue
-        module = load(path)
-        funcs = [
-            getattr(module, name)
-            for name in sorted(dir(module))
-            if name.startswith("test_") and callable(getattr(module, name))
-        ]
-        for fn in funcs:
-            fn()
-            passed += 1
-            print(f"PASS {path.name}::{fn.__name__}")
-    print(f"PASS: {passed} repo CPU/static checks")
+        proc = subprocess.run(
+            [sys.executable, "-m", "pytest", "-q", str(path),
+             "-o", "python_files=test_*.py"],
+            cwd=ROOT, env=env, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+        )
+        matches = re.findall(r"(\d+) passed", proc.stdout)
+        count = int(matches[-1]) if matches else 0
+        if proc.returncode or not count:
+            failures.append(path.name)
+            print(proc.stdout, flush=True)
+        else:
+            passed += count
+            print(f"PASS {path.name}: {count} checks", flush=True)
+    if failures:
+        raise RuntimeError("Failed test modules: " + ", ".join(failures))
+    print(f"PASS: {passed} repo CPU/static checks", flush=True)
     return passed
 
 
-def main() -> None:
-    run_all()
-
-
 if __name__ == "__main__":
-    main()
+    run_all()

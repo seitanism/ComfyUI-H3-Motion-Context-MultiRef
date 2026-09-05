@@ -70,10 +70,13 @@ def test_v2v_latent_motion_transfer_smears_source_only_for_pass2_reference():
     assert source_smear["type"] == "H3TimeSmear"
 
     links = {link[0]: link for link in data["links"]}
-    # Original source video goes directly into Pass 1 Ref2VA.
-    assert links[8][1:5] == [1, 0, 20, 6]
+    # Original source passes 24fps validation, without time smearing in Pass 1.
+    validator = next(n for n in data["nodes"] if n["type"] == "MiniMaxH3Validate24FPSVideo")
+    source_link = next(i for i in validator["inputs"] if i["name"] == "images")["link"]
+    assert links[source_link][1:3] == [1, 0]
+    assert links[8][1:5] == [validator["id"], 0, 20, 6]
     # The same source is smeared only for Pass 2, using the generated hold map.
-    assert links[32][1:5] == [1, 0, 139, 0]
+    assert links[32][1:5] == [validator["id"], 0, 139, 0]
     assert links[33][1:5] == [123, 0, 139, 1]
     assert links[47][1:5] == [139, 0, 131, 6]
 

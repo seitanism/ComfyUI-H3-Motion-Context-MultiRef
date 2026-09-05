@@ -55,6 +55,8 @@ def encode_exact_audio_grid(audio_vae, waveform, target_audio_steps, label="H3 a
     wrapper/encoder contract problem and should not be hidden by latent padding
     or trimming.
     """
+    from .h3_audio_vae_compat import ensure_h3_audio_vae_crop
+    ensure_h3_audio_vae_crop(audio_vae)
     sample_rate, samples_per_latent, expected_samples = audio_grid_geometry(
         audio_vae, target_audio_steps
     )

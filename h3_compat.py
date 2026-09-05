@@ -189,6 +189,8 @@ def ensure_existing_video_compat():
 
     ensure_h3_mask_compat()
     ensure_av_mask_payload_compat()
+    from .h3_mask_velocity import ensure_h3_mask_velocity
+    ensure_h3_mask_velocity()
     _log_once(
         "existing_video_ready",
         "h3_motion_context: existing-video H3 AV-mask support ready "

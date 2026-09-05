@@ -4,7 +4,7 @@ This document explains the implementation behind the workflows in this repositor
 
 If you only want to choose and run a workflow, start with [README.md](README.md) and [example_workflows/README.md](example_workflows/README.md).
 
-> **Update 6 (2026-08-17) current-state note:** the AV Extension and Music Video examples are checkpoint-free direct-latent workflows. Their public final outputs stream frames directly into VideoHelperSuite instead of materializing one complete ComfyUI `IMAGE` movie tensor. Small H3 decoded-audio duration mismatches in either direction are time-conformed to the exact frame-derived sample timeline before seam cutting. Sections 14–19 below document the historical Update-5 checkpoint architecture for context; those checkpoint/resume nodes are no longer registered by the current node pack.
+> **Update 9 (2026-09-05):** current examples use constant 24 fps input/output. Guide conditioning and latent preservation remain separate families. AV Bridge contexts are restricted to 39 + 51*k frames; targets retain 5 + 17*k with exact final PCM assembly. Sections 14–19 are historical Update-5 checkpoint architecture only; those checkpoint/resume nodes are not registered. See [workflow prerequisites](WORKFLOW_PREREQUISITES.md) and the detailed [keyframes/inserts guide](KEYFRAMES_AND_INSERTS.md).
 
 ### Dated update chronology
 
@@ -16,6 +16,7 @@ If you only want to choose and run a workflow, start with [README.md](README.md)
 - Update 6 — **2026-08-17** — direct-latent long-form workflows, exact AV timing, and VHS streaming
 - Update 7 — **2026-08-18** changelog/PR date; merged to `main` **2026-08-30** — arbitrary inserts, hard-masked keyframes, and H3 AV mask utilities ([PR #3](https://github.com/seitanism/ComfyUI-H3-Motion-Context-MultiRef/pull/3) by Reithan)
 - Update 8 — **2026-08-30** — granular fractional V2V, exact audio-grid paths, modular streaming/cache fixes, calculated bridge timing, and dynamic de-rope seam continuation
+- Update 9 — **2026-09-05** — audit repairs, strict current-workflow timing, dated output folders, lazy audio-crop/velocity compatibility, and expanded node guidance
 
 `MODIFICATIONS.md` is the authoritative full change log; this chronology is only a technical orientation index.
 
@@ -25,7 +26,7 @@ If you only want to choose and run a workflow, start with [README.md](README.md)
 
 The repository contains two different continuation families.
 
-### Legacy Motion Context
+### Native guide conditioning
 
 The previous clip is represented as **native H3 guide conditioning**. The target H3 latent remains a fresh generation target; previous motion/audio is supplied as conditioning that tells H3 what is already happening.
 
@@ -33,9 +34,7 @@ Main node:
 
 - `H3 Motion Context`
 
-Typical workflow label:
-
-- `OLD - Motion Context - ...`
+Used by the new 2MP de-rope continuation example and retained `OLD - Motion Context - ...` workflows. Guide conditioning is current functionality; the OLD label describes those earlier example graphs.
 
 ### Current latent masking
 
@@ -234,19 +233,19 @@ Class:
 MiniMaxH3CustomKeyframesMasked
 ```
 
-The masked keyframes node applies the same mask semantics to still-image anchors: it VAE-encodes each still, writes it directly into the target AV latent at its quantized latent step, and zeros the video noise mask at exactly those steps so the sampler never denoises them. Audio is not masked; it is fully generated.
+The masked keyframes node applies the same mask semantics to still-image anchors: it VAE-encodes each still, writes it directly into the target AV latent at its quantized latent step, and zeros the video noise mask at exactly those steps so the sampler never denoises them. Audio retains the incoming audio mask. If none exists, it defaults to all-generate.
 
 Hard vs soft:
 
 | | Soft (`H3 Custom Keyframes`) | Hard (`H3 Custom Keyframes (Masked)`) |
 |---|---|---|
 | Mechanism | conditioning rows | latent write + mask |
-| Adherence | H3 uses image as suggestion | exact preservation (no denoising) |
+| Adherence | H3 uses image as suggestion | latent-step protection; decoded pixels may differ |
 | Input | `conditioning` | `latent` + `vae` |
 | Output | `CONDITIONING` | `LATENT` |
-| Audio | follows conditioning | fully generated (not masked) |
+| Audio | follows conditioning | existing audio mask retained; otherwise all-generate |
 
-Phase-0 vs interior positions: phase-0 positions (`1, 18, 35, 52, ...` in the default 1-based indexing mode; `0, 17, 34, 51, ...` in 0-based mode) map to the single still-token step (1 pinned frame). Interior positions map to the containing 4-frame latent step, pinning a static hold for up to 4 frames; the node logs the frame, the full pinned span, and the nearest phase-0 positions when this happens.
+Phase-0 vs interior positions: phase-0 positions (`1, 18, 35, 52, ...` in the default 1-based indexing mode; `0, 17, 34, 51, ...` in 0-based mode) map to the single still-token step (1 pinned frame). Interior positions map to the containing 4-frame latent step, protecting the whole containing step (up to 4 frames; a static decoded hold is not guaranteed); the node logs the frame, the full pinned span, and the nearest phase-0 positions when this happens.
 
 Duplicate positions that resolve to the same latent step after quantization raise with both slot numbers named. If the incoming latent already carries a **nested H3 AV `noise_mask`**, the node preserves that mask and unions the new hard-keyframe protection into the video stream while leaving the audio mask unchanged. A hard keyframe may not claim a video latent step that is already protected (including fractional protection); that overlap raises with the keyframe position and latent step named. Plain/single-tensor masks are rejected with guidance to use the H3 AV mask utilities below.
 When combining this with `H3 Existing Video Masked Context`, put `H3 Custom Keyframes (Masked)` **after** the existing-video context node so it can merge into that node's AV mask.
@@ -372,7 +371,9 @@ H3 then generates only the middle region.
 
 The delivered workflow still uses visual overlap treatment at the final source/generated joins because decoded source pixels and VAE-reconstructed generated endpoint pixels can differ slightly even when they represent the same content.
 
-Audio endpoint windows are encoded on exact H3 40 Hz PCM grids. For a preserved run that is video-valid but not a shared 24/40-Hz boundary (for example 56 frames), the start-source tail is **end-aligned** to the first generation seam and the end-source head is **start-aligned** to the second generation seam. This prevents ComfyUI's generic VAE center-crop from moving either seam; only the outer edge absorbs the unavoidable fraction-of-one-audio-tick difference. Shared AV runs such as 39/90/141 frames need no adjustment.
+Update 9 accepts only shared AV context lengths: **39 + 51*k** (39, 90, 141, 192, …). The target remains a full H3 run **5 + 17*k**, and must leave a nonempty middle after subtracting both contexts. A 56-frame context is rejected even though it is a valid full video run.
+
+`H3 AV Bridge Timing` validates controls before sampling. `H3 Assemble Bridge Audio` removes the protected head/tail at exact 40 Hz boundaries, then time-conforms only the generated middle to its absolute 24 fps sample span. This is necessary for targets such as 107 or 124, whose latent-audio endpoints round to whole cells. It fits the source intervals and concatenates on absolute sample boundaries, avoiding accumulated relative-rounding drift. Larger-than-grid timing discrepancies raise. This replaces the old shared-FPS/math/TrimAudioDuration/AudioConcat chain. Current source validation checks both VHS source and loaded FPS; output remains 24 fps.
 
 ---
 
@@ -449,7 +450,7 @@ The current workflows therefore allow native `MiniMaxH3ReferenceToVideo` conditi
 
 ---
 
-## 11. Legacy `H3 Motion Context`
+## 11. Native `H3 Motion Context`
 
 Class:
 
@@ -537,7 +538,7 @@ The Music Video streamer is intentionally an intermediate-output node. Keeping t
 
 A normal ComfyUI `IMAGE` output is a materialized tensor. For long H3 timelines, a complete RGB float32 movie can therefore consume tens of GiB before the encoder even starts. The Update-6 streaming nodes avoid exposing the final movie as an `IMAGE` output.
 
-The internal frame source is a one-shot sequence tailored to the access pattern used by `VHS_VideoCombine`: VHS asks for `len(images)`, probes `images[0]` for dimensions, and then iterates the source. The sequence primes the generator once so Clip 1 is not decoded twice.
+The internal frame source is a one-shot sequence tailored to the access pattern used by `VHS_VideoCombine`: VHS asks for `len(images)`, probes `images[0]` for dimensions, and then iterates the source. The sequence primes the generator once so Clip 1 is not decoded twice. Update 9 clones that first frame into independent storage: neither VHS’s first-image local nor the one-shot iterator can retain the entire first decoded batch through a frame view.
 
 Final filename allocation is intentionally left to VHS. The H3 streaming layer passes through `filename_prefix` but does not construct, overwrite, rename, or delete final output paths. VHS therefore owns its normal numbered-output counter across repeated runs. This is a release invariant: final H3 output code must not return to a fixed filename that replaces the previous run.
 
@@ -550,9 +551,9 @@ For generated clips, the streamer:
 5. yields completed frames to VHS;
 6. releases the decoded clip before continuing.
 
-For an uploaded Existing Video source, source frames are CFR-indexed to 24 fps and resized in small chunks; only the source seam tail is retained before generated Extension 1.
+For an uploaded Existing Video source, source frames are CFR-indexed to 24 fps and resized in small chunks; only the source seam tail is retained by the streaming iterator before generated Extension 1. The original source IMAGE tensor may still remain alive in ComfyUI’s graph cache.
 
-The AV streamer builds the final audio waveform separately using exact absolute sample boundaries and the decoded-audio timebase conformance described above. The Music Video streamer passes the original master waveform through unchanged.
+The AV streamer builds the final audio waveform separately using exact absolute sample boundaries and decoded-audio timebase conformance. Each extension owns its full protected audio overlap in the final buffer, preserving the generation-side feather. At the default 39 frames (65 audio ticks), 57 ticks stay hard-protected and only the final 8 ticks (0.2 s) gradually receive denoising. The whole 1.625-second context is not regenerated. Because assembly copies the extension decode, VAE reconstruction and bounded timebase conformance can still cause small differences outside the feather; this is not a promise of bit-identical original PCM. The Music Video streamer passes the original master waveform through unchanged.
 
 ### Inline VHS preview refresh
 
@@ -789,9 +790,9 @@ The workflow-facing mask contract is unchanged: `0 = preserve`, `1 = generate`, 
 
 ### Update 8 step 1: fractional V2V precision — 2026-08-30
 
-`H3 V2V Granular Fractional Denoise` (`H3V2VGranularFractionalDenoise`) encodes the full selected source video/audio interval into the target H3 AV latent and drives V2V strength through H3 denoise masks. **Granular** refers to the continuous `0..1` preserve-to-generate mask levels used by the workflow rather than a binary preserve/generate mask. **Fractional Denoise** is the user-facing effect of those levels. The node does not globally replace ComfyUI mask logic: its near-1 precision compatibility is lazy and capability-probed, and only supplies missing H3 precision/transport behavior when the node executes. It does not modify scheduler sigmas; `BasicScheduler` denoise remains `1.0`. The default global video mask is `0.9995`, while audio defaults to `0.0` for source-audio preservation.
+`H3 V2V Granular Fractional Denoise` (`H3V2VGranularFractionalDenoise`) encodes the full selected source video/audio interval into the target H3 AV latent and drives V2V strength through H3 denoise masks. **Granular** refers to fractional `0..1` preserve-to-generate mask levels rather than a binary mask. The compatibility path uses ceiling quantization on a 1/4096 grid; it is not infinitely continuous. `0.9995 → 0.99951171875`, `0.9997 → 0.999755859375`, and `0.9998 → 1.0`. Values above 4095/4096 enter the fully-generative top bin. Native support may be finer. **Fractional Denoise** is the user-facing effect of those levels. The node does not replace mask logic for other model families: its near-1 precision compatibility is lazy and capability-probed, and only supplies missing H3 precision/transport behavior when the node executes. It does not modify scheduler sigmas; `BasicScheduler` denoise remains `1.0`. The default global video mask is `0.9995`, while audio defaults to `0.0` for source-audio preservation.
 
-The near-1 precision layer lives in `h3_mask_precision.py` and is deliberately not imported by normal repository startup. The V2V node imports it inside `prepare()` and probes the live H3 implementation before changing anything. The capabilities are independent: token-grid resolution/near-1 condition retention, exact-1 row shortcuts, and FP32 transport for `denoise_mask` / `audio_denoise_mask`. A native implementation can therefore replace these pieces incrementally; only still-missing pieces are patched. Once all probes pass natively, the precision layer self-retires and installs nothing.
+The near-1 precision layer lives in `h3_mask_precision.py` and is deliberately not imported by normal repository startup. The V2V node imports it inside `prepare()` and probes the live H3 implementation before changing anything. The installed H3 class/function changes are process-wide for H3, not local to the returned MODEL instance; they disappear on restart. The capabilities are independent: token-grid resolution/near-1 condition retention, exact-1 row shortcuts, and FP32 transport for `denoise_mask` / `audio_denoise_mask`. A native implementation can therefore replace these pieces incrementally; only still-missing pieces are patched. Once all probes pass natively, the precision layer self-retires and installs nothing.
 
 The precision probe tests more than dtype. It verifies multiple near-1 values so a coarser `1/2048` grid cannot accidentally look equivalent at `0.9995`, and it verifies that `0.99951171875` reaches the H3 diffusion call unchanged as FP32 rather than being rounded in BF16 and merely converted back to FP32 afterward.
 
@@ -817,7 +818,23 @@ Keep the three audio contracts distinct when debugging:
 
 These post-decode/output operations do not compensate for a bad PCM -> latent encode.
 
-One deliberate boundary remains outside this repository's exact-grid encoder: optional `ref_audio_*` inputs on stock `MiniMaxH3ReferenceToVideo` are encoded by ComfyUI core. They therefore inherit the AudioVAE preprocessing behavior of the installed ComfyUI revision. On builds without the [PR #15972](https://github.com/Comfy-Org/ComfyUI/pull/15972) fix, those stock reference-audio sockets can still be affected by the generic center-crop described above; once that core fix is present, `MiniMaxH3AudioVAE` receives the complete waveform and performs its own right-padding. The repository's master-song path and repo-owned source/timeline-audio encode paths do not use those sockets for their authoritative audio timeline.
+Stock `MiniMaxH3ReferenceToVideo` audio references still have their own semantic window selection. In Update 9, the current workflows route their audio VAE through `H3 Audio VAE Compatibility` before stock references. The node applies PR #15972-equivalent `crop_input=False` only on an unfixed connected MiniMaxH3AudioVAE wrapper. Native fixed/backported VAEs are unchanged. Repo-owned `encode_exact_audio_grid()` calls make the same lazy check automatically; they still prepare exact PCM spans, because correct timeline anchoring is separate from generic cropping.
+
+### Update 9: lazy compatibility and retirement
+
+Both upstream PRs were open when Update 9 was prepared; this is provenance, not a runtime dependency on GitHub. Installed capabilities determine whether a fix is needed. A merge does not fix an old local installation until the user updates it, and a backport can provide the fix before a merge.
+
+- **PR #15972:** narrow VAE-instance configuration correction, checked on node use. No global VAE constructor replacement; unrelated VAEs are unchanged. A fixed native instance receives no patch. The 437,333-sample regression confirms origin preservation and 547 cells instead of the cropped 546.
+- **PR #15988:** live-forward behavioral probes use small synthetic network outputs with fractional video/audio masks, including audio carry scale 4. An unfixed recognized forward receives the upstream velocity multiplication after the network result/output-copy stage but before audio carry conversion. Native passing implementations are untouched. Unknown or partially converted layouts raise rather than risk double scaling; post-install failure rolls back the function.
+- **Fractional precision:** the audio shortcut probe evaluates the extracted live audio-mask branch with near-one masks, rather than assuming an absent literal cutoff string means native readiness. Source/AST availability is still required for this branch check and compatibility rewrites. Known patched functions retain their explicit marker.
+
+PR #15988 scales predicted velocities by the denoise mask before global-sigma x0 recovery, so masked rows evaluated at `mask * sigma` are converted consistently. This applies to ordinary feathered masks as well as near-one V2V masks. Attribution: poorpaper’s [ComfyUI PR #15988](https://github.com/Comfy-Org/ComfyUI/pull/15988).
+
+### Update 9: other runtime repairs
+
+Spatial V2V masks now use the same center-crop rectangle as source frames before latent resizing. Shortened Motion Context audio uses its actual returned duration for seam-nearest placement; complete windows retain the old coordinate and saved widget order. Current workflow clocks are fixed at 24 fps while old Python source-normalization helpers remain available for legacy integrations.
+
+The AV/Music streamer resolves `%date:yyyy-MM-dd%/MiniMax_H3_` and documented time tokens using the server’s local clock, including API queues. Prefixes remain relative to ComfyUI output; traversal/absolute paths are rejected. VHS owns output numbering. This addresses [issue #16](https://github.com/seitanism/ComfyUI-H3-Motion-Context-MultiRef/issues/16).
 
 ---
 
@@ -931,7 +948,7 @@ Run the standalone repository regressions with:
 pytest -q
 ```
 
-The pytest entry point delegates to the isolated mock runner because several test modules intentionally install different lightweight ComfyUI mocks. The same underlying checks can also be run directly with `python tests/run_tests.py`.
+Install `requirements-test.txt` first. The pytest entry point delegates to `tests/run_tests.py`, which runs each module in a fresh pytest subprocess. Pytest fixtures execute normally and incompatible ComfyUI mocks cannot leak between modules. The same checks run directly with `python tests/run_tests.py`. CI explicitly installs pytest. Update 9 includes behavior regressions for memory lifetime, spatial cropping, short audio placement, absolute bridge samples, date prefixes, and native/legacy compatibility retirement.
 
 ---
 

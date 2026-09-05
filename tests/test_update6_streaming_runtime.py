@@ -53,7 +53,7 @@ def test_final_output_filename_allocation_stays_owned_by_vhs():
     # The H3 wrapper must hand the user prefix to stock VHS and let VHS choose
     # the numbered output path.  It must not become a custom file writer again.
     assert "vhs.combine_video(" in wrapper
-    assert "filename_prefix=str(filename_prefix)" in wrapper
+    assert "filename_prefix=_expand_output_prefix(filename_prefix)" in wrapper
     for destructive in (
         "os.remove(", "os.unlink(", "os.replace(", "os.rename(",
         "Path.unlink(", "subprocess.", "ffmpeg",

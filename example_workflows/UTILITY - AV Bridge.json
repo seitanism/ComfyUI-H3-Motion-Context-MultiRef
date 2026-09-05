@@ -1,8 +1,8 @@
 {
   "id": "fc9b7952-1377-4272-8632-358cde75b0f0",
   "revision": 0,
-  "last_node_id": 75,
-  "last_link_id": 48,
+  "last_node_id": 78,
+  "last_link_id": 61,
   "nodes": [
     {
       "id": 1,
@@ -37,33 +37,35 @@
           "name": "IMAGE",
           "type": "IMAGE",
           "links": [
-            7,
-            28
+            57
           ]
         },
         {
           "name": "frame_count",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "audio",
           "type": "AUDIO",
           "links": [
             8,
-            24
+            50
           ]
         },
         {
           "name": "video_info",
           "type": "VHS_VIDEOINFO",
-          "links": null
+          "links": [
+            58
+          ]
         }
       ],
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "4ee72c065db22c9d96c2427954dc69e7b908444b",
-        "Node name for S&R": "VHS_LoadVideo"
+        "Node name for S&R": "VHS_LoadVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "video": "video1.mp4",
@@ -123,33 +125,35 @@
           "name": "IMAGE",
           "type": "IMAGE",
           "links": [
-            9,
-            31
+            59
           ]
         },
         {
           "name": "frame_count",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "audio",
           "type": "AUDIO",
           "links": [
             10,
-            27
+            51
           ]
         },
         {
           "name": "video_info",
           "type": "VHS_VIDEOINFO",
-          "links": null
+          "links": [
+            60
+          ]
         }
       ],
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "4ee72c065db22c9d96c2427954dc69e7b908444b",
-        "Node name for S&R": "VHS_LoadVideo"
+        "Node name for S&R": "VHS_LoadVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "video": "video2.mp4",
@@ -203,7 +207,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "UNETLoader"
+        "Node name for S&R": "UNETLoader",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
@@ -237,7 +242,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "CLIPLoader"
+        "Node name for S&R": "CLIPLoader",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "qwen3vl_32b_minimax_h3_int8_convrot.safetensors",
@@ -274,7 +280,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAELoader"
+        "Node name for S&R": "VAELoader",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "minimax_h3_video_vae_int8_convrot.safetensors"
@@ -300,15 +307,15 @@
           "name": "VAE",
           "type": "VAE",
           "links": [
-            6,
-            22
+            61
           ]
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAELoader"
+        "Node name for S&R": "VAELoader",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "minimax_h3_audio_vae_fp32.safetensors"
@@ -348,7 +355,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "MiniMaxH3SigmaShift"
+        "Node name for S&R": "MiniMaxH3SigmaShift",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         12,
@@ -420,7 +428,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "MiniMaxH3ImageToVideo"
+        "Node name for S&R": "MiniMaxH3ImageToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "integrated_multimodal_description:\nGenerate one physically continuous transition from the preserved ending of the first source video to the preserved beginning of the second source video. Continue naturally from the first endpoint, evolve the action and camera path through the generated middle, and arrive early enough for the motion and composition to settle naturally into the second endpoint. Preserve coherent identity, environment logic, lighting, motion, and audiovisual timing across the transition.\n\noverall_soundscape:\nEvolve the ambience and acoustic space naturally from the first endpoint toward the second endpoint.\n\nnon_diegetic_music:\nPreserve any established musical character if present.",
@@ -485,7 +494,7 @@
           "widget": {
             "name": "start_fps"
           },
-          "link": 37
+          "link": null
         },
         {
           "name": "end_fps",
@@ -493,7 +502,7 @@
           "widget": {
             "name": "end_fps"
           },
-          "link": 38
+          "link": null
         },
         {
           "name": "preserve_frames",
@@ -523,7 +532,7 @@
         {
           "name": "middle_frames",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "preserve_frames",
@@ -535,7 +544,8 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "MiniMaxH3MaskedAVBridge"
+        "Node name for S&R": "MiniMaxH3MaskedAVBridge",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         24.0,
@@ -571,7 +581,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "RandomNoise"
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         123456789,
@@ -616,7 +627,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       },
       "widgets_values": []
     },
@@ -647,7 +659,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "KSamplerSelect"
+        "Node name for S&R": "KSamplerSelect",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "res_multistep"
@@ -686,7 +699,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "BasicScheduler"
+        "Node name for S&R": "BasicScheduler",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "simple",
@@ -747,13 +761,14 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "SamplerCustomAdvanced"
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "h3_fixed_fps": true
       },
       "widgets_values": []
     },
@@ -795,7 +810,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecode"
+        "Node name for S&R": "VAEDecode",
+        "h3_fixed_fps": true
       },
       "widgets_values": []
     },
@@ -830,160 +846,17 @@
           "name": "AUDIO",
           "type": "AUDIO",
           "links": [
-            23
+            49
           ]
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecodeAudio"
+        "Node name for S&R": "VAEDecodeAudio",
+        "h3_fixed_fps": true
       },
       "widgets_values": []
-    },
-    {
-      "id": 40,
-      "type": "TrimAudioDuration",
-      "pos": [
-        2160,
-        -800
-      ],
-      "size": [
-        260,
-        110
-      ],
-      "flags": {},
-      "order": 16,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "audio",
-          "type": "AUDIO",
-          "link": 23
-        },
-        {
-          "name": "start_index",
-          "type": "FLOAT",
-          "widget": {
-            "name": "start_index"
-          },
-          "link": 47
-        },
-        {
-          "name": "duration",
-          "type": "FLOAT",
-          "widget": {
-            "name": "duration"
-          },
-          "link": 48
-        }
-      ],
-      "outputs": [
-        {
-          "name": "AUDIO",
-          "type": "AUDIO",
-          "links": [
-            25
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.33.0",
-        "Node name for S&R": "TrimAudioDuration"
-      },
-      "widgets_values": [
-        1.625,
-        4.75
-      ]
-    },
-    {
-      "id": 41,
-      "type": "AudioConcat",
-      "pos": [
-        2530,
-        -850
-      ],
-      "size": [
-        260,
-        110
-      ],
-      "flags": {},
-      "order": 17,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "audio1",
-          "type": "AUDIO",
-          "link": 24
-        },
-        {
-          "name": "audio2",
-          "type": "AUDIO",
-          "link": 25
-        }
-      ],
-      "outputs": [
-        {
-          "name": "AUDIO",
-          "type": "AUDIO",
-          "links": [
-            26
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.33.0",
-        "Node name for S&R": "AudioConcat"
-      },
-      "widgets_values": [
-        "after"
-      ]
-    },
-    {
-      "id": 42,
-      "type": "AudioConcat",
-      "pos": [
-        2890,
-        -850
-      ],
-      "size": [
-        260,
-        110
-      ],
-      "flags": {},
-      "order": 18,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "audio1",
-          "type": "AUDIO",
-          "link": 26
-        },
-        {
-          "name": "audio2",
-          "type": "AUDIO",
-          "link": 27
-        }
-      ],
-      "outputs": [
-        {
-          "name": "AUDIO",
-          "type": "AUDIO",
-          "links": [
-            33
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.33.0",
-        "Node name for S&R": "AudioConcat"
-      },
-      "widgets_values": [
-        "after"
-      ]
     },
     {
       "id": 50,
@@ -1023,12 +896,12 @@
         {
           "name": "source_images",
           "type": "IMAGE",
-          "links": null
+          "links": []
         },
         {
           "name": "start_images",
           "type": "IMAGE",
-          "links": null
+          "links": []
         },
         {
           "name": "extended_images",
@@ -1041,7 +914,8 @@
       "properties": {
         "cnr_id": "comfyui-kjnodes",
         "ver": "073efb07419f56cc714e099a82e49fbc23ad9263",
-        "Node name for S&R": "ImageBatchExtendWithOverlap"
+        "Node name for S&R": "ImageBatchExtendWithOverlap",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         39,
@@ -1087,12 +961,12 @@
         {
           "name": "source_images",
           "type": "IMAGE",
-          "links": null
+          "links": []
         },
         {
           "name": "start_images",
           "type": "IMAGE",
-          "links": null
+          "links": []
         },
         {
           "name": "extended_images",
@@ -1105,7 +979,8 @@
       "properties": {
         "cnr_id": "comfyui-kjnodes",
         "ver": "073efb07419f56cc714e099a82e49fbc23ad9263",
-        "Node name for S&R": "ImageBatchExtendWithOverlap"
+        "Node name for S&R": "ImageBatchExtendWithOverlap",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         39,
@@ -1137,7 +1012,7 @@
           "name": "audio",
           "shape": 7,
           "type": "AUDIO",
-          "link": 33
+          "link": 56
         },
         {
           "name": "fps",
@@ -1145,7 +1020,7 @@
           "widget": {
             "name": "fps"
           },
-          "link": 41
+          "link": null
         }
       ],
       "outputs": [
@@ -1160,7 +1035,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "CreateVideo"
+        "Node name for S&R": "CreateVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         24.0
@@ -1215,264 +1091,14 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "SaveVideo"
+        "Node name for S&R": "SaveVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "video/H3_masked_AV_bridge_192f",
         "auto",
         "auto"
       ]
-    },
-    {
-      "id": 70,
-      "type": "PrimitiveInt",
-      "pos": [
-        -1810,
-        -1370
-      ],
-      "size": [
-        300,
-        82
-      ],
-      "flags": {},
-      "order": 23,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "INT",
-          "type": "INT",
-          "links": [
-            35,
-            44
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.31.0",
-        "Node name for S&R": "PrimitiveInt"
-      },
-      "widgets_values": [
-        192,
-        "fixed"
-      ],
-      "widgets_values_named": {
-        "value": 192,
-        "fixed": "fixed"
-      }
-    },
-    {
-      "id": 71,
-      "type": "PrimitiveInt",
-      "pos": [
-        -1810,
-        -1250
-      ],
-      "size": [
-        300,
-        82
-      ],
-      "flags": {},
-      "order": 24,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "INT",
-          "type": "INT",
-          "links": [
-            36,
-            42,
-            45
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.31.0",
-        "Node name for S&R": "PrimitiveInt"
-      },
-      "widgets_values": [
-        39,
-        "fixed"
-      ],
-      "widgets_values_named": {
-        "value": 39,
-        "fixed": "fixed"
-      }
-    },
-    {
-      "id": 72,
-      "type": "PrimitiveFloat",
-      "pos": [
-        -1810,
-        -1130
-      ],
-      "size": [
-        300,
-        72
-      ],
-      "flags": {},
-      "order": 25,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "FLOAT",
-          "type": "FLOAT",
-          "links": [
-            37,
-            38,
-            41,
-            43,
-            46
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.30.0",
-        "Node name for S&R": "PrimitiveFloat"
-      },
-      "widgets_values": [
-        24.0
-      ],
-      "widgets_values_named": {
-        "value": 24.0
-      }
-    },
-    {
-      "id": 73,
-      "type": "ComfyMathExpression",
-      "pos": [
-        1660,
-        -650
-      ],
-      "size": [
-        410,
-        150
-      ],
-      "flags": {},
-      "order": 26,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "values.a",
-          "type": "FLOAT,INT,BOOLEAN",
-          "link": 42
-        },
-        {
-          "label": "b",
-          "name": "values.b",
-          "shape": 7,
-          "type": "FLOAT,INT,BOOLEAN",
-          "link": 43
-        },
-        {
-          "label": "c",
-          "name": "values.c",
-          "shape": 7,
-          "type": "FLOAT,INT,BOOLEAN",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "FLOAT",
-          "type": "FLOAT",
-          "links": [
-            47
-          ]
-        },
-        {
-          "name": "INT",
-          "type": "INT",
-          "links": null
-        },
-        {
-          "name": "BOOL",
-          "type": "BOOLEAN",
-          "links": null
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.31.0",
-        "Node name for S&R": "ComfyMathExpression"
-      },
-      "widgets_values": [
-        "round(a / b * 40) / 40"
-      ],
-      "widgets_values_named": {
-        "expression": "round(a / b * 40) / 40"
-      }
-    },
-    {
-      "id": 74,
-      "type": "ComfyMathExpression",
-      "pos": [
-        1660,
-        -450
-      ],
-      "size": [
-        500,
-        150
-      ],
-      "flags": {},
-      "order": 27,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "values.a",
-          "type": "FLOAT,INT,BOOLEAN",
-          "link": 44
-        },
-        {
-          "label": "b",
-          "name": "values.b",
-          "shape": 7,
-          "type": "FLOAT,INT,BOOLEAN",
-          "link": 45
-        },
-        {
-          "label": "c",
-          "name": "values.c",
-          "shape": 7,
-          "type": "FLOAT,INT,BOOLEAN",
-          "link": 46
-        }
-      ],
-      "outputs": [
-        {
-          "name": "FLOAT",
-          "type": "FLOAT",
-          "links": [
-            48
-          ]
-        },
-        {
-          "name": "INT",
-          "type": "INT",
-          "links": null
-        },
-        {
-          "name": "BOOL",
-          "type": "BOOLEAN",
-          "links": null
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.31.0",
-        "Node name for S&R": "ComfyMathExpression"
-      },
-      "widgets_values": [
-        "(round(a / c * 40) - 2 * round(b / c * 40)) / 40"
-      ],
-      "widgets_values_named": {
-        "expression": "(round(a / c * 40) - 2 * round(b / c * 40)) / 40"
-      }
     },
     {
       "id": 75,
@@ -1490,15 +1116,248 @@
       "mode": 0,
       "inputs": [],
       "outputs": [],
-      "properties": {},
+      "properties": {
+        "h3_fixed_fps": true
+      },
       "widgets_values": [
-        "BRIDGE TIMING\n\nThe three values above are the shared timing controls: target H3 frames, preserved frames per side, and FPS. They drive the H3 target length, bridge preservation, visual overlap, output FPS, and generated-audio trim.\n\nThe audio trim is calculated on H3's 40 Hz latent grid so it removes exactly the protected audio head/tail from the decoded bridge. Defaults 192 / 39 / 24 evaluate to 1.625 s trim start and 4.75 s generated middle.\n\nUse exact H3 video runs (5, 22, 39, 56, ...). Values such as 39 and 192 also land exactly on shared 24-fps / 40-Hz AV boundaries."
+        "UPDATE 9 — EXACT AV BRIDGE\n\nUse constant 24 fps source videos. Source and output FPS are fixed at 24.\n\nH3 AV Bridge Timing validates target_frames = 5 + 17*k and preserve_frames = 39 + 51*k (39, 90, 141, 192, ...). The target must exceed twice the preserved context. 56 is not a valid AV context.\n\nDefault 192/39: 1.625 s protected at each end; 4.75 s generated middle. H3 Assemble Bridge Audio trims both protected audio spans on the 40 Hz grid and conforms the middle to the exact picture timeline, including targets that end between audio ticks."
       ],
       "widgets_values_named": {
         "text": "BRIDGE TIMING\n\nThe three values above are the shared timing controls: target H3 frames, preserved frames per side, and FPS. They drive the H3 target length, bridge preservation, visual overlap, output FPS, and generated-audio trim.\n\nThe audio trim is calculated on H3's 40 Hz latent grid so it removes exactly the protected audio head/tail from the decoded bridge. Defaults 192 / 39 / 24 evaluate to 1.625 s trim start and 4.75 s generated middle.\n\nUse exact H3 video runs (5, 22, 39, 56, ...). Values such as 39 and 192 also land exactly on shared 24-fps / 40-Hz AV boundaries."
       },
       "color": "#234",
       "bgcolor": "#345"
+    },
+    {
+      "id": 70,
+      "type": "MiniMaxH3AVBridgeTiming",
+      "pos": [
+        -1400,
+        -1350
+      ],
+      "size": [
+        330,
+        100
+      ],
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "target_frames",
+          "type": "INT",
+          "links": [
+            35,
+            54
+          ]
+        },
+        {
+          "name": "preserve_frames",
+          "type": "INT",
+          "links": [
+            36,
+            55
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MiniMaxH3AVBridgeTiming",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": [
+        192,
+        39
+      ]
+    },
+    {
+      "id": 40,
+      "type": "MiniMaxH3AssembleBridgeAudio",
+      "pos": [
+        650,
+        -350
+      ],
+      "size": [
+        330,
+        225
+      ],
+      "flags": {},
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "generated_audio",
+          "type": "AUDIO",
+          "link": 49
+        },
+        {
+          "name": "start_audio",
+          "type": "AUDIO",
+          "link": 50
+        },
+        {
+          "name": "end_audio",
+          "type": "AUDIO",
+          "link": 51
+        },
+        {
+          "name": "start_frames",
+          "type": "IMAGE",
+          "link": 52
+        },
+        {
+          "name": "end_frames",
+          "type": "IMAGE",
+          "link": 53
+        },
+        {
+          "name": "target_frames",
+          "type": "INT",
+          "link": 54
+        },
+        {
+          "name": "preserve_frames",
+          "type": "INT",
+          "link": 55
+        }
+      ],
+      "outputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "links": [
+            56
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MiniMaxH3AssembleBridgeAudio",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 76,
+      "type": "MiniMaxH3Validate24FPSVideo",
+      "pos": [
+        -1400,
+        -720
+      ],
+      "size": [
+        330,
+        80
+      ],
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 57
+        },
+        {
+          "name": "video_info",
+          "type": "VHS_VIDEOINFO",
+          "link": 58
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            7,
+            28,
+            52
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MiniMaxH3Validate24FPSVideo",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 77,
+      "type": "MiniMaxH3Validate24FPSVideo",
+      "pos": [
+        -1400,
+        -180
+      ],
+      "size": [
+        330,
+        80
+      ],
+      "flags": {},
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 59
+        },
+        {
+          "name": "video_info",
+          "type": "VHS_VIDEOINFO",
+          "link": 60
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            9,
+            31,
+            53
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MiniMaxH3Validate24FPSVideo",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 78,
+      "type": "MiniMaxH3AudioVAECompatibility",
+      "pos": [
+        -2290,
+        -880
+      ],
+      "size": [
+        330,
+        90
+      ],
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio_vae",
+          "type": "VAE",
+          "link": 61
+        }
+      ],
+      "outputs": [
+        {
+          "name": "audio_vae",
+          "type": "VAE",
+          "links": [
+            6,
+            22
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MiniMaxH3AudioVAECompatibility",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": []
     }
   ],
   "links": [
@@ -1544,7 +1403,7 @@
     ],
     [
       6,
-      13,
+      78,
       0,
       21,
       2,
@@ -1552,7 +1411,7 @@
     ],
     [
       7,
-      1,
+      76,
       0,
       21,
       3,
@@ -1568,7 +1427,7 @@
     ],
     [
       9,
-      2,
+      77,
       0,
       21,
       5,
@@ -1672,55 +1531,15 @@
     ],
     [
       22,
-      13,
+      78,
       0,
       36,
       1,
       "VAE"
     ],
     [
-      23,
-      36,
-      0,
-      40,
-      0,
-      "AUDIO"
-    ],
-    [
-      24,
-      1,
-      2,
-      41,
-      0,
-      "AUDIO"
-    ],
-    [
-      25,
-      40,
-      0,
-      41,
-      1,
-      "AUDIO"
-    ],
-    [
-      26,
-      41,
-      0,
-      42,
-      0,
-      "AUDIO"
-    ],
-    [
-      27,
-      2,
-      2,
-      42,
-      1,
-      "AUDIO"
-    ],
-    [
       28,
-      1,
+      76,
       0,
       50,
       0,
@@ -1744,7 +1563,7 @@
     ],
     [
       31,
-      2,
+      77,
       0,
       51,
       1,
@@ -1759,52 +1578,12 @@
       "IMAGE"
     ],
     [
-      33,
-      42,
-      0,
-      60,
-      1,
-      "AUDIO"
-    ],
-    [
       34,
       60,
       0,
       61,
       0,
       "VIDEO"
-    ],
-    [
-      35,
-      70,
-      0,
-      20,
-      4,
-      "INT"
-    ],
-    [
-      36,
-      71,
-      0,
-      21,
-      9,
-      "INT"
-    ],
-    [
-      37,
-      72,
-      0,
-      21,
-      7,
-      "FLOAT"
-    ],
-    [
-      38,
-      72,
-      0,
-      21,
-      8,
-      "FLOAT"
     ],
     [
       39,
@@ -1823,68 +1602,124 @@
       "INT"
     ],
     [
-      41,
-      72,
-      0,
-      60,
-      2,
-      "FLOAT"
-    ],
-    [
-      42,
-      71,
-      0,
-      73,
-      0,
-      "INT"
-    ],
-    [
-      43,
-      72,
-      0,
-      73,
-      1,
-      "FLOAT"
-    ],
-    [
-      44,
+      35,
       70,
       0,
-      74,
-      0,
+      20,
+      4,
       "INT"
     ],
     [
-      45,
-      71,
-      0,
-      74,
+      36,
+      70,
       1,
+      21,
+      9,
       "INT"
     ],
     [
-      46,
-      72,
+      49,
+      36,
       0,
-      74,
-      2,
-      "FLOAT"
+      40,
+      0,
+      "AUDIO"
     ],
     [
-      47,
-      73,
-      0,
+      50,
+      1,
+      2,
       40,
       1,
-      "FLOAT"
+      "AUDIO"
     ],
     [
-      48,
-      74,
-      0,
+      51,
+      2,
+      2,
       40,
       2,
-      "FLOAT"
+      "AUDIO"
+    ],
+    [
+      52,
+      76,
+      0,
+      40,
+      3,
+      "IMAGE"
+    ],
+    [
+      53,
+      77,
+      0,
+      40,
+      4,
+      "IMAGE"
+    ],
+    [
+      54,
+      70,
+      0,
+      40,
+      5,
+      "INT"
+    ],
+    [
+      55,
+      70,
+      1,
+      40,
+      6,
+      "INT"
+    ],
+    [
+      56,
+      40,
+      0,
+      60,
+      1,
+      "AUDIO"
+    ],
+    [
+      57,
+      1,
+      0,
+      76,
+      0,
+      "IMAGE"
+    ],
+    [
+      58,
+      1,
+      3,
+      76,
+      1,
+      "VHS_VIDEOINFO"
+    ],
+    [
+      59,
+      2,
+      0,
+      77,
+      0,
+      "IMAGE"
+    ],
+    [
+      60,
+      2,
+      3,
+      77,
+      1,
+      "VHS_VIDEOINFO"
+    ],
+    [
+      61,
+      13,
+      0,
+      78,
+      0,
+      "VAE"
     ]
   ],
   "groups": [

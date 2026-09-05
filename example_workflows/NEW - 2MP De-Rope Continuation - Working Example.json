@@ -1,8 +1,8 @@
 {
   "id": "e3f2b845-8f2c-4b5a-9caf-eac1029d3e7e",
   "revision": 2,
-  "last_node_id": 6001,
-  "last_link_id": 12013,
+  "last_node_id": 6002,
+  "last_link_id": 12014,
   "nodes": [
     {
       "id": 219,
@@ -50,7 +50,8 @@
           "widget_ue_connectable": {},
           "version": "7.5.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "h3_fixed_fps": true
       }
     },
     {
@@ -105,7 +106,7 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "title": "CLIP 1 — LOW 4 @ 2MP",
@@ -117,7 +118,8 @@
           "widget_ue_connectable": {},
           "version": "7.5.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "h3_fixed_fps": true
       }
     },
     {
@@ -163,7 +165,8 @@
           "widget_ue_connectable": {},
           "version": "7.5.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
@@ -210,7 +213,7 @@
         {
           "name": "FLOAT",
           "type": "FLOAT",
-          "links": null
+          "links": []
         },
         {
           "name": "INT",
@@ -224,7 +227,7 @@
         {
           "name": "BOOL",
           "type": "BOOLEAN",
-          "links": null
+          "links": []
         }
       ],
       "title": "Frame Count — 24 fps / H3 Grid",
@@ -236,7 +239,8 @@
           "widget_ue_connectable": {},
           "version": "7.5.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "max(5, round(a * 24)) + (5 - (max(5, round(a * 24)) % 17)) % 17"
@@ -272,14 +276,15 @@
         {
           "name": "INT",
           "type": "INT",
-          "links": null
+          "links": []
         }
       ],
       "title": "Set Duration Frames",
       "properties": {
         "Node name for S&R": "SetNode",
         "aux_id": "kijai/ComfyUI-KJNodes",
-        "previousName": "时长"
+        "previousName": "时长",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "duration_frames"
@@ -315,14 +320,15 @@
         {
           "name": "VAE",
           "type": "VAE",
-          "links": null
+          "links": []
         }
       ],
       "title": "Set Audio Vae",
       "properties": {
         "Node name for S&R": "SetNode",
         "aux_id": "kijai/ComfyUI-KJNodes",
-        "previousName": "音频vae"
+        "previousName": "音频vae",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "audio_vae"
@@ -358,14 +364,15 @@
         {
           "name": "VAE",
           "type": "VAE",
-          "links": null
+          "links": []
         }
       ],
       "title": "Set Video Vae",
       "properties": {
         "Node name for S&R": "SetNode",
         "aux_id": "kijai/ComfyUI-KJNodes",
-        "previousName": "视频vae"
+        "previousName": "视频vae",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "video_vae"
@@ -417,7 +424,8 @@
           "widget_ue_connectable": {},
           "version": "7.5.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "16:9 (Widescreen)",
@@ -461,7 +469,8 @@
       "title": "Get Base Height",
       "properties": {
         "Node name for S&R": "GetNode",
-        "aux_id": "kijai/ComfyUI-KJNodes"
+        "aux_id": "kijai/ComfyUI-KJNodes",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "base_height"
@@ -501,7 +510,8 @@
       "title": "Get Base Width",
       "properties": {
         "Node name for S&R": "GetNode",
-        "aux_id": "kijai/ComfyUI-KJNodes"
+        "aux_id": "kijai/ComfyUI-KJNodes",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "base_width"
@@ -540,7 +550,8 @@
       "title": "Get Duration Frames",
       "properties": {
         "Node name for S&R": "GetNode",
-        "aux_id": "kijai/ComfyUI-KJNodes"
+        "aux_id": "kijai/ComfyUI-KJNodes",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "duration_frames"
@@ -581,7 +592,8 @@
       "title": "Get Video Vae",
       "properties": {
         "Node name for S&R": "GetNode",
-        "aux_id": "kijai/ComfyUI-KJNodes"
+        "aux_id": "kijai/ComfyUI-KJNodes",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "video_vae"
@@ -620,7 +632,8 @@
       "title": "Get Audio Vae",
       "properties": {
         "Node name for S&R": "GetNode",
-        "aux_id": "kijai/ComfyUI-KJNodes"
+        "aux_id": "kijai/ComfyUI-KJNodes",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "audio_vae"
@@ -668,7 +681,8 @@
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.5.2"
-        }
+        },
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "minimax_h3_latent_upscaler_3d_fp16.safetensors",
@@ -718,14 +732,15 @@
         {
           "name": "INT",
           "type": "INT",
-          "links": null
+          "links": []
         }
       ],
       "title": "Set Base Height",
       "properties": {
         "Node name for S&R": "SetNode",
         "aux_id": "kijai/ComfyUI-KJNodes",
-        "previousName": "高"
+        "previousName": "高",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "base_height"
@@ -764,7 +779,8 @@
       "title": "Get Video Vae",
       "properties": {
         "Node name for S&R": "GetNode",
-        "aux_id": "kijai/ComfyUI-KJNodes"
+        "aux_id": "kijai/ComfyUI-KJNodes",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "video_vae"
@@ -800,14 +816,15 @@
         {
           "name": "INT",
           "type": "INT",
-          "links": null
+          "links": []
         }
       ],
       "title": "Set Base Width",
       "properties": {
         "Node name for S&R": "SetNode",
         "aux_id": "kijai/ComfyUI-KJNodes",
-        "previousName": "宽"
+        "previousName": "宽",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "base_width"
@@ -883,7 +900,8 @@
           "widget_ue_connectable": {},
           "version": "7.5.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "h3_fixed_fps": true
       }
     },
     {
@@ -931,7 +949,8 @@
           "widget_ue_connectable": {},
           "version": "7.5.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "h3_fixed_fps": true
       }
     },
     {
@@ -973,7 +992,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecode"
+        "Node name for S&R": "VAEDecode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -1015,7 +1035,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEEncode"
+        "Node name for S&R": "VAEEncode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -1049,7 +1070,7 @@
         {
           "name": "FLOAT",
           "type": "FLOAT",
-          "links": null
+          "links": []
         },
         {
           "name": "INT",
@@ -1061,14 +1082,15 @@
         {
           "name": "BOOL",
           "type": "BOOLEAN",
-          "links": null
+          "links": []
         }
       ],
       "title": "2× Width",
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "ComfyMathExpression"
+        "Node name for S&R": "ComfyMathExpression",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "a * 2"
@@ -1108,7 +1130,7 @@
         {
           "name": "FLOAT",
           "type": "FLOAT",
-          "links": null
+          "links": []
         },
         {
           "name": "INT",
@@ -1120,14 +1142,15 @@
         {
           "name": "BOOL",
           "type": "BOOLEAN",
-          "links": null
+          "links": []
         }
       ],
       "title": "2× Height",
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "ComfyMathExpression"
+        "Node name for S&R": "ComfyMathExpression",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "a * 2"
@@ -1177,7 +1200,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecodeAudio"
+        "Node name for S&R": "VAEDecodeAudio",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -1219,7 +1243,8 @@
           "widget_ue_connectable": {},
           "version": "7.5.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "minimax_h3_video_vae_int8_convrot.safetensors"
@@ -1261,7 +1286,8 @@
           "widget_ue_connectable": {},
           "version": "7.5.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         5
@@ -1324,7 +1350,8 @@
         "cnr_id": "comfyui-mainodes",
         "ver": "c49cde8826da7460361b408bd590dc86d36cc0b2",
         "Node name for S&R": "H3V2VInit",
-        "aux_id": "matlowai/ComfyUI-MAINodes"
+        "aux_id": "matlowai/ComfyUI-MAINodes",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         0,
@@ -1367,13 +1394,7 @@
           "name": "VAE",
           "type": "VAE",
           "links": [
-            390,
-            434,
-            448,
-            452,
-            496,
-            507,
-            511
+            12014
           ]
         }
       ],
@@ -1393,7 +1414,8 @@
           "widget_ue_connectable": {},
           "version": "7.5.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "minimax_h3_audio_vae_fp32.safetensors"
@@ -1442,27 +1464,27 @@
         {
           "name": "segments",
           "type": "STRING",
-          "links": null
+          "links": []
         },
         {
           "name": "window_start",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "window_len",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "profile",
           "type": "STRING",
-          "links": null
+          "links": []
         },
         {
           "name": "report",
           "type": "STRING",
-          "links": null
+          "links": []
         }
       ],
       "title": "EXT 1 — Jerk Oracle (q=.70, bridge=8)",
@@ -1470,7 +1492,8 @@
         "cnr_id": "comfyui-mainodes",
         "ver": "c49cde8826da7460361b408bd590dc86d36cc0b2",
         "Node name for S&R": "H3JerkOracle",
-        "aux_id": "matlowai/ComfyUI-MAINodes"
+        "aux_id": "matlowai/ComfyUI-MAINodes",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         124,
@@ -1540,7 +1563,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEEncode"
+        "Node name for S&R": "VAEEncode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -1582,7 +1606,8 @@
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.5.2"
-        }
+        },
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "minimax_h3_latent_upscaler_3d_fp16.safetensors",
@@ -1646,7 +1671,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecodeAudio"
+        "Node name for S&R": "VAEDecodeAudio",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -1704,7 +1730,8 @@
         "cnr_id": "comfyui-mainodes",
         "ver": "c49cde8826da7460361b408bd590dc86d36cc0b2",
         "Node name for S&R": "H3V2VInit",
-        "aux_id": "matlowai/ComfyUI-MAINodes"
+        "aux_id": "matlowai/ComfyUI-MAINodes",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         0,
@@ -1831,14 +1858,15 @@
         {
           "name": "LATENT",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "title": "EXT 1 — 2MP Conditioning",
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "",
@@ -1894,7 +1922,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -1949,7 +1978,7 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "title": "EXT 1 — LOW 4 @ 2MP (No Mask)",
@@ -1961,7 +1990,8 @@
           "widget_ue_connectable": {},
           "version": "7.5.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "h3_fixed_fps": true
       }
     },
     {
@@ -2010,7 +2040,8 @@
           "widget_ue_connectable": {},
           "version": "7.5.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "h3_fixed_fps": true
       }
     },
     {
@@ -2056,7 +2087,8 @@
         "cnr_id": "comfyui-mainodes",
         "ver": "c49cde8826da7460361b408bd590dc86d36cc0b2",
         "Node name for S&R": "H3ExactRecover",
-        "aux_id": "matlowai/ComfyUI-MAINodes"
+        "aux_id": "matlowai/ComfyUI-MAINodes",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         ""
@@ -2121,7 +2153,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "5839d453efa0346c1da49acc39fc65050c5c48c0",
-        "Node name for S&R": "MiniMaxH3AssembleExtension"
+        "Node name for S&R": "MiniMaxH3AssembleExtension",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         24,
@@ -2179,7 +2212,8 @@
           "widget_ue_connectable": {},
           "version": "7.5.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         24,
@@ -2217,7 +2251,7 @@
         {
           "name": "video",
           "type": "VIDEO",
-          "links": null
+          "links": []
         }
       ],
       "title": "Save Final Video",
@@ -2229,7 +2263,8 @@
           "widget_ue_connectable": {},
           "version": "7.5.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "video/H3_2MP_derope_offset_context_PR",
@@ -2278,7 +2313,8 @@
           "widget_ue_connectable": {},
           "version": "7.5.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "Continue directly from the final moment of the previous clip with no reset or re-establishment. The incoming motion context is authoritative for pose, movement, camera trajectory, lighting, environment, object state, ambience, and timing.\n\nIDENTITY LOCK: <Picture 1> is the exact same person. Preserve her face, hair, skin tone, wardrobe and equipment, and overall appearance. <Picture 1> is identity reference only; do not pull her toward the reference-image pose or framing.\n\n5-second high-energy Hollywood action continuation on the same rain-soaked neon street. Keep <Picture 1> prominent in medium and medium-close framing. Fast practical stunt motion, strong directional momentum, wet pavement reflections, dramatic police-light backlight, natural motion blur, crisp impacts.\n\nFrom the opening moment, accelerate immediately: <Picture 1> surges forward, traps an attacker’s arm, spins past them and drives them into the sedan in one fast continuous movement. The camera performs an aggressive forward rush, then a rapid whip-pan around her shoulder as she pivots. A second attacker lunges in; she ducks, counters with a fast elbow and sweeping heel strike, sending them off balance. Use very fast camera tracking, snap reframing, brief impact shake, and a short speed-ramp sensation while keeping her face and body readable.\n\nAround 00:03.2, the camera rapidly pushes into a tight moving close-up as she snatches the encrypted data drive and turns toward camera. Breathing hard but controlled, she says clearly: “Too slow.” She immediately rises and moves forward as blue police light sweeps across her face. Finish with a confident moving close-up rather than a static pose.\n\nSound: heavy rain, fast footsteps, clothing movement, baton whooshes, sharp body impacts, metal hits, water splashes, distant traffic and rising police sirens. Dialogue is clear and natural; surrounding action dips briefly under the spoken line.\n\nMusic: fast cinematic action score with pounding drums, distorted synth bass, aggressive strings and short sub-bass impacts synchronized to major hits. Maintain high momentum throughout."
@@ -2360,14 +2396,15 @@
         {
           "name": "trim_frames",
           "type": "INT",
-          "links": null
+          "links": []
         }
       ],
       "title": "GUIDE — Native 39f at Dynamic Seam Offset",
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "15fc6a7bf7b78efb27f33d7eef3818e7ed0e118a",
-        "Node name for S&R": "MiniMaxH3MotionContext"
+        "Node name for S&R": "MiniMaxH3MotionContext",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         39,
@@ -2422,7 +2459,8 @@
           "widget_ue_connectable": {},
           "version": "7.5.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "summary:\n[reference generation] The target video is a 5-second, 16:9 high-energy Hollywood action-movie street fight centered on <Subject 1>. The supplied image is used only as a character, face, wardrobe, and equipment reference. The scene features a rain-slick urban street, two attackers, hard-hitting practical stunt choreography, aggressive camera pushes, controlled impact shake, dramatic backlight, and a fast commercial action-film rhythm. Keep the framing predominantly medium and medium-close so that <Subject 1>'s face, costume, physical performance, and combat technique remain clearly visible.\n\ndetailed_description:\nThe target video has a polished Hollywood action-movie style rather than a restrained spy-thriller style: punchy contrast, bold backlight, wet reflective pavement, practical stunt realism, sharp impact timing, controlled handheld energy, quick push-ins, snap pans, brief impact camera shake, and natural motion blur. Use predominantly medium and medium-close compositions, with <Subject 1> occupying 60–75% of the frame. Avoid wide establishing shots. Keep the action intense but non-graphic, with no visible blood, gore, broken bones, text overlays, logos, or watermarks.\n\n[Shot 1] The video opens with a medium-full 50mm side-tracking shot, framed from the knees to the head. <Subject 1> strides through a rain-soaked city street as neon reflections and storefront lights streak across the blurred background. Two attackers step into her path. The camera performs a fast forward push-in as she stops, turns her shoulders, and adopts a confident fighting stance. A sharp musical hit and a burst of rain spray announce the action.\n\n[Shot 2] At 00:01.800, cut to a medium close-up handheld shot framed from the chest to the thighs. The first attacker swings a collapsible baton. <Subject 1> ducks under it, traps the wrist, redirects the attacker into the sedan, and delivers a clean elbow strike. Add a brief controlled camera jolt exactly on impact, followed by a fast snap-pan as she pivots. Keep her face, gloved hands, harness, and upper-body mechanics readable.\n\n[Shot 3] At 00:04.000, use a medium-full low-angle 40mm shot. The second attacker rushes from behind. <Subject 1> catches the arm, rolls across the wet hood of the sedan, and throws the attacker onto the pavement in a controlled stunt fall. Use a brief speed-ramp feeling during the reversal, then return to normal speed as water splashes across the lens. Her hair, jacket tails, heels, and athletic footwork remain physically coherent.\n\n\noverall_soundscape:\nHeavy rain, wet footsteps, jacket and harness movement, baton whooshes, sharp stunt impacts, car-door clangs, body sliding across metal, tire hiss, water splashes, distant traffic, and a rising police siren. Add controlled low-frequency impact hits synchronized with major strikes. No spoken dialogue.\n\nnon_diegetic_music:\nA high-energy Hollywood action score at approximately 132 BPM, with pounding cinematic drums, distorted synth bass, aggressive string ostinatos, metallic percussion, rising brass stabs, and short sub-bass impacts synchronized to the fight choreography. The music escalates rapidly through [Shot 2], peaks near the end of [Shot 3], and carries its momentum directly into the continuation."
@@ -2460,7 +2498,7 @@
         {
           "name": "MASK",
           "type": "MASK",
-          "links": null
+          "links": []
         }
       ],
       "title": "Identity Reference",
@@ -2472,7 +2510,8 @@
           "widget_ue_connectable": {},
           "version": "7.5.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "derope_continuation_reference.png",
@@ -2523,27 +2562,27 @@
         {
           "name": "segments",
           "type": "STRING",
-          "links": null
+          "links": []
         },
         {
           "name": "window_start",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "window_len",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "profile",
           "type": "STRING",
-          "links": null
+          "links": []
         },
         {
           "name": "report",
           "type": "STRING",
-          "links": null
+          "links": []
         }
       ],
       "title": "CLIP 1 — Jerk Oracle",
@@ -2551,7 +2590,8 @@
         "cnr_id": "comfyui-mainodes",
         "ver": "c49cde8826da7460361b408bd590dc86d36cc0b2",
         "Node name for S&R": "H3JerkOracle",
-        "aux_id": "matlowai/ComfyUI-MAINodes"
+        "aux_id": "matlowai/ComfyUI-MAINodes",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         124,
@@ -2622,7 +2662,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEEncodeAudio"
+        "Node name for S&R": "VAEEncodeAudio",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -2753,7 +2794,8 @@
           },
           "version": "7.5.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "",
@@ -2844,7 +2886,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "15fc6a7bf7b78efb27f33d7eef3818e7ed0e118a",
-        "Node name for S&R": "MiniMaxH3MotionContext"
+        "Node name for S&R": "MiniMaxH3MotionContext",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         39,
@@ -2910,7 +2953,8 @@
           "widget_ue_connectable": {},
           "version": "7.5.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "h3_fixed_fps": true
       }
     },
     {
@@ -2980,7 +3024,8 @@
           "widget_ue_connectable": {},
           "version": "7.5.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "h3_fixed_fps": true
       }
     },
     {
@@ -3035,7 +3080,7 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "title": "EXT 1 — Audio Baseline LOW 4",
@@ -3047,7 +3092,8 @@
           "widget_ue_connectable": {},
           "version": "7.5.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "h3_fixed_fps": true
       }
     },
     {
@@ -3089,7 +3135,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecode"
+        "Node name for S&R": "VAEDecode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -3149,7 +3196,7 @@
         {
           "name": "report",
           "type": "STRING",
-          "links": null
+          "links": []
         }
       ],
       "title": "EXT 1 — Time Smear",
@@ -3157,7 +3204,8 @@
         "cnr_id": "comfyui-mainodes",
         "ver": "c49cde8826da7460361b408bd590dc86d36cc0b2",
         "Node name for S&R": "H3TimeSmear",
-        "aux_id": "matlowai/ComfyUI-MAINodes"
+        "aux_id": "matlowai/ComfyUI-MAINodes",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         4,
@@ -3222,7 +3270,8 @@
         "cnr_id": "comfyui-mainodes",
         "ver": "c49cde8826da7460361b408bd590dc86d36cc0b2",
         "Node name for S&R": "H3AudioSmear",
-        "aux_id": "matlowai/ComfyUI-MAINodes"
+        "aux_id": "matlowai/ComfyUI-MAINodes",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "",
@@ -3291,7 +3340,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "5839d453efa0346c1da49acc39fc65050c5c48c0",
-        "Node name for S&R": "MiniMaxH3FanRecoveredContext"
+        "Node name for S&R": "MiniMaxH3FanRecoveredContext",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         39
@@ -3340,7 +3390,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEEncodeAudio"
+        "Node name for S&R": "VAEEncodeAudio",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -3396,19 +3447,20 @@
         {
           "name": "crossfade_images",
           "type": "IMAGE",
-          "links": null
+          "links": []
         },
         {
           "name": "crossfade_frames",
           "type": "INT",
-          "links": null
+          "links": []
         }
       ],
       "title": "FINAL — Trim Hidden Context + Match Audio Tail",
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "5839d453efa0346c1da49acc39fc65050c5c48c0",
-        "Node name for S&R": "MiniMaxH3MotionContextTrim"
+        "Node name for S&R": "MiniMaxH3MotionContextTrim",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         0,
@@ -3458,7 +3510,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "ImageFromBatch"
+        "Node name for S&R": "ImageFromBatch",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         -39,
@@ -3508,7 +3561,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -3555,7 +3609,8 @@
         "cnr_id": "comfyui-mainodes",
         "ver": "c49cde8826da7460361b408bd590dc86d36cc0b2",
         "Node name for S&R": "H3ExactRecover",
-        "aux_id": "matlowai/ComfyUI-MAINodes"
+        "aux_id": "matlowai/ComfyUI-MAINodes",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         ""
@@ -3668,14 +3723,15 @@
         {
           "name": "LATENT",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "title": "CLIP 1 — 2MP Conditioning",
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "",
@@ -3748,7 +3804,7 @@
         {
           "name": "report",
           "type": "STRING",
-          "links": null
+          "links": []
         }
       ],
       "title": "CLIP 1 — Time Smear",
@@ -3756,7 +3812,8 @@
         "cnr_id": "comfyui-mainodes",
         "ver": "c49cde8826da7460361b408bd590dc86d36cc0b2",
         "Node name for S&R": "H3TimeSmear",
-        "aux_id": "matlowai/ComfyUI-MAINodes"
+        "aux_id": "matlowai/ComfyUI-MAINodes",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         4,
@@ -3821,7 +3878,8 @@
         "cnr_id": "comfyui-mainodes",
         "ver": "c49cde8826da7460361b408bd590dc86d36cc0b2",
         "Node name for S&R": "H3AudioSmear",
-        "aux_id": "matlowai/ComfyUI-MAINodes"
+        "aux_id": "matlowai/ComfyUI-MAINodes",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "",
@@ -3885,7 +3943,7 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "title": "CLIP 1 — Audio Baseline LOW 4",
@@ -3897,7 +3955,8 @@
           "widget_ue_connectable": {},
           "version": "7.5.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "h3_fixed_fps": true
       }
     },
     {
@@ -3934,7 +3993,8 @@
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.5.2"
-        }
+        },
+        "h3_fixed_fps": true
       }
     },
     {
@@ -4064,7 +4124,8 @@
           },
           "version": "7.5.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "",
@@ -4114,7 +4175,8 @@
           "widget_ue_connectable": {},
           "version": "7.5.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "minimax_h3_fl2va_pruned_int8_convrot.safetensors",
@@ -4161,7 +4223,8 @@
           "widget_ue_connectable": {},
           "version": "7.5.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         999,
@@ -4210,7 +4273,8 @@
           "widget_ue_connectable": {},
           "version": "7.5.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "euler"
@@ -4258,7 +4322,8 @@
           "widget_ue_connectable": {},
           "version": "7.5.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "simple",
@@ -4321,7 +4386,8 @@
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.5.2"
-        }
+        },
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         4
@@ -4370,7 +4436,8 @@
       "properties": {
         "aux_id": "kijai/ComfyUI-SolAttn_triton",
         "ver": "842c4eaa7d91dbaef3fee3ccdbf36a39521e82fc",
-        "Node name for S&R": "SolAttnPatch"
+        "Node name for S&R": "SolAttnPatch",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         1.3,
@@ -4434,7 +4501,8 @@
           "widget_ue_connectable": {},
           "version": "7.5.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "minimax_h3_fl2va_pruned_int8_convrot.safetensors",
@@ -4484,7 +4552,8 @@
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.5.2"
-        }
+        },
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "comfy kitchen attention"
@@ -4532,7 +4601,8 @@
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.5.2"
-        }
+        },
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "minimax_h3_fl2v_lightx2v_turbo_4step_v0.1_comfy.safetensors",
@@ -4582,7 +4652,8 @@
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.5.2"
-        }
+        },
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         12,
@@ -4627,7 +4698,8 @@
       "properties": {
         "cnr_id": "comfyui-kjnodes",
         "ver": "3f20054214fec9f9234fd3841ae6f1e4287948f6",
-        "Node name for S&R": "MiniMaxChunkFeedForward"
+        "Node name for S&R": "MiniMaxChunkFeedForward",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         8,
@@ -4674,7 +4746,8 @@
       "properties": {
         "cnr_id": "comfyui-kjnodes",
         "ver": "3f20054214fec9f9234fd3841ae6f1e4287948f6",
-        "Node name for S&R": "MiniMaxLowVRAMAttention"
+        "Node name for S&R": "MiniMaxLowVRAMAttention",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         8
@@ -4722,7 +4795,8 @@
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.5.2"
-        }
+        },
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "minimax_h3_fl2v_lightx2v_turbo_4step_v0.1_comfy.safetensors",
@@ -4772,7 +4846,8 @@
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.5.2"
-        }
+        },
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         12,
@@ -4823,7 +4898,8 @@
       "properties": {
         "aux_id": "kijai/ComfyUI-SolAttn_triton",
         "ver": "842c4eaa7d91dbaef3fee3ccdbf36a39521e82fc",
-        "Node name for S&R": "SolAttnPatch"
+        "Node name for S&R": "SolAttnPatch",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         1.3,
@@ -4893,7 +4969,8 @@
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.5.2"
-        }
+        },
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "comfy kitchen attention"
@@ -4936,7 +5013,8 @@
       "properties": {
         "cnr_id": "comfyui-kjnodes",
         "ver": "3f20054214fec9f9234fd3841ae6f1e4287948f6",
-        "Node name for S&R": "MiniMaxChunkFeedForward"
+        "Node name for S&R": "MiniMaxChunkFeedForward",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         8,
@@ -4982,7 +5060,8 @@
       "properties": {
         "cnr_id": "comfyui-kjnodes",
         "ver": "3f20054214fec9f9234fd3841ae6f1e4287948f6",
-        "Node name for S&R": "MiniMaxLowVRAMAttention"
+        "Node name for S&R": "MiniMaxLowVRAMAttention",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         8
@@ -4990,6 +5069,48 @@
       "widgets_values_named": {
         "head_chunks": 8
       }
+    },
+    {
+      "id": 6002,
+      "type": "MiniMaxH3AudioVAECompatibility",
+      "pos": [
+        -390,
+        260
+      ],
+      "size": [
+        330,
+        90
+      ],
+      "flags": {},
+      "order": 85,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio_vae",
+          "type": "VAE",
+          "link": 12014
+        }
+      ],
+      "outputs": [
+        {
+          "name": "audio_vae",
+          "type": "VAE",
+          "links": [
+            390,
+            434,
+            448,
+            452,
+            496,
+            507,
+            511
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MiniMaxH3AudioVAECompatibility",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": []
     }
   ],
   "links": [
@@ -5123,7 +5244,7 @@
     ],
     [
       390,
-      120,
+      6002,
       0,
       226,
       0,
@@ -5371,7 +5492,7 @@
     ],
     [
       434,
-      120,
+      6002,
       0,
       265,
       2,
@@ -5467,7 +5588,7 @@
     ],
     [
       448,
-      120,
+      6002,
       0,
       269,
       1,
@@ -5499,7 +5620,7 @@
     ],
     [
       452,
-      120,
+      6002,
       0,
       271,
       1,
@@ -5723,7 +5844,7 @@
     ],
     [
       496,
-      120,
+      6002,
       0,
       294,
       2,
@@ -5771,7 +5892,7 @@
     ],
     [
       507,
-      120,
+      6002,
       0,
       290,
       1,
@@ -5803,7 +5924,7 @@
     ],
     [
       511,
-      120,
+      6002,
       0,
       292,
       1,
@@ -6256,6 +6377,14 @@
       402,
       0,
       "MODEL"
+    ],
+    [
+      12014,
+      120,
+      0,
+      6002,
+      0,
+      "VAE"
     ]
   ],
   "groups": [

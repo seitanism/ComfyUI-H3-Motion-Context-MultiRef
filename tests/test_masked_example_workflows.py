@@ -46,49 +46,29 @@ def test_masked_two_video_bridge_example():
     by_id = {n["id"]: n for n in data["nodes"]}
     links = {link[0]: link for link in data["links"]}
 
-    # Three shared timing controls drive target length, preserve length, and FPS.
-    target_frames = by_id[70]
-    preserve_frames = by_id[71]
-    fps = by_id[72]
-    assert target_frames["type"] == "PrimitiveInt"
-    assert target_frames["widgets_values"][0] == 192
-    assert preserve_frames["type"] == "PrimitiveInt"
-    assert preserve_frames["widgets_values"][0] == 39
-    assert fps["type"] == "PrimitiveFloat"
-    assert fps["widgets_values"][0] == 24.0
-
+    timing = _node(data, "MiniMaxH3AVBridgeTiming")
+    assert timing["widgets_values"] == [192, 39]
+    assert "PrimitiveFloat" not in types
+    assert "TrimAudioDuration" not in types
+    assert "AudioConcat" not in types
     target = _node(data, "MiniMaxH3ImageToVideo")
-    target_length = next(i for i in target["inputs"] if i["name"] == "length")
-    assert links[target_length["link"]][1:4] == [70, 0, 20]
-
+    target_link = next(i for i in target["inputs"] if i["name"] == "length")["link"]
+    assert links[target_link][1:3] == [timing["id"], 0]
     bridge = _node(data, "MiniMaxH3MaskedAVBridge")
-    assert next(i for i in bridge["inputs"] if i["name"] == "preserve_frames")["link"] == 36
-    assert next(i for i in bridge["inputs"] if i["name"] == "start_fps")["link"] == 37
-    assert next(i for i in bridge["inputs"] if i["name"] == "end_fps")["link"] == 38
-
-    # Visual stitching follows the validated bridge preserve_frames output.
-    stitches = [n for n in data["nodes"] if n["type"] == "ImageBatchExtendWithOverlap"]
-    assert len(stitches) == 2
-    overlap_links = [next(i for i in n["inputs"] if i["name"] == "overlap")["link"] for n in stitches]
-    assert overlap_links == [39, 40]
-    assert links[39][1:5] == [21, 2, 50, 2]
-    assert links[40][1:5] == [21, 2, 51, 2]
-
-    # Decoded bridge audio removes the protected H3 audio-grid head/tail.
-    math_nodes = [n for n in data["nodes"] if n["type"] == "ComfyMathExpression"]
-    assert {n["widgets_values"][0] for n in math_nodes} == {
-        "round(a / b * 40) / 40",
-        "(round(a / c * 40) - 2 * round(b / c * 40)) / 40",
-    }
-    trim = _node(data, "TrimAudioDuration")
-    assert next(i for i in trim["inputs"] if i["name"] == "start_index")["link"] == 47
-    assert next(i for i in trim["inputs"] if i["name"] == "duration")["link"] == 48
-
-    # Default 192 / 39 / 24 still evaluates to the historical exact values.
-    target_steps = round(192 / 24 * 40)
-    preserve_steps = round(39 / 24 * 40)
-    assert preserve_steps / 40 == 1.625
-    assert (target_steps - 2 * preserve_steps) / 40 == 4.75
-
-    create_video = _node(data, "CreateVideo")
-    assert next(i for i in create_video["inputs"] if i["name"] == "fps")["link"] == 41
+    for name in ("start_fps", "end_fps"):
+        assert next(i for i in bridge["inputs"] if i["name"] == name)["link"] is None
+    assert bridge["widgets_values"][:3] == [24.0, 24.0, 39]
+    preserve_link = next(i for i in bridge["inputs"] if i["name"] == "preserve_frames")["link"]
+    assert links[preserve_link][1:3] == [timing["id"], 1]
+    audio = _node(data, "MiniMaxH3AssembleBridgeAudio")
+    for name, slot in (("target_frames", 0), ("preserve_frames", 1)):
+        lid = next(i for i in audio["inputs"] if i["name"] == name)["link"]
+        assert links[lid][1:3] == [timing["id"], slot]
+    for stitch in [n for n in data["nodes"] if n["type"] == "ImageBatchExtendWithOverlap"]:
+        lid = next(i for i in stitch["inputs"] if i["name"] == "overlap")["link"]
+        assert links[lid][1:3] == [bridge["id"], 2]
+    output = _node(data, "CreateVideo")
+    assert output["widgets_values"] == [24.0]
+    lid = next(i for i in output["inputs"] if i["name"] == "audio")["link"]
+    assert links[lid][1:3] == [audio["id"], 0]
+    assert types.count("MiniMaxH3Validate24FPSVideo") == 2

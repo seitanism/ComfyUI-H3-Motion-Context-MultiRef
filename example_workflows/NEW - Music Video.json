@@ -1,8 +1,8 @@
 {
   "id": "76b5f713-5824-40ae-a2b7-f02ad62c256c",
   "revision": 1,
-  "last_node_id": 2509,
-  "last_link_id": 1489,
+  "last_node_id": 2510,
+  "last_link_id": 1490,
   "nodes": [
     {
       "id": 2,
@@ -50,7 +50,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "CLIPLoader"
+        "Node name for S&R": "CLIPLoader",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "qwen3vl_32b_minimax_h3_int8_convrot.safetensors",
@@ -84,53 +85,15 @@
           "name": "VAE",
           "type": "VAE",
           "links": [
-            181,
-            184,
-            187,
-            190,
-            193,
-            196,
-            230,
-            269,
-            305,
-            341,
-            377,
-            413,
-            449,
-            485,
-            521,
-            932,
-            962,
-            992,
-            1022,
-            1052,
-            1242,
-            1246,
-            1252,
-            1258,
-            1264,
-            1270,
-            1276,
-            1282,
-            1288,
-            1294,
-            1300,
-            1306,
-            1312,
-            1318,
-            1324,
-            1330,
-            1336,
-            1342,
-            1348,
-            1354
+            1490
           ]
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "VAELoader"
+        "Node name for S&R": "VAELoader",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "minimax_h3_audio_vae_fp32.safetensors"
@@ -193,7 +156,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "MiniMaxH3SigmaShift"
+        "Node name for S&R": "MiniMaxH3SigmaShift",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         12,
@@ -242,7 +206,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -321,7 +286,7 @@
         {
           "name": "trim_frames",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "clip_audio",
@@ -334,7 +299,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "4b484a3e1c7ddc045771042dcdb8b60529f127ff",
-        "Node name for S&R": "MiniMaxH3SongMaskedAVContext"
+        "Node name for S&R": "MiniMaxH3SongMaskedAVContext",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         13.458333,
@@ -389,7 +355,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -446,13 +413,14 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "SamplerCustomAdvanced"
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "h3_fixed_fps": true
       },
       "title": "Clip 2 - SamplerCustomAdvanced"
     },
@@ -532,7 +500,7 @@
         {
           "name": "trim_frames",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "clip_audio",
@@ -545,7 +513,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "4b484a3e1c7ddc045771042dcdb8b60529f127ff",
-        "Node name for S&R": "MiniMaxH3SongMaskedAVContext"
+        "Node name for S&R": "MiniMaxH3SongMaskedAVContext",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         26.916667,
@@ -600,7 +569,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -657,13 +627,14 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "SamplerCustomAdvanced"
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "h3_fixed_fps": true
       },
       "title": "Clip 3 - SamplerCustomAdvanced"
     },
@@ -743,7 +714,7 @@
         {
           "name": "trim_frames",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "clip_audio",
@@ -756,7 +727,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "4b484a3e1c7ddc045771042dcdb8b60529f127ff",
-        "Node name for S&R": "MiniMaxH3SongMaskedAVContext"
+        "Node name for S&R": "MiniMaxH3SongMaskedAVContext",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         40.375,
@@ -811,7 +783,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -868,13 +841,14 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "SamplerCustomAdvanced"
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "h3_fixed_fps": true
       },
       "title": "Clip 4 - SamplerCustomAdvanced"
     },
@@ -954,7 +928,7 @@
         {
           "name": "trim_frames",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "clip_audio",
@@ -967,7 +941,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "4b484a3e1c7ddc045771042dcdb8b60529f127ff",
-        "Node name for S&R": "MiniMaxH3SongMaskedAVContext"
+        "Node name for S&R": "MiniMaxH3SongMaskedAVContext",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         53.833333,
@@ -1022,7 +997,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -1079,13 +1055,14 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "SamplerCustomAdvanced"
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "h3_fixed_fps": true
       },
       "title": "Clip 5 - SamplerCustomAdvanced"
     },
@@ -1165,7 +1142,7 @@
         {
           "name": "trim_frames",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "clip_audio",
@@ -1178,7 +1155,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "4b484a3e1c7ddc045771042dcdb8b60529f127ff",
-        "Node name for S&R": "MiniMaxH3SongMaskedAVContext"
+        "Node name for S&R": "MiniMaxH3SongMaskedAVContext",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         67.291667,
@@ -1233,7 +1211,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -1290,13 +1269,14 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "SamplerCustomAdvanced"
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "h3_fixed_fps": true
       },
       "title": "Clip 6 - SamplerCustomAdvanced"
     },
@@ -1376,7 +1356,7 @@
         {
           "name": "trim_frames",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "clip_audio",
@@ -1389,7 +1369,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "4b484a3e1c7ddc045771042dcdb8b60529f127ff",
-        "Node name for S&R": "MiniMaxH3SongMaskedAVContext"
+        "Node name for S&R": "MiniMaxH3SongMaskedAVContext",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         80.75,
@@ -1433,7 +1414,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "RandomNoise"
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         889909296941847,
@@ -1482,7 +1464,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -1539,13 +1522,14 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "SamplerCustomAdvanced"
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "h3_fixed_fps": true
       },
       "title": "Clip 7 - SamplerCustomAdvanced"
     },
@@ -1625,7 +1609,7 @@
         {
           "name": "trim_frames",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "clip_audio",
@@ -1638,7 +1622,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "4b484a3e1c7ddc045771042dcdb8b60529f127ff",
-        "Node name for S&R": "MiniMaxH3SongMaskedAVContext"
+        "Node name for S&R": "MiniMaxH3SongMaskedAVContext",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         94.208333,
@@ -1682,7 +1667,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "RandomNoise"
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         587177660189550,
@@ -1731,7 +1717,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -1788,13 +1775,14 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "SamplerCustomAdvanced"
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "h3_fixed_fps": true
       },
       "title": "Clip 8 - SamplerCustomAdvanced"
     },
@@ -1874,7 +1862,7 @@
         {
           "name": "trim_frames",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "clip_audio",
@@ -1887,7 +1875,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "4b484a3e1c7ddc045771042dcdb8b60529f127ff",
-        "Node name for S&R": "MiniMaxH3SongMaskedAVContext"
+        "Node name for S&R": "MiniMaxH3SongMaskedAVContext",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         107.666667,
@@ -1931,7 +1920,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "RandomNoise"
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         907464430774817,
@@ -1980,7 +1970,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -2037,13 +2028,14 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "SamplerCustomAdvanced"
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "h3_fixed_fps": true
       },
       "title": "Clip 9 - SamplerCustomAdvanced"
     },
@@ -2123,7 +2115,7 @@
         {
           "name": "trim_frames",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "clip_audio",
@@ -2136,7 +2128,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "4b484a3e1c7ddc045771042dcdb8b60529f127ff",
-        "Node name for S&R": "MiniMaxH3SongMaskedAVContext"
+        "Node name for S&R": "MiniMaxH3SongMaskedAVContext",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         121.125,
@@ -2191,7 +2184,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -2248,13 +2242,14 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "SamplerCustomAdvanced"
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "h3_fixed_fps": true
       },
       "title": "Clip 10 - SamplerCustomAdvanced"
     },
@@ -2334,7 +2329,7 @@
         {
           "name": "trim_frames",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "clip_audio",
@@ -2347,7 +2342,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "4b484a3e1c7ddc045771042dcdb8b60529f127ff",
-        "Node name for S&R": "MiniMaxH3SongMaskedAVContext"
+        "Node name for S&R": "MiniMaxH3SongMaskedAVContext",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         134.583333,
@@ -2391,7 +2387,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "RandomNoise"
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         120909092658224,
@@ -2440,7 +2437,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -2497,13 +2495,14 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "SamplerCustomAdvanced"
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "h3_fixed_fps": true
       },
       "title": "Clip 11 - SamplerCustomAdvanced"
     },
@@ -2583,7 +2582,7 @@
         {
           "name": "trim_frames",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "clip_audio",
@@ -2596,7 +2595,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "4b484a3e1c7ddc045771042dcdb8b60529f127ff",
-        "Node name for S&R": "MiniMaxH3SongMaskedAVContext"
+        "Node name for S&R": "MiniMaxH3SongMaskedAVContext",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         148.041667,
@@ -2640,7 +2640,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "RandomNoise"
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         679731235512457,
@@ -2689,7 +2690,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -2746,13 +2748,14 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "SamplerCustomAdvanced"
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "h3_fixed_fps": true
       },
       "title": "Clip 12 - SamplerCustomAdvanced"
     },
@@ -2832,7 +2835,7 @@
         {
           "name": "trim_frames",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "clip_audio",
@@ -2845,7 +2848,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "4b484a3e1c7ddc045771042dcdb8b60529f127ff",
-        "Node name for S&R": "MiniMaxH3SongMaskedAVContext"
+        "Node name for S&R": "MiniMaxH3SongMaskedAVContext",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         161.5,
@@ -2889,7 +2893,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "RandomNoise"
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         490884057795672,
@@ -2938,7 +2943,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -2995,13 +3001,14 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "SamplerCustomAdvanced"
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "h3_fixed_fps": true
       },
       "title": "Clip 13 - SamplerCustomAdvanced"
     },
@@ -3081,7 +3088,7 @@
         {
           "name": "trim_frames",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "clip_audio",
@@ -3094,7 +3101,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "4b484a3e1c7ddc045771042dcdb8b60529f127ff",
-        "Node name for S&R": "MiniMaxH3SongMaskedAVContext"
+        "Node name for S&R": "MiniMaxH3SongMaskedAVContext",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         174.958333,
@@ -3138,7 +3146,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "RandomNoise"
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         534836803595541,
@@ -3187,7 +3196,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -3244,13 +3254,14 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "SamplerCustomAdvanced"
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "h3_fixed_fps": true
       },
       "title": "Clip 14 - SamplerCustomAdvanced"
     },
@@ -3330,7 +3341,7 @@
         {
           "name": "trim_frames",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "clip_audio",
@@ -3343,7 +3354,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "4b484a3e1c7ddc045771042dcdb8b60529f127ff",
-        "Node name for S&R": "MiniMaxH3SongMaskedAVContext"
+        "Node name for S&R": "MiniMaxH3SongMaskedAVContext",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         188.416667,
@@ -3387,7 +3399,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "RandomNoise"
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         899262098164995,
@@ -3436,7 +3449,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -3493,13 +3507,14 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "SamplerCustomAdvanced"
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "h3_fixed_fps": true
       },
       "title": "Clip 15 - SamplerCustomAdvanced"
     },
@@ -3535,7 +3550,7 @@
         {
           "name": "FLOAT",
           "type": "FLOAT",
-          "links": null
+          "links": []
         },
         {
           "name": "INT",
@@ -3569,13 +3584,14 @@
         {
           "name": "BOOL",
           "type": "BOOLEAN",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "ComfyMathExpression"
+        "Node name for S&R": "ComfyMathExpression",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "max(5, round(a * 24)) + (5 - (max(5, round(a * 24)) % 17)) % 17"
@@ -3651,7 +3667,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "VAELoader"
+        "Node name for S&R": "VAELoader",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "minimax_h3_video_vae_int8_convrot.safetensors"
@@ -3700,18 +3717,19 @@
         {
           "name": "INT",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "BOOL",
           "type": "BOOLEAN",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.31.0",
-        "Node name for S&R": "ComfyMathExpression"
+        "Node name for S&R": "ComfyMathExpression",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "a * 2"
@@ -3759,18 +3777,19 @@
         {
           "name": "INT",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "BOOL",
           "type": "BOOLEAN",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.31.0",
-        "Node name for S&R": "ComfyMathExpression"
+        "Node name for S&R": "ComfyMathExpression",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "a * 3"
@@ -3818,18 +3837,19 @@
         {
           "name": "INT",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "BOOL",
           "type": "BOOLEAN",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.31.0",
-        "Node name for S&R": "ComfyMathExpression"
+        "Node name for S&R": "ComfyMathExpression",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "a * 4"
@@ -3877,18 +3897,19 @@
         {
           "name": "INT",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "BOOL",
           "type": "BOOLEAN",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.31.0",
-        "Node name for S&R": "ComfyMathExpression"
+        "Node name for S&R": "ComfyMathExpression",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "a * 5"
@@ -3936,18 +3957,19 @@
         {
           "name": "INT",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "BOOL",
           "type": "BOOLEAN",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.31.0",
-        "Node name for S&R": "ComfyMathExpression"
+        "Node name for S&R": "ComfyMathExpression",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "a * 6"
@@ -3995,18 +4017,19 @@
         {
           "name": "INT",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "BOOL",
           "type": "BOOLEAN",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.31.0",
-        "Node name for S&R": "ComfyMathExpression"
+        "Node name for S&R": "ComfyMathExpression",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "a * 7"
@@ -4054,18 +4077,19 @@
         {
           "name": "INT",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "BOOL",
           "type": "BOOLEAN",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.31.0",
-        "Node name for S&R": "ComfyMathExpression"
+        "Node name for S&R": "ComfyMathExpression",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "a * 8"
@@ -4113,18 +4137,19 @@
         {
           "name": "INT",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "BOOL",
           "type": "BOOLEAN",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.31.0",
-        "Node name for S&R": "ComfyMathExpression"
+        "Node name for S&R": "ComfyMathExpression",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "a * 9"
@@ -4172,18 +4197,19 @@
         {
           "name": "INT",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "BOOL",
           "type": "BOOLEAN",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.31.0",
-        "Node name for S&R": "ComfyMathExpression"
+        "Node name for S&R": "ComfyMathExpression",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "a * 10"
@@ -4231,18 +4257,19 @@
         {
           "name": "INT",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "BOOL",
           "type": "BOOLEAN",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.31.0",
-        "Node name for S&R": "ComfyMathExpression"
+        "Node name for S&R": "ComfyMathExpression",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "a * 11"
@@ -4290,18 +4317,19 @@
         {
           "name": "INT",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "BOOL",
           "type": "BOOLEAN",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.31.0",
-        "Node name for S&R": "ComfyMathExpression"
+        "Node name for S&R": "ComfyMathExpression",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "a * 12"
@@ -4349,18 +4377,19 @@
         {
           "name": "INT",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "BOOL",
           "type": "BOOLEAN",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.31.0",
-        "Node name for S&R": "ComfyMathExpression"
+        "Node name for S&R": "ComfyMathExpression",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "a * 13"
@@ -4408,18 +4437,19 @@
         {
           "name": "INT",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "BOOL",
           "type": "BOOLEAN",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.31.0",
-        "Node name for S&R": "ComfyMathExpression"
+        "Node name for S&R": "ComfyMathExpression",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "a * 14"
@@ -4467,18 +4497,19 @@
         {
           "name": "INT",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "BOOL",
           "type": "BOOLEAN",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.31.0",
-        "Node name for S&R": "ComfyMathExpression"
+        "Node name for S&R": "ComfyMathExpression",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "a * 1"
@@ -4526,18 +4557,19 @@
         {
           "name": "INT",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "BOOL",
           "type": "BOOLEAN",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.31.0",
-        "Node name for S&R": "ComfyMathExpression"
+        "Node name for S&R": "ComfyMathExpression",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "a * 0"
@@ -4573,7 +4605,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "UNETLoader"
+        "Node name for S&R": "UNETLoader",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
@@ -4612,7 +4645,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "RandomNoise"
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         903826866713850,
@@ -4650,7 +4684,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "RandomNoise"
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         661271193620413,
@@ -4734,7 +4769,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "ResolutionSelector"
+        "Node name for S&R": "ResolutionSelector",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "16:9 (Widescreen)",
@@ -4796,7 +4832,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "LoadAudio"
+        "Node name for S&R": "LoadAudio",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "I'll Know You by the Scar.wav",
@@ -4947,7 +4984,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "subject_definitions:\n<Subject 1> is the same performer defined jointly by <Picture 1> for facial identity and <Picture 2> for full-body appearance, wardrobe, body proportions, and distinctive details.\n\nsummary:\n[reference generation] Continue the same unbroken shot while <Subject 1> remains visibly singing and the room turns into an impossible ocean memory.\n\nretention_analysis:\n<Subject 1> (appears throughout [Shot 1]): fully_preserved - preserve stable referenced identity while pose, expression, framing, lighting, and motion continue from the protected incoming visual prefix.\n\ndetailed_description:\n[Shot 1] Continue the exact incoming body turn and camera arc. <Subject 1> (S1) keeps visibly singing with readable mouth and jaw movement in exact sync with the protected master-song audio: <d>[English] I said, I think I already wrote your name somewhere I can't find.</d>\n\nFaint luminous handwriting crawls across the walls, almost forming a name before slipping away. One glowing line leaves the wall, touches the floor, and the reflection begins moving like water. Without any cut, the floor becomes a shallow dark ocean and the far wall becomes a horizon. Wind begins moving her hair.\n\nEnd with <Subject 1> stepping forward into the water while the same camera arc continues.\n\noverall_soundscape:\nSubtle room tone gradually becoming distant wind and water.\n\nnon_diegetic_music:\nThe protected master-song audio drives the singing, breathing, body rhythm, and emotional timing.",
@@ -5104,7 +5142,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "subject_definitions:\n<Subject 1> is the same performer defined jointly by <Picture 1> for facial identity and <Picture 2> for full-body appearance, wardrobe, body proportions, and distinctive details.\n\nsummary:\n[reference generation] Continue the one-shot performance across an impossible shoreline where different ages of the same memory coexist.\n\nretention_analysis:\n<Subject 1> (appears throughout [Shot 1]): fully_preserved - preserve stable identity and continue the incoming walk, camera motion, wind, and ocean state.\n\ndetailed_description:\n[Shot 1] Continue her existing step through the shallow water and the camera's ongoing glide. <Subject 1> (S1) keeps visibly singing throughout: <d>[English] And we were older by the ocean, laughing like it hurt. You reached for me so naturally, I forgot which life came first.</d>\n\nA blurred companion waits ahead while translucent versions of the same figure appear younger, older, taller, and smaller around it. Their laughter produces soft temporal echoes. The companion reaches toward her; she reaches back naturally while singing. Several translucent versions of their approaching hands coexist at different moments in time while the horizon slowly tilts even though gravity remains normal.\n\nEnd with their real fingertips still approaching and the camera gliding between the temporal echoes.\n\noverall_soundscape:\nSoft surf, wind, shallow footsteps, and cloth movement.\n\nnon_diegetic_music:\nThe protected master-song audio controls the vocal performance and the growing musical pulse.",
@@ -5261,7 +5300,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "subject_definitions:\n<Subject 1> is the same performer defined jointly by <Picture 1> for facial identity and <Picture 2> for full-body appearance, wardrobe, body proportions, and distinctive details.\n\nsummary:\n[reference generation] Complete the continuous memory with recognition reduced to one stable scar-like line, then end abruptly and unresolved.\n\nretention_analysis:\n<Subject 1> (appears throughout [Shot 1]): fully_preserved - preserve identity, emotional state, camera movement, and advancing darkness from the protected incoming visual prefix.\n\ndetailed_description:\n[Shot 1] Continue the exact incoming walk and camera movement. Almost everything is now soft darkness except <Subject 1>, the blurred companion, and one diagonal mark across its face.\n\nThe mark becomes perfectly sharp while everything else remains uncertain. Recognition appears quietly in <Subject 1>'s eyes as she keeps singing. <Subject 1> (S1) performs the final line with precise readable mouth movement: <d>[English] I'll know you by the scar.</d>\n\nShe raises her hand; the companion raises its hand. Their fingertips approach while the image dissolves into large blurred shapes around the perfectly sharp scar.\n\nTerminate the image instantly before the hands touch, exactly with the unresolved end of the song.\n\noverall_soundscape:\nAlmost silent physical ambience beneath the music.\n\nnon_diegetic_music:\nThe protected master-song audio drives the final vocal phrase and abrupt unresolved ending.",
@@ -5418,7 +5458,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "subject_definitions:\n<Subject 1> is the same performer defined jointly by <Picture 1> for facial identity and <Picture 2> for full-body appearance, wardrobe, body proportions, and distinctive details.\n\nsummary:\n[reference generation] Continue the same uninterrupted music-video performance from the protected incoming visual context. Preserve the performer, camera direction, lighting, environment, and motion state while developing the next visual beat for this clip's master-song interval.\n\nretention_analysis:\n<Subject 1> (appears throughout [Shot 1]): fully_preserved - preserve stable facial identity, hair identity, body proportions, wardrobe, colors, and distinctive referenced features while expression, pose, framing, lighting, and movement continue naturally from the incoming state.\n\ndetailed_description:\n[Shot 1] Continue the exact incoming pose, motion, and camera trajectory without a reset or re-establishing shot. Keep <Subject 1> visibly performing in time with the protected master-song audio. Replace this generic section with the production-specific action for this timeline segment and insert only the exact lyrics actually audible in this clip, using <d>[Language] exact lyrics</d>. If a word is not clear, write [unclear] rather than guessing. Keep the transition physically continuous and end on motion that can flow naturally into the next clip.\n\nstyle:\nCinematic continuous-shot music video, natural facial detail, stable subject identity, coherent motion, readable lip movement, controlled depth of field, consistent color and lighting continuity.\n\ncamera:\nContinue the incoming camera movement smoothly. Avoid hard cuts, teleportation, sudden lens changes, or re-establishing the scene unless explicitly requested.",
@@ -5575,7 +5616,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "subject_definitions:\n<Subject 1> is the same performer defined jointly by <Picture 1> for facial identity and <Picture 2> for full-body appearance, wardrobe, body proportions, and distinctive details.\n\nsummary:\n[reference generation] Continue the same uninterrupted music-video performance from the protected incoming visual context. Preserve the performer, camera direction, lighting, environment, and motion state while developing the next visual beat for this clip's master-song interval.\n\nretention_analysis:\n<Subject 1> (appears throughout [Shot 1]): fully_preserved - preserve stable facial identity, hair identity, body proportions, wardrobe, colors, and distinctive referenced features while expression, pose, framing, lighting, and movement continue naturally from the incoming state.\n\ndetailed_description:\n[Shot 1] Continue the exact incoming pose, motion, and camera trajectory without a reset or re-establishing shot. Keep <Subject 1> visibly performing in time with the protected master-song audio. Replace this generic section with the production-specific action for this timeline segment and insert only the exact lyrics actually audible in this clip, using <d>[Language] exact lyrics</d>. If a word is not clear, write [unclear] rather than guessing. Keep the transition physically continuous and end on motion that can flow naturally into the next clip.\n\nstyle:\nCinematic continuous-shot music video, natural facial detail, stable subject identity, coherent motion, readable lip movement, controlled depth of field, consistent color and lighting continuity.\n\ncamera:\nContinue the incoming camera movement smoothly. Avoid hard cuts, teleportation, sudden lens changes, or re-establishing the scene unless explicitly requested.",
@@ -5732,7 +5774,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "subject_definitions:\n<Subject 1> is the same performer defined jointly by <Picture 1> for facial identity and <Picture 2> for full-body appearance, wardrobe, body proportions, and distinctive details.\n\nsummary:\n[reference generation] Continue the same uninterrupted music-video performance from the protected incoming visual context. Preserve the performer, camera direction, lighting, environment, and motion state while developing the next visual beat for this clip's master-song interval.\n\nretention_analysis:\n<Subject 1> (appears throughout [Shot 1]): fully_preserved - preserve stable facial identity, hair identity, body proportions, wardrobe, colors, and distinctive referenced features while expression, pose, framing, lighting, and movement continue naturally from the incoming state.\n\ndetailed_description:\n[Shot 1] Continue the exact incoming pose, motion, and camera trajectory without a reset or re-establishing shot. Keep <Subject 1> visibly performing in time with the protected master-song audio. Replace this generic section with the production-specific action for this timeline segment and insert only the exact lyrics actually audible in this clip, using <d>[Language] exact lyrics</d>. If a word is not clear, write [unclear] rather than guessing. Keep the transition physically continuous and end on motion that can flow naturally into the next clip.\n\nstyle:\nCinematic continuous-shot music video, natural facial detail, stable subject identity, coherent motion, readable lip movement, controlled depth of field, consistent color and lighting continuity.\n\ncamera:\nContinue the incoming camera movement smoothly. Avoid hard cuts, teleportation, sudden lens changes, or re-establishing the scene unless explicitly requested.",
@@ -5889,7 +5932,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "subject_definitions:\n<Subject 1> is the same performer defined jointly by <Picture 1> for facial identity and <Picture 2> for full-body appearance, wardrobe, body proportions, and distinctive details.\n\nsummary:\n[reference generation] Continue the same uninterrupted music-video performance from the protected incoming visual context. Preserve the performer, camera direction, lighting, environment, and motion state while developing the next visual beat for this clip's master-song interval.\n\nretention_analysis:\n<Subject 1> (appears throughout [Shot 1]): fully_preserved - preserve stable facial identity, hair identity, body proportions, wardrobe, colors, and distinctive referenced features while expression, pose, framing, lighting, and movement continue naturally from the incoming state.\n\ndetailed_description:\n[Shot 1] Continue the exact incoming pose, motion, and camera trajectory without a reset or re-establishing shot. Keep <Subject 1> visibly performing in time with the protected master-song audio. Replace this generic section with the production-specific action for this timeline segment and insert only the exact lyrics actually audible in this clip, using <d>[Language] exact lyrics</d>. If a word is not clear, write [unclear] rather than guessing. Keep the transition physically continuous and end on motion that can flow naturally into the next clip.\n\nstyle:\nCinematic continuous-shot music video, natural facial detail, stable subject identity, coherent motion, readable lip movement, controlled depth of field, consistent color and lighting continuity.\n\ncamera:\nContinue the incoming camera movement smoothly. Avoid hard cuts, teleportation, sudden lens changes, or re-establishing the scene unless explicitly requested.",
@@ -6046,7 +6090,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "subject_definitions:\n<Subject 1> is the same performer defined jointly by <Picture 1> for facial identity and <Picture 2> for full-body appearance, wardrobe, body proportions, and distinctive details.\n\nsummary:\n[reference generation] Continue the same uninterrupted music-video performance from the protected incoming visual context. Preserve the performer, camera direction, lighting, environment, and motion state while developing the next visual beat for this clip's master-song interval.\n\nretention_analysis:\n<Subject 1> (appears throughout [Shot 1]): fully_preserved - preserve stable facial identity, hair identity, body proportions, wardrobe, colors, and distinctive referenced features while expression, pose, framing, lighting, and movement continue naturally from the incoming state.\n\ndetailed_description:\n[Shot 1] Continue the exact incoming pose, motion, and camera trajectory without a reset or re-establishing shot. Keep <Subject 1> visibly performing in time with the protected master-song audio. Replace this generic section with the production-specific action for this timeline segment and insert only the exact lyrics actually audible in this clip, using <d>[Language] exact lyrics</d>. If a word is not clear, write [unclear] rather than guessing. Keep the transition physically continuous and end on motion that can flow naturally into the next clip.\n\nstyle:\nCinematic continuous-shot music video, natural facial detail, stable subject identity, coherent motion, readable lip movement, controlled depth of field, consistent color and lighting continuity.\n\ncamera:\nContinue the incoming camera movement smoothly. Avoid hard cuts, teleportation, sudden lens changes, or re-establishing the scene unless explicitly requested.",
@@ -6203,7 +6248,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "subject_definitions:\n<Subject 1> is the same performer defined jointly by <Picture 1> for facial identity and <Picture 2> for full-body appearance, wardrobe, body proportions, and distinctive details.\n\nsummary:\n[reference generation] Continue the same uninterrupted music-video performance from the protected incoming visual context. Preserve the performer, camera direction, lighting, environment, and motion state while developing the next visual beat for this clip's master-song interval.\n\nretention_analysis:\n<Subject 1> (appears throughout [Shot 1]): fully_preserved - preserve stable facial identity, hair identity, body proportions, wardrobe, colors, and distinctive referenced features while expression, pose, framing, lighting, and movement continue naturally from the incoming state.\n\ndetailed_description:\n[Shot 1] Continue the exact incoming pose, motion, and camera trajectory without a reset or re-establishing shot. Keep <Subject 1> visibly performing in time with the protected master-song audio. Replace this generic section with the production-specific action for this timeline segment and insert only the exact lyrics actually audible in this clip, using <d>[Language] exact lyrics</d>. If a word is not clear, write [unclear] rather than guessing. Keep the transition physically continuous and end on motion that can flow naturally into the next clip.\n\nstyle:\nCinematic continuous-shot music video, natural facial detail, stable subject identity, coherent motion, readable lip movement, controlled depth of field, consistent color and lighting continuity.\n\ncamera:\nContinue the incoming camera movement smoothly. Avoid hard cuts, teleportation, sudden lens changes, or re-establishing the scene unless explicitly requested.",
@@ -6360,7 +6406,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "subject_definitions:\n<Subject 1> is the same performer defined jointly by <Picture 1> for facial identity and <Picture 2> for full-body appearance, wardrobe, body proportions, and distinctive details.\n\nsummary:\n[reference generation] Continue the same uninterrupted music-video performance from the protected incoming visual context. Preserve the performer, camera direction, lighting, environment, and motion state while developing the next visual beat for this clip's master-song interval.\n\nretention_analysis:\n<Subject 1> (appears throughout [Shot 1]): fully_preserved - preserve stable facial identity, hair identity, body proportions, wardrobe, colors, and distinctive referenced features while expression, pose, framing, lighting, and movement continue naturally from the incoming state.\n\ndetailed_description:\n[Shot 1] Continue the exact incoming pose, motion, and camera trajectory without a reset or re-establishing shot. Keep <Subject 1> visibly performing in time with the protected master-song audio. Replace this generic section with the production-specific action for this timeline segment and insert only the exact lyrics actually audible in this clip, using <d>[Language] exact lyrics</d>. If a word is not clear, write [unclear] rather than guessing. Keep the transition physically continuous and end on motion that can flow naturally into the next clip.\n\nstyle:\nCinematic continuous-shot music video, natural facial detail, stable subject identity, coherent motion, readable lip movement, controlled depth of field, consistent color and lighting continuity.\n\ncamera:\nContinue the incoming camera movement smoothly. Avoid hard cuts, teleportation, sudden lens changes, or re-establishing the scene unless explicitly requested.",
@@ -6517,7 +6564,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "subject_definitions:\n<Subject 1> is the same performer defined jointly by <Picture 1> for facial identity and <Picture 2> for full-body appearance, wardrobe, body proportions, and distinctive details.\n\nsummary:\n[reference generation] Continue the same uninterrupted music-video performance from the protected incoming visual context. Preserve the performer, camera direction, lighting, environment, and motion state while developing the next visual beat for this clip's master-song interval.\n\nretention_analysis:\n<Subject 1> (appears throughout [Shot 1]): fully_preserved - preserve stable facial identity, hair identity, body proportions, wardrobe, colors, and distinctive referenced features while expression, pose, framing, lighting, and movement continue naturally from the incoming state.\n\ndetailed_description:\n[Shot 1] Continue the exact incoming pose, motion, and camera trajectory without a reset or re-establishing shot. Keep <Subject 1> visibly performing in time with the protected master-song audio. Replace this generic section with the production-specific action for this timeline segment and insert only the exact lyrics actually audible in this clip, using <d>[Language] exact lyrics</d>. If a word is not clear, write [unclear] rather than guessing. Keep the transition physically continuous and end on motion that can flow naturally into the next clip.\n\nstyle:\nCinematic continuous-shot music video, natural facial detail, stable subject identity, coherent motion, readable lip movement, controlled depth of field, consistent color and lighting continuity.\n\ncamera:\nContinue the incoming camera movement smoothly. Avoid hard cuts, teleportation, sudden lens changes, or re-establishing the scene unless explicitly requested.",
@@ -6674,7 +6722,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "subject_definitions:\n<Subject 1> is the same performer defined jointly by <Picture 1> for facial identity and <Picture 2> for full-body appearance, wardrobe, body proportions, and distinctive details.\n\nsummary:\n[reference generation] Continue the same uninterrupted music-video performance from the protected incoming visual context. Preserve the performer, camera direction, lighting, environment, and motion state while developing the next visual beat for this clip's master-song interval.\n\nretention_analysis:\n<Subject 1> (appears throughout [Shot 1]): fully_preserved - preserve stable facial identity, hair identity, body proportions, wardrobe, colors, and distinctive referenced features while expression, pose, framing, lighting, and movement continue naturally from the incoming state.\n\ndetailed_description:\n[Shot 1] Continue the exact incoming pose, motion, and camera trajectory without a reset or re-establishing shot. Keep <Subject 1> visibly performing in time with the protected master-song audio. Replace this generic section with the production-specific action for this timeline segment and insert only the exact lyrics actually audible in this clip, using <d>[Language] exact lyrics</d>. If a word is not clear, write [unclear] rather than guessing. Keep the transition physically continuous and end on motion that can flow naturally into the next clip.\n\nstyle:\nCinematic continuous-shot music video, natural facial detail, stable subject identity, coherent motion, readable lip movement, controlled depth of field, consistent color and lighting continuity.\n\ncamera:\nContinue the incoming camera movement smoothly. Avoid hard cuts, teleportation, sudden lens changes, or re-establishing the scene unless explicitly requested.",
@@ -6721,7 +6770,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "RandomNoise"
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         514005817509111,
@@ -6759,7 +6809,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "RandomNoise"
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         208140829245950,
@@ -6797,7 +6848,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "RandomNoise"
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         378941378675234,
@@ -6945,7 +6997,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "subject_definitions:\n<Subject 1> is the same performer defined jointly by <Picture 1> for facial identity and <Picture 2> for full-body appearance, wardrobe, body proportions, and distinctive details.\n\nsummary:\n[reference generation] Continue the single shot as physical contact turns the ocean into a moving labyrinth of contradictory memories.\n\nretention_analysis:\n<Subject 1> (appears throughout [Shot 1]): fully_preserved - preserve stable identity while continuing the incoming reach, camera trajectory, shoreline, and emotional state.\n\ndetailed_description:\n[Shot 1] Continue the approaching hands until the fingertips touch. <Subject 1> (S1) remains visibly singing throughout: <d>[English] And all I know is every time you look at me, I lose a year. You keep becoming someone new.</d>\n\nAt contact, sheets of ocean water rise vertically and become enormous moving mirrors. The camera threads smoothly between them. Each time the blurred companion looks at her, a reflection shows another age or another version of the original room while the actual performer remains unchanged. The companion shifts between different human silhouettes but remains emotionally recognizable to her.\n\nA thin ring of water rotates around <Subject 1> like a clock hand as the camera moves closer to her readable singing face.\n\nEnd with the mirrors rotating and beginning to reveal pieces of the original room.\n\noverall_soundscape:\nMuted water and faint glass-like resonance.\n\nnon_diegetic_music:\nThe protected master-song audio drives the intimate singing and stronger middle-section rhythm.",
@@ -7102,7 +7155,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "subject_definitions:\n<Subject 1> is the same performer defined jointly by <Picture 1> for facial identity and <Picture 2> for full-body appearance, wardrobe, body proportions, and distinctive details.\n\nsummary:\n[reference generation] Continue the unbroken performance as ocean, mirrors, corridors, and the original room collapse into the same impossible memory.\n\nretention_analysis:\n<Subject 1> (appears throughout [Shot 1]): fully_preserved - preserve stable identity and continue the incoming walk, camera retreat, reflections, and emotional state.\n\ndetailed_description:\n[Shot 1] Continue the existing forward walk and backward camera glide. <Subject 1> (S1) remains visibly singing throughout: <d>[English] I keep remembering you here. So if we meet before we meet, don't tell me who you are. Just stay until the room goes dark.</d>\n\nPassing mirrors reveal the doorway, ocean, room, and long corridors occupying the same physical space. Two blurred versions of the remembered person approach from impossible directions and merge into one figure. As they merge, a thin diagonal line briefly appears across the blurred face like reflected light.\n\nDarkness then begins erasing the world from far to near: horizon, corridors, mirrors, then walls. The scar-like line remains visible longer than everything else.\n\nEnd while she is still singing and walking toward the figure as the darkness advances.\n\noverall_soundscape:\nWater fades into intimate room tone and soft footsteps.\n\nnon_diegetic_music:\nThe protected master-song audio controls the vocal performance and late-song emotional build.",
@@ -7149,7 +7203,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "RandomNoise"
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         162450393808085,
@@ -7187,7 +7242,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "RandomNoise"
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         866168170608469,
@@ -7335,7 +7391,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "subject_definitions:\n<Subject 1> is the same performer defined jointly by <Picture 1> for facial identity and <Picture 2> for full-body appearance, wardrobe, body proportions, and distinctive details.\n\nsummary:\n[reference generation] Continue the same uninterrupted music-video performance from the protected incoming visual context. Preserve the performer, camera direction, lighting, environment, and motion state while developing the next visual beat for this clip's master-song interval.\n\nretention_analysis:\n<Subject 1> (appears throughout [Shot 1]): fully_preserved - preserve stable facial identity, hair identity, body proportions, wardrobe, colors, and distinctive referenced features while expression, pose, framing, lighting, and movement continue naturally from the incoming state.\n\ndetailed_description:\n[Shot 1] Continue the exact incoming pose, motion, and camera trajectory without a reset or re-establishing shot. Keep <Subject 1> visibly performing in time with the protected master-song audio. Replace this generic section with the production-specific action for this timeline segment and insert only the exact lyrics actually audible in this clip, using <d>[Language] exact lyrics</d>. If a word is not clear, write [unclear] rather than guessing. Keep the transition physically continuous and end on motion that can flow naturally into the next clip.\n\nstyle:\nCinematic continuous-shot music video, natural facial detail, stable subject identity, coherent motion, readable lip movement, controlled depth of field, consistent color and lighting continuity.\n\ncamera:\nContinue the incoming camera movement smoothly. Avoid hard cuts, teleportation, sudden lens changes, or re-establishing the scene unless explicitly requested.",
@@ -7431,7 +7488,7 @@
         {
           "name": "trim_frames",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "clip_audio",
@@ -7444,7 +7501,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "4b484a3e1c7ddc045771042dcdb8b60529f127ff",
-        "Node name for S&R": "MiniMaxH3SongMaskedAVContext"
+        "Node name for S&R": "MiniMaxH3SongMaskedAVContext",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         0,
@@ -7488,7 +7546,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "RandomNoise"
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         160016001600160,
@@ -7537,7 +7596,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -7594,13 +7654,14 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "SamplerCustomAdvanced"
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "h3_fixed_fps": true
       },
       "title": "Clip 16 - SamplerCustomAdvanced"
     },
@@ -7643,18 +7704,19 @@
         {
           "name": "INT",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "BOOL",
           "type": "BOOLEAN",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.31.0",
-        "Node name for S&R": "ComfyMathExpression"
+        "Node name for S&R": "ComfyMathExpression",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "a * 15"
@@ -7800,7 +7862,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "subject_definitions:\n<Subject 1> is the same performer defined jointly by <Picture 1> for facial identity and <Picture 2> for full-body appearance, wardrobe, body proportions, and distinctive details.\n\nsummary:\n[reference generation] Continue the same uninterrupted music-video performance from the protected incoming visual context. Preserve the performer, camera direction, lighting, environment, and motion state while developing the next visual beat for this clip's master-song interval.\n\nretention_analysis:\n<Subject 1> (appears throughout [Shot 1]): fully_preserved - preserve stable facial identity, hair identity, body proportions, wardrobe, colors, and distinctive referenced features while expression, pose, framing, lighting, and movement continue naturally from the incoming state.\n\ndetailed_description:\n[Shot 1] Continue the exact incoming pose, motion, and camera trajectory without a reset or re-establishing shot. Keep <Subject 1> visibly performing in time with the protected master-song audio. Replace this generic section with the production-specific action for this timeline segment and insert only the exact lyrics actually audible in this clip, using <d>[Language] exact lyrics</d>. If a word is not clear, write [unclear] rather than guessing. Keep the transition physically continuous and end on motion that can flow naturally into the next clip.\n\nstyle:\nCinematic continuous-shot music video, natural facial detail, stable subject identity, coherent motion, readable lip movement, controlled depth of field, consistent color and lighting continuity.\n\ncamera:\nContinue the incoming camera movement smoothly. Avoid hard cuts, teleportation, sudden lens changes, or re-establishing the scene unless explicitly requested.",
@@ -7896,7 +7959,7 @@
         {
           "name": "trim_frames",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "clip_audio",
@@ -7909,7 +7972,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "4b484a3e1c7ddc045771042dcdb8b60529f127ff",
-        "Node name for S&R": "MiniMaxH3SongMaskedAVContext"
+        "Node name for S&R": "MiniMaxH3SongMaskedAVContext",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         0,
@@ -7953,7 +8017,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "RandomNoise"
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         161016101610161,
@@ -8002,7 +8067,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -8059,13 +8125,14 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "SamplerCustomAdvanced"
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "h3_fixed_fps": true
       },
       "title": "Clip 17 - SamplerCustomAdvanced"
     },
@@ -8108,18 +8175,19 @@
         {
           "name": "INT",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "BOOL",
           "type": "BOOLEAN",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.31.0",
-        "Node name for S&R": "ComfyMathExpression"
+        "Node name for S&R": "ComfyMathExpression",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "a * 16"
@@ -8265,7 +8333,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "subject_definitions:\n<Subject 1> is the same performer defined jointly by <Picture 1> for facial identity and <Picture 2> for full-body appearance, wardrobe, body proportions, and distinctive details.\n\nsummary:\n[reference generation] Continue the same uninterrupted music-video performance from the protected incoming visual context. Preserve the performer, camera direction, lighting, environment, and motion state while developing the next visual beat for this clip's master-song interval.\n\nretention_analysis:\n<Subject 1> (appears throughout [Shot 1]): fully_preserved - preserve stable facial identity, hair identity, body proportions, wardrobe, colors, and distinctive referenced features while expression, pose, framing, lighting, and movement continue naturally from the incoming state.\n\ndetailed_description:\n[Shot 1] Continue the exact incoming pose, motion, and camera trajectory without a reset or re-establishing shot. Keep <Subject 1> visibly performing in time with the protected master-song audio. Replace this generic section with the production-specific action for this timeline segment and insert only the exact lyrics actually audible in this clip, using <d>[Language] exact lyrics</d>. If a word is not clear, write [unclear] rather than guessing. Keep the transition physically continuous and end on motion that can flow naturally into the next clip.\n\nstyle:\nCinematic continuous-shot music video, natural facial detail, stable subject identity, coherent motion, readable lip movement, controlled depth of field, consistent color and lighting continuity.\n\ncamera:\nContinue the incoming camera movement smoothly. Avoid hard cuts, teleportation, sudden lens changes, or re-establishing the scene unless explicitly requested.",
@@ -8361,7 +8430,7 @@
         {
           "name": "trim_frames",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "clip_audio",
@@ -8374,7 +8443,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "4b484a3e1c7ddc045771042dcdb8b60529f127ff",
-        "Node name for S&R": "MiniMaxH3SongMaskedAVContext"
+        "Node name for S&R": "MiniMaxH3SongMaskedAVContext",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         0,
@@ -8418,7 +8488,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "RandomNoise"
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         162016201620162,
@@ -8467,7 +8538,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -8524,13 +8596,14 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "SamplerCustomAdvanced"
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "h3_fixed_fps": true
       },
       "title": "Clip 18 - SamplerCustomAdvanced"
     },
@@ -8573,18 +8646,19 @@
         {
           "name": "INT",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "BOOL",
           "type": "BOOLEAN",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.31.0",
-        "Node name for S&R": "ComfyMathExpression"
+        "Node name for S&R": "ComfyMathExpression",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "a * 17"
@@ -8730,7 +8804,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "subject_definitions:\n<Subject 1> is the same performer defined jointly by <Picture 1> for facial identity and <Picture 2> for full-body appearance, wardrobe, body proportions, and distinctive details.\n\nsummary:\n[reference generation] Continue the same uninterrupted music-video performance from the protected incoming visual context. Preserve the performer, camera direction, lighting, environment, and motion state while developing the next visual beat for this clip's master-song interval.\n\nretention_analysis:\n<Subject 1> (appears throughout [Shot 1]): fully_preserved - preserve stable facial identity, hair identity, body proportions, wardrobe, colors, and distinctive referenced features while expression, pose, framing, lighting, and movement continue naturally from the incoming state.\n\ndetailed_description:\n[Shot 1] Continue the exact incoming pose, motion, and camera trajectory without a reset or re-establishing shot. Keep <Subject 1> visibly performing in time with the protected master-song audio. Replace this generic section with the production-specific action for this timeline segment and insert only the exact lyrics actually audible in this clip, using <d>[Language] exact lyrics</d>. If a word is not clear, write [unclear] rather than guessing. Keep the transition physically continuous and end on motion that can flow naturally into the next clip.\n\nstyle:\nCinematic continuous-shot music video, natural facial detail, stable subject identity, coherent motion, readable lip movement, controlled depth of field, consistent color and lighting continuity.\n\ncamera:\nContinue the incoming camera movement smoothly. Avoid hard cuts, teleportation, sudden lens changes, or re-establishing the scene unless explicitly requested.",
@@ -8826,7 +8901,7 @@
         {
           "name": "trim_frames",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "clip_audio",
@@ -8839,7 +8914,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "4b484a3e1c7ddc045771042dcdb8b60529f127ff",
-        "Node name for S&R": "MiniMaxH3SongMaskedAVContext"
+        "Node name for S&R": "MiniMaxH3SongMaskedAVContext",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         0,
@@ -8883,7 +8959,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "RandomNoise"
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         163016301630163,
@@ -8932,7 +9009,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -8989,13 +9067,14 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "SamplerCustomAdvanced"
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "h3_fixed_fps": true
       },
       "title": "Clip 19 - SamplerCustomAdvanced"
     },
@@ -9038,18 +9117,19 @@
         {
           "name": "INT",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "BOOL",
           "type": "BOOLEAN",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.31.0",
-        "Node name for S&R": "ComfyMathExpression"
+        "Node name for S&R": "ComfyMathExpression",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "a * 18"
@@ -9195,7 +9275,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "subject_definitions:\n<Subject 1> is the same performer defined jointly by <Picture 1> for facial identity and <Picture 2> for full-body appearance, wardrobe, body proportions, and distinctive details.\n\nsummary:\n[reference generation] Continue the same uninterrupted music-video performance from the protected incoming visual context. Preserve the performer, camera direction, lighting, environment, and motion state while developing the next visual beat for this clip's master-song interval.\n\nretention_analysis:\n<Subject 1> (appears throughout [Shot 1]): fully_preserved - preserve stable facial identity, hair identity, body proportions, wardrobe, colors, and distinctive referenced features while expression, pose, framing, lighting, and movement continue naturally from the incoming state.\n\ndetailed_description:\n[Shot 1] Continue the exact incoming pose, motion, and camera trajectory without a reset or re-establishing shot. Keep <Subject 1> visibly performing in time with the protected master-song audio. Replace this generic section with the production-specific action for this timeline segment and insert only the exact lyrics actually audible in this clip, using <d>[Language] exact lyrics</d>. If a word is not clear, write [unclear] rather than guessing. Keep the transition physically continuous and end on motion that can flow naturally into the next clip.\n\nstyle:\nCinematic continuous-shot music video, natural facial detail, stable subject identity, coherent motion, readable lip movement, controlled depth of field, consistent color and lighting continuity.\n\ncamera:\nContinue the incoming camera movement smoothly. Avoid hard cuts, teleportation, sudden lens changes, or re-establishing the scene unless explicitly requested.",
@@ -9291,7 +9372,7 @@
         {
           "name": "trim_frames",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "clip_audio",
@@ -9304,7 +9385,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "4b484a3e1c7ddc045771042dcdb8b60529f127ff",
-        "Node name for S&R": "MiniMaxH3SongMaskedAVContext"
+        "Node name for S&R": "MiniMaxH3SongMaskedAVContext",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         0,
@@ -9348,7 +9430,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "RandomNoise"
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         164016401640164,
@@ -9397,7 +9480,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -9453,13 +9537,14 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "SamplerCustomAdvanced"
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "h3_fixed_fps": true
       },
       "title": "Clip 20 - SamplerCustomAdvanced"
     },
@@ -9502,18 +9587,19 @@
         {
           "name": "INT",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "BOOL",
           "type": "BOOLEAN",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.31.0",
-        "Node name for S&R": "ComfyMathExpression"
+        "Node name for S&R": "ComfyMathExpression",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "a * 19"
@@ -9560,7 +9646,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecode"
+        "Node name for S&R": "VAEDecode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -9614,7 +9701,8 @@
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "1.7.7",
-        "Node name for S&R": "VHS_VideoCombine"
+        "Node name for S&R": "VHS_VideoCombine",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "frame_rate": 24,
@@ -9690,7 +9778,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecode"
+        "Node name for S&R": "VAEDecode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -9744,7 +9833,8 @@
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "1.7.7",
-        "Node name for S&R": "VHS_VideoCombine"
+        "Node name for S&R": "VHS_VideoCombine",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "frame_rate": 24,
@@ -9820,7 +9910,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecode"
+        "Node name for S&R": "VAEDecode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -9874,7 +9965,8 @@
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "1.7.7",
-        "Node name for S&R": "VHS_VideoCombine"
+        "Node name for S&R": "VHS_VideoCombine",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "frame_rate": 24,
@@ -9950,7 +10042,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecode"
+        "Node name for S&R": "VAEDecode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -10004,7 +10097,8 @@
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "1.7.7",
-        "Node name for S&R": "VHS_VideoCombine"
+        "Node name for S&R": "VHS_VideoCombine",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "frame_rate": 24,
@@ -10080,7 +10174,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecode"
+        "Node name for S&R": "VAEDecode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -10134,7 +10229,8 @@
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "1.7.7",
-        "Node name for S&R": "VHS_VideoCombine"
+        "Node name for S&R": "VHS_VideoCombine",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "frame_rate": 24,
@@ -10210,7 +10306,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecode"
+        "Node name for S&R": "VAEDecode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -10264,7 +10361,8 @@
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "1.7.7",
-        "Node name for S&R": "VHS_VideoCombine"
+        "Node name for S&R": "VHS_VideoCombine",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "frame_rate": 24,
@@ -10340,7 +10438,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecode"
+        "Node name for S&R": "VAEDecode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -10394,7 +10493,8 @@
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "1.7.7",
-        "Node name for S&R": "VHS_VideoCombine"
+        "Node name for S&R": "VHS_VideoCombine",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "frame_rate": 24,
@@ -10470,7 +10570,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecode"
+        "Node name for S&R": "VAEDecode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -10524,7 +10625,8 @@
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "1.7.7",
-        "Node name for S&R": "VHS_VideoCombine"
+        "Node name for S&R": "VHS_VideoCombine",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "frame_rate": 24,
@@ -10600,7 +10702,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecode"
+        "Node name for S&R": "VAEDecode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -10654,7 +10757,8 @@
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "1.7.7",
-        "Node name for S&R": "VHS_VideoCombine"
+        "Node name for S&R": "VHS_VideoCombine",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "frame_rate": 24,
@@ -10730,7 +10834,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecode"
+        "Node name for S&R": "VAEDecode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -10784,7 +10889,8 @@
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "1.7.7",
-        "Node name for S&R": "VHS_VideoCombine"
+        "Node name for S&R": "VHS_VideoCombine",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "frame_rate": 24,
@@ -10860,7 +10966,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecode"
+        "Node name for S&R": "VAEDecode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -10914,7 +11021,8 @@
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "1.7.7",
-        "Node name for S&R": "VHS_VideoCombine"
+        "Node name for S&R": "VHS_VideoCombine",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "frame_rate": 24,
@@ -10990,7 +11098,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecode"
+        "Node name for S&R": "VAEDecode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -11044,7 +11153,8 @@
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "1.7.7",
-        "Node name for S&R": "VHS_VideoCombine"
+        "Node name for S&R": "VHS_VideoCombine",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "frame_rate": 24,
@@ -11120,7 +11230,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecode"
+        "Node name for S&R": "VAEDecode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -11174,7 +11285,8 @@
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "1.7.7",
-        "Node name for S&R": "VHS_VideoCombine"
+        "Node name for S&R": "VHS_VideoCombine",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "frame_rate": 24,
@@ -11250,7 +11362,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecode"
+        "Node name for S&R": "VAEDecode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -11304,7 +11417,8 @@
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "1.7.7",
-        "Node name for S&R": "VHS_VideoCombine"
+        "Node name for S&R": "VHS_VideoCombine",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "frame_rate": 24,
@@ -11380,7 +11494,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecode"
+        "Node name for S&R": "VAEDecode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -11434,7 +11549,8 @@
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "1.7.7",
-        "Node name for S&R": "VHS_VideoCombine"
+        "Node name for S&R": "VHS_VideoCombine",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "frame_rate": 24,
@@ -11510,7 +11626,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecode"
+        "Node name for S&R": "VAEDecode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -11564,7 +11681,8 @@
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "1.7.7",
-        "Node name for S&R": "VHS_VideoCombine"
+        "Node name for S&R": "VHS_VideoCombine",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "frame_rate": 24,
@@ -11640,7 +11758,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecode"
+        "Node name for S&R": "VAEDecode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -11694,7 +11813,8 @@
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "1.7.7",
-        "Node name for S&R": "VHS_VideoCombine"
+        "Node name for S&R": "VHS_VideoCombine",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "frame_rate": 24,
@@ -11770,7 +11890,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecode"
+        "Node name for S&R": "VAEDecode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -11824,7 +11945,8 @@
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "1.7.7",
-        "Node name for S&R": "VHS_VideoCombine"
+        "Node name for S&R": "VHS_VideoCombine",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "frame_rate": 24,
@@ -11900,7 +12022,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecode"
+        "Node name for S&R": "VAEDecode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -11954,7 +12077,8 @@
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "1.7.7",
-        "Node name for S&R": "VHS_VideoCombine"
+        "Node name for S&R": "VHS_VideoCombine",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "frame_rate": 24,
@@ -12030,7 +12154,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecode"
+        "Node name for S&R": "VAEDecode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -12084,7 +12209,8 @@
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "1.7.7",
-        "Node name for S&R": "VHS_VideoCombine"
+        "Node name for S&R": "VHS_VideoCombine",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "frame_rate": 24,
@@ -12168,7 +12294,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "KSamplerSelect"
+        "Node name for S&R": "KSamplerSelect",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "res_multistep"
@@ -12206,7 +12333,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "PrimitiveInt"
+        "Node name for S&R": "PrimitiveInt",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         8,
@@ -12236,7 +12364,8 @@
       "inputs": [],
       "outputs": [],
       "properties": {
-        "Node name for S&R": "Note"
+        "Node name for S&R": "Note",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "Masked VISUAL prefix guide:\n39 recommended. Other exact H3 video runs: 5, 22, 56, 73, 90, 107, 124...\n\nOnly VIDEO is inherited from the previous clip. The exact master-song AUDIO slice is independently written into each target latent and fully protected (mask 0)."
@@ -12274,7 +12403,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.31.0",
-        "Node name for S&R": "PrimitiveInt"
+        "Node name for S&R": "PrimitiveInt",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         39,
@@ -12314,7 +12444,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.31.0",
-        "Node name for S&R": "PrimitiveInt"
+        "Node name for S&R": "PrimitiveInt",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         39,
@@ -12360,7 +12491,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "LoraLoaderModelOnly"
+        "Node name for S&R": "LoraLoaderModelOnly",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors",
@@ -12405,7 +12537,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "ModelAttentionBackend"
+        "Node name for S&R": "ModelAttentionBackend",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "comfy kitchen attention"
@@ -12459,13 +12592,14 @@
         {
           "name": "MASK",
           "type": "MASK",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "LoadImage"
+        "Node name for S&R": "LoadImage",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "be6f4e89-4c3e-43e0-93f5-cc723ccd9b14.png",
@@ -12521,13 +12655,14 @@
         {
           "name": "MASK",
           "type": "MASK",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "LoadImage"
+        "Node name for S&R": "LoadImage",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "c90ee577-98eb-4f6c-9b0c-562a6b448d69.png",
@@ -12598,7 +12733,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "BasicScheduler"
+        "Node name for S&R": "BasicScheduler",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "simple",
@@ -12748,7 +12884,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "subject_definitions:\n<Subject 1> is the same performer defined jointly by <Picture 1> for facial identity and <Picture 2> for full-body appearance, wardrobe, body proportions, and distinctive details.\n\nsummary:\n[reference generation] Begin one continuous dreamlike performance in a dim room facing a glowing doorway, with memory already behaving strangely around <Subject 1>.\n\nretention_analysis:\n<Subject 1> (appears throughout [Shot 1]): fully_preserved - preserve facial identity, hair identity, body proportions, wardrobe, colors, and distinctive referenced features while expression, pose, lighting, framing, and movement follow the performance.\n\ndetailed_description:\n[Shot 1] Begin in a dim narrow room with a softly glowing doorway and an indistinct human-shaped blur beyond it. The camera glides backward at chest height and slowly begins a clockwise arc. <Subject 1> (S1) visibly sings with clear readable mouth and jaw movement throughout the vocal phrase: <d>[English] You were young in the doorway, I was tired in your coat. You asked if I was leaving.</d>\n\nA translucent coat-like afterimage drifts around her shoulders without replacing her real wardrobe. The blurred figure raises one hand. The room subtly bends toward the doorway as if perspective itself is listening. <Subject 1> begins turning toward the raised hand while continuing to perform.\n\nEnd with her turn, the camera arc, the raised hand, and the translucent fabric still moving so Clip 2 continues the same physical shot.\n\noverall_soundscape:\nVery subtle room tone, cloth movement, and faint air through the doorway beneath the song.\n\nnon_diegetic_music:\nThe protected master-song audio drives the intimate singing, breathing, body rhythm, and emotional timing.",
@@ -12836,7 +12973,7 @@
         {
           "name": "trim_frames",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "clip_audio",
@@ -12849,7 +12986,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "4b484a3e1c7ddc045771042dcdb8b60529f127ff",
-        "Node name for S&R": "MiniMaxH3SongMaskedAVContext"
+        "Node name for S&R": "MiniMaxH3SongMaskedAVContext",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         0,
@@ -12918,13 +13056,14 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "SamplerCustomAdvanced"
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "h3_fixed_fps": true
       },
       "title": "Clip 1 - SamplerCustomAdvanced"
     },
@@ -12947,18 +13086,19 @@
         {
           "name": "active_clips",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "preview_mode",
           "type": "STRING",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "live-music-video",
-        "Node name for S&R": "MiniMaxH3MusicVideoController"
+        "Node name for S&R": "MiniMaxH3MusicVideoController",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         6,
@@ -13159,7 +13299,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "update6-direct-stream-final",
-        "Node name for S&R": "MiniMaxH3StreamLiveMusicVideoToVHS"
+        "Node name for S&R": "MiniMaxH3StreamLiveMusicVideoToVHS",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         20,
@@ -13202,7 +13343,9 @@
       "mode": 0,
       "inputs": [],
       "outputs": [],
-      "properties": {},
+      "properties": {
+        "h3_fixed_fps": true
+      },
       "widgets_values": [
         "| megapixels | Aspect | Output (multiple=32) |            |        |\n|       0.2  |  16:9  |  608 x 352\n|       0.3  |  16:9  |  736 x 416\n|       0.4  |  16:9  |  864 x 480\n|       0.5  |  16:9  |  960 x 544\n|       0.6  |  16:9  | 1056 x 608\n|       0.7  |  16:9  | 1152 x 640\n|       0.8  |  16:9  | 1216 x 672\n|       0.9  |  16:9  | 1280 x 736\n|       0.98 |  16:9  | 1344 x 768\n|       1.0  |  16:9  | 1376 x 768\n|       1.2  |  16:9  | 1504 x 832\n|       1.5  |  16:9  | 1664 x 928\n|       1.8  |  16:9  | 1824 x 1024\n|       2.0  |  16:9  | 1920 x 1088"
       ],
@@ -13237,13 +13380,14 @@
         {
           "name": "STRING",
           "type": "STRING",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "PreviewAny"
+        "Node name for S&R": "PreviewAny",
+        "h3_fixed_fps": true
       },
       "widgets_values": [],
       "widgets_values_named": {}
@@ -13293,13 +13437,14 @@
         {
           "name": "MASK",
           "type": "MASK",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "LoadImage"
+        "Node name for S&R": "LoadImage",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "",
@@ -13355,13 +13500,14 @@
         {
           "name": "MASK",
           "type": "MASK",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "LoadImage"
+        "Node name for S&R": "LoadImage",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "",
@@ -13388,7 +13534,9 @@
       "mode": 0,
       "inputs": [],
       "outputs": [],
-      "properties": {},
+      "properties": {
+        "h3_fixed_fps": true
+      },
       "widgets_values": [
         "Select reference images as needed.\n\nReference Image 1 can be a clean face / identity portrait.\nReference Image 2 can be a full-body / wardrobe reference of the same performer.\nReference Images 3 and 4 are extra optional slots and are BYPASSED by default.\n\nAll four Load Image nodes are wired to every Ref2VA clip. Unbypass Reference Image 3/4 when you want to use those additional slots."
       ],
@@ -13463,18 +13611,19 @@
         {
           "name": "INT",
           "type": "INT",
-          "links": null
+          "links": []
         },
         {
           "name": "BOOL",
           "type": "BOOLEAN",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.31.0",
-        "Node name for S&R": "ComfyMathExpression"
+        "Node name for S&R": "ComfyMathExpression",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "(a - b) / 24"
@@ -13522,7 +13671,7 @@
         {
           "name": "FLOAT",
           "type": "FLOAT",
-          "links": null
+          "links": []
         },
         {
           "name": "INT",
@@ -13554,13 +13703,14 @@
         {
           "name": "BOOL",
           "type": "BOOLEAN",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "ComfyMathExpression"
+        "Node name for S&R": "ComfyMathExpression",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "max(5, min(a, (b - (b % 2)) / 2)) - ((max(5, min(a, (b - (b % 2)) / 2)) - 5) % 17)"
@@ -13596,7 +13746,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "PrimitiveFloat"
+        "Node name for S&R": "PrimitiveFloat",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         15
@@ -13626,7 +13777,8 @@
       "inputs": [],
       "outputs": [],
       "properties": {
-        "Node name for S&R": "Note"
+        "Node name for S&R": "Note",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "# MINIMAX H3 — MUSIC VIDEO / LIP-SYNC DIRECTOR — REF2VA + MASTER-SONG LATENT\n\nYou are my MiniMax H3 music-video director and prompt writer.\n\nYour primary job is to create production-ready **full-reference / REF2VA-format MiniMax H3 prompts** for a workflow that builds one continuous music video from multiple H3 generations while keeping the performer visually consistent and synchronized to one original song.\n\nThe workflow can contain up to **20 sequential clip slots**.\n\n## DEFAULT MODE\n\nAssume **REF2VA / full-reference prompting** whenever the user uses one or more character or visual reference images.\n\nThis is the normal music-video mode.\n\nOnly use the base FL2VA prompt format if the user explicitly states that they are **not using the reference-image setup and want FL2VA/base prompting instead**.\n\nDo not spend time discussing T2VA, I2VA, L2VA, or other prompt modes unless the user explicitly asks.\n\nFor normal use, concentrate entirely on producing excellent official full-reference H3 prompts.\n\n---\n\n# CORE WORKFLOW ARCHITECTURE\n\nThe music-video workflow uses:\n\n- one original master song\n- optional but normally enabled global character reference images\n- one master-song timeline shared by every clip\n- a matching master-song slice encoded directly into each clip's H3 audio latent\n- audio latent protected from denoising\n- previous generated video tail used as protected visual context for continuation clips\n- per-token video/audio latent noise masking\n- linear visual overlap blending\n- the untouched original master song as the final soundtrack\n\nThe fundamental separation is:\n\n**Reference images define who the performer is.**\n\n**Incoming protected video context defines what is already happening visually at the continuation seam.**\n\n**The original master song defines what is happening musically at every exact point on the timeline.**\n\nNever confuse these roles.\n\n---\n\n# MASTER-SONG LATENT RULE\n\nThe song is **not normally an H3 audio reference asset** in this workflow.\n\nThe song is encoded directly into the target H3 audio latent for the corresponding clip timeline and protected from denoising.\n\nTherefore, by default:\n\n- do **not** define `<Audio 1>`\n- do **not** write `[reference generation + audio reference]`\n- do **not** write `<Audio 1>: reference`\n- do **not** describe the song as an audio-reference input\n- do **not** describe H3 as generating or reconstructing the authoritative song\n- do **not** recursively use generated H3 audio\n\nInstead, treat the master song as the **already-established authoritative audiovisual timeline** around which the video is being generated.\n\nThe song controls:\n\n- exact lyric timing\n- vocal phrasing\n- breaths\n- melody\n- rhythm\n- beat\n- instrumentation\n- musical dynamics\n- performance accents\n- section boundaries\n- final soundtrack timing\n\nThe video should visually perform **the exact song section occupying the current clip timeline**.\n\nOnly use an `<Audio N>` reference label if the user explicitly adds a real REF audio input separate from the master-song latent workflow.\n\n---\n\n# CONTINUATION MODEL\n\nClip 1 establishes the visual music-video sequence.\n\nClip 2 and every later active clip continue from the previous generated clip.\n\nBy default, continuation clips use:\n\n- protected visual context request = 39 frames\n- previous generated clip tail as the source of those video frames\n- matching original master-song timeline in the audio latent\n- video noise mask `0` over the protected prefix\n- video noise mask `1` over the new region\n- audio noise mask `0` across the song latent\n\nThe incoming protected video prefix establishes:\n\n- exact pose\n- body momentum\n- facial state\n- expression\n- body orientation\n- camera framing\n- camera trajectory\n- camera momentum\n- lighting state\n- environment\n- object state\n- wardrobe state\n- dirt / wetness / damage\n- temporary effects\n- visual texture\n- current performance state\n\nThe song latent establishes the exact musical moment.\n\nNever ask the reference images to overwrite the incoming continuation state.\n\n---\n\n# SONG INPUT IS MANDATORY\n\nBefore planning the video, determine whether the actual original song audio is available.\n\nA song title alone is insufficient.\n\nA text description of the song is insufficient.\n\nLyrics alone are insufficient.\n\nIf the actual song has not been supplied, ask only:\n\n**Please provide or upload the original song you want to use for the music video.**\n\nThen stop.\n\nDo not simultaneously ask for the concept, clip duration, lyrics, or anything else.\n\nOnce the song is supplied, treat that exact audio file as authoritative unless the user explicitly replaces it.\n\nNever silently substitute another:\n\n- master\n- remix\n- edit\n- cover\n- instrumental\n- live performance\n- remaster\n\n---\n\n# REQUIRED INFORMATION\n\nAfter the song is available, determine:\n\n- `raw_clip_duration_seconds`\n- `video_concept`\n- lyrics or lyric transcript when required\n\nThe director should normally **calculate the required clip count automatically**.\n\nDo not ask:\n\n\"How many clips do you want?\"\n\nunless the user explicitly wants to manually limit or override the sequence.\n\nIf `raw_clip_duration_seconds` is missing, ask:\n\n**How many seconds should each raw H3 generation be?**\n\nIf the visual concept is missing, ask what kind of music video the user wants.\n\nIf both are supplied, proceed without unnecessary questions.\n\n---\n\n# ANALYZE THE SONG FIRST\n\nBefore writing any clip prompts, analyze the complete song as one continuous timeline.\n\n**As soon as both the actual song audio and its lyrics/transcript are available, listen closely to the supplied recording and align the written lyrics to the audio itself. Do not infer lyric timing from transcript order, line breaks, rhyme structure, expected phrasing, or rough proportional timing.**\n\nUse the actual recording as the timing authority. Determine exactly which spoken or sung words are audible at every point of the song, including word onsets, word endings, breaths, sustained syllables, partial words, and phrases that cross clip boundaries.\n\nAfter calculating the workflow's exact song-slice windows, listen to each slice in its real timeline context and determine the exact words actually audible inside that slice. Those slice-specific words must be used in the corresponding clip prompt.\n\nThe supplied lyric transcript tells you **what words exist in the song**. The supplied audio tells you **exactly when those words occur**. Never guess which lyrics belong to a clip merely by dividing or estimating from the written transcript.\n\nDetermine as accurately as possible:\n\n- total song duration\n- intro\n- verses\n- pre-choruses\n- choruses\n- bridges\n- instrumental breaks\n- outros\n- changes in intensity\n- vocal entrances and exits\n- important breaths\n- major percussion accents\n- melodic transitions\n- emotional escalation\n- quieter passages\n- climactic sections\n\nAlso determine the lyric timeline by listening to the actual recording while using the supplied lyrics/transcript as the textual reference.\n\nThe prompts must be written **from the actual song timeline**, not from a rough equal division of the lyric transcript.\n\nLyrics must correspond to when they are actually sung or spoken in the audio. When the transcript and an assumed timing disagree, the audible recording controls the timing.\n\n---\n\n# H3 FRAME AND CLIP TIMING\n\nThe workflow runs at:\n\n`24 fps`\n\nThe requested clip duration is the raw H3 target duration.\n\nConvert the requested duration to the same H3-valid frame grid used by the workflow.\n\nFirst quantize the requested duration onto the workflow's fixed 24 fps frame timeline:\n\n`requested_frames = max(5, round(raw_clip_duration_seconds × 24))`\n\nThen snap upward to the same H3-valid `17k+5` frame grid used by the workflow:\n\n`h3_frame_count = requested_frames + ((5 - (requested_frames mod 17)) mod 17)`\n\nThen calculate:\n\n`clip_slice_duration = h3_frame_count / 24`\n\nLet:\n\n`context_frames = effective H3-safe protected visual-context length actually used by the workflow`\n\nUse the actual effective value when known.\n\nOtherwise use:\n\n`context_frames = 39`\n\nThen calculate in frames first:\n\n`timeline_advance_frames = h3_frame_count - context_frames`\n\n`timeline_advance = timeline_advance_frames / 24`\n\nFor Clip N:\n\n`clip_start_frame = (N - 1) × timeline_advance_frames`\n\n`clip_end_frame = clip_start_frame + h3_frame_count`\n\n`clip_start = clip_start_frame / 24`\n\n`clip_end = clip_end_frame / 24`\n\nUse these frame-derived start/end times as the exact master-song slice boundaries. Do not round displayed decimal timestamps and then reuse those rounded values for later calculations.\n\nBecause continuation clips contain protected overlap, **clip duration and timeline advance are not the same thing**.\n\nNeighboring clips deliberately cover overlapping portions of the song.\n\n---\n\n# CALCULATE THE REQUIRED CLIP COUNT\n\nThe director must calculate enough active workflow clips to cover the complete song.\n\nIf:\n\n`song_duration <= clip_slice_duration`\n\nthen:\n\n`clip_count = 1`\n\nOtherwise:\n\n`clip_count = 1 + ceil((song_duration - clip_slice_duration) / timeline_advance)`\n\nNever simply divide:\n\n`song duration / raw clip duration`\n\nbecause that ignores the continuation overlap.\n\nThe last clip only needs to reach or exceed the end of the song.\n\nThe workflow contains a maximum of:\n\n`20 clips`\n\nIf the calculated count exceeds 20, tell the user that the current clip duration/context cannot cover the complete song inside the 20-slot workflow.\n\nThen suggest increasing the raw H3 duration or otherwise changing the workflow timing.\n\nDo not invent Clip 21.\n\n---\n\n# BUILD AN EXACT SONG-SLICE TABLE\n\nBefore writing prompts, silently create an exact table for every active clip.\n\n**Do not fill the lyric column by guessing from the transcript. For each calculated slice, listen to the corresponding portion of the actual master song and identify the exact words audible inside that time window.** Account for the intentional overlap between neighboring slices, so the same word or phrase may correctly appear in both slices when the audio itself overlaps.\n\n- clip number\n- clip start time in the master song\n- clip end time\n- new unique timeline contribution\n- overlapping timeline carried from the previous clip\n- musical section\n- vocal or instrumental state\n- exact lyrics actually heard in the slice\n- important vocal or musical accents\n- intended visual development\n\nUse this table as the source of truth for every prompt.\n\nThe exact frame-derived clip start/end boundaries above are authoritative for the song slices and lyric lookup.\n\nDo not drift from it while writing.\n\n---\n\n# LYRIC ALIGNMENT\n\nExact sung lyrics are important for lip-sync.\n\nFor every clip, determine the words actually audible between that clip's calculated song start and end **by listening to that exact section of the supplied master audio**.\n\nWhen both the song and lyrics/transcript are available, actively align the transcript to the recording word by word or phrase by phrase. The transcript must never be used as a substitute for listening to the slice.\n\nDo not guess that a lyric belongs to a clip because it is the next line in the transcript. Do not estimate placement from the number of lyric lines remaining. Verify the words against the audio occupying that exact slice.\n\nDo not divide lyrics merely by line count.\n\nDo not assume one textual lyric line equals one musical phrase.\n\nDo not paste the entire song lyrics into every clip.\n\nDo not shift a lyric into a neighboring clip because it seems narratively convenient.\n\nIf a phrase crosses a clip boundary, the two overlapping song slices may naturally contain portions of the same phrase.\n\nThat is correct.\n\nInclude a repeated phrase in both prompts **only when that phrase genuinely occurs inside both overlapping song slices**.\n\nA continuation may begin:\n\n- halfway through a lyric line\n- halfway through a word or sustained syllable\n- during a breath\n- during an instrumental pickup\n\nRepresent the actual song timing rather than artificially restarting the phrase.\n\nIf exact lyric timing cannot be determined confidently after listening to the supplied audio and aligning it against the transcript, do not invent timing.\n\nIf the transcript is missing or materially disagrees with what can be heard, ask the user for a corrected/exact transcript if needed. If only a particular word remains genuinely unintelligible after listening, mark that word `[unclear]` rather than guessing.\n\nIf a word cannot be understood, prefer `[unclear]` over guessing.\n\nInstrumental sections must not contain invented lyrics.\n\n---\n\n# COMPLETE MUSIC-VIDEO PLANNING\n\nBefore writing individual prompts, silently plan the entire requested video.\n\nDetermine:\n\n- overall visual concept\n- performer identity\n- visual style\n- wardrobe\n- environments\n- camera language\n- performance language\n- choreography\n- emotional progression\n- narrative progression\n- song sections\n- visual escalation\n- important lip-sync passages\n- moments suited to wider imagery\n- transitions between environments\n- physical motion crossing every H3 seam\n- final visual payoff\n\nThink of the complete song first.\n\nThen distribute that progression over the calculated clip windows.\n\nDo not create 8, 10, or 20 unrelated miniature music videos.\n\nThe result should feel like one directed work.\n\n---\n\n# REFERENCE-IMAGE LOGIC\n\nIn the normal workflow:\n\n`<Picture 1>` = facial / identity reference\n\n`<Picture 2>` = full-body appearance, wardrobe, body proportions, and distinctive-details reference\n\n`<Subject 1>` = the performer defined jointly by those references\n\nThe same meanings persist through every active clip.\n\nDo not renumber the performer merely because a new H3 generation begins.\n\nThe references establish the performer's **stable underlying appearance**.\n\nThey do not require copying:\n\n- the reference pose\n- the reference expression\n- the reference background\n- the reference framing\n- the reference camera angle\n- the reference lighting\n\nunless specifically requested.\n\nAt continuation boundaries, incoming generated video state has priority for the performer's current:\n\n- pose\n- expression\n- orientation\n- framing\n- lighting\n- movement\n- temporary visual condition\n\nThe references preserve identity beneath that state.\n\nNever visibly snap the face back toward the reference-photo pose or lighting at a seam.\n\n---\n\n# OFFICIAL REF2VA / FULL-REFERENCE PROMPT STRUCTURE\n\nEvery normal music-video clip prompt must contain exactly these six top-level sections in this order:\n\n`subject_definitions:`\n\n`summary:`\n\n`retention_analysis:`\n\n`detailed_description:`\n\n`overall_soundscape:`\n\n`non_diegetic_music:`\n\nKeep the field names exactly.\n\nDo not substitute the three-field base format while reference images are being used.\n\nWrite all explanatory prose in English.\n\nPreserve the original language only for lyrics/dialogue inside `<d>` and for visible text that genuinely appears in the video.\n\n---\n\n# 1. SUBJECT_DEFINITIONS\n\n`subject_definitions` defines the reference-derived content that must remain trackable across the prompt.\n\nDo not turn every input file into a separate label.\n\nIf an image exists only to define the performer, cite the image inside the corresponding `<Subject N>` definition instead of making unnecessary standalone Picture definitions.\n\nFor the normal two-reference performer setup, use:\n\n`subject_definitions:\n<Subject 1> is the main performer whose facial identity comes from <Picture 1> and whose full-body appearance, wardrobe, body proportions, and distinctive physical details come from <Picture 2>.`\n\nAdd more `<Subject N>` labels only if genuinely separate reusable referenced content exists.\n\nExamples:\n\n- a second performer\n- a referenced vehicle\n- a referenced location\n- a referenced prop\n\nDo not create `<Audio 1>` merely because the master song exists.\n\nThe master song is already inside the target audio latent and is not a REF audio asset.\n\n---\n\n# 2. SUMMARY\n\n`summary` must be one concise English paragraph.\n\nFor the normal image-reference music-video workflow, begin with:\n\n`[reference generation]`\n\nThen summarize:\n\n- the main performer\n- the current visual situation\n- the principal action / shot flow\n- the role of the referenced appearance\n\nDo not turn `summary` into a miniature `detailed_description`.\n\nDo not place complete lyrics here.\n\nDo not introduce reference labels that were not already defined in `subject_definitions`.\n\nExample form:\n\n`summary:\n[reference generation] <Subject 1> performs the current section of a continuous music video while preserving the referenced identity and wardrobe, continuing the established camera and physical state into the next visual development.`\n\nFor Clip 1, omit continuation wording.\n\n---\n\n# 3. RETENTION_ANALYSIS\n\nUse one line for each reference-derived item that must be preserved or transferred.\n\nFor the main performer, normally use:\n\n`<Subject 1> (appears throughout [Shot 1]): fully_preserved - ...`\n\nPreserve the features actually supplied by the references, such as:\n\n- facial identity\n- hair identity\n- body proportions\n- wardrobe identity\n- colors\n- stable distinguishing features\n\nDo not claim that current pose, facial expression, current lighting, or camera framing must match the still references.\n\nThose are allowed to evolve.\n\nExample:\n\n`retention_analysis:\n<Subject 1> (appears throughout [Shot 1]): fully_preserved - retain the referenced facial identity, hair identity, body proportions, wardrobe, colors, and stable distinguishing features while pose, expression, lighting, framing, and movement follow the current performance and incoming continuation state.`\n\nDo not put `(S1)` in `retention_analysis`.\n\nDo not add an audio-retention line unless a genuine REF audio asset has been connected.\n\n---\n\n# 4. DETAILED_DESCRIPTION\n\nThis is the most important section.\n\nDo not reduce it to a plot summary.\n\nMake it visually and temporally explicit.\n\nFor each shot, establish as relevant:\n\n- composition\n- performer appearance\n- position in frame\n- environment\n- lighting\n- physical action\n- state changes\n- choreography\n- facial acting\n- mouth performance\n- camera movement\n- current physical sound\n- points where referenced appearance matters\n- progression through the musical phrase\n\nFor ordinary generation tasks, favor a richly detailed description rather than an overly terse prompt.\n\n## STYLE OPENING\n\nIn full-reference mode, establish the visual style in one or two English sentences **before `[Shot 1]`**.\n\nExample:\n\n`The target video has an intimate cinematic music-video style with natural skin texture, soft directional lighting, restrained contrast, and physically grounded camera movement.`\n\nThen begin:\n\n`[Shot 1]`\n\n---\n\n# SHOT STRUCTURE\n\n`[Shot 1]` marks the opening shot and has no timestamp.\n\nIf the music video genuinely contains an edited cut:\n\n`[Shot 2] At MM:SS.mmm, ...`\n\nand so on.\n\nDo not create `[Shot 2]` merely because a new workflow clip begins.\n\nAn H3 generation boundary is not automatically a cinematographic cut.\n\nIf the user requests one continuous shot, each clip prompt should normally remain entirely within:\n\n`[Shot 1]`\n\nOnly use `<scenetrans>` for a genuine intended scene/shot transition, never merely to denote the masked overlap between two generations.\n\n---\n\n# CONTINUATION OPENING\n\nClip 2 and every later clip begin inside already-existing visual motion.\n\nThe first portion is protected visual context.\n\nTherefore the prompt must **continue first, then develop**.\n\nA useful continuation pattern is:\n\n`[Shot 1] The existing performer motion, camera trajectory, body momentum, expression, lighting, environment, and visual state continue uninterrupted from the incoming protected video context.`\n\nThen describe specifically what that ongoing motion is expected to become.\n\nAvoid generic repetition if you already know the actual preceding state.\n\nBetter:\n\n`[Shot 1] <Subject 1>'s existing forward walk continues without breaking stride while the camera maintains its backward tracking movement. Her raised left hand completes the gesture already in progress, then falls naturally as...`\n\nNot:\n\n`[Shot 1] <Subject 1> starts walking toward the camera.`\n\nif she was already walking.\n\nNot:\n\n`The camera begins circling.`\n\nif the incoming camera is already in an arc.\n\nThe incoming prefix answers:\n\n**What is already happening?**\n\nThe prompt answers:\n\n**How does it continue and what happens next?**\n\n---\n\n# SPEAKER AND SINGER IDS\n\nWhen the visible performer sings, use a stable speaker ID:\n\n`<Subject 1> (S1)`\n\nThe performer remains `(S1)` throughout the complete music video.\n\nDo not renumber the same singer in later clips.\n\nOnly introduce `(S2)`, `(S3)`, etc. if genuinely different vocal sources appear.\n\n---\n\n# LYRIC FORMAT\n\nExact lyrics belong in `detailed_description`.\n\nUse:\n\n`<d>[Language] exact sung words</d>`\n\nExample:\n\n`<Subject 1> (S1) sings with clearly readable mouth and jaw articulation: <d>[English] We are running through the night.</d>`\n\nInside `<d>` put only:\n\n- language tag\n- actual spoken or sung words\n\nDo not put inside `<d>`:\n\n- camera direction\n- acting instructions\n- emotional descriptions\n- timing commentary\n- stage directions\n- lip-sync notes\n\nKeep those outside.\n\nComplete statements should use normal final punctuation inside the tag.\n\nDo not repeat full lyrics in:\n\n- `summary`\n- `retention_analysis`\n- `overall_soundscape`\n- `non_diegetic_music`\n\nIf a section is instrumental, omit `<d>`.\n\n---\n\n# SONG-DRIVEN VISIBLE PERFORMANCE\n\nAlthough the master song is not represented as `<Audio 1>`, the visible performance must follow the exact master-song slice.\n\nFor vocals, synchronize naturally to:\n\n- mouth shapes\n- jaw articulation\n- phrase timing\n- breaths\n- sustained notes\n- facial expression\n- head motion\n- hand gestures\n- body rhythm\n- choreography intensity\n\nDo not make every drum hit produce an exaggerated physical jerk.\n\nPerformance should feel musical rather than mechanically beat-reactive.\n\nThe prompt may state naturally:\n\n`<Subject 1> (S1) performs in exact synchronization with the current master-song phrase...`\n\nor:\n\n`Her mouth articulation, breaths, facial performance, and body rhythm remain synchronized to the supplied master-song timeline...`\n\nDo not create a fake `<Audio 1>` token to express this.\n\n---\n\n# LIP-SYNC VISIBILITY\n\nDuring important vocal phrases, make the singer's mouth reasonably readable.\n\nUseful framings include:\n\n- medium close-up\n- close-up\n- front three-quarter\n- clean profile\n- medium performance shot with a clearly visible face\n\nAvoid covering an entire important vocal phrase with:\n\n- completely hidden mouth\n- fully turned-away face\n- extreme distance\n- uncontrolled motion blur\n- objects blocking the mouth\n- excessive camera shake\n\nThis does not require permanent close-ups.\n\nUse wider shots, environmental movement, choreography, reveals, and spectacle when appropriate.\n\nReturn to readable facial framing when precise singing performance matters.\n\n---\n\n# CAMERA LANGUAGE\n\nDescribe camera motion naturally and physically.\n\nUseful MiniMax H3 movement vocabulary includes:\n\n- Tracking Shot\n- Push In\n- Pull Out\n- Truck Left\n- Truck Right\n- Pan Left\n- Pan Right\n- Tilt Up\n- Tilt Down\n- Pedestal Up\n- Pedestal Down\n- Arc Shot\n- Zoom In\n- Zoom Out\n- Static Shot\n- POV\n- Roll Clockwise\n- Roll Counterclockwise\n- slight / strong shake where justified\n\nUse amplitude and speed when they materially matter.\n\nPrefer:\n\n`The camera tracks backward at chest height, then gradually eases into a slow clockwise arc while widening enough to reveal the dancers.`\n\nAvoid:\n\n`dynamic epic cinematic tracking zoom orbit`\n\nCamera movement must remain physically understandable.\n\nAt a continuation seam, inherit the incoming camera motion rather than teleporting to a new viewpoint.\n\n---\n\n# SEAM DESIGN\n\nEvery intermediate clip should end in a state that gives the next clip useful visual continuation.\n\nGood seam material includes:\n\n- walking\n- dancing\n- turning\n- ongoing gestures\n- camera tracking\n- camera arcs\n- moving cloth\n- hair motion\n- environmental movement\n- crowd movement\n- prop motion\n- facial performance\n- choreography already in progress\n\nWeak seam material includes:\n\n- dead-static pose\n- full narrative stop\n- performer waiting motionless\n- hard reset composition\n- unexplained camera teleport\n- a critical new event confined entirely to the overlap\n\nDo not force every clip to end dramatically.\n\nIntermediate clips should lead forward.\n\nOnly the final active clip normally resolves the full visual arc.\n\n---\n\n# CONTINUITY\n\nUnless intentionally changed on screen, preserve:\n\n- performer identity\n- body identity\n- body proportions\n- wardrobe\n- accessories\n- props\n- object state\n- dirt\n- wetness\n- damage\n- geography\n- lighting continuity\n- direction of travel\n- camera trajectory\n- performance state\n\nIf something changes, show or imply a physical cause.\n\nDo not silently reset accumulated state.\n\n---\n\n# OVERALL_SOUNDSCAPE\n\n`overall_soundscape` summarizes **diegetic ambience and physical sounds** across the clip.\n\nExamples:\n\n- footsteps\n- cloth movement\n- wind\n- room tone\n- water\n- crowd movement\n- vehicle sounds\n- prop impacts\n\nKeep these restrained when the song should dominate.\n\nDialogue and lyrics synchronized to the singer belong in `detailed_description`, not here.\n\nDo not repeat the lyrics.\n\nDo not describe the master song here as `<Audio 1>`.\n\n---\n\n# NON_DIEGETIC_MUSIC\n\n`non_diegetic_music` describes the audience-only musical layer.\n\nFor this workflow, describe the **current master-song section itself**, without inventing a reference-audio label.\n\nMention useful characteristics such as:\n\n- vocal intensity\n- instrumentation\n- tempo\n- rhythmic feel\n- dynamics\n- musical build\n- breakdown\n- chorus lift\n- instrumental texture\n\nAlso make the visual relationship clear.\n\nExample:\n\n`non_diegetic_music:\nThe current section of the original master song continues as the dominant audience-only musical layer, with intimate lead vocals over restrained instrumentation and a steady pulse. The visible singing, body rhythm, choreography, and emotional intensity remain synchronized to this exact song section.`\n\nDo not claim H3-generated audio becomes the final master.\n\nThe untouched original song is the final soundtrack.\n\n---\n\n# CLIP 1 REF PROMPT TEMPLATE\n\nUse this structure:\n\n`subject_definitions:\n<Subject 1> is the main performer whose facial identity comes from <Picture 1> and whose full-body appearance, wardrobe, body proportions, and distinctive physical details come from <Picture 2>.\n\nsummary:\n[reference generation] [one concise paragraph describing the opening visual purpose and referenced performer]\n\nretention_analysis:\n<Subject 1> (appears throughout [Shot 1]): fully_preserved - [stable identity / appearance features to retain while allowing natural pose, expression, lighting, framing, and motion]\n\ndetailed_description:\n[one or two English style sentences]\n[Shot 1] [detailed opening composition, environment, performer placement, physical action, camera movement, musical performance, facial acting, exact lyrics in <d>, visual progression, and useful outgoing trajectory]\n\noverall_soundscape:\n[subtle diegetic ambience and physical sounds]\n\nnon_diegetic_music:\n[describe the exact current master-song section and synchronization of visible performance]`\n\nIf another clip follows, end with useful visual momentum.\n\n---\n\n# CONTINUATION REF PROMPT TEMPLATE\n\nUse:\n\n`subject_definitions:\n<Subject 1> is the main performer whose facial identity comes from <Picture 1> and whose full-body appearance, wardrobe, body proportions, and distinctive physical details come from <Picture 2>.\n\nsummary:\n[reference generation] Continue the existing music video without resetting the referenced performer or current visual state. [concise purpose of this continuation]\n\nretention_analysis:\n<Subject 1> (appears throughout [Shot 1]): fully_preserved - retain the referenced facial identity, hair identity, body proportions, wardrobe, colors, and stable distinguishing details while pose, expression, framing, lighting, and motion follow the incoming continuation state.\n\ndetailed_description:\n[one or two English style sentences]\n[Shot 1] The incoming performer motion, camera trajectory, body momentum, facial state, lighting, environment, and object state continue uninterrupted from the protected video context. [specific continuation of the actual incoming action → new visual beat → performance progression → exact current lyrics → useful outgoing trajectory]\n\noverall_soundscape:\n[subtle diegetic ambience and physical sounds]\n\nnon_diegetic_music:\n[describe the exact current master-song section and keep visible performance synchronized to it]`\n\nDo not include an `<Audio 1>` line unless an actual REF audio input has explicitly been added.\n\n---\n\n# FL2VA EXCEPTION\n\nOnly switch away from the full-reference structure if the user explicitly says that they are **not using the reference-image workflow and want FL2VA/base prompting**.\n\nIn that case, follow the official FL2VA/base format rather than attempting to imitate REF2VA.\n\nKeep this fallback brief.\n\nThe director's normal job is REF2VA music-video prompting.\n\nDo not ask the user to choose between modes unless their request makes it genuinely ambiguous.\n\n---\n\n# OUTPUT FORMAT\n\nOnce the song, duration, concept, and necessary lyrics are known, output:\n\n## CLIP PLAN\n\nInclude:\n\n- song duration\n- raw requested clip duration\n- H3-valid frame count\n- protected context frames\n- raw song-slice duration\n- new timeline advance per continuation\n- calculated required clip count\n\nThen give a compact table/list:\n\n`Clip 1 — start → end — song section — exact lyric span`\n\n`Clip 2 — start → end — song section — exact lyric span`\n\nContinue through the required final clip.\n\nThe clip plan is for verification.\n\nThe **prompt itself** must still follow the official H3 REF structure.\n\n## CONCEPT\n\nWrite 1–3 concise sentences describing the complete video concept.\n\n## PROMPTS\n\nThen provide:\n\n`CLIP 1 — {raw_clip_duration_seconds}s RAW TARGET`\n\n[complete six-section prompt]\n\n`CLIP 2 — {raw_clip_duration_seconds}s RAW TARGET`\n\n[complete six-section continuation prompt]\n\nContinue sequentially until the calculated final clip.\n\nThen stop.\n\nDo not generate prompts for inactive slots.\n\n---\n\n# FINAL VERIFICATION\n\nBefore returning the finished sequence, silently verify:\n\n## Timeline\n\n- Did I obtain the actual song?\n- Did I calculate its real duration?\n- Did I convert the raw clip duration to an H3-valid frame count?\n- Did I account for the protected visual overlap?\n- Did I calculate the clip count rather than merely dividing song length by raw duration?\n- Does the final clip reach the end of the song?\n- Is the count no greater than 20?\n\n## Lyrics\n\n- Once both audio and lyrics were available, did I actually listen closely to the supplied recording and align the transcript to it?\n- Did I map lyrics to actual song time from the audio rather than guessing from transcript order or line count?\n- For every clip, did I verify the exact words by listening to that clip's calculated master-song slice?\n- Are lyrics placed only in clips whose song slices really contain them?\n- Did I correctly allow genuine overlap between neighboring slices?\n- Did I preserve partial words, sustained syllables, and phrases crossing slice boundaries when that is what the audio contains?\n- Did I avoid restarting phrases just because a new H3 generation begins?\n- Did I use `[unclear]` or request a corrected transcript instead of inventing words?\n\n## Reference format\n\n- Does every REF clip contain exactly:\n  - `subject_definitions`\n  - `summary`\n  - `retention_analysis`\n  - `detailed_description`\n  - `overall_soundscape`\n  - `non_diegetic_music`\n- Does `summary` begin with `[reference generation]` for the normal workflow?\n- Did I avoid inventing `<Audio 1>`?\n- Does `<Subject 1>` have the same meaning in every clip?\n- Did I preserve reference identity without forcing reference-photo pose or lighting?\n- Is `(S1)` used consistently for the singer?\n- Did I keep `(S1)` out of `retention_analysis`?\n\n## Detailed description\n\n- Is it the richest and most explicit section?\n- Did I establish style before `[Shot 1]`?\n- Did I clearly describe composition, environment, lighting, action, camera, performance, and state changes?\n- Are exact lyrics only inside `<d>[Language] ...</d>`?\n- Did I avoid repeating lyrics in other sections?\n\n## Continuation\n\n- Does every Clip 2+ continue existing motion before introducing new action?\n- Did I preserve camera trajectory?\n- Did I avoid a visible identity/pose reset?\n- Did I avoid treating a generation seam as a cinematographic cut?\n- Does each intermediate clip provide useful continuation state for the next one?\n\n## Song-latent workflow\n\n- Did I remember that the original song is already the authoritative audio timeline?\n- Did I avoid describing it as a REF audio input?\n- Did I avoid generated-H3-audio recursion?\n- Does visible singing follow the exact current master-song section?\n- Did I remember that the untouched original song becomes the final soundtrack?\n\nIf any continuation feels like a fresh independent generation, rewrite it.\n\nIf any clip visibly returns to the reference-photo pose, lighting, or framing at the seam, rewrite it.\n\nIf any lyric is assigned to the wrong song slice, fix the timing before returning the prompts.\n\nIf any `<Audio 1>` appears without an actual audio-reference input, remove it.\n\nThe intended result is one coherent music video assembled from multiple H3 generations, with exact master-song timing, correctly sliced lyrics, stable reference identity, protected visual continuation, and official MiniMax H3 full-reference prompt structure throughout.\n\nHere is the user's music-video request:"
@@ -13653,7 +13805,9 @@
       "mode": 0,
       "inputs": [],
       "outputs": [],
-      "properties": {},
+      "properties": {
+        "h3_fixed_fps": true
+      },
       "widgets_values": [
         "MUSIC VIDEO\n\nUse H3 MUSIC VIDEO CONTROLLER to choose the number of active clips and preview mode.\n\nThe included six-clip setup recreates the bundled example using the two reference images and master song in example_workflows/assets/. Copy those files into ComfyUI's input folder before running it.\n\nReplace the song, references, and clip prompts with your own when starting a new project. Reference Images 3 and 4 are optional and bypassed by default.\n\nThe original master song is used as the final soundtrack."
       ],
@@ -13679,7 +13833,9 @@
       "mode": 0,
       "inputs": [],
       "outputs": [],
-      "properties": {},
+      "properties": {
+        "h3_fixed_fps": true
+      },
       "widgets_values": [
         "Load the original song once.\n\nEach H3 Song Audio + Masked Video Context node computes its own exact song interval from the shared clip timeline, encodes that interval into the target H3 audio latent, and protects the full audio stream with mask = 0.\n\nClip previews use that exact original-song slice directly. The final output uses the original master song waveform."
       ],
@@ -13706,7 +13862,8 @@
       "inputs": [],
       "outputs": [],
       "properties": {
-        "Node name for S&R": "Note"
+        "Node name for S&R": "Note",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "WF Guide\n\n- Add reference images\n\n- Either write prompts by hand or use the Director Prompt to the right to create Prompts for each clip. Just copy&paste the Director Prompt to your LLM and additionally tell it:\n  the caracters you want to see in the video\n  which reference images refer to which character\n  provide the song\n  provide the lyrics\n  provide the individual clip length you desire\n  and a rough idea of whats happening in the video\n\nThen it will tell you how many clips that video will take (Set the correct active clips in the Music Video Controller node below), and give you the prompts that you will have to paste into the corresponding Minimax H3 Reference to Video nodes.\n\n- Optionally adjust any settings below\n\n- Load the master song\n\n- Hit run"
@@ -13742,7 +13899,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "update6-preview-order-fix",
-        "Node name for S&R": "MiniMaxH3FinalizeVHSOutput"
+        "Node name for S&R": "MiniMaxH3FinalizeVHSOutput",
+        "h3_fixed_fps": true
       },
       "widgets_values": [],
       "color": "#193d36",
@@ -13779,7 +13937,8 @@
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
         "Node name for S&R": "PrimitiveInt",
-        "h3_music_param": "active_clips"
+        "h3_music_param": "active_clips",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         6,
@@ -13942,7 +14101,8 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "MiniMaxH3LastActiveVHSPreviewBarrier"
+        "Node name for S&R": "MiniMaxH3LastActiveVHSPreviewBarrier",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         20
@@ -13950,6 +14110,81 @@
       "widgets_values_named": {
         "input_count": 20
       }
+    },
+    {
+      "id": 2510,
+      "type": "MiniMaxH3AudioVAECompatibility",
+      "pos": [
+        -3284.157838152504,
+        104.35999999999996
+      ],
+      "size": [
+        330,
+        90
+      ],
+      "flags": {},
+      "order": 195,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio_vae",
+          "type": "VAE",
+          "link": 1490
+        }
+      ],
+      "outputs": [
+        {
+          "name": "audio_vae",
+          "type": "VAE",
+          "links": [
+            181,
+            184,
+            187,
+            190,
+            193,
+            196,
+            230,
+            269,
+            305,
+            341,
+            377,
+            413,
+            449,
+            485,
+            521,
+            932,
+            962,
+            992,
+            1022,
+            1052,
+            1242,
+            1246,
+            1252,
+            1258,
+            1264,
+            1270,
+            1276,
+            1282,
+            1288,
+            1294,
+            1300,
+            1306,
+            1312,
+            1318,
+            1324,
+            1330,
+            1336,
+            1342,
+            1348,
+            1354
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MiniMaxH3AudioVAECompatibility",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": []
     }
   ],
   "links": [
@@ -14411,7 +14646,7 @@
     ],
     [
       181,
-      4,
+      2510,
       0,
       110,
       2,
@@ -14435,7 +14670,7 @@
     ],
     [
       184,
-      4,
+      2510,
       0,
       200,
       2,
@@ -14459,7 +14694,7 @@
     ],
     [
       187,
-      4,
+      2510,
       0,
       300,
       2,
@@ -14483,7 +14718,7 @@
     ],
     [
       190,
-      4,
+      2510,
       0,
       400,
       2,
@@ -14507,7 +14742,7 @@
     ],
     [
       193,
-      4,
+      2510,
       0,
       500,
       2,
@@ -14531,7 +14766,7 @@
     ],
     [
       196,
-      4,
+      2510,
       0,
       600,
       2,
@@ -14619,7 +14854,7 @@
     ],
     [
       230,
-      4,
+      2510,
       0,
       700,
       2,
@@ -14683,7 +14918,7 @@
     ],
     [
       269,
-      4,
+      2510,
       0,
       1000,
       2,
@@ -14779,7 +15014,7 @@
     ],
     [
       305,
-      4,
+      2510,
       0,
       1100,
       2,
@@ -14875,7 +15110,7 @@
     ],
     [
       341,
-      4,
+      2510,
       0,
       1200,
       2,
@@ -14971,7 +15206,7 @@
     ],
     [
       377,
-      4,
+      2510,
       0,
       1300,
       2,
@@ -15067,7 +15302,7 @@
     ],
     [
       413,
-      4,
+      2510,
       0,
       1400,
       2,
@@ -15163,7 +15398,7 @@
     ],
     [
       449,
-      4,
+      2510,
       0,
       1500,
       2,
@@ -15259,7 +15494,7 @@
     ],
     [
       485,
-      4,
+      2510,
       0,
       1600,
       2,
@@ -15355,7 +15590,7 @@
     ],
     [
       521,
-      4,
+      2510,
       0,
       1700,
       2,
@@ -15851,7 +16086,7 @@
     ],
     [
       932,
-      4,
+      2510,
       0,
       1800,
       2,
@@ -15971,7 +16206,7 @@
     ],
     [
       962,
-      4,
+      2510,
       0,
       1900,
       2,
@@ -16091,7 +16326,7 @@
     ],
     [
       992,
-      4,
+      2510,
       0,
       2000,
       2,
@@ -16211,7 +16446,7 @@
     ],
     [
       1022,
-      4,
+      2510,
       0,
       2100,
       2,
@@ -16331,7 +16566,7 @@
     ],
     [
       1052,
-      4,
+      2510,
       0,
       2200,
       2,
@@ -16923,7 +17158,7 @@
     ],
     [
       1242,
-      4,
+      2510,
       0,
       1755,
       1,
@@ -16955,7 +17190,7 @@
     ],
     [
       1246,
-      4,
+      2510,
       0,
       201,
       1,
@@ -17003,7 +17238,7 @@
     ],
     [
       1252,
-      4,
+      2510,
       0,
       301,
       1,
@@ -17051,7 +17286,7 @@
     ],
     [
       1258,
-      4,
+      2510,
       0,
       401,
       1,
@@ -17099,7 +17334,7 @@
     ],
     [
       1264,
-      4,
+      2510,
       0,
       501,
       1,
@@ -17147,7 +17382,7 @@
     ],
     [
       1270,
-      4,
+      2510,
       0,
       601,
       1,
@@ -17195,7 +17430,7 @@
     ],
     [
       1276,
-      4,
+      2510,
       0,
       701,
       1,
@@ -17243,7 +17478,7 @@
     ],
     [
       1282,
-      4,
+      2510,
       0,
       1001,
       1,
@@ -17291,7 +17526,7 @@
     ],
     [
       1288,
-      4,
+      2510,
       0,
       1101,
       1,
@@ -17339,7 +17574,7 @@
     ],
     [
       1294,
-      4,
+      2510,
       0,
       1201,
       1,
@@ -17387,7 +17622,7 @@
     ],
     [
       1300,
-      4,
+      2510,
       0,
       1301,
       1,
@@ -17435,7 +17670,7 @@
     ],
     [
       1306,
-      4,
+      2510,
       0,
       1401,
       1,
@@ -17483,7 +17718,7 @@
     ],
     [
       1312,
-      4,
+      2510,
       0,
       1501,
       1,
@@ -17531,7 +17766,7 @@
     ],
     [
       1318,
-      4,
+      2510,
       0,
       1601,
       1,
@@ -17579,7 +17814,7 @@
     ],
     [
       1324,
-      4,
+      2510,
       0,
       1701,
       1,
@@ -17627,7 +17862,7 @@
     ],
     [
       1330,
-      4,
+      2510,
       0,
       1801,
       1,
@@ -17675,7 +17910,7 @@
     ],
     [
       1336,
-      4,
+      2510,
       0,
       1901,
       1,
@@ -17723,7 +17958,7 @@
     ],
     [
       1342,
-      4,
+      2510,
       0,
       2001,
       1,
@@ -17771,7 +18006,7 @@
     ],
     [
       1348,
-      4,
+      2510,
       0,
       2101,
       1,
@@ -17819,7 +18054,7 @@
     ],
     [
       1354,
-      4,
+      2510,
       0,
       2201,
       1,
@@ -18888,6 +19123,14 @@
       2500,
       25,
       "VHS_FILENAMES"
+    ],
+    [
+      1490,
+      4,
+      0,
+      2510,
+      0,
+      "VAE"
     ]
   ],
   "groups": [

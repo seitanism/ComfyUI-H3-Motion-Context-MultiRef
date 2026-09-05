@@ -1,8 +1,8 @@
 {
   "id": "2b2d291a-78ac-41e1-9306-e0f24b476946",
   "revision": 0,
-  "last_node_id": 1044,
-  "last_link_id": 456,
+  "last_node_id": 1046,
+  "last_link_id": 459,
   "nodes": [
     {
       "id": 120,
@@ -31,7 +31,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "RandomNoise"
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         123456789,
@@ -80,7 +81,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -138,14 +140,15 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "title": "Extension 1 - SamplerCustomAdvanced",
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "SamplerCustomAdvanced"
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -175,7 +178,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "RandomNoise"
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         123469134,
@@ -224,7 +228,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -282,14 +287,15 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "title": "Extension 2 - SamplerCustomAdvanced",
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "SamplerCustomAdvanced"
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -416,7 +422,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "Continue the existing scene from the previous generated H3 clip with no cut, reset, or re-establishment. The incoming protected H3 audiovisual latent prefix is authoritative for current pose, motion, camera trajectory, facial state, lighting, environment, object state, voice, ambience, and timing. Connected reference images are optional; use them only to preserve stable subject identity and appearance beneath that incoming state.\n\n[Shot 1] Continue the exact motion and sound already in progress, then develop the next action naturally. [DESCRIBE WHAT HAPPENS NEXT; DO NOT RESTART FROM REST.]",
@@ -462,7 +469,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "RandomNoise"
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         123481479,
@@ -511,7 +519,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -569,14 +578,15 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "title": "Extension 3 - SamplerCustomAdvanced",
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "SamplerCustomAdvanced"
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -703,7 +713,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "Continue the existing scene from the previous generated H3 clip with no cut, reset, or re-establishment. The incoming protected H3 audiovisual latent prefix is authoritative for current pose, motion, camera trajectory, facial state, lighting, environment, object state, voice, ambience, and timing. Connected reference images are optional; use them only to preserve stable subject identity and appearance beneath that incoming state.\n\n[Shot 1] Continue the exact motion and sound already in progress, then develop the next action naturally. [DESCRIBE WHAT HAPPENS NEXT; DO NOT RESTART FROM REST.]",
@@ -749,7 +760,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "RandomNoise"
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         123493824,
@@ -798,7 +810,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -856,14 +869,15 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "title": "Extension 4 - SamplerCustomAdvanced",
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "SamplerCustomAdvanced"
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -990,7 +1004,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "Continue the existing scene from the previous generated H3 clip with no cut, reset, or re-establishment. The incoming protected H3 audiovisual latent prefix is authoritative for current pose, motion, camera trajectory, facial state, lighting, environment, object state, voice, ambience, and timing. Connected reference images are optional; use them only to preserve stable subject identity and appearance beneath that incoming state.\n\n[Shot 1] Continue the exact motion and sound already in progress, then develop the next action naturally. [DESCRIBE WHAT HAPPENS NEXT; DO NOT RESTART FROM REST.]",
@@ -1036,7 +1051,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "RandomNoise"
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         123506169,
@@ -1085,7 +1101,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -1143,14 +1160,15 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "title": "Extension 5 - SamplerCustomAdvanced",
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "SamplerCustomAdvanced"
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -1277,7 +1295,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "Continue the existing scene from the previous generated H3 clip with no cut, reset, or re-establishment. The incoming protected H3 audiovisual latent prefix is authoritative for current pose, motion, camera trajectory, facial state, lighting, environment, object state, voice, ambience, and timing. Connected reference images are optional; use them only to preserve stable subject identity and appearance beneath that incoming state.\n\n[Shot 1] Continue the exact motion and sound already in progress, then develop the next action naturally. [DESCRIBE WHAT HAPPENS NEXT; DO NOT RESTART FROM REST.]",
@@ -1323,7 +1342,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "RandomNoise"
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         123518514,
@@ -1372,7 +1392,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -1429,14 +1450,15 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "title": "Extension 6 - SamplerCustomAdvanced",
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "SamplerCustomAdvanced"
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -1520,13 +1542,14 @@
         {
           "name": "trim_frames",
           "type": "INT",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "ee38f3dd3bcdbab3cfecb8c7e60a3e20a41e5277",
-        "Node name for S&R": "MiniMaxH3StartMaskedContext"
+        "Node name for S&R": "MiniMaxH3StartMaskedContext",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         39,
@@ -1596,13 +1619,14 @@
         {
           "name": "trim_frames",
           "type": "INT",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "ee38f3dd3bcdbab3cfecb8c7e60a3e20a41e5277",
-        "Node name for S&R": "MiniMaxH3GeneratedAVMaskedContext"
+        "Node name for S&R": "MiniMaxH3GeneratedAVMaskedContext",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         39,
@@ -1668,13 +1692,14 @@
         {
           "name": "trim_frames",
           "type": "INT",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "ee38f3dd3bcdbab3cfecb8c7e60a3e20a41e5277",
-        "Node name for S&R": "MiniMaxH3GeneratedAVMaskedContext"
+        "Node name for S&R": "MiniMaxH3GeneratedAVMaskedContext",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         39,
@@ -1740,13 +1765,14 @@
         {
           "name": "trim_frames",
           "type": "INT",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "ee38f3dd3bcdbab3cfecb8c7e60a3e20a41e5277",
-        "Node name for S&R": "MiniMaxH3GeneratedAVMaskedContext"
+        "Node name for S&R": "MiniMaxH3GeneratedAVMaskedContext",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         39,
@@ -1812,13 +1838,14 @@
         {
           "name": "trim_frames",
           "type": "INT",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "ee38f3dd3bcdbab3cfecb8c7e60a3e20a41e5277",
-        "Node name for S&R": "MiniMaxH3GeneratedAVMaskedContext"
+        "Node name for S&R": "MiniMaxH3GeneratedAVMaskedContext",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         39,
@@ -1884,13 +1911,14 @@
         {
           "name": "trim_frames",
           "type": "INT",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "ee38f3dd3bcdbab3cfecb8c7e60a3e20a41e5277",
-        "Node name for S&R": "MiniMaxH3GeneratedAVMaskedContext"
+        "Node name for S&R": "MiniMaxH3GeneratedAVMaskedContext",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         39,
@@ -1923,24 +1951,7 @@
           "name": "VAE",
           "type": "VAE",
           "links": [
-            22,
-            28,
-            34,
-            40,
-            46,
-            52,
-            218,
-            224,
-            230,
-            236,
-            242,
-            248,
-            254,
-            277,
-            296,
-            347,
-            411,
-            429
+            459
           ]
         }
       ],
@@ -1948,7 +1959,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "VAELoader"
+        "Node name for S&R": "VAELoader",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "minimax_h3_audio_vae_fp32.safetensors"
@@ -2003,7 +2015,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "VAELoader"
+        "Node name for S&R": "VAELoader",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "minimax_h3_video_vae_int8_convrot.safetensors"
@@ -2047,7 +2060,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "CLIPLoader"
+        "Node name for S&R": "CLIPLoader",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "qwen3vl_32b_minimax_h3_int8_convrot.safetensors",
@@ -2087,7 +2101,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "UNETLoader"
+        "Node name for S&R": "UNETLoader",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
@@ -2125,13 +2140,14 @@
         {
           "name": "MASK",
           "type": "MASK",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "LoadImage"
+        "Node name for S&R": "LoadImage",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "",
@@ -2197,13 +2213,14 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "SamplerCustomAdvanced"
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "h3_fixed_fps": true
       },
       "title": "Starter Clip - SamplerCustomAdvanced"
     },
@@ -2331,7 +2348,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "Continue the existing scene from the previous generated H3 clip with no cut, reset, or re-establishment. The incoming protected H3 audiovisual latent prefix is authoritative for current pose, motion, camera trajectory, facial state, lighting, environment, object state, voice, ambience, and timing. Connected reference images are optional; use them only to preserve stable subject identity and appearance beneath that incoming state.\n\n[Shot 1] Continue the exact motion and sound already in progress, then develop the next action naturally. [DESCRIBE WHAT HAPPENS NEXT; DO NOT RESTART FROM REST.]",
@@ -2384,7 +2402,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "KSamplerSelect"
+        "Node name for S&R": "KSamplerSelect",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "res_multistep"
@@ -2428,7 +2447,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.31.0",
-        "Node name for S&R": "PrimitiveInt"
+        "Node name for S&R": "PrimitiveInt",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         39,
@@ -2468,7 +2488,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.31.0",
-        "Node name for S&R": "PrimitiveInt"
+        "Node name for S&R": "PrimitiveInt",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         39,
@@ -2533,7 +2554,8 @@
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "1.7.7",
-        "Node name for S&R": "VHS_VideoCombine"
+        "Node name for S&R": "VHS_VideoCombine",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "frame_rate": 24,
@@ -2608,7 +2630,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecode"
+        "Node name for S&R": "VAEDecode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -2649,7 +2672,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecodeAudio"
+        "Node name for S&R": "VAEDecodeAudio",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -2704,7 +2728,8 @@
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "1.7.7",
-        "Node name for S&R": "VHS_VideoCombine"
+        "Node name for S&R": "VHS_VideoCombine",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "frame_rate": 24,
@@ -2779,7 +2804,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecode"
+        "Node name for S&R": "VAEDecode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -2820,7 +2846,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecodeAudio"
+        "Node name for S&R": "VAEDecodeAudio",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -2875,7 +2902,8 @@
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "1.7.7",
-        "Node name for S&R": "VHS_VideoCombine"
+        "Node name for S&R": "VHS_VideoCombine",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "frame_rate": 24,
@@ -2950,7 +2978,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecode"
+        "Node name for S&R": "VAEDecode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -2991,7 +3020,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecodeAudio"
+        "Node name for S&R": "VAEDecodeAudio",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -3046,7 +3076,8 @@
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "1.7.7",
-        "Node name for S&R": "VHS_VideoCombine"
+        "Node name for S&R": "VHS_VideoCombine",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "frame_rate": 24,
@@ -3121,7 +3152,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecode"
+        "Node name for S&R": "VAEDecode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -3162,7 +3194,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecodeAudio"
+        "Node name for S&R": "VAEDecodeAudio",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -3217,7 +3250,8 @@
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "1.7.7",
-        "Node name for S&R": "VHS_VideoCombine"
+        "Node name for S&R": "VHS_VideoCombine",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "frame_rate": 24,
@@ -3292,7 +3326,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecode"
+        "Node name for S&R": "VAEDecode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -3333,7 +3368,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecodeAudio"
+        "Node name for S&R": "VAEDecodeAudio",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -3388,7 +3424,8 @@
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "1.7.7",
-        "Node name for S&R": "VHS_VideoCombine"
+        "Node name for S&R": "VHS_VideoCombine",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "frame_rate": 24,
@@ -3549,7 +3586,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "Continue directly from the final moment of the selected start clip with no cut, reset, or re-establishment. The incoming protected audiovisual prefix is authoritative for pose, motion, camera trajectory, lighting, environment, object state, voice, ambience, and timing. Connected reference images are identity/appearance references only; never pull the subject back toward a reference-image pose, expression, framing, or lighting.\n\n[Shot 1] Continue the exact motion and sound already in progress, then develop the next action naturally. [DESCRIBE WHAT HAPPENS NEXT; DO NOT RESTART FROM REST.]",
@@ -3597,7 +3635,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "PrimitiveInt"
+        "Node name for S&R": "PrimitiveInt",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         8,
@@ -3648,7 +3687,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -3678,7 +3718,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "RandomNoise"
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         123432109,
@@ -3727,7 +3768,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecode"
+        "Node name for S&R": "VAEDecode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -3768,7 +3810,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecodeAudio"
+        "Node name for S&R": "VAEDecodeAudio",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -3809,7 +3852,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecodeAudio"
+        "Node name for S&R": "VAEDecodeAudio",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -3850,7 +3894,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecode"
+        "Node name for S&R": "VAEDecode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -3978,7 +4023,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "Create the opening clip for a new continuous video. Establish coherent subject identity, camera, lighting, environment, motion, voice, ambience, and audiovisual timing so later masked extensions can continue seamlessly. If an H3 keyframe is enabled at frame 1, treat it as the exact opening image and animate naturally forward. Connected reference images are identity/appearance references only and should not force their pose, framing, expression, or lighting onto the shot.",
@@ -4045,7 +4091,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "75432bdb14d7ec02c8f0d8932bdc78b4afed603b",
-        "Node name for S&R": "MiniMaxH3CustomKeyframes"
+        "Node name for S&R": "MiniMaxH3CustomKeyframes",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "{\"count\":1,\"positions\":[1]}",
@@ -4187,7 +4234,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "update8-modular-stream-inputs",
-        "Node name for S&R": "MiniMaxH3StreamLiveExtensionAVToVHS"
+        "Node name for S&R": "MiniMaxH3StreamLiveExtensionAVToVHS",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         6,
@@ -4251,31 +4299,33 @@
           "name": "IMAGE",
           "type": "IMAGE",
           "links": [
-            7
+            457
           ]
         },
         {
           "name": "mask",
           "type": "MASK",
-          "links": null
+          "links": []
         },
         {
           "name": "audio",
           "type": "AUDIO",
-          "links": null
+          "links": []
         },
         {
           "name": "video_info",
           "type": "VHS_VIDEOINFO",
           "links": [
-            436
+            436,
+            458
           ]
         }
       ],
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "4ee72c065db22c9d96c2427954dc69e7b908444b",
-        "Node name for S&R": "VHS_LoadVideoFFmpeg"
+        "Node name for S&R": "VHS_LoadVideoFFmpeg",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "video": "",
@@ -4362,7 +4412,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "ee38f3dd3bcdbab3cfecb8c7e60a3e20a41e5277",
-        "Node name for S&R": "MiniMaxH3CropTo32"
+        "Node name for S&R": "MiniMaxH3CropTo32",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -4398,13 +4449,14 @@
         {
           "name": "MASK",
           "type": "MASK",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "LoadImage"
+        "Node name for S&R": "LoadImage",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "",
@@ -4448,13 +4500,14 @@
         {
           "name": "MASK",
           "type": "MASK",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "LoadImage"
+        "Node name for S&R": "LoadImage",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "",
@@ -4499,13 +4552,13 @@
           "name": "SIGMAS",
           "type": "SIGMAS",
           "links": [
-            292,
             63,
             71,
             79,
             87,
             95,
             103,
+            292,
             427
           ]
         }
@@ -4513,7 +4566,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "BasicScheduler"
+        "Node name for S&R": "BasicScheduler",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "simple",
@@ -4569,7 +4623,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "MiniMaxH3SigmaShift"
+        "Node name for S&R": "MiniMaxH3SigmaShift",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         12,
@@ -4613,7 +4668,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "LoraLoaderModelOnly"
+        "Node name for S&R": "LoraLoaderModelOnly",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors",
@@ -4660,7 +4716,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "ModelAttentionBackend"
+        "Node name for S&R": "ModelAttentionBackend",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "comfy kitchen attention"
@@ -4714,14 +4771,15 @@
         {
           "name": "Filenames",
           "type": "VHS_FILENAMES",
-          "links": null
+          "links": []
         }
       ],
       "title": "Starter Clip - VHS Video Combine",
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "1.7.7",
-        "Node name for S&R": "VHS_VideoCombine"
+        "Node name for S&R": "VHS_VideoCombine",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "frame_rate": 24,
@@ -4774,9 +4832,11 @@
       "mode": 0,
       "inputs": [],
       "outputs": [],
-      "properties": {},
+      "properties": {
+        "h3_fixed_fps": true
+      },
       "widgets_values": [
-        "AV EXTENSION\n\nUse H3 AV EXTENSION CONTROLLER to choose the start mode, number of active extensions, audio feather, previews, and Existing Video source-audio policy.\n\nExisting Video uses the normal VHS video loader so the loaded clip remains visible in its preview. Its VHS audio output is intentionally left unconnected. Keep source audio extracts the selected file safely inside H3; a video with no audio stream becomes exact-duration silence. Regenerate with H3 synthesizes a new soundtrack while protecting the complete source picture.\n\nT2V generates a starter without an image keyframe. I2V / Custom Keyframes enables the starter image/keyframe group.\n\nSet prompts/references in the active generation groups. Reference Audio 1 and 2 are optional and bypassed by default. The controller enables/bypasses managed extension groups from Active Extensions."
+        "AV EXTENSION\n\nUse H3 AV EXTENSION CONTROLLER to choose the start mode, number of active extensions, audio feather, previews, and Existing Video source-audio policy.\n\nExisting Video uses the normal VHS video loader so the loaded clip remains visible in its preview. Its VHS audio output is intentionally left unconnected. Keep source audio extracts the selected file safely inside H3; a video with no audio stream becomes exact-duration silence. Regenerate with H3 synthesizes a new soundtrack while protecting the complete source picture.\n\nT2V generates a starter without an image keyframe. I2V / Custom Keyframes enables the starter image/keyframe group.\n\nSet prompts/references in the active generation groups. Reference Audio 1 and 2 are optional and bypassed by default. The controller enables/bypasses managed extension groups from Active Extensions.\n\nUPDATE 9\nInput video must be constant 24 fps. Keep source audio protects the context; only its final 8 audio ticks (0.2 s) gradually receive denoising. The entire 39-frame context is NOT regenerated. Final overlap uses the extension decode, so VAE reconstruction can still differ slightly. Output prefix supports %date:yyyy-MM-dd%/MiniMax_H3_ (server local date)."
       ],
       "widgets_values_named": {
         "text": "AV EXTENSION\n\nUse H3 AV EXTENSION CONTROLLER to choose the start mode, number of active extensions, audio feather, previews, and Existing Video source-audio policy.\n\nExisting Video uses the normal VHS video loader so the loaded clip remains visible in its preview. Its VHS audio output is intentionally left unconnected. Keep source audio extracts the selected file safely inside H3; a video with no audio stream becomes exact-duration silence. Regenerate with H3 synthesizes a new soundtrack while protecting the complete source picture.\n\nT2V generates a starter without an image keyframe. I2V / Custom Keyframes enables the starter image/keyframe group.\n\nSet prompts/references in the active generation groups. Reference Audio 1 and 2 are optional and bypassed by default. The controller enables/bypasses managed extension groups from Active Extensions."
@@ -4870,7 +4930,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "ee38f3dd3bcdbab3cfecb8c7e60a3e20a41e5277",
-        "Node name for S&R": "MiniMaxH3StartCanvasSelector"
+        "Node name for S&R": "MiniMaxH3StartCanvasSelector",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         960,
@@ -4914,7 +4975,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "PrimitiveFloat"
+        "Node name for S&R": "PrimitiveFloat",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         5
@@ -4970,7 +5032,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "75432bdb14d7ec02c8f0d8932bdc78b4afed603b",
-        "Node name for S&R": "MiniMaxH3AVExtensionController"
+        "Node name for S&R": "MiniMaxH3AVExtensionController",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "Existing Video",
@@ -5005,7 +5068,9 @@
       "mode": 0,
       "inputs": [],
       "outputs": [],
-      "properties": {},
+      "properties": {
+        "h3_fixed_fps": true
+      },
       "widgets_values": [
         "| megapixels | Aspect | Output (multiple=32) |            |        |\n|       0.2  |  16:9  |  608 x 352\n|       0.3  |  16:9  |  736 x 416\n|       0.4  |  16:9  |  864 x 480\n|       0.5  |  16:9  |  960 x 544\n|       0.6  |  16:9  | 1056 x 608\n|       0.7  |  16:9  | 1152 x 640\n|       0.8  |  16:9  | 1216 x 672\n|       0.9  |  16:9  | 1280 x 736\n|       0.98 |  16:9  | 1344 x 768\n|       1.0  |  16:9  | 1376 x 768\n|       1.2  |  16:9  | 1504 x 832\n|       1.5  |  16:9  | 1664 x 928\n|       1.8  |  16:9  | 1824 x 1024\n|       2.0  |  16:9  | 1920 x 1088"
       ],
@@ -5050,7 +5115,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "ResolutionSelector"
+        "Node name for S&R": "ResolutionSelector",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "16:9 (Widescreen)",
@@ -5097,7 +5163,7 @@
         {
           "name": "FLOAT",
           "type": "FLOAT",
-          "links": null
+          "links": []
         },
         {
           "name": "INT",
@@ -5116,13 +5182,14 @@
         {
           "name": "BOOL",
           "type": "BOOLEAN",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "ComfyMathExpression"
+        "Node name for S&R": "ComfyMathExpression",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "max(5, round(a * 24)) + (5 - (max(5, round(a * 24)) % 17)) % 17"
@@ -5156,13 +5223,14 @@
         {
           "name": "STRING",
           "type": "STRING",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "PreviewAny"
+        "Node name for S&R": "PreviewAny",
+        "h3_fixed_fps": true
       },
       "widgets_values": [],
       "widgets_values_named": {}
@@ -5194,7 +5262,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "LoadAudio"
+        "Node name for S&R": "LoadAudio",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "",
@@ -5235,7 +5304,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "LoadAudio"
+        "Node name for S&R": "LoadAudio",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "",
@@ -5288,7 +5358,8 @@
       ],
       "properties": {
         "showOutputText": false,
-        "horizontal": false
+        "horizontal": false,
+        "h3_fixed_fps": true
       }
     },
     {
@@ -5330,7 +5401,8 @@
       ],
       "properties": {
         "showOutputText": false,
-        "horizontal": false
+        "horizontal": false,
+        "h3_fixed_fps": true
       }
     },
     {
@@ -5373,13 +5445,14 @@
         {
           "name": "source_frames_24fps",
           "type": "INT",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "ee38f3dd3bcdbab3cfecb8c7e60a3e20a41e5277",
-        "Node name for S&R": "MiniMaxH3SourceAudioRegenLength"
+        "Node name for S&R": "MiniMaxH3SourceAudioRegenLength",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         24
@@ -5511,7 +5584,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "Regenerate the complete soundtrack for the supplied source video. The entire visual stream is protected and authoritative: do not change, reinterpret, restart, or replace the video. Generate synchronized audio for the full clip from beginning to end, including dialogue/voice when visually implied, foley, impacts, movement sounds, room tone, ambience, and other scene-appropriate sound. Match visible timing precisely and maintain continuous acoustic perspective across the whole source clip.",
@@ -5590,7 +5664,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "ee38f3dd3bcdbab3cfecb8c7e60a3e20a41e5277",
-        "Node name for S&R": "MiniMaxH3SourceAudioRegenMask"
+        "Node name for S&R": "MiniMaxH3SourceAudioRegenMask",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         24,
@@ -5628,7 +5703,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "RandomNoise"
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         918273645,
@@ -5677,7 +5753,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -5732,13 +5809,14 @@
         {
           "name": "denoised_output",
           "type": "LATENT",
-          "links": null
+          "links": []
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "SamplerCustomAdvanced"
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "h3_fixed_fps": true
       },
       "title": "Source Audio Regen - SamplerCustomAdvanced"
     },
@@ -5803,7 +5881,8 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "MiniMaxH3SourceAudioPolicy"
+        "Node name for S&R": "MiniMaxH3SourceAudioPolicy",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         24
@@ -5842,7 +5921,8 @@
       ],
       "properties": {
         "Node name for S&R": "MiniMaxH3AVStartModeParam",
-        "h3_av_param": "start"
+        "h3_av_param": "start",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "Existing Video"
@@ -5882,7 +5962,8 @@
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
         "Node name for S&R": "PrimitiveInt",
-        "h3_av_param": "active_extensions"
+        "h3_av_param": "active_extensions",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         1,
@@ -5928,7 +6009,8 @@
         "cnr_id": "comfy-core",
         "ver": "0.30.0",
         "Node name for S&R": "PrimitiveInt",
-        "h3_av_param": "audio_feather_ticks"
+        "h3_av_param": "audio_feather_ticks",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         8,
@@ -5967,7 +6049,8 @@
       ],
       "properties": {
         "Node name for S&R": "MiniMaxH3AVSourceAudioModeParam",
-        "h3_av_param": "source_audio"
+        "h3_av_param": "source_audio",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "Keep source audio"
@@ -6045,7 +6128,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "update8-preview-barrier",
-        "Node name for S&R": "MiniMaxH3LastActiveVHSPreviewBarrier"
+        "Node name for S&R": "MiniMaxH3LastActiveVHSPreviewBarrier",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         6
@@ -6080,7 +6164,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "update8-bypass-safe-final-sink",
-        "Node name for S&R": "MiniMaxH3FinalizeVHSOutput"
+        "Node name for S&R": "MiniMaxH3FinalizeVHSOutput",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -6099,7 +6184,9 @@
       "mode": 0,
       "inputs": [],
       "outputs": [],
-      "properties": {},
+      "properties": {
+        "h3_fixed_fps": true
+      },
       "widgets_values": [
         "# MINIMAX H3 AV EXTENSION — PROMPT DIRECTOR\n\nYou are a Prompt Director for a MiniMax H3 audiovisual extension workflow.\n\nYour job is to take a user's rough concept and turn it into a sequence of production-ready MiniMax H3 prompts that form one continuous audiovisual scene across multiple generated clips.\n\nThe user does not need to storyboard every clip themselves.\n\nYou are responsible for:\n\n- developing the rough idea into a coherent sequence\n- dividing the story naturally across the requested number of clips\n- preserving audiovisual continuity between clips\n- planning actions that fit the actual newly generated duration of each extension\n- maintaining characters, objects, environment, camera motion, dialogue, ambience, and music across the complete chain\n- using supplied reference assets correctly\n- producing exactly the requested number of prompts\n- formatting every final prompt as a separate copy-paste box\n\n---\n\n# REQUIRED USER INFORMATION\n\nBefore creating the prompt chain, make sure you know:\n\n1. **How many generated clips the user wants**\n2. **How long each generated clip should be**\n3. **What references will be used**\n\nReferences may include:\n\n- character reference images\n- object / creature reference images\n- style reference images\n- reference video\n- reference audio\n- an existing source video that is being extended\n- no references\n\nAlso use any additional information the user provides, such as:\n\n- rough story or concept\n- desired visual style\n- characters\n- location\n- camera style\n- dialogue\n- music\n- sound design\n- desired ending\n- starting image / keyframe\n\n## MISSING INFORMATION RULE\n\nIf any of the following has NOT already been provided:\n\n- number of clips\n- duration of the clips\n- references being used\n\nyou MUST ask the user for the missing information before generating the final prompt chain.\n\nDo not ask again for information that the user already supplied.\n\nWhen asking, keep it short and specific.\n\nFor example:\n\n`Before I build the chain, I still need:`\n\n`1. How many generated clips do you want?`\n\n`2. How many seconds should each clip be?`\n\n`3. What references will be connected? Please list the actual image, video, or audio references and what each is supposed to control. If there are none, say \"none\".`\n\nOnly include the questions that are actually unanswered.\n\nIf the sequence starts by extending an existing video, identify that existing video as the **source footage**, not automatically as a Ref2VA reference asset.\n\n---\n\n# WORKFLOW CONTINUATION MODEL\n\nThe workflow creates a continuous audiovisual sequence by carrying context from the end of one clip into the beginning of the next generation.\n\nThe context contains both:\n\n- video state\n- audio state\n\nThe copied context is protected.\n\nH3 generates the future after that protected region.\n\nTherefore every extension begins **inside an audiovisual event that is already happening**.\n\nThe incoming context can already establish:\n\n- body pose\n- body momentum\n- facial expression\n- gaze\n- hand position\n- subject orientation\n- camera framing\n- camera direction\n- camera velocity\n- lighting\n- environment\n- weather\n- prop positions\n- object state\n- clothing state\n- dirt\n- damage\n- wetness\n- smoke\n- particles\n- dialogue already in progress\n- voice character\n- breathing\n- footsteps\n- ambience\n- machinery\n- environmental sounds\n- music\n- rhythm\n- acoustic perspective\n\nThe next prompt must CONTINUE from this state.\n\nIt must not recreate the beginning of the scene.\n\n---\n\n# DEFAULT CONTEXT\n\nUnless the user explicitly gives a different workflow setting, assume:\n\n`context_frames = 39`\n\nMiniMax H3 operates at:\n\n`24 fps`\n\nTherefore:\n\n`39 frames = 1.625 seconds`\n\nThe first approximately **1.625 seconds** of an extension are inherited audiovisual context.\n\nThis means those first 1.625 seconds are not freely generated story time.\n\nThey already contain the ending of the previous clip.\n\nThe prompt should use that period as a natural continuation bridge.\n\n---\n\n# DURATION PLANNING\n\nThe user's requested clip duration refers to the total H3 generation target.\n\nH3 video lengths use valid frame counts following:\n\n`5, 22, 39, 56, 73, 90, 107, 124, 141, 158, 175, 192...`\n\nAt 24 fps, convert the user's requested duration into frames and snap upward to the next valid H3 frame count.\n\nUse:\n\n`requested_frames = max(5, round(requested_seconds × 24))`\n\nThen select the smallest valid H3 frame count that is equal to or greater than `requested_frames`.\n\nThe resulting duration is:\n\n`actual_clip_duration = valid_frame_count / 24`\n\nFor an extension:\n\n`new_frames = valid_frame_count - context_frames`\n\nand:\n\n`new_story_duration = new_frames / 24`\n\nThis distinction is extremely important.\n\nThe Extension prompt should pace NEW story events according to:\n\n`new_story_duration`\n\nnot according to the entire raw clip duration.\n\n## EXAMPLE\n\nIf the user requests approximately:\n\n`5 seconds`\n\nthen:\n\n`5 × 24 = 120 frames`\n\nThe next valid H3 length is:\n\n`124 frames`\n\nActual generated target:\n\n`124 / 24 = 5.167 seconds`\n\nUsing 39 frames of incoming context:\n\n`124 - 39 = 85 new frames`\n\nTherefore the extension contains approximately:\n\n`85 / 24 = 3.542 seconds`\n\nof genuinely new story progression.\n\nThe first 1.625 seconds already come from the preceding clip.\n\nDo not try to fit 5.167 seconds of new action into this extension.\n\nPlan approximately 3.54 seconds of new action.\n\n---\n\n# STARTING MODES\n\nThe sequence may begin in different ways.\n\n## GENERATED STARTER\n\nIf the first clip is generated from text, an image, or workflow keyframes, Prompt 1 is the **Starter Clip**.\n\nThe Starter does not have inherited AV context from a previous generated clip.\n\nIts job is to establish the sequence.\n\nIt should establish only the information that actually matters:\n\n- subject\n- environment\n- composition\n- visual style\n- initial camera behavior\n- lighting\n- props\n- voice if relevant\n- ambience\n- physical sounds\n- music if relevant\n- initial action\n\nIf more clips follow, the Starter should end in a useful continuing audiovisual state.\n\nIt should not resolve the entire story immediately.\n\n## EXISTING SOURCE VIDEO\n\nIf the workflow begins by extending an existing video, the existing video already supplies the beginning of the sequence.\n\nDo not create an H3 prompt for footage that already exists.\n\nThe first generated prompt is the first Extension.\n\nIts job is to continue naturally from the final audiovisual state of the existing source.\n\nIf the source ending is known, use its actual:\n\n- subject state\n- movement\n- framing\n- camera movement\n- lighting\n- environment\n- objects\n- speech\n- ambience\n- music\n- sound\n\nIf the exact ending cannot be inspected, do not invent precise incoming details.\n\nUse continuity-safe language such as:\n\n`Continue naturally from the exact incoming audiovisual state, preserving the current pose, motion, camera trajectory, lighting, environment, object state, voice, ambience, music, and timing.`\n\nThen describe what happens next.\n\n---\n\n# CLIP COUNT\n\nOutput exactly the number of generated prompts requested by the user.\n\nIf the user says:\n\n`4 generated clips`\n\ncreate exactly:\n\n`4 prompts`\n\nIf a generated Starter is required:\n\n`Prompt 1 = Starter`\n\nand the remaining prompts are Extensions.\n\nExample:\n\n`4 generated clips`\n\nbecomes:\n\n- Starter\n- Extension 1\n- Extension 2\n- Extension 3\n\nIf an existing video already supplies the beginning:\n\n`4 generated clips`\n\nbecomes:\n\n- Extension 1\n- Extension 2\n- Extension 3\n- Extension 4\n\nDo not count existing footage as a generated prompt unless the user explicitly asks you to write a prompt for recreating it.\n\n---\n\n# DIRECT THE COMPLETE STORY FIRST\n\nBefore writing individual prompts, silently plan the complete chain.\n\nTurn the user's rough idea into a progression such as:\n\n`initial state`\n\n→\n\n`developing action`\n\n→\n\n`consequence`\n\n→\n\n`escalation`\n\n→\n\n`reaction`\n\n→\n\n`resolution`\n\nThe exact structure depends on the concept.\n\nDo not make every clip feel like a miniature standalone scene.\n\nThe entire chain should feel like one longer sequence.\n\nThink in terms of:\n\n`state → action → consequence → next state`\n\nEvery new action should logically follow what happened previously.\n\n---\n\n# CONTINUITY STATE\n\nInternally track the important state after every clip.\n\n## SUBJECT STATE\n\nTrack:\n\n- identity\n- position\n- pose\n- orientation\n- expression\n- gaze\n- body momentum\n- current action\n- emotional state\n- wardrobe\n- dirt\n- damage\n- wetness\n\n## OBJECT STATE\n\nTrack:\n\n- object positions\n- held objects\n- doors open / closed\n- vehicles moving / stopped\n- broken / intact objects\n- switched lights\n- spilled liquids\n- dropped objects\n- other persistent changes\n\n## ENVIRONMENT STATE\n\nTrack:\n\n- location\n- lighting\n- weather\n- time of day\n- smoke\n- fire\n- fog\n- water\n- crowd state\n- persistent environmental changes\n\n## CAMERA STATE\n\nTrack:\n\n- framing\n- camera position\n- camera direction\n- movement\n- movement speed\n- camera height\n- orientation\n- focus behavior\n\n## AUDIO STATE\n\nTrack:\n\n- ambience\n- room tone\n- voice identity\n- ongoing dialogue\n- breathing\n- footsteps\n- machinery\n- environmental sounds\n- music\n- tempo\n- rhythm\n- instrumentation\n- acoustic perspective\n\nThe outgoing state of one clip becomes the intended incoming state of the next.\n\n---\n\n# INCOMING CONTEXT IS AUTHORITATIVE\n\nThe incoming audiovisual context determines what is happening at the start of an Extension.\n\nTherefore an Extension prompt must never demand an immediate reset merely because the original story plan expected something slightly different.\n\nIf the previous generation leaves the character halfway through a turn, continue the turn.\n\nDo not instantly place them in the pose you originally expected them to reach.\n\nIf the camera is still moving, inherit that movement.\n\nIf dialogue is still happening, continue from it.\n\nIf an object is already moving, preserve its momentum.\n\nThe story plan defines the intended trajectory.\n\nThe actual incoming state defines the immediate reality.\n\n---\n\n# EXTENSION OPENING RULE\n\nAn Extension does NOT begin with a fresh scene establishment.\n\nAvoid opening continuation prompts with phrases such as:\n\n- `The scene opens...`\n- `We see...`\n- `The character appears...`\n- `The character begins standing...`\n- `The camera starts tracking...`\n- `Music begins...`\n- `Rain begins...`\n- `The engine starts...`\n- `Establishing shot...`\n\nunless that event genuinely begins later as a new story event.\n\nInstead use continuation language such as:\n\n- `Continue the exact incoming motion...`\n- `Without a cut, the existing camera movement continues...`\n- `The movement already underway carries forward...`\n- `The current action completes naturally...`\n- `The ongoing footsteps and ambience continue...`\n- `The existing camera arc carries forward...`\n- `The established music continues naturally...`\n- `The sentence already in progress continues without restarting...`\n\nDo not mechanically repeat the same wording in every prompt.\n\nWrite natural continuation instructions appropriate to each scene.\n\n---\n\n# PROTECTED PREFIX\n\nFor every Extension:\n\n`0 seconds → context_duration`\n\nis inherited footage and audio.\n\nWith the default 39-frame context:\n\n`0.000 → 1.625 seconds`\n\nis protected.\n\nDo not schedule REQUIRED new actions inside this region.\n\nFor example, with 39-frame context, avoid:\n\n`At 0.5 seconds she opens the door.`\n\n`At 1 second the camera cuts.`\n\n`At 0.8 seconds the explosion occurs.`\n\nThose timestamps occur inside audiovisual material that already exists.\n\nInstead, let the incoming action continue through the bridge and introduce the new event after the protected context.\n\n---\n\n# STORY SHAPE OF AN EXTENSION\n\nA strong Extension generally follows this pattern:\n\n`incoming audiovisual state`\n\n→\n\n`existing action continues naturally`\n\n→\n\n`motion already underway develops or completes`\n\n→\n\n`next meaningful story event occurs`\n\n→\n\n`physical / emotional consequence`\n\n→\n\n`useful outgoing state`\n\nThe first meaningful new event should feel causally connected to what preceded it.\n\nAvoid:\n\n`existing motion → unrelated new scene`\n\n---\n\n# OUTGOING HANDOFF\n\nIf another Extension follows, deliberately design the end of the current clip so the next generation has something useful to continue.\n\nThe final context window becomes the incoming context of the next Extension.\n\nWith the default setting, roughly the final 1.625 seconds are particularly important.\n\nGood handoff states include:\n\n- walking\n- running\n- reaching\n- turning\n- falling\n- climbing\n- driving\n- ongoing dialogue\n- sustained facial reaction\n- camera tracking\n- camera orbiting\n- camera pushing inward\n- an opening door\n- rolling objects\n- moving cloth\n- moving hair\n- wind\n- rain\n- flowing water\n- moving vehicles\n- smoke\n- particles\n- machinery\n- continuing music\n- persistent ambience\n\nAvoid unnecessarily ending intermediate clips with:\n\n- everyone completely frozen\n- a total narrative stop\n- an unexplained camera stop\n- unexplained silence\n- a fully resolved ending\n- a new action introduced at the final instant with no room to develop\n\nIntermediate clips should normally point forward.\n\nThe final requested clip may resolve the story.\n\n---\n\n# GENERATION BOUNDARY\n\nThe boundary between generated clips should be invisible.\n\nDo not write:\n\n`Cut to the next clip.`\n\n`In the next clip...`\n\n`The new clip starts...`\n\nThe viewer should experience one continuous audiovisual sequence.\n\nA real creative camera cut is allowed if the story needs one, but it should occur deliberately within newly generated footage rather than simply because another Extension group begins.\n\n---\n\n# CAMERA CONTINUITY\n\nAt an Extension boundary, inherit the existing camera behavior.\n\nIf the camera is:\n\n- tracking backward\n- panning\n- orbiting\n- pushing in\n- pulling out\n- handheld\n- static\n- tilting\n- following a vehicle\n\ncontinue that physical behavior naturally before changing it.\n\nUseful H3 camera terminology includes:\n\n- Push In\n- Pull Out\n- Pan Left\n- Pan Right\n- Truck Left\n- Truck Right\n- Tilt Up\n- Tilt Down\n- Pedestal Up\n- Pedestal Down\n- Arc Shot\n- Tracking Shot\n- Static Shot\n- Zoom In\n- Zoom Out\n- POV\n- Roll Clockwise\n- Roll Counterclockwise\n- slight camera shake\n- strong camera shake\n\nUse concrete physical camera descriptions.\n\nPrefer:\n\n`The existing backward Tracking Shot continues at walking speed, then gradually curves into a slow clockwise Arc Shot around her.`\n\nAvoid vague keyword piles.\n\n---\n\n# SHOT STRUCTURE\n\nDefault to one continuous shot per generated clip when appropriate.\n\nUse additional shots only when the concept clearly benefits from an intentional edit.\n\nIf multiple shots are used:\n\n- `[Shot 1]` does not need a starting timestamp\n- later shots should use increasing timestamps\n- timestamps must fit inside the actual generated target\n- cuts in Extensions must occur after the protected context\n- cuts should happen for a clear narrative or visual reason\n- do not place a cut exactly on a generation boundary\n\nDo not add unnecessary cuts when continuous camera movement can communicate the same event.\n\n---\n\n# AUDIO CONTINUITY\n\nAudio is part of the incoming continuation state.\n\nPreserve audio that is already happening.\n\nThis includes:\n\n- dialogue\n- voice\n- breathing\n- footsteps\n- wind\n- room tone\n- traffic\n- machinery\n- impacts\n- water\n- environmental sound\n- music\n- rhythm\n- sustained tones\n- reverberation\n\nIf rain is already present, do not say:\n\n`Rain begins.`\n\nSay:\n\n`The existing rain continues at the same intensity...`\n\nIf an engine is already running, do not restart the ignition.\n\nIf footsteps are already happening, maintain their cadence.\n\nIf music is already playing, do not introduce it again from silence.\n\nIf a character is already speaking, do not restart their sentence.\n\n---\n\n# MUSIC\n\nWhen the sequence contains continuing music, preserve its important identity across Extensions.\n\nTrack useful characteristics such as:\n\n- approximate tempo\n- groove\n- meter\n- instrumentation\n- bass character\n- percussion\n- harmonic character\n- intensity\n- production character\n- overall mood\n\nAllow the music to evolve naturally when the action changes.\n\nExample:\n\n`The established restrained electronic score continues seamlessly, maintaining the same slow pulse, muted analog bass, sparse percussion, and sustained synth texture while gradually increasing in intensity.`\n\nDo not reintroduce the score as new music in every Extension.\n\nMusic heard physically by characters from a radio, nightclub, instrument, television, vehicle stereo, etc. is **diegetic** and belongs in the audiovisual scene description / soundscape.\n\nMusic heard only by the audience belongs in:\n\n`non_diegetic_music:`\n\nIf no non-diegetic music is wanted:\n\n`non_diegetic_music: N/A`\n\n---\n\n# DIALOGUE\n\nUse stable speaker IDs across the complete chain.\n\nExamples:\n\n`(S1)`\n\n`(S2)`\n\n`(S3)`\n\nThe same character always keeps the same speaker ID.\n\nUse MiniMax dialogue formatting:\n\n`<d>[Language] exact spoken words</d>`\n\nOnly spoken words belong inside `<d>`.\n\nKeep acting and delivery outside.\n\nCorrect:\n\n`<Subject 1> (S1) glances back over her shoulder, breathing hard, and says quietly, <d>[English] Keep moving.</d>`\n\nIncorrect:\n\n`<d>[English, nervous and breathing hard] Keep moving.</d>`\n\nIf the user supplied exact dialogue, preserve it unless they ask you to rewrite it.\n\nDo not invent extensive dialogue unless the concept calls for it.\n\n---\n\n# DIALOGUE ACROSS EXTENSIONS\n\nDo not restart speech because a new generation begins.\n\nIf a sentence is already underway in the incoming context, continue naturally.\n\nDo not repeat words that are already present in the inherited audio.\n\nWhenever possible, place important exact dialogue away from Extension boundaries.\n\nGood transition moments include:\n\n- after a sentence\n- during a breath\n- between phrases\n- during physical action without speech\n\nIf dialogue intentionally crosses a boundary, maintain:\n\n- speaker ID\n- voice identity\n- speaking posture\n- emotional delivery\n- vocal intensity\n\n---\n\n# PHYSICAL CAUSALITY\n\nPersistent changes should happen visibly or audibly.\n\nExamples:\n\nIf a character becomes wet, show the water reaching them.\n\nIf clothing becomes damaged, show the cause.\n\nIf a prop changes hands, show the transfer.\n\nIf a door becomes open, show it opening.\n\nIf a light turns off, show or imply the cause.\n\nIf an object breaks, show the impact.\n\nIf a character changes direction, show the turn.\n\nIf someone leaves the scene, show them exiting.\n\nDo not silently change important state between prompts.\n\n---\n\n# REFERENCE ASSETS\n\nUse only references the user actually supplies.\n\nPossible H3 reference labels include:\n\n- `<Picture 1>`\n- `<Picture 2>`\n- `<Video 1>`\n- `<Audio 1>`\n\nDo not invent a reference label for workflow context.\n\nThe incoming protected AV context is not automatically:\n\n`<Video 1>`\n\nand its audio is not automatically:\n\n`<Audio 1>`\n\nThose labels should only represent real reference inputs connected for that purpose.\n\n---\n\n# REFERENCE IMAGES\n\nReference images may define stable characteristics such as:\n\n- face identity\n- hairstyle\n- body proportions\n- clothing design\n- creature design\n- object design\n- distinctive markings\n- persistent visual details\n\nDo not force an Extension back toward the pose, expression, framing, lighting, or background of a static reference image.\n\nAt a continuation boundary:\n\n**incoming context determines the current temporal state**\n\nwhile:\n\n**reference images preserve the underlying identity or design**\n\nExample:\n\n`<Subject 1> retains the facial identity, hair, clothing design, body proportions, and distinguishing details from <Picture 1>, while current pose, expression, framing, lighting, and movement continue from the incoming audiovisual state.`\n\n---\n\n# REFERENCE AUDIO\n\nOnly use `<Audio N>` when an actual audio-reference asset is supplied.\n\nIt may be used for:\n\n- voice timbre\n- vocal character\n- musical style\n- instrument character\n- ambience\n- sound texture\n\nDo not create `<Audio N>` simply because audio exists in the continuation context.\n\nIf an audio reference provides only a voice or style target, describe it as a reference rather than claiming the original audio timeline is being replayed.\n\n---\n\n# PROMPT FORMAT — WITH REFERENCES\n\nWhen actual H3 reference assets are being used, use this six-section structure:\n\n`subject_definitions:`\n\n`summary:`\n\n`retention_analysis:`\n\n`detailed_description:`\n\n`overall_soundscape:`\n\n`non_diegetic_music:`\n\nKeep these top-level sections in this order.\n\n---\n\n# SUBJECT\\_DEFINITIONS\n\nDefine actual referenced subjects and relevant assets.\n\nKeep meanings consistent across every prompt.\n\nExample:\n\n`<Subject 1> is the woman whose facial identity, hairstyle, body proportions, clothing design, colors, and distinguishing features are defined by <Picture 1>.`\n\nIf multiple pictures define the same person:\n\n`<Subject 1> is the same woman defined by <Picture 1> for facial identity and <Picture 2> for full-body appearance and clothing.`\n\nDo not create definitions for references that do not exist.\n\n---\n\n# SUMMARY\n\nKeep this concise.\n\nDescribe the purpose of the specific generation.\n\nFor an Extension, make continuation explicit.\n\nExample:\n\n`[reference generation] Continue the same uninterrupted audiovisual sequence from the incoming state while preserving <Subject 1>'s identity and developing the pursuit into the next physical beat.`\n\n---\n\n# RETENTION\\_ANALYSIS\n\nUse this only for actual reference assets.\n\nExample:\n\n`<Subject 1> (appears throughout [Shot 1]): fully_preserved - preserve facial identity, hairstyle, body proportions, clothing design, colors, and distinguishing features while pose, expression, framing, lighting, and movement follow the incoming audiovisual state.`\n\nAudio example:\n\n`<Audio 1>: reference - use the referenced vocal timbre and delivery character without replaying the original audio timeline.`\n\nDo not add the protected latent context to this section.\n\n---\n\n# DETAILED\\_DESCRIPTION\n\nThis contains the main audiovisual direction.\n\nFor the Starter:\n\n- establish the opening state\n- describe composition\n- environment\n- action\n- camera\n- synchronized sound\n- dialogue if needed\n- progression\n- outgoing handoff\n\nFor an Extension:\n\n- immediately acknowledge continuation\n- preserve incoming movement\n- preserve camera trajectory\n- preserve current object state\n- preserve lighting and environment\n- preserve audio state\n- develop the next action\n- show consequences\n- establish a useful outgoing state\n\nSpend most of the description on what happens NEXT rather than repeatedly describing inherited context.\n\n---\n\n# OVERALL\\_SOUNDSCAPE\n\nUse this for:\n\n- ambience\n- environmental sound\n- room tone\n- footsteps\n- wind\n- rain\n- fabric\n- impacts\n- machinery\n- traffic\n- water\n- non-verbal vocal sounds\n- other physical sound\n\nFor Extensions, persistent ambience should continue naturally rather than restart.\n\nDo not repeat dialogue here.\n\n---\n\n# NON\\_DIEGETIC\\_MUSIC\n\nUse this only for music heard by the audience but not physically present inside the scene.\n\nDescribe concrete features where useful:\n\n- instrumentation\n- tempo\n- rhythm\n- dynamics\n- intensity\n- progression\n\nIf none:\n\n`N/A`\n\n---\n\n# PROMPT FORMAT — WITHOUT REFERENCES\n\nIf no actual reference assets are used, use:\n\n`integrated_multimodal_description:`\n\n`overall_soundscape:`\n\n`non_diegetic_music:`\n\nDo not invent empty reference sections.\n\n---\n\n# STARTER TEMPLATE — NO REFERENCES\n\nUse this structure:\n\n\\`integrated\\_multimodal\\_description:\n[Shot 1] [Opening composition, subjects, environment, lighting, camera behavior, synchronized audiovisual action, dialogue if any, story progression, and a useful outgoing state if another clip follows.]\n\noverall\\_soundscape:\n[Ambient and physical sounds.]\n\nnon\\_diegetic\\_music:\n[Music description or N/A.]\\`\n\n---\n\n# EXTENSION TEMPLATE — NO REFERENCES\n\nUse this structure:\n\n\\`integrated\\_multimodal\\_description:\n[Shot 1] Continue naturally from the exact incoming audiovisual state with no cut or reset. Preserve the existing pose, momentum, camera trajectory, lighting, environment, object state, voice, ambience, music, and timing. [Existing action continues → next story event → consequence → outgoing handoff.]\n\noverall\\_soundscape:\n[Persistent ambience continues naturally. Describe additional physically caused sounds introduced by the new action.]\n\nnon\\_diegetic\\_music:\n[Continue and develop the established score, or N/A.]\\`\n\nDo not copy this template word-for-word into every Extension.\n\nAdapt it naturally to the actual sequence.\n\n---\n\n# PACING\n\nOnly include actions that can physically fit inside the available newly generated duration.\n\nIf an Extension has approximately 3.5 seconds of new footage, do not cram in:\n\n- several major actions\n- multiple location changes\n- long conversations\n- complex choreography\n- multiple unrelated reveals\n\nPrefer clear, readable physical progression.\n\nFor example:\n\nBad:\n\n`She reaches the door, opens it, runs downstairs, enters a car, drives away, crashes through a gate, and sees the helicopter.`\n\nBetter:\n\n`She reaches the door, shoulders it open without slowing, and disappears into the stairwell as the camera follows.`\n\nThe next Extension can continue the descent.\n\n---\n\n# FINAL CLIP\n\nIntermediate clips should generally produce forward momentum.\n\nThe final requested clip may:\n\n- resolve the action\n- settle the camera\n- complete dialogue\n- bring music toward resolution\n- allow characters to stop\n- end on a deliberate final composition\n\nDo not create another obvious handoff unless the user requests an open ending or intends to extend the chain further.\n\n---\n\n# OUTPUT PROCEDURE\n\nWhen all required information is available, first provide a compact:\n\n## CHAIN PLAN\n\nState:\n\n- number of generated clips\n- requested duration per clip\n- actual H3 frame target\n- approximate actual H3 duration\n- protected context duration\n- approximate new story duration per Extension\n- references being used\n- starting method\n- short narrative purpose of every clip\n\nKeep this concise.\n\nExample:\n\n`Clip 1 — establish the chase; runner enters the tunnel while camera tracks backward.`\n\n`Clip 2 — continue running; tunnel lights fail; runner reaches the stairwell.`\n\n`Clip 3 — continue into stairwell; pursuer becomes audible; runner turns at the landing.`\n\n`Clip 4 — confrontation and final resolution.`\n\nThen output:\n\n## COPY-PASTE PROMPTS\n\n---\n\n# COPY-PASTE BOX REQUIREMENT\n\nEvery H3 prompt MUST appear in its own separate Markdown fenced code block.\n\nThis is mandatory.\n\nDo NOT put multiple prompts inside one code block.\n\nDo NOT put explanations inside a prompt's code block.\n\nThe label for the clip goes immediately ABOVE the code block.\n\nExample:\n\n### STARTER CLIP\n\n```text\nintegrated_multimodal_description:\n...\n\noverall_soundscape:\n...\n\nnon_diegetic_music:\n...\n\n```\n\n### EXTENSION 1\n\n```text\nintegrated_multimodal_description:\n...\n\noverall_soundscape:\n...\n\nnon_diegetic_music:\n...\n\n```\n\n### EXTENSION 2\n\n```text\n...\n\n```\n\nEach code block must contain ONLY the exact text intended to be copied into the H3 prompt field.\n\nThis allows every prompt to be copied individually with a single copy action.\n\nDo not combine the prompts into one large box.\n\n---\n\n# FINAL VERIFICATION\n\nBefore responding, silently check:\n\n## INPUTS\n\n- Do I know how many generated clips are wanted?\n- Do I know their requested duration?\n- Do I know what references will be used?\n- If anything is missing, did I ask instead of inventing it?\n\n## COUNT\n\n- Did I create exactly the requested number of generated prompts?\n- If existing source footage is being extended, did I avoid counting it as a generated prompt?\n\n## TIMING\n\n- Did I convert the requested duration correctly?\n- Did I use an H3-valid target length?\n- Did I account for the protected context?\n- Did I pace Extension events according to genuinely new generated time?\n\n## CONTINUITY\n\n- Does every Extension begin inside the existing action?\n- Is pose continuity preserved?\n- Is body momentum preserved?\n- Is expression continuity preserved?\n- Is camera continuity preserved?\n- Is lighting preserved?\n- Are persistent object states preserved?\n- Are dirt, damage, wetness, wardrobe, smoke, weather, etc. preserved where applicable?\n\n## AUDIO\n\n- Does persistent ambience continue?\n- Does dialogue continue rather than restart?\n- Are voices consistent?\n- Do footsteps and physical sounds remain logical?\n- Does established music continue naturally when applicable?\n\n## REFERENCES\n\n- Did I use only references that actually exist?\n- Are `<Subject N>` identities consistent?\n- Did I avoid inventing `<Video N>` or `<Audio N>` for incoming workflow context?\n- Are reference images preserving identity rather than forcing old poses or framing?\n\n## STORY\n\n- Does every clip advance the same sequence?\n- Does every action have a logical consequence?\n- Are intermediate endings useful continuation states?\n- Does the final requested clip end appropriately?\n\n## OUTPUT\n\n- Is every generated prompt in its own fenced code block?\n- Does each box contain only copy-paste-ready H3 prompt text?\n- Did I avoid putting several prompts into one box?\n\nIf a prompt feels like a new independent scene rather than a continuation, rewrite it.\n\nIf an Extension resets the pose, camera, audio, lighting, environment, identity, or physical state, rewrite it.\n\nIf a required new event falls inside the protected context, move it later.\n\nIf an intermediate clip gives the next Extension nothing useful to continue, redesign its ending.\n\nThe final result should behave like one continuous audiovisual sequence whose generation boundaries are difficult to perceive.\n\nHere is the user's AV Extension request:"
       ],
@@ -6108,6 +6195,100 @@
       },
       "color": "#234",
       "bgcolor": "#345"
+    },
+    {
+      "id": 1045,
+      "type": "MiniMaxH3Validate24FPSVideo",
+      "pos": [
+        -3150,
+        -735
+      ],
+      "size": [
+        330,
+        80
+      ],
+      "flags": {},
+      "order": 100,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 457
+        },
+        {
+          "name": "video_info",
+          "type": "VHS_VIDEOINFO",
+          "link": 458
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            7
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MiniMaxH3Validate24FPSVideo",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 1046,
+      "type": "MiniMaxH3AudioVAECompatibility",
+      "pos": [
+        -3662.638703265703,
+        104.35999999999996
+      ],
+      "size": [
+        330,
+        90
+      ],
+      "flags": {},
+      "order": 101,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio_vae",
+          "type": "VAE",
+          "link": 459
+        }
+      ],
+      "outputs": [
+        {
+          "name": "audio_vae",
+          "type": "VAE",
+          "links": [
+            22,
+            28,
+            34,
+            40,
+            46,
+            52,
+            218,
+            224,
+            230,
+            236,
+            242,
+            248,
+            254,
+            277,
+            296,
+            347,
+            411,
+            429
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MiniMaxH3AudioVAECompatibility",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": []
     }
   ],
   "links": [
@@ -6129,7 +6310,7 @@
     ],
     [
       7,
-      99,
+      1045,
       0,
       100,
       0,
@@ -6153,7 +6334,7 @@
     ],
     [
       22,
-      4,
+      1046,
       0,
       110,
       2,
@@ -6177,7 +6358,7 @@
     ],
     [
       28,
-      4,
+      1046,
       0,
       200,
       2,
@@ -6201,7 +6382,7 @@
     ],
     [
       34,
-      4,
+      1046,
       0,
       300,
       2,
@@ -6225,7 +6406,7 @@
     ],
     [
       40,
-      4,
+      1046,
       0,
       400,
       2,
@@ -6249,7 +6430,7 @@
     ],
     [
       46,
-      4,
+      1046,
       0,
       500,
       2,
@@ -6273,7 +6454,7 @@
     ],
     [
       52,
-      4,
+      1046,
       0,
       600,
       2,
@@ -6609,7 +6790,7 @@
     ],
     [
       218,
-      4,
+      1046,
       0,
       991,
       1,
@@ -6641,7 +6822,7 @@
     ],
     [
       224,
-      4,
+      1046,
       0,
       994,
       1,
@@ -6673,7 +6854,7 @@
     ],
     [
       230,
-      4,
+      1046,
       0,
       997,
       1,
@@ -6705,7 +6886,7 @@
     ],
     [
       236,
-      4,
+      1046,
       0,
       1000,
       1,
@@ -6737,7 +6918,7 @@
     ],
     [
       242,
-      4,
+      1046,
       0,
       1003,
       1,
@@ -6769,7 +6950,7 @@
     ],
     [
       248,
-      4,
+      1046,
       0,
       1006,
       1,
@@ -6801,7 +6982,7 @@
     ],
     [
       254,
-      4,
+      1046,
       0,
       1009,
       1,
@@ -6953,7 +7134,7 @@
     ],
     [
       277,
-      4,
+      1046,
       0,
       973,
       2,
@@ -7105,7 +7286,7 @@
     ],
     [
       296,
-      4,
+      1046,
       0,
       103,
       2,
@@ -7457,7 +7638,7 @@
     ],
     [
       347,
-      4,
+      1046,
       0,
       946,
       1,
@@ -7833,7 +8014,7 @@
     ],
     [
       411,
-      4,
+      1046,
       0,
       1032,
       2,
@@ -7977,7 +8158,7 @@
     ],
     [
       429,
-      4,
+      1046,
       0,
       1037,
       0,
@@ -8182,6 +8363,30 @@
       1042,
       6,
       "VHS_FILENAMES"
+    ],
+    [
+      457,
+      99,
+      0,
+      1045,
+      0,
+      "IMAGE"
+    ],
+    [
+      458,
+      99,
+      3,
+      1045,
+      1,
+      "VHS_VIDEOINFO"
+    ],
+    [
+      459,
+      4,
+      0,
+      1046,
+      0,
+      "VAE"
     ]
   ],
   "groups": [

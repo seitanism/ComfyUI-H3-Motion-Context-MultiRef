@@ -1,8 +1,8 @@
 {
   "id": "0e3bd285-20c7-456a-89f7-559cfa2ec9d7",
   "revision": 2,
-  "last_node_id": 162,
-  "last_link_id": 97,
+  "last_node_id": 164,
+  "last_link_id": 100,
   "nodes": [
     {
       "id": 10,
@@ -32,7 +32,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "UNETLoader"
+        "Node name for S&R": "UNETLoader",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "minimax_h3_fl2va_pruned_int8_convrot.safetensors",
@@ -71,7 +72,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "CLIPLoader"
+        "Node name for S&R": "CLIPLoader",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "qwen3vl_32b_minimax_h3_int8_convrot.safetensors",
@@ -104,17 +106,15 @@
           "name": "VAE",
           "type": "VAE",
           "links": [
-            5,
-            14,
-            39,
-            44
+            100
           ]
         }
       ],
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAELoader"
+        "Node name for S&R": "VAELoader",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "minimax_h3_audio_vae_fp32.safetensors"
@@ -156,7 +156,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "ModelAttentionBackend"
+        "Node name for S&R": "ModelAttentionBackend",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "comfy kitchen attention"
@@ -225,7 +226,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "SamplerCustomAdvanced"
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -306,7 +308,8 @@
       "properties": {
         "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
         "ver": "5839d453efa0346c1da49acc39fc65050c5c48c0",
-        "Node name for S&R": "H3V2VGranularFractionalDenoise"
+        "Node name for S&R": "H3V2VGranularFractionalDenoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         24,
@@ -444,7 +447,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "subject_definitions:\n\n<Subject 1> is the character whose identity and appearance come from <Picture 1> and whose motion and performance come from <Video 1>. Their appearance follows <Picture 1>: she is a dark haired young woman in black clothing.\n\nTheir motion follows <Video 1>: they are fighting each other on a pier on a beach.\n\nThe location is a pier on a sunny beach\n\n<Subject 2> is the character whose identity and appearance come from <Picture 2> and whose motion and performance come from <Video 1>. Their appearance follows <Picture 2>: she is a red haired young woman in business clothing.\n\n<Video 1> is the source video for the target edit, providing the choreography, body motion, expression timing, subject positioning, camera framing, camera movement, perspective, pacing, and temporal structure.\n\n<Audio 1> is the synchronized audio track of <Video 1> and is reused as the complete final audio track.\n\nsummary:\n\n[video editing + reference generation + audio reuse] The target video is an edited version of <Video 1>. The original performers are replaced throughout the entire video by <Subject 1> and <Subject 2>, whose identity and appearance come from <Picture 1> and <Picture 2>, while their motion and performance follows <Video 1>.\n\nThe location is a pier on a sunny beach.\n\nretention_analysis:\n\n<Subject 1> (appears throughout [Shot 1]): fully_preserved - the identity and appearance of <Subject 1> from <Picture 1> remain consistent throughout the entire video, while the motion and performance from <Video 1> are preserved.\n\n<Subject 2> (appears throughout [Shot 1]): fully_preserved - the identity and appearance of <Subject 2> from <Picture 2> remain consistent throughout the entire video, while the motion and performance from <Video 1> are preserved.\n\n<Video 1> (source-video motion, camera, composition, and timing): fully_preserved - preserve the fight choreography, body motion, expression timing, performer position and scale, camera viewpoint, framing, camera movement, perspective, pacing, and shot structure. Only the original performer's identity and appearance are replaced - The fighter on the left with the blue jacket is replaced with <Subject 1> and the fighter on the right with the black sports bra and black shorts is replaced with <Subject 2>.\n\n<Audio 1>: fully_copy - <Audio 1> is reused 1:1 as the complete synchronized final audio track.\n\ndetailed_description:\n\nThe target video is a precise performer-replacement edit of <Video 1>.\n\n<Subject 1> replaces the original fighter in blue from <Video 1> remaining visibly and consistently the character from <Picture 1>: she is a dark haired young woman in black clothing.\n\n<Subject 2> replaces the original fighter in black from <Video 1> remaining visibly and consistently the character from <Picture 2>: she is a red haired young woman in business clothing.\n\n<Subject 1> performs the motion from the blue fighter from <Video 1>: She is fighting against <Subject 2>. <Subject 2> performs the motion from the fighter in black from <Video 1>: She is fighting against <Subject 1>.\n\nPreserve the original video's position, scale, depth, pose progression, expression timing, choreography timing, and relationship to the camera.\n\nPreserve <Video 1>'s camera viewpoint, perspective, framing, crop, camera movement, pacing, and temporal structure.\n\nThey are fighting on a pier on a sunny beach with the ocean in the background.\n\nThe edit changes only the identity and appearance of the original performers into <Subject 1> and <Subject 2>. Do not retain the original performer's face, hair, clothing, or identity characteristics.\n\noverall_soundscape:\n\nThe complete synchronized audio signal from <Audio 1> is reused unchanged. All music, ambience, dialogue, and other source-video audio remain aligned 1:1 with the corresponding visual timing.\n\nnon_diegetic_music:\n\nThe music contained in <Audio 1> is directly reused with its original timing, rhythm, dynamics, and level.",
@@ -489,7 +493,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "UNETLoader"
+        "Node name for S&R": "UNETLoader",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "minimax_h3_fl2va_pruned_int8_convrot.safetensors",
@@ -533,7 +538,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "ModelAttentionBackend"
+        "Node name for S&R": "ModelAttentionBackend",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "comfy kitchen attention"
@@ -576,7 +582,8 @@
       "properties": {
         "cnr_id": "comfyui-kjnodes",
         "ver": "3f20054214fec9f9234fd3841ae6f1e4287948f6",
-        "Node name for S&R": "MiniMaxChunkFeedForward"
+        "Node name for S&R": "MiniMaxChunkFeedForward",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         8,
@@ -620,7 +627,8 @@
       "properties": {
         "cnr_id": "comfyui-kjnodes",
         "ver": "3f20054214fec9f9234fd3841ae6f1e4287948f6",
-        "Node name for S&R": "MiniMaxLowVRAMAttention"
+        "Node name for S&R": "MiniMaxLowVRAMAttention",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         4
@@ -662,7 +670,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.34.0",
-        "Node name for S&R": "LoraLoaderModelOnly"
+        "Node name for S&R": "LoraLoaderModelOnly",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "minimax_h3_fl2v_turbo_8step_v1.0_768p_comfyui_bf16.safetensors",
@@ -707,7 +716,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "MiniMaxH3SigmaShift"
+        "Node name for S&R": "MiniMaxH3SigmaShift",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         12,
@@ -745,7 +755,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "RandomNoise"
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         252345333,
@@ -783,7 +794,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "KSamplerSelect"
+        "Node name for S&R": "KSamplerSelect",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "er_sde"
@@ -905,7 +917,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "",
@@ -960,7 +973,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -1027,7 +1041,8 @@
           "widget_ue_connectable": {},
           "version": "7.5.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "h3_fixed_fps": true
       }
     },
     {
@@ -1074,7 +1089,8 @@
       ],
       "properties": {
         "cnr_id": "comfyui-kjnodes",
-        "ver": "3f20054214fec9f9234fd3841ae6f1e4287948f6"
+        "ver": "3f20054214fec9f9234fd3841ae6f1e4287948f6",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         3,
@@ -1134,7 +1150,8 @@
           "widget_ue_connectable": {},
           "version": "7.5.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "h3_fixed_fps": true
       }
     },
     {
@@ -1180,7 +1197,8 @@
         "cnr_id": "comfyui-mainodes",
         "ver": "c49cde8826da7460361b408bd590dc86d36cc0b2",
         "Node name for S&R": "H3ExactRecover",
-        "aux_id": "matlowai/ComfyUI-MAINodes"
+        "aux_id": "matlowai/ComfyUI-MAINodes",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         ""
@@ -1222,7 +1240,8 @@
       ],
       "properties": {
         "showOutputText": false,
-        "horizontal": false
+        "horizontal": false,
+        "h3_fixed_fps": true
       }
     },
     {
@@ -1274,7 +1293,8 @@
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "4ee72c065db22c9d96c2427954dc69e7b908444b",
-        "Node name for S&R": "VHS_VideoCombine"
+        "Node name for S&R": "VHS_VideoCombine",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "frame_rate": 24,
@@ -1352,7 +1372,8 @@
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "4ee72c065db22c9d96c2427954dc69e7b908444b",
-        "Node name for S&R": "VHS_VideoCombine"
+        "Node name for S&R": "VHS_VideoCombine",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "frame_rate": 24,
@@ -1439,7 +1460,8 @@
         "cnr_id": "comfyui-mainodes",
         "ver": "c49cde8826da7460361b408bd590dc86d36cc0b2",
         "Node name for S&R": "H3TimeSmear",
-        "aux_id": "matlowai/ComfyUI-MAINodes"
+        "aux_id": "matlowai/ComfyUI-MAINodes",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         4,
@@ -1528,7 +1550,8 @@
         "cnr_id": "comfyui-mainodes",
         "ver": "c49cde8826da7460361b408bd590dc86d36cc0b2",
         "Node name for S&R": "H3JerkOracle",
-        "aux_id": "matlowai/ComfyUI-MAINodes"
+        "aux_id": "matlowai/ComfyUI-MAINodes",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         107,
@@ -1598,7 +1621,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEDecode"
+        "Node name for S&R": "VAEDecode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -1664,7 +1688,8 @@
         "cnr_id": "comfyui-mainodes",
         "ver": "c49cde8826da7460361b408bd590dc86d36cc0b2",
         "Node name for S&R": "H3TimeSmear",
-        "aux_id": "matlowai/ComfyUI-MAINodes"
+        "aux_id": "matlowai/ComfyUI-MAINodes",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         4,
@@ -1723,7 +1748,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEEncode"
+        "Node name for S&R": "VAEEncode",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -1759,7 +1785,8 @@
           "widget_ue_connectable": {},
           "version": "7.5.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "subject_definitions:\n\n<Subject 1> is the character whose identity and appearance come from <Picture 1> and whose motion and performance come from <Video 1>. Their appearance follows <Picture 1>: she is a dark haired young woman in black clothing.\n\nTheir motion follows <Video 1>: they are fighting each other on a pier on a beach.\n\nThe location is a pier on a sunny beach\n\n<Subject 2> is the character whose identity and appearance come from <Picture 2> and whose motion and performance come from <Video 1>. Their appearance follows <Picture 2>: she is a red haired young woman in business clothing.\n\n<Video 1> is the source video for the target edit, providing the choreography, body motion, expression timing, subject positioning, camera framing, camera movement, perspective, pacing, and temporal structure.\n\n<Audio 1> is the synchronized audio track of <Video 1> and is reused as the complete final audio track.\n\nsummary:\n\n[video editing + reference generation + audio reuse] The target video is an edited version of <Video 1>. The original performers are replaced throughout the entire video by <Subject 1> and <Subject 2>, whose identity and appearance come from <Picture 1> and <Picture 2>, while their motion and performance follows <Video 1>.\n\nThe location is a pier on a sunny beach.\n\nretention_analysis:\n\n<Subject 1> (appears throughout [Shot 1]): fully_preserved - the identity and appearance of <Subject 1> from <Picture 1> remain consistent throughout the entire video, while the motion and performance from <Video 1> are preserved.\n\n<Subject 2> (appears throughout [Shot 1]): fully_preserved - the identity and appearance of <Subject 2> from <Picture 2> remain consistent throughout the entire video, while the motion and performance from <Video 1> are preserved.\n\n<Video 1> (source-video motion, camera, composition, and timing): fully_preserved - preserve the fight choreography, body motion, expression timing, performer position and scale, camera viewpoint, framing, camera movement, perspective, pacing, and shot structure. Only the original performer's identity and appearance are replaced - The fighter on the left with the blue jacket is replaced with <Subject 1> and the fighter on the right with the black sports bra and black shorts is replaced with <Subject 2>.\n\n<Audio 1>: fully_copy - <Audio 1> is reused 1:1 as the complete synchronized final audio track.\n\ndetailed_description:\n\nThe target video is a precise performer-replacement edit of <Video 1>.\n\n<Subject 1> replaces the original fighter in blue from <Video 1> remaining visibly and consistently the character from <Picture 1>: she is a dark haired young woman in black clothing.\n\n<Subject 2> replaces the original fighter in black from <Video 1> remaining visibly and consistently the character from <Picture 2>: she is a red haired young woman in business clothing.\n\n<Subject 1> performs the motion from the blue fighter from <Video 1>: She is fighting against <Subject 2>. <Subject 2> performs the motion from the fighter in black from <Video 1>: She is fighting against <Subject 1>.\n\nPreserve the original video's position, scale, depth, pose progression, expression timing, choreography timing, and relationship to the camera.\n\nPreserve <Video 1>'s camera viewpoint, perspective, framing, crop, camera movement, pacing, and temporal structure.\n\nThey are fighting on a pier on a sunny beach with the ocean in the background.\n\nThe edit changes only the identity and appearance of the original performers into <Subject 1> and <Subject 2>. Do not retain the original performer's face, hair, clothing, or identity characteristics.\n\noverall_soundscape:\n\nThe complete synchronized audio signal from <Audio 1> is reused unchanged. All music, ambience, dialogue, and other source-video audio remain aligned 1:1 with the corresponding visual timing.\n\nnon_diegetic_music:\n\nThe music contained in <Audio 1> is directly reused with its original timing, rhythm, dynamics, and level."
@@ -1801,7 +1828,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "LoadImage"
+        "Node name for S&R": "LoadImage",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "d47ce26b-c56c-4486-84be-130d728931ca.png",
@@ -1845,7 +1873,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "LoadImage"
+        "Node name for S&R": "LoadImage",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "90125b58-9ac9-43c9-bd39-461669a40cb8.png",
@@ -1872,7 +1901,9 @@
       "mode": 0,
       "inputs": [],
       "outputs": [],
-      "properties": {},
+      "properties": {
+        "h3_fixed_fps": true
+      },
       "widgets_values": [
         "HOW THIS WORKFLOW WORKS\n\n1) Pass 1 runs low-resolution fractional V2V to transfer motion and timing from the source clip while replacing the performers using the reference images.\n\n2) The de-rope stage analyzes the pass-1 output and source video/audio, builds smear guidance, and prepares a cleaner latent for the second pass.\n\n3) The latent is upscaled 1.5x, then Pass 2 performs a short high-resolution refinement.\n\n4) H3ExactRecover restores exact source-frame timing, and the original source audio is reused for the final output.\n\nThe two VHS outputs preview/save both the pre-recover comparison output and the final recovered output."
       ],
@@ -1914,7 +1945,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAELoader"
+        "Node name for S&R": "VAELoader",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "minimax_h3_video_vae_int8_convrot.safetensors"
@@ -1939,9 +1971,11 @@
       "mode": 0,
       "inputs": [],
       "outputs": [],
-      "properties": {},
+      "properties": {
+        "h3_fixed_fps": true
+      },
       "widgets_values": [
-        "REQUIRED CUSTOM NODE PACKS\n\n- ComfyUI-H3-Motion-Context-MultiRef (Update 8): H3V2VGranularFractionalDenoise\n- ComfyUI-MAINodes: H3JerkOracle, H3TimeSmear, H3AudioSmear, H3V2VInit, H3ExactRecover\n- ComfyUI-KJNodes: MiniMaxChunkFeedForward, MiniMaxLowVRAMAttention, ImageConcatMulti\n- ComfyUI-VideoHelperSuite: VHS_LoadVideo, VHS_VideoCombine\n- Comfyui_Minimax_h3_latent_Upscaler: MinimaxH3LatentUpscaler3D"
+        "REQUIRED CUSTOM NODE PACKS\n\n- ComfyUI-H3-Motion-Context-MultiRef (Update 9): H3V2VGranularFractionalDenoise\n- ComfyUI-MAINodes: H3JerkOracle, H3TimeSmear, H3AudioSmear, H3V2VInit, H3ExactRecover\n- ComfyUI-KJNodes: MiniMaxChunkFeedForward, MiniMaxLowVRAMAttention, ImageConcatMulti\n- ComfyUI-VideoHelperSuite: VHS_LoadVideo, VHS_VideoCombine\n- Comfyui_Minimax_h3_latent_Upscaler: MinimaxH3LatentUpscaler3D"
       ],
       "widgets_values_named": {
         "text": "REQUIRED CUSTOM NODE PACKS\n\n- ComfyUI-H3-Motion-Context-MultiRef (Update 8): H3V2VGranularFractionalDenoise\n- ComfyUI-MAINodes: H3JerkOracle, H3TimeSmear, H3AudioSmear, H3V2VInit, H3ExactRecover\n- ComfyUI-KJNodes: MiniMaxChunkFeedForward, MiniMaxLowVRAMAttention, ImageConcatMulti\n- ComfyUI-VideoHelperSuite: VHS_LoadVideo, VHS_VideoCombine\n- Comfyui_Minimax_h3_latent_Upscaler: MinimaxH3LatentUpscaler3D"
@@ -1987,7 +2021,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "BasicGuider"
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -2023,7 +2058,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "BasicScheduler"
+        "Node name for S&R": "BasicScheduler",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "beta",
@@ -2063,7 +2099,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "KSamplerSelect"
+        "Node name for S&R": "KSamplerSelect",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "er_sde"
@@ -2099,7 +2136,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "RandomNoise"
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         685836354144328,
@@ -2126,9 +2164,11 @@
       "mode": 0,
       "inputs": [],
       "outputs": [],
-      "properties": {},
+      "properties": {
+        "h3_fixed_fps": true
+      },
       "widgets_values": [
-        "FRACTIONAL MASK NOTE\n\nglobal_strength determines how much the source video that is encoded into the latent will get denoised. 1 means it gets fully denoised, 0 means it doesnt get denoised at all. so a value close to 1 means it will almost completely get denoised, but not quite.\n\nglobal_strength = 0.9995 is intentional. It leaves a very faint residue of the source video inside the target latent. That residue helps anchor choreography and motion transfer, giving the model a subtle motion guide while still replacing identity and appearance.\n\nFor the best results I suggest you try global_strength values between 0.995 and 0.9997 (the highest possible value before 1.0) for motion transfer. It should be high enough so the source video will pick up on the prompt and references to switch or change characters or objects, but as low as possible so the latent residue helps guide the motion in the generated clip. Finetuning this value for your specific clip will yield the best results."
+        "FRACTIONAL MASK NOTE\n\nglobal_strength determines how much the source video that is encoded into the latent will get denoised. 1 means it gets fully denoised, 0 means it doesnt get denoised at all. so a value close to 1 means it will almost completely get denoised, but not quite.\n\nglobal_strength = 0.9995 is intentional. It leaves a very faint residue of the source video inside the target latent. That residue helps anchor choreography and motion transfer, giving the model a subtle motion guide while still replacing identity and appearance.\n\nFor the best results I suggest you try global_strength values between 0.995 and 0.9997 (the highest possible value before 1.0) for motion transfer. It should be high enough so the source video will pick up on the prompt and references to switch or change characters or objects, but as low as possible so the latent residue helps guide the motion in the generated clip. Finetuning this value for your specific clip will yield the best results.\n\nUPDATE 9 — PRECISION\nMask strength is fractional, not infinitely continuous. The compatibility token grid uses ceil(value*4096)/4096: 0.9995 → 0.99951171875; 0.9997 → 0.999755859375; 0.9998 → 1.0 (fully generative). Tiny slider changes can share one grid value. Native support may use finer precision. Keep BasicScheduler denoise at 1.0. PR #15988 velocity correction is checked lazily when masked nodes run; a native fix is never applied twice. Source videos must be constant 24 fps."
       ],
       "widgets_values_named": {
         "text": "FRACTIONAL MASK NOTE\n\nglobal_strength determines how much the source video that is encoded into the latent will get denoised. 1 means it gets fully denoised, 0 means it doesnt get denoised at all. so a value close to 1 means it will almost completely get denoised, but not quite.\n\nglobal_strength = 0.9995 is intentional. It leaves a very faint residue of the source video inside the target latent. That residue helps anchor choreography and motion transfer, giving the model a subtle motion guide while still replacing identity and appearance.\n\nFor the best results I suggest you try global_strength values between 0.995 and 0.9997 (the highest possible value before 1.0) for motion transfer. It should be high enough so the source video will pick up on the prompt and references to switch or change characters or objects, but as low as possible so the latent residue helps guide the motion in the generated clip. Finetuning this value for your specific clip will yield the best results."
@@ -2152,7 +2192,9 @@
       "mode": 0,
       "inputs": [],
       "outputs": [],
-      "properties": {},
+      "properties": {
+        "h3_fixed_fps": true
+      },
       "widgets_values": [
         "CHUNKED FEED-FORWARD NOTE\n\nWith the default settings the second pass runs at 1920x1056 for almost 5 seconds with de-rope (which can increase the frame count 3 or 4 fold). The KJNodes MiniMax Chunk Feed-Forward patch is used here to reduce peak memory during this high-resolution refinement."
       ],
@@ -2195,10 +2237,7 @@
           "name": "IMAGE",
           "type": "IMAGE",
           "links": [
-            8,
-            15,
-            32,
-            65
+            98
           ]
         },
         {
@@ -2221,13 +2260,16 @@
         {
           "name": "video_info",
           "type": "VHS_VIDEOINFO",
-          "links": []
+          "links": [
+            99
+          ]
         }
       ],
       "properties": {
         "cnr_id": "comfyui-videohelpersuite",
         "ver": "4ee72c065db22c9d96c2427954dc69e7b908444b",
-        "Node name for S&R": "VHS_LoadVideo"
+        "Node name for S&R": "VHS_LoadVideo",
+        "h3_fixed_fps": true
       },
       "widgets_values": {
         "video": "5secDownloadClip_2_24FPS.mp4",
@@ -2321,7 +2363,8 @@
         "cnr_id": "comfyui-mainodes",
         "ver": "c49cde8826da7460361b408bd590dc86d36cc0b2",
         "Node name for S&R": "H3AudioSmear",
-        "aux_id": "matlowai/ComfyUI-MAINodes"
+        "aux_id": "matlowai/ComfyUI-MAINodes",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "",
@@ -2371,7 +2414,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "VAEEncodeAudio"
+        "Node name for S&R": "VAEEncodeAudio",
+        "h3_fixed_fps": true
       }
     },
     {
@@ -2427,7 +2471,8 @@
         "cnr_id": "comfyui-mainodes",
         "ver": "c49cde8826da7460361b408bd590dc86d36cc0b2",
         "Node name for S&R": "H3V2VInit",
-        "aux_id": "matlowai/ComfyUI-MAINodes"
+        "aux_id": "matlowai/ComfyUI-MAINodes",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         0,
@@ -2488,7 +2533,8 @@
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.5.2"
-        }
+        },
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "minimax_h3_latent_upscaler_3d_fp16.safetensors",
@@ -2544,7 +2590,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "BasicScheduler"
+        "Node name for S&R": "BasicScheduler",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "beta",
@@ -2573,7 +2620,9 @@
       "mode": 0,
       "inputs": [],
       "outputs": [],
-      "properties": {},
+      "properties": {
+        "h3_fixed_fps": true
+      },
       "widgets_values": [
         "you can try denoise 0.3 instead of the default 0.4, or any other value, I have not tried much here."
       ],
@@ -2616,7 +2665,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.34.0",
-        "Node name for S&R": "LoraLoaderModelOnly"
+        "Node name for S&R": "LoraLoaderModelOnly",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         "minimax_h3_fl2v_turbo_8step_v1.0_768p_comfyui_bf16.safetensors",
@@ -2662,7 +2712,8 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
-        "Node name for S&R": "MiniMaxH3SigmaShift"
+        "Node name for S&R": "MiniMaxH3SigmaShift",
+        "h3_fixed_fps": true
       },
       "widgets_values": [
         12,
@@ -2672,6 +2723,89 @@
         "shift_video": 12,
         "shift_audio": 3
       }
+    },
+    {
+      "id": 163,
+      "type": "MiniMaxH3Validate24FPSVideo",
+      "pos": [
+        -1785.2662420206689,
+        -618.8799028381301
+      ],
+      "size": [
+        330,
+        80
+      ],
+      "flags": {},
+      "order": 50,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 98
+        },
+        {
+          "name": "video_info",
+          "type": "VHS_VIDEOINFO",
+          "link": 99
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            8,
+            15,
+            32,
+            65
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MiniMaxH3Validate24FPSVideo",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 164,
+      "type": "MiniMaxH3AudioVAECompatibility",
+      "pos": [
+        -3300.5801483171513,
+        -720
+      ],
+      "size": [
+        330,
+        90
+      ],
+      "flags": {},
+      "order": 51,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio_vae",
+          "type": "VAE",
+          "link": 100
+        }
+      ],
+      "outputs": [
+        {
+          "name": "audio_vae",
+          "type": "VAE",
+          "links": [
+            5,
+            14,
+            39,
+            44
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MiniMaxH3AudioVAECompatibility",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": []
     }
   ],
   "links": [
@@ -2701,7 +2835,7 @@
     ],
     [
       5,
-      13,
+      164,
       0,
       20,
       2,
@@ -2725,7 +2859,7 @@
     ],
     [
       8,
-      1,
+      163,
       0,
       20,
       6,
@@ -2773,7 +2907,7 @@
     ],
     [
       14,
-      13,
+      164,
       0,
       21,
       3,
@@ -2781,7 +2915,7 @@
     ],
     [
       15,
-      1,
+      163,
       0,
       21,
       4,
@@ -2901,7 +3035,7 @@
     ],
     [
       32,
-      1,
+      163,
       0,
       139,
       0,
@@ -2957,7 +3091,7 @@
     ],
     [
       39,
-      13,
+      164,
       0,
       129,
       1,
@@ -2989,7 +3123,7 @@
     ],
     [
       44,
-      13,
+      164,
       0,
       131,
       2,
@@ -3101,7 +3235,7 @@
     ],
     [
       65,
-      1,
+      163,
       0,
       141,
       0,
@@ -3282,6 +3416,30 @@
       132,
       0,
       "MODEL"
+    ],
+    [
+      98,
+      1,
+      0,
+      163,
+      0,
+      "IMAGE"
+    ],
+    [
+      99,
+      1,
+      3,
+      163,
+      1,
+      "VHS_VIDEOINFO"
+    ],
+    [
+      100,
+      13,
+      0,
+      164,
+      0,
+      "VAE"
     ]
   ],
   "groups": [
