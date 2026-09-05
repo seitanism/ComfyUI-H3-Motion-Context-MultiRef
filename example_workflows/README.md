@@ -1,5 +1,8 @@
 # Example Workflows
 
+Update 9 examples require constant **24 fps** input videos. See [per-workflow prerequisites](../WORKFLOW_PREREQUISITES.md) for the exact external packs, recorded versions, model filenames, and assets. Generation/output clocks are fixed at 24; old widget names remain for saved-workflow compatibility.
+
+
 ## NEW - 2MP De-Rope Continuation — Working Example
 
 `NEW - 2MP De-Rope Continuation - Working Example.json`
@@ -61,6 +64,8 @@ For this workflow, the practical range is usually **`0.996` to `0.9997`**. That 
 
 If the source motion is **not transferring strongly enough**, decrease `global_strength` in small steps. A lower value preserves a little more of the source latent, which strengthens the motion/performance guide. Keep the changes small and tune against the specific source clip; the useful range is intentionally narrow.
 
+The token grid is finite: the compatibility patch uses ceiling quantization at **1/4096**. For example, `0.9995 → 0.99951171875`, `0.9997 → 0.999755859375`, and `0.9998 → 1.0`. Small slider changes can share a grid value; native implementations may offer finer precision. The recommended range is empirical tuning guidance, not a guarantee for every model/source.
+
 Update 8's granular fractional-denoise support is what makes this usable: it carries the H3 denoise-mask values in FP32 and preserves near-1 values instead of collapsing them to plain `1.0`. Without that precision, settings such as `0.9995` would lose their intended meaning.
 
 ### Practical workflow notes
@@ -120,6 +125,10 @@ It can start from either:
 
 Choose whether the workflow begins with an existing video or generates the first clip itself. Existing Video uses the normal VHS loader so the source clip has an inline preview. Its VHS audio output is deliberately unconnected; **Keep source audio** extracts audio safely inside the MultiRef node and treats a genuinely silent container as silence, while **Regenerate with H3** protects the full source picture and synthesizes a replacement soundtrack.
 
+Keep source audio does not regenerate the whole context. With 39 frames and eight feather ticks, the first 57 audio ticks remain protected and only the final 8 ticks (0.2 s) gradually denoise. Assembly uses the extension decode over the overlap, so VAE reconstruction can still differ slightly.
+
+Final AV/Music prefixes accept `%date:yyyy-MM-dd%/MiniMax_H3_` and relative subfolders; dates use the server clock.
+
 ### Extensions
 
 Set **Active Extensions** to the number of continuation sections you want to run. The bundled controller automatically enables the required managed extension groups and bypasses the inactive ones; no manual group-enabling order is required.
@@ -141,13 +150,24 @@ Use the preview control to enable or disable extension previews.
 
 `UTILITY - AV Bridge.json`
 
-Creates a generated H3 audiovisual bridge between the ending of one source clip and the beginning of another. The workflow exposes shared target-frame, preserve-frame, and FPS controls. These values drive the bridge masks, visual overlap, output FPS, and the decoded generated-audio trim. The decoded generated-audio trim is calculated on H3's 40-Hz audio grid from the shared target-frame, preserve-frame, and FPS controls.
+Use two constant-24-fps videos with audio. **H3 AV Bridge Timing** validates the target and context before generation:
 
-The default `192` target frames with `39` preserved frames per side at `24` fps still produce the same exact bridge middle: `1.625 s` protected audio at each side and `4.75 s` of generated middle audio.
+- context length: **39, 90, 141, 192, …** (`39 + 51*k`); 56 is not allowed;
+- total target length: **5 + 17*k**;
+- the target must be longer than both preserved contexts combined.
+
+Defaults **192 target / 39 preserved per side** give **1.625 s** protected at each side and a **4.75 s** generated middle. H3 Assemble Bridge Audio trims the protected audio intervals on the 40 Hz grid and conforms the generated middle to exact frame-derived sample boundaries before concatenating both sources. This also handles valid targets such as 107 or 124 whose audio endpoint is rounded to a latent cell. Keep both visual overlap links connected to the bridge's validated preserve_frames output.
+
+The example requires VideoHelperSuite and KJNodes; see [its prerequisites](../WORKFLOW_PREREQUISITES.md).
 
 ---
 
-The folder also contains utility workflows for AV bridging and custom keyframes, plus legacy Motion Context and hybrid workflows retained from earlier versions.
+## UTILITY - Custom Keyframes
+
+`UTILITY - Custom Keyframes.json`
+
+This example demonstrates soft image guides. Read [Keyframes, masks, and interior inserts](../KEYFRAMES_AND_INSERTS.md) for detailed soft/hard keyframe instructions, one-based versus zero-based positions, latent-step quantization, Update 7 interior-insert recipes, and H3 Set/Clear AV Noise Mask usage. The three `OLD -` workflows remain available for earlier setups.
+
 
 ## More information
 

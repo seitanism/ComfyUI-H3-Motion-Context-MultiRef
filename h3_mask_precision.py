@@ -123,25 +123,40 @@ def _probe_video_row_shortcut(h3m):
 
 
 def _audio_shortcut_status(h3m):
-    """Recognize exact-1-only audio behavior without running the full H3 model."""
+    """Execute the live audio-mask branch with near-one masks, without the network."""
     fn = getattr(getattr(h3m, "MiniMaxH3Model", None), "_forward", None)
     if fn is None:
         return False, "MiniMaxH3Model._forward missing"
     if _is_ours(fn):
         return True, None
     try:
-        src = inspect.getsource(fn)
-    except (OSError, TypeError) as exc:
-        return False, "source unavailable: %r" % (exc,)
-    compact = " ".join(src.split())
-    # Current native code has the exact expression below. If upstream removes
-    # the 1e-3 shortcut entirely, consider it native-ready. If it still contains
-    # the threshold, the compatibility edit is required.
-    if "audio_denoise_mask" not in compact:
-        return False, "audio mask path not found"
-    if "1.0 - 1e-3" in compact or "1.0-1e-3" in compact:
-        return False, None
-    return True, None
+        tree = ast.parse(textwrap.dedent(inspect.getsource(fn)))
+        branches = [node for node in ast.walk(tree) if isinstance(node, ast.If)
+                    and isinstance(node.test, ast.Compare)
+                    and isinstance(node.test.left, ast.Name)
+                    and node.test.left.id == "audio_denoise_mask"]
+        if len(branches) != 1:
+            return False, "unrecognized audio-mask branch"
+        probe_tree = ast.parse("def probe(audio_denoise_mask):\n    t_a = 0.25\n    t_pin_a = 0.999\n    audio_rows_t = None\n    seg_t = {'audio': t_a}\n")
+        probe_tree.body[0].body.append(branches[0])
+        probe_tree.body[0].body.extend(ast.parse(
+            "return audio_rows_t if audio_rows_t is not None else seg_t['audio']"
+        ).body)
+        ast.fix_missing_locations(probe_tree)
+        ns = dict(fn.__globals__)
+        exec(compile(probe_tree, "<H3 audio shortcut probe>", "exec"), ns)
+        for value in (_EXPECTED_PROBE, _EXPECTED_PROBE_FINE):
+            result = ns["probe"](torch.full((1, 1, 2, 2), value))
+            if result is None:
+                return False, None
+            if torch.is_tensor(result):
+                if result.numel() == 0:
+                    return False, None
+            elif abs(float(result) - (1.0 - value * 0.75)) > 1e-6:
+                return False, None
+        return True, None
+    except Exception as exc:
+        return False, repr(exc)
 
 
 class _SamplingProbe:
@@ -319,7 +334,7 @@ class _AudioShortcutTransformer(ast.NodeTransformer):
 
     @staticmethod
     def _is_one_minus_1e3(node):
-        return bool(
+        return (isinstance(node, ast.Constant) and node.value == 0.999) or bool(
             isinstance(node, ast.BinOp)
             and isinstance(node.op, ast.Sub)
             and isinstance(node.left, ast.Constant)

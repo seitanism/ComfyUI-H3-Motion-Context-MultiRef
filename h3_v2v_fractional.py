@@ -215,7 +215,14 @@ def _fit_mask_frames(source_mask, source_frame_count, canonical_indices, fit_sta
     )
 
 
-def _mask_to_video_latent(mask_frames, latent_t, latent_h, latent_w, reduce_mode):
+def _mask_to_video_latent(mask_frames, latent_t, latent_h, latent_w, reduce_mode, crop="disabled"):
+    # Match common_upscale center-crop coordinates before mask interpolation.
+    if crop == "center":
+        old_h, old_w = mask_frames.shape[-2:]
+        aspect = float(latent_w) / float(latent_h)
+        x = round((old_w - old_h * aspect) / 2) if old_w / old_h > aspect else 0
+        y = round((old_h - old_w / aspect) / 2) if old_w / old_h < aspect else 0
+        mask_frames = mask_frames[..., y:old_h-y, x:old_w-x]
     # Resize each source-frame mask to the video-latent grid first, then collapse
     # each H3 VAE temporal run (1,4,4,4,4...) to one latent step.
     m = mask_frames.to(dtype=torch.float32).unsqueeze(1)
@@ -274,7 +281,7 @@ class H3V2VGranularFractionalDenoise:
                     "tooltip": "Source audio matching source_frames. audio_strength=0 preserves it."
                 }),
                 "source_fps": ("FLOAT", {
-                    "default": 24.0, "min": 1.0, "max": 240.0, "step": 0.001,
+                    "default": 24.0, "min": 24.0, "max": 24.0, "step": 0.001,
                 }),
                 "mode": (["global", "spatial"], {"default": "global"}),
                 "global_strength": ("FLOAT", {
@@ -420,6 +427,7 @@ class H3V2VGranularFractionalDenoise:
                 int(target_video.shape[3]),
                 int(target_video.shape[4]),
                 str(mask_temporal_reduce),
+                str(crop),
             ).to(device=out_video.device, dtype=torch.float32)
             inside = float(inside_strength)
             outside = float(outside_strength)

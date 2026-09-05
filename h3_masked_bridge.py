@@ -156,8 +156,8 @@ def _canonical_audio(audio, target_sr, frame_count, label):
 
 def _validate_preserve_frames(requested, start_available, end_available, target_frames):
     n = int(requested)
-    if n < 5:
-        raise ValueError("h3_masked_bridge: preserve_frames must be at least 5")
+    if n < 39 or (n - 39) % 51 != 0:
+        raise ValueError("h3_masked_bridge: preserve_frames must be a shared AV boundary: 39, 90, 141, 192, ... (39 + 51*k)")
     if largest_h3_video_run(n) != n:
         raise ValueError(
             "h3_masked_bridge: preserve_frames must be an exact H3 video run "
@@ -265,16 +265,16 @@ class MiniMaxH3MaskedAVBridge:
                     "tooltip": "Audio matching end_frames. The first preserved interval is frozen at the bridge end."
                 }),
                 "start_fps": ("FLOAT", {
-                    "default": 24.0, "min": 1.0, "max": 240.0, "step": 0.001,
+                    "default": 24.0, "min": 24.0, "max": 24.0, "step": 0.001,
                     "tooltip": "Frame rate represented by start_frames. CFR input is converted deterministically to H3 24 fps."
                 }),
                 "end_fps": ("FLOAT", {
-                    "default": 24.0, "min": 1.0, "max": 240.0, "step": 0.001,
+                    "default": 24.0, "min": 24.0, "max": 24.0, "step": 0.001,
                     "tooltip": "Frame rate represented by end_frames. CFR input is converted deterministically to H3 24 fps."
                 }),
                 "preserve_frames": ("INT", {
-                    "default": 39, "min": 5, "max": 9999,
-                    "tooltip": "Exact H3 run length: 5, 22, 39, 56, ... . 39 is recommended because it is exactly 1.625 s / 65 audio latent steps."
+                    "default": 39, "min": 39, "max": 9984, "step": 51,
+                    "tooltip": "Shared AV boundaries only: 39, 90, 141, 192, ... (39 + 51*k). The target must leave a generated middle."
                 }),
                 "crop": (["disabled", "center"], {"default": "center"}),
             }
@@ -305,6 +305,8 @@ class MiniMaxH3MaskedAVBridge:
         preserve_frames=39,
         crop="center",
     ):
+        if float(start_fps) != FPS or float(end_fps) != FPS:
+            raise ValueError("H3 AV Bridge requires 24 fps sources; convert both videos to 24 fps first.")
         _require_h3_mask_support()
 
         target_video, target_audio = _streams_from_latent(latent)

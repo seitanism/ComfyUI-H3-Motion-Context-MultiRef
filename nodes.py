@@ -429,7 +429,12 @@ class MiniMaxH3MotionContext:
                         "h3_motion_context: native timeline audio longer than the "
                         "visual guide would need to start before its target span. "
                         "Use audio_context_length <= context_length or ref mode.")
-                audio_start = int(start + span - a_frames)
+                requested_ticks = int(round(a_frames / float(FPS) * AUDIO_HZ))
+                # Keep existing placement byte-for-byte for a complete window.
+                # A genuinely shorter guide must still end at the visual seam.
+                actual_frames = (ref_audio_t * float(FPS) / AUDIO_HZ
+                                 if ref_audio_t < requested_ticks else a_frames)
+                audio_start = int(round(start + span - actual_frames))
                 # Native #15439 audio guide: cond_audio rows share the guide's
                 # target-relative time origin. Attach to an existing keyframe at
                 # that index when possible, otherwise add an audio-only guide.
@@ -512,7 +517,7 @@ class MiniMaxH3MotionContextTrim:
                                "matching duration so sound stays locked to "
                                "picture. Leave unwired for silent clips."}),
                 "fps": ("FLOAT", {
-                    "default": 24.0, "min": 1.0, "max": 240.0, "step": 0.001,
+                    "default": 24.0, "min": 24.0, "max": 24.0, "step": 0.001,
                     "tooltip": "Frame rate used to convert the trim into an "
                                "audio duration. Must match what you feed "
                                "Create Video."}),
@@ -1423,7 +1428,7 @@ class MiniMaxH3CustomKeyframesMasked:
         "Pinned positions must be phase-0 to pin exactly one frame: 1, 18, 35, 52, "
         "... in the default 1-based mode; 0, 17, 34, 51, ... in 0-based mode. "
         "Interior positions pin the full containing latent step (up to 4 "
-        "frames of static hold). Existing nested H3 AV masks are preserved and "
+        "frames of latent protection; decoded pixels may differ). Existing nested H3 AV masks are preserved and "
         "merged; a keyframe may not overlap an already protected video step. "
         "Audio mask state is preserved unchanged."
     )
@@ -1522,7 +1527,7 @@ class MiniMaxH3CustomKeyframesMasked:
                 _LOG.info(
                     "h3_motion_context: keyframe %d requests pixel frame %d "
                     "(inside latent step %d, frames %d-%d); the full %d-frame "
-                    "step will be pinned as a static hold. Nearest phase-0 "
+                    "latent step will be protected; decoded pixels may differ. Nearest phase-0 "
                     "positions (%s indexing): %d and %d",
                     slot,
                     pixel_index,
@@ -1710,7 +1715,16 @@ class MiniMaxH3CustomKeyframesMasked:
         return (out,)
 
 
+from .h3_audio_vae_compat import MiniMaxH3AudioVAECompatibility
+from .h3_workflow_utilities import (
+    MiniMaxH3Validate24FPSVideo, MiniMaxH3AVBridgeTiming, MiniMaxH3AssembleBridgeAudio,
+)
+
 NODE_CLASS_MAPPINGS = {
+    "MiniMaxH3AudioVAECompatibility": MiniMaxH3AudioVAECompatibility,
+    "MiniMaxH3Validate24FPSVideo": MiniMaxH3Validate24FPSVideo,
+    "MiniMaxH3AVBridgeTiming": MiniMaxH3AVBridgeTiming,
+    "MiniMaxH3AssembleBridgeAudio": MiniMaxH3AssembleBridgeAudio,
     "MiniMaxH3MotionContext": MiniMaxH3MotionContext,
     "MiniMaxH3MotionContextTrim": MiniMaxH3MotionContextTrim,
     "MiniMaxH3MotionContextSaveLatent": MiniMaxH3MotionContextSaveLatent,
@@ -1746,6 +1760,10 @@ NODE_CLASS_MAPPINGS = {
     "H3V2VGranularFractionalDenoise": H3V2VGranularFractionalDenoise,
 }
 NODE_DISPLAY_NAME_MAPPINGS = {
+    "MiniMaxH3AudioVAECompatibility": "H3 Audio VAE Compatibility",
+    "MiniMaxH3Validate24FPSVideo": "H3 Validate 24 FPS Video",
+    "MiniMaxH3AVBridgeTiming": "H3 AV Bridge Timing",
+    "MiniMaxH3AssembleBridgeAudio": "H3 Assemble Bridge Audio",
     "MiniMaxH3MotionContext": "H3 Motion Context",
     "MiniMaxH3MotionContextTrim": "H3 Motion Context Trim",
     "MiniMaxH3MotionContextSaveLatent": "H3 Motion Context Save Latent",

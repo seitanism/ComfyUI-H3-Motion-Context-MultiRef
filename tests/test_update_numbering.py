@@ -3,10 +3,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_modifications_contains_updates_1_through_8():
+def test_modifications_contains_updates_1_through_9():
     text = (ROOT / "MODIFICATIONS.md").read_text(encoding="utf-8")
 
-    for number in range(1, 9):
+    for number in range(1, 10):
         assert f"Update {number}" in text
 
 
@@ -32,28 +32,12 @@ def test_readme_stays_recent_changes_only_and_technical_report_has_dated_chronol
         assert f"Update {number} — **{date}" in architecture
 
 
-def test_readme_update8_highlights_user_visible_fixes_and_features():
+def test_readme_update9_is_compact_and_links_detailed_guidance():
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    required = (
-        "no longer forces earlier generated clips to regenerate",
-        "cache-isolated internal execution parameters",
-        "Input Count",
-        "Update inputs",
-        "H3 Last Active VHS Preview Barrier",
-        "complete V2V motion-transfer workflow",
-        "generated-x0 de-rope",
-        "learned latent upscaling",
-        "motion/performance guide",
-        "H3 V2V Granular Fractional Denoise",
-        "1/4096",
-        "FP32",
-        "exact `1.0`",
-        "H3 Fan Recovered Context",
-        "target_start",
-        "2MP De-Rope Continuation — Working Example",
-        "AV Bridge timing",
-    )
-    for item in required:
+    assert len(readme.split()) < 800
+    for item in ("Update 9", "24 fps", "39 + 51*k", "5 + 17*k", "1/4096",
+                 "%date:yyyy-MM-dd%", "KEYFRAMES_AND_INSERTS.md",
+                 "WORKFLOW_PREREQUISITES.md", "MODIFICATIONS.md"):
         assert item in readme
 
 def test_modifications_numbered_update_headings_are_dated():
@@ -125,7 +109,8 @@ def test_update_8_is_distinct_from_pr3_update_7():
 
     assert "## Update 7 — Arbitrary-position latent inserts and keyframes" in modifications
     assert "## Update 8 — released 2026-08-30" in modifications
-    assert "Update 8 (**released 2026-08-30**)" in readme
+    assert "Update 9" in readme
+    assert "## Update 8 — released 2026-08-30" in modifications
     assert "fractional H3 V2V denoise" in readme
     assert "current work in progress" not in readme
     assert "started 2026-08-30" not in readme

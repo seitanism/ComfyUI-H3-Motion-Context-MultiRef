@@ -428,7 +428,7 @@ class MiniMaxH3SourceAudioRegenLength:
                     "tooltip": "Source video frames. The count is normalized to H3's 24 fps timeline before padding to an exact H3 run."
                 }),
                 "source_fps": ("FLOAT", {
-                    "default": 24.0, "min": 1.0, "max": 240.0, "step": 0.001,
+                    "default": 24.0, "min": 24.0, "max": 24.0, "step": 0.001,
                 }),
             }
         }
@@ -474,7 +474,7 @@ class MiniMaxH3SourceAudioRegenMask:
                     "tooltip": "The complete source video. All visual latent steps are protected; only audio is regenerated."
                 }),
                 "source_fps": ("FLOAT", {
-                    "default": 24.0, "min": 1.0, "max": 240.0, "step": 0.001,
+                    "default": 24.0, "min": 24.0, "max": 24.0, "step": 0.001,
                 }),
                 "crop": (["disabled", "center"], {"default": "disabled"}),
             }
@@ -733,7 +733,7 @@ class MiniMaxH3SourceAudioPolicy:
                     "tooltip": "Connect the source VHS video loader's video_info. The VHS audio socket must remain unconnected; this link identifies the selected source file safely."
                 }),
                 "source_fps": ("FLOAT", {
-                    "default": 24.0, "min": 1.0, "max": 240.0, "step": 0.001,
+                    "default": 24.0, "min": 24.0, "max": 24.0, "step": 0.001,
                 }),
             },
             "optional": {
@@ -846,7 +846,7 @@ class MiniMaxH3ExistingVideoMaskedContext:
                     "tooltip": "Audio from the same source video. Mono is duplicated to stereo; multichannel must be downmixed first."
                 }),
                 "source_fps": ("FLOAT", {
-                    "default": 24.0, "min": 1.0, "max": 240.0, "step": 0.001,
+                    "default": 24.0, "min": 24.0, "max": 24.0, "step": 0.001,
                     "tooltip": "Source-frame FPS. Use CFR or a decoder-normalized frame stream; the example forces 24 fps."
                 }),
                 "context_length": ("INT", {
@@ -1193,11 +1193,12 @@ class MiniMaxH3SetAVNoiseMask:
     )
 
     def set_mask(self, latent, video_mask=None, audio_mask=None):
+        _require_h3_mask_support()
         if video_mask is None and audio_mask is None:
             raise ValueError(
                 "h3_av_noise_mask: both video_mask and audio_mask are None. To "
                 "remove the noise mask entirely use MiniMaxH3ClearAVNoiseMask; to "
-                "discard just one stream, zero that mask and set it."
+                "fully denoise just one stream, set that stream mask to one."
             )
 
         video, audio = _streams_from_latent(latent)
@@ -1302,7 +1303,7 @@ class MiniMaxH3AssembleInterior:
                     "tooltip": "Audio from the source video."
                 }),
                 "source_fps": ("FLOAT", {
-                    "default": 24.0, "min": 1.0, "max": 240.0, "step": 0.001,
+                    "default": 24.0, "min": 24.0, "max": 24.0, "step": 0.001,
                 }),
                 "insert_frame": ("INT", {
                     "default": 0, "min": 0,
@@ -1313,7 +1314,7 @@ class MiniMaxH3AssembleInterior:
                     "tooltip": "Wire from the preserved_frames output of H3 Existing Video Masked Context."
                 }),
                 "fps": ("FLOAT", {
-                    "default": 24.0, "min": 1.0, "max": 240.0, "step": 0.001,
+                    "default": 24.0, "min": 24.0, "max": 24.0, "step": 0.001,
                     "tooltip": "Use 24 for MiniMax H3."
                 }),
                 "crop": (["disabled", "center"], {
@@ -1699,7 +1700,7 @@ class MiniMaxH3StartMaskedContext:
                 "start_mode": ("STRING", {"forceInput": True}),
                 "context_length": ("INT", {"default": 39, "min": 5, "max": 9999}),
                 "audio_feather_ticks": ("INT", {"default": 8, "min": 0, "max": 256}),
-                "source_fps": ("FLOAT", {"default": 24.0, "min": 1.0, "max": 240.0, "step": 0.001}),
+                "source_fps": ("FLOAT", {"default": 24.0, "min": 24.0, "max": 24.0, "step": 0.001}),
                 "crop": (["disabled", "center"], {"default": "disabled"}),
             },
             "optional": {
@@ -1770,12 +1771,12 @@ class MiniMaxH3AssembleExtension:
                 }),
                 "source_audio": ("AUDIO",),
                 "source_fps": ("FLOAT", {
-                    "default": 24.0, "min": 1.0, "max": 240.0, "step": 0.001
+                    "default": 24.0, "min": 24.0, "max": 24.0, "step": 0.001
                 }),
                 "continuation_images": ("IMAGE",),
                 "continuation_audio": ("AUDIO",),
                 "fps": ("FLOAT", {
-                    "default": 24.0, "min": 1.0, "max": 240.0, "step": 0.001,
+                    "default": 24.0, "min": 24.0, "max": 24.0, "step": 0.001,
                     "tooltip": "Use 24 for MiniMax H3. Audio is forced to the exact integer-sample duration implied by each image batch before concatenation."
                 }),
                 "crop": (["disabled", "center"], {

@@ -1,0 +1,5 @@
+# CPU/static regression dependencies; production dependencies come from ComfyUI.
+torch
+numpy
+safetensors
+pytest

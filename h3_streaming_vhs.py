@@ -12,6 +12,9 @@ No custom object is exposed as a ComfyUI IMAGE output. The internal one-shot seq
 from __future__ import annotations
 
 import inspect
+import re
+from datetime import datetime
+from pathlib import PurePosixPath
 import logging
 
 import torch
@@ -128,7 +131,7 @@ class _OneShotFrameSequence:
             return
         self._generator = iter(self._generator_factory())
         try:
-            self._first = next(self._generator)
+            self._first = next(self._generator).detach().clone()
         except StopIteration as exc:
             raise RuntimeError("h3_streaming_vhs: frame stream produced no frames") from exc
         self._primed = True
@@ -441,6 +444,27 @@ def _vhs_h264_inputs(filename_default, trim_default):
     }
 
 
+def _expand_output_prefix(prefix, now=None):
+    """Resolve Comfy-style date folders for UI and API callers (server local time)."""
+    now = now or datetime.now()
+    values = {"yyyy": f"{now.year:04d}", "yy": f"{now.year % 100:02d}",
+              "MM": f"{now.month:02d}", "dd": f"{now.day:02d}",
+              "HH": f"{now.hour:02d}", "hh": f"{now.hour % 12 or 12:02d}",
+              "mm": f"{now.minute:02d}", "ss": f"{now.second:02d}"}
+    def expand(match):
+        pattern = match.group(1)
+        # Only documented date tokens and safe separators are supported.
+        parts = re.findall(r"yyyy|yy|MM|dd|HH|hh|mm|ss|[^A-Za-z]", pattern)
+        if "".join(parts) != pattern:
+            raise ValueError("Unsupported date token; use yyyy, yy, MM, dd, HH, hh, mm, ss.")
+        return "".join(values.get(part, part) for part in parts)
+    value = re.sub(r"%date:([^%]+)%", expand, str(prefix)).replace("\\", "/")
+    if (not value or PurePosixPath(value).is_absolute() or ".." in PurePosixPath(value).parts
+            or re.search(r"[<>:\x00-\x1f]", value) or "%date:" in value):
+        raise ValueError("Output prefix must be a relative filename/subfolder inside ComfyUI output.")
+    return value
+
+
 def _run_vhs_h264(
     frames,
     audio,
@@ -476,7 +500,7 @@ def _run_vhs_h264(
         frame_rate=24,
         loop_count=0,
         images=frames,
-        filename_prefix=str(filename_prefix),
+        filename_prefix=_expand_output_prefix(filename_prefix),
         format=output_format,
         pingpong=False,
         save_output=bool(save_output),
@@ -549,7 +573,7 @@ class MiniMaxH3StreamLiveExtensionAVToVHS:
             ),
             "source_fps": (
                 "FLOAT",
-                {"default": 24.0, "min": 1.0, "max": 240.0, "step": 0.001},
+                {"default": 24.0, "min": 24.0, "max": 24.0, "step": 0.001},
             ),
             "crop": (["disabled", "center"], {"default": "disabled"}),
         }

@@ -474,8 +474,8 @@ def test_1based_position_17_is_interior_static_hold():
     vm, _ = out_latent["noise_mask"].unbind()
     assert float(vm[0, 0, 4].max()) == 0.0, "step 4 should be masked (static hold)"
 
-    hold_msgs = [m for m in handler.records if "static hold" in m]
-    assert hold_msgs, "expected a static-hold log line for interior position 17"
+    hold_msgs = [m for m in handler.records if "full 4-frame latent step will be protected" in m]
+    assert hold_msgs, "expected a latent-step protection log for interior position 17"
     msg = hold_msgs[0]
     assert "pixel frame 16" in msg
     # Nearest phase-0 positions in 1-based indexing: 1 and 18.
@@ -507,8 +507,8 @@ def test_1based_position_18_is_phase0_no_static_hold():
     vm, _ = out_latent["noise_mask"].unbind()
     assert float(vm[0, 0, 5].max()) == 0.0, "step 5 should be masked (phase-0)"
 
-    hold_msgs = [m for m in handler.records if "static hold" in m]
-    assert not hold_msgs, "phase-0 position 18 must not trigger a static-hold log"
+    hold_msgs = [m for m in handler.records if "full 4-frame latent step will be protected" in m]
+    assert not hold_msgs, "phase-0 position 18 must not trigger an interior-step protection log"
 
 
 def test_connected_position_int_overrides_saved_widget_state():

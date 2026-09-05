@@ -11,6 +11,56 @@ Low-level implementation details live in [TECHNICAL_ARCHITECTURE.md](TECHNICAL_A
 
 ---
 
+
+## Update 9 — Audit repairs, exact workflow timing, and compatibility — 2026-09-05
+
+This package follows Update 8 without renumbering Reithan’s Update 7 contribution. It is intended for local ComfyUI testing before publication. CPU/static verification does not certify full H3 inference, browser behavior, or external-pack compatibility.
+
+### Runtime fixes
+
+- Fixed a first-frame tensor-view retention in the direct VHS streamers. The first preview/probe frame now owns only its own storage, allowing the first full decoded clip to be released while later clips are encoded. VHS still owns filename numbering.
+- Fixed spatial V2V masks to follow the source’s center crop before latent resizing. Global V2V settings are unchanged.
+- Corrected shortened Motion Context timeline-audio placement using actual returned audio coverage. Complete windows, public names, argument ordering, and saved widget ordering retain their existing behavior; coordinates still use the nearest representable video frame.
+- Current workflows validate constant-24-fps source/loaded metadata and lock H3/source/output clock controls at 24. Old Python normalization helpers are retained for legacy integrations. The check cannot infer VFR timing from frames/average-FPS metadata; convert source videos to constant 24 fps first.
+- AV Bridge contexts now require **39 + 51*k** frames (39, 90, 141, 192, …); 56 is rejected. Full targets still use **5 + 17*k**, with a generated middle longer than zero. The new H3 AV Bridge Timing node validates both controls before generation.
+- Replaced the AV Bridge graph’s FPS-dependent trim/math/concatenation chain with H3 Assemble Bridge Audio. It cuts exact protected audio cells, conforms the generated middle to the 24 fps picture interval, and assembles both sources on absolute PCM boundaries. Non-shared target endpoints remain supported without drift.
+
+### Audio preservation clarification
+
+The existing eight-tick half-cosine audio feather is retained. For the default 39-frame context, **57 of 65 audio ticks remain fully protected**; only the last **8 ticks (0.2 s)** gradually receive denoising. Keep source audio does **not** regenerate the entire 1.625-second context. Final AV streaming uses the extension’s decoded overlap to retain that feather. VAE reconstruction and bounded timebase conformance can still make small changes to the decoded overlap; the policy does not promise bit-identical source PCM. The interior-insert assembler has a different purpose: it restores original canonical source pixels/PCM over its entire inserted interval, replacing any feather there.
+
+### PR #15972 — audio input cropping
+
+The supplied Update 8 snapshot used exact-grid PCM preparation, not a global crop monkeypatch. That source-side correction remains active: every repo-owned audio encode constructs its intended exact H3 cell span and checks the encoded length.
+
+Added `h3_audio_vae_compat.py` and H3 Audio VAE Compatibility. On use, an unfixed connected H3 audio VAE gets `crop_input=False`, equivalent to [ComfyUI PR #15972](https://github.com/Comfy-Org/ComfyUI/pull/15972) by seitanism. Current workflow audio VAEs pass through this node before stock reference encodes too. Already-fixed native instances and unrelated VAEs are unchanged; no VAE constructor is globally patched. Exact-grid preparation remains necessary for semantic start/end anchoring after the upstream fix.
+
+The regression reproduces 437,333 samples being cropped to 546 cells with a shifted origin, then verifies an unchanged origin and 547 cells with the correction; native-fix retirement is tested.
+
+### PR #15988 — masked velocity conversion
+
+Included a lazy, H3-only compatibility equivalent of [poorpaper’s ComfyUI PR #15988](https://github.com/Comfy-Org/ComfyUI/pull/15988). Returned video/audio velocities are multiplied by their masks before audio carry conversion and outer global-sigma x0 conversion. This makes the predicted local `mask * sigma` timestep consistent with recovery, including fractional/feathered masks.
+
+The live forward is probed with synthetic outputs, including audio carry scale 4. Native passing behavior is left untouched. The fallback supports both the original wrapper output and the newer malloc-graph output-copy stage; it preserves those operations and inserts scaling before audio carry conversion. Unknown/partially converted code is rejected instead of double-patched, and a failed post-check restores the original forward. The patch is process-wide for H3 after first masked-node use and disappears on restart.
+
+Both PRs were still open when inspected on 2026-09-05. Runtime retirement depends on the **installed behavior**, not an online merge-status check: native/backported fixes win, while an older local build still needs compatibility after an upstream merge.
+
+### Issue #16 — dated output folders
+
+Final AV/Music streamers now accept `%date:yyyy-MM-dd%/MiniMax_H3_`, including API queues without VHS frontend hooks. Supported tokens are `yyyy`, `yy`, `MM`, `dd`, `HH`, `hh`, `mm`, and `ss`; dates use the server’s local clock. Relative subdirectories are supported under ComfyUI output, and VHS retains its numbered filename allocation. Absolute paths and traversal prefixes are rejected. Addresses [issue #16](https://github.com/seitanism/ComfyUI-H3-Motion-Context-MultiRef/issues/16).
+
+### Precision, documentation, and verification
+
+- Clarified the finite 1/4096 ceiling-quantized compatibility grid in the README, V2V workflow note, and architecture. Near-one values above 4095/4096 enter the 1.0 bin; tiny slider changes may be equivalent. Native implementations may offer finer precision.
+- Replaced the audio-shortcut literal-string readiness assumption with an extracted-branch behavior probe. Compatibility rewriting still requires a recognized source/AST shape.
+- Added [KEYFRAMES_AND_INSERTS.md](KEYFRAMES_AND_INSERTS.md) for soft/hard anchors, phase grids, mask composition, interior splice recipes, and related Update 7 nodes, with attribution to Reithan. Corrected latent-versus-pixel guarantees and incoming audio-mask semantics.
+- Added [WORKFLOW_PREREQUISITES.md](WORKFLOW_PREREQUISITES.md) with each current example’s external packs, recorded versions, exact selected model filenames, and required inputs. Recorded workflow versions are evidence, not new end-to-end compatibility guarantees.
+- Kept the casual README compact and moved detailed changes here. Updated the technical architecture’s current/historical distinctions, memory contract, and patch scope.
+- Added pytest to CI and `requirements-test.txt`. Each test module now runs in a fresh pytest process, honoring fixtures and exposing previously incomplete mocks; repaired those mocks and updated obsolete topology assertions to check the new contracts.
+- Release validation: **214 CPU/static/mock checks passed** with real pytest fixture execution; all Python files parsed, JavaScript syntax passed, and all nine workflow graphs passed reciprocal-link checks. The three OLD workflow JSON files are unchanged. No H3 model/GPU inference or live ComfyUI browser run was available.
+- Regenerated SHA256SUMS after all release edits. The checksum helper supports both generation and verification without hashing its own manifest or transient caches.
+
+
 ## Initial fork — MultiRef + Motion Context coexistence
 
 The fork began by adapting H3 Motion Context for workflows that also used MiniMax H3 reference conditioning.

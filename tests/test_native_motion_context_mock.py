@@ -27,6 +27,10 @@ def install_module():
         return torch.nn.functional.interpolate(
             samples, size=(height, width), mode="bilinear", align_corners=False)
     utils.common_upscale = common_upscale
+    nested = types.ModuleType("comfy.nested_tensor")
+    nested.NestedTensor = lambda xs: xs
+    comfy.nested_tensor = nested
+    sys.modules["comfy.nested_tensor"] = nested
     comfy.utils = utils
     sys.modules["comfy"] = comfy
     sys.modules["comfy.utils"] = utils
