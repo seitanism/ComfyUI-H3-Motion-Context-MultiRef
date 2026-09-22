@@ -23,17 +23,17 @@ def _input(node, name):
     return next(i for i in node.get("inputs", []) if i["name"] == name)
 
 
-def test_live_music_video_is_checkpoint_free_20_clip_ref2va_chain():
+def test_live_music_video_is_checkpoint_free_40_clip_ref2va_chain():
     data = load()
     types = [n["type"] for n in data["nodes"]]
-    assert types.count("MiniMaxH3ReferenceToVideo") == 20
-    assert types.count("MiniMaxH3SongMaskedAVContext") == 20
-    assert types.count("SamplerCustomAdvanced") == 20
+    assert types.count("MiniMaxH3ReferenceToVideo") == 40
+    assert types.count("MiniMaxH3SongMaskedAVContext") == 40
+    assert types.count("SamplerCustomAdvanced") == 40
     assert types.count("MiniMaxH3MusicVideoController") == 1
     assert types.count("MiniMaxH3StreamLiveMusicVideoToVHS") == 1
     assert types.count("MiniMaxH3FinalizeVHSOutput") == 1
     assert types.count("MiniMaxH3AssembleLiveMusicVideo") == 0
-    assert types.count("VHS_VideoCombine") == 20  # clip previews only; no separate final VHS node
+    assert types.count("VHS_VideoCombine") == 40  # clip previews only; no separate final VHS node
     assert not any("Checkpoint" in t for t in types)
     assert not any("rgthree" in t.lower() for t in types)
     loader = next(n for n in data["nodes"] if n["type"] == "UNETLoader")
@@ -57,14 +57,19 @@ def test_music_controller_defaults_and_group_ownership():
                 members.append(n); owners[n["id"]].append(meta)
         managed.append((meta, members))
     assert not {nid: v for nid, v in owners.items() if len(v) > 1}
-    assert sum(m["role"] == "music_clip" for m, _ in managed) == 20
-    assert sum(m["role"] == "music_preview" for m, _ in managed) == 20
+    assert sum(m["role"] == "music_clip" for m, _ in managed) == 40
+    assert sum(m["role"] == "music_preview" for m, _ in managed) == 40
+    assert {(m["role"], m["index"]) for m, _ in managed} == {
+        (role, index)
+        for role in ("music_clip", "music_preview")
+        for index in range(1, 41)
+    }
     for meta, members in managed:
         enabled = meta.get("index") <= 6
         assert all(n.get("mode", 0) == (0 if enabled else 4) for n in members)
 
 
-def test_four_global_images_feed_all_twenty_ref2va_nodes():
+def test_four_global_images_feed_all_forty_ref2va_nodes():
     data = load(); nodes = _nodes(data); links = _links(data)
     # Identify the four global references by graph type/role rather than optional display titles.
     refs = [n for n in nodes.values() if n["type"] == "LoadImage"]
@@ -86,7 +91,7 @@ def test_each_continuation_uses_previous_sampler_latent_directly():
     final = next(n for n in nodes.values() if n["type"] == "MiniMaxH3StreamLiveMusicVideoToVHS")
     samplers = []
     contexts = []
-    for i in range(1, 21):
+    for i in range(1, 41):
         clip_link = _input(final, f"clip_{i}")["link"]
         assert clip_link is not None
         sampler = nodes[links[clip_link][1]]
@@ -99,9 +104,14 @@ def test_each_continuation_uses_previous_sampler_latent_directly():
         assert context["type"] == "MiniMaxH3SongMaskedAVContext"
         contexts.append(context)
 
-    assert len(samplers) == len(contexts) == 20
+        start_link = _input(context, "clip_start_seconds")["link"]
+        start = nodes[links[start_link][1]]
+        assert start["type"] == "ComfyMathExpression"
+        assert start["widgets_values_named"]["expression"] == f"a * {i - 1}"
+
+    assert len(samplers) == len(contexts) == 40
     assert _input(contexts[0], "source_latent")["link"] is None
-    for i in range(1, 20):
+    for i in range(1, 40):
         source_link = _input(contexts[i], "source_latent")["link"]
         assert source_link is not None
         source = links[source_link][1]
@@ -113,7 +123,7 @@ def test_master_song_timing_and_final_output_are_live_and_untrimmed():
     master = next(n for n in nodes.values() if n["type"] == "LoadAudio")
     assert master["widgets_values"][0] == "I\'ll Know You by the Scar.wav"
     final = next(n for n in nodes.values() if n["type"] == "MiniMaxH3StreamLiveMusicVideoToVHS")
-    for i in range(1, 21):
+    for i in range(1, 41):
         assert _input(final, f"clip_{i}")["link"] is not None
     assert links[_input(final, "master_audio")["link"]][1] == master["id"]
     assert final["outputs"][0]["type"] == "VHS_FILENAMES"
@@ -246,11 +256,12 @@ def test_music_preview_barrier_orders_last_active_preview_before_final_stream():
     assert "OUTPUT_NODE = True" in sink_block
 
     previews = [n for n in nodes.values() if n["type"] == "VHS_VideoCombine"]
-    preview_ids = [2293 + 3 * i for i in range(20)]
-    for i, preview_id in enumerate(preview_ids, 1):
-        preview = nodes[preview_id]
+    for i in range(1, 41):
+        preview_link = links[_input(barrier, f"preview_{i}")["link"]]
+        preview = nodes[preview_link[1]]
         assert preview["type"] == "VHS_VideoCombine"
-        assert links[_input(barrier, f"preview_{i}")["link"]][1] == preview_id
+        assert preview.get("title") == f"Clip {i} - VHS Video Combine"
+        assert preview["widgets_values_named"]["filename_prefix"] == f"h3_preview/music_clip_{i:02d}"
 
     # For active demo clips, prove each preview decode comes from the same sampler
     # supplied to the final stream; do not rely on optional/custom titles.

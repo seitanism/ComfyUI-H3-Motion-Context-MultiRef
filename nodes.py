@@ -1086,7 +1086,7 @@ class MiniMaxH3MusicVideoController:
     PREVIEW_OFF = "Off"
     PREVIEW_LAST = "Last Active"
     PREVIEW_ALL = "All Active"
-    MAX_CLIPS = 20
+    MAX_CLIPS = 40
 
     @classmethod
     def INPUT_TYPES(cls):

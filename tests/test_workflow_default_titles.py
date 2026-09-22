@@ -59,7 +59,7 @@ def test_new_workflows_only_prefix_prompt_sampler_vhs_and_model_loaders():
         else:
             assert title.endswith(f" - {DEFAULT_SUFFIX[node['type']]}")
             prefix = title[: -len(f" - {DEFAULT_SUFFIX[node['type']]}")]
-            assert prefix in {f"Clip {i}" for i in range(1, 21)}
+            assert prefix in {f"Clip {i}" for i in range(1, 41)}
 
 def test_v2v_latent_motion_transfer_only_prefixes_stage_defining_nodes():
     data = _load("NEW - V2V Latent Motion Transfer (with upscale and de-rope).json")

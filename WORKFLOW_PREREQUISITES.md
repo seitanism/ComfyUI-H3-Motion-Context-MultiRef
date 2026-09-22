@@ -80,7 +80,7 @@ Core node metadata: `0.30.0`, `0.31.0`, `0.33.0`.
 
 Selected input assets: `I'll Know You by the Scar.wav`, `be6f4e89-4c3e-43e0-93f5-cc723ccd9b14.png`, `c90ee577-98eb-4f6c-9b0c-562a6b448d69.png`, ``.
 
-Copy the bundled song and reference images from `example_workflows/assets/` into `ComfyUI/input/`. The example has 20 available clip sections; ensure the song covers every active raw clip.
+Copy the bundled song and reference images from `example_workflows/assets/` into `ComfyUI/input/`. The example has 40 available clip sections; ensure the song covers every active raw clip.
 
 ## NEW - V2V Latent Motion Transfer (with upscale and de-rope)
 
