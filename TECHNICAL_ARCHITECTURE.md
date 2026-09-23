@@ -171,7 +171,7 @@ This distinction is important for the master-song workflow because an audio VAE 
 1. keeping its public `clip_audio` output at the exact picture duration;
 2. taking the target H3 audio latent length as authoritative;
 3. converting that target length to an exact PCM grid (`target_steps * samples_per_latent`);
-4. taking that grid-sized master-song interval starting exactly at `clip_start_seconds`, using real song lookahead when the rounded 40 Hz endpoint extends beyond the final picture frame and only allowing the small expected PCM boundary pad at a real source endpoint;
+4. taking that grid-sized master-song interval starting exactly at `clip_start_seconds`, using real song lookahead when available and padding a short final interval with silence when the last raw clip crosses the master-song endpoint;
 5. giving the generic VAE wrapper an already aligned PCM length, so its center-crop path is a no-op;
 6. requiring the encoder to return exactly the target number of audio latents.
 

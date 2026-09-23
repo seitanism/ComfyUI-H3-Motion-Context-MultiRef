@@ -114,6 +114,15 @@ class AudioVAE:
         return torch.ones((1, 32, 2, t), dtype=torch.float32) * 0.5
 
 
+class CapturingAudioVAE(AudioVAE):
+    def __init__(self):
+        self.last_input = None
+
+    def encode(self, x):
+        self.last_input = x.clone()
+        return super().encode(x)
+
+
 def test_master_song_audio_is_fully_preserved_while_only_video_prefix_is_masked():
     # 141 H3 frames -> 42 video latent steps / 235 audio latent steps.
     video = torch.zeros((1, 24, 42, 2, 4))
@@ -150,6 +159,29 @@ def test_master_song_audio_is_fully_preserved_while_only_video_prefix_is_masked(
     assert am.max() == 0 and am.min() == 0
     assert clip_audio["sample_rate"] == 32000
     assert clip_audio["waveform"].shape[-1] == round(141 / 24 * 32000)
+
+
+def test_master_song_tail_shortage_is_silence_padded_for_final_clip():
+    video = torch.zeros((1, 24, 42, 2, 4))
+    audio = torch.zeros((1, 32, 2, 235))
+    latent = {"samples": NestedTensor((video, audio))}
+    start_sample = 32000
+    grid_samples = 235 * 800
+    available = grid_samples - 174240
+    master = torch.ones((1, 2, start_sample + available))
+    vae = CapturingAudioVAE()
+
+    _out, _n, clip_audio = module.MiniMaxH3SongMaskedAVContext().prepare(
+        latent, vae, {"waveform": master, "sample_rate": 32000},
+        clip_start_seconds=1.0, context_length=0, source_fps=24.0,
+        crop="disabled", vae=None, source_frames=None,
+    )
+
+    assert vae.last_input.shape[1] == grid_samples
+    assert torch.all(vae.last_input[:, :available] == 1)
+    assert torch.count_nonzero(vae.last_input[:, available:]) == 0
+    assert clip_audio["waveform"].shape[-1] == grid_samples
+    assert torch.count_nonzero(clip_audio["waveform"][..., available:]) == 0
 
 
 class FloorAudioVAE:
