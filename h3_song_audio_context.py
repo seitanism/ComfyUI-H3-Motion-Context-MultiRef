@@ -313,14 +313,6 @@ class MiniMaxH3SongMaskedAVContext:
         encode_slice = waveform[..., start_sample:min(encode_end_sample, int(waveform.shape[-1]))]
         pcm_pad = grid_samples - int(encode_slice.shape[-1])
         if pcm_pad > 0:
-            expected_overhang = max(0, grid_samples - picture_samples)
-            tolerance = max(2, int(round(vae_sr * 0.001)))
-            if pcm_pad > expected_overhang + tolerance:
-                raise ValueError(
-                    "h3_song_audio: master audio is %d samples short of the target H3 audio grid; "
-                    "only %d samples are explained by picture-to-40-Hz endpoint rounding"
-                    % (pcm_pad, expected_overhang)
-                )
             encode_slice = torch.nn.functional.pad(encode_slice, (0, pcm_pad))
 
         audio_full, _grid_diag = encode_exact_audio_grid(

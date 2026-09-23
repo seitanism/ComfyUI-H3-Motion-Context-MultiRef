@@ -4,7 +4,7 @@ const NODE_NAME = "MiniMaxH3MusicVideoController";
 const CONTROL_ID = "music_video";
 const MODE_ALWAYS = 0;
 const MODE_BYPASS = 4;
-const MAX_CLIPS = 20;
+const MAX_CLIPS = 40;
 const WATCHDOG_MS = 500;
 let watchdog = null;
 let reconciling = false;
@@ -114,7 +114,7 @@ function desiredState(meta, state) {
     return null;
 }
 
-function validateManagedGroups(graph, managed, controller) {
+function validateManagedGroups(graph, managed, controller, state) {
     const errors = [];
     const allControllers = (graph?._nodes ?? []).filter(isController);
     if (allControllers.length !== 1) {
@@ -127,6 +127,10 @@ function validateManagedGroups(graph, managed, controller) {
         if (!new Set(["music_clip", "music_preview"]).has(String(entry.meta.role ?? ""))) {
             errors.push(`managed group ${entry.group?.title ?? "?"} has unknown role ${entry.meta.role ?? "missing"}`);
         }
+        const index = Number(entry.meta.index);
+        if (!Number.isInteger(index) || index < 1 || index > MAX_CLIPS) {
+            errors.push(`managed group ${entry.group?.title ?? "?"} has invalid clip index ${entry.meta.index ?? "missing"}`);
+        }
         if (!entry.nodes.size) {
             errors.push(`managed group ${entry.group?.title ?? "?"} contains no nodes`);
         }
@@ -135,7 +139,15 @@ function validateManagedGroups(graph, managed, controller) {
         }
     }
 
-    for (let i = 1; i <= MAX_CLIPS; i++) {
+    const indexes = managed
+        .map((entry) => Number(entry.meta.index))
+        .filter((index) => Number.isInteger(index) && index >= 1 && index <= MAX_CLIPS);
+    const managedClipCount = indexes.length ? Math.max(...indexes) : 0;
+    if (!managedClipCount) errors.push("expected at least one managed music clip and preview group");
+    if (state.active > managedClipCount) {
+        errors.push(`active_clips is ${state.active}, but the workflow contains only ${managedClipCount} managed clip slots`);
+    }
+    for (let i = 1; i <= managedClipCount; i++) {
         const clips = managed.filter((x) => x.meta.role === "music_clip" && Number(x.meta.index) === i);
         if (clips.length !== 1) errors.push(`expected exactly one music clip ${i} group, found ${clips.length}`);
         const previews = managed.filter((x) => x.meta.role === "music_preview" && Number(x.meta.index) === i);
@@ -227,7 +239,7 @@ function applyController(controller, { strict = false } = {}) {
             if (!meta) continue;
             managed.push({ group, meta, nodes: memberNodes(group, graph) });
         }
-        const errors = [...parameterErrors, ...validateManagedGroups(graph, managed, controller)];
+        const errors = [...parameterErrors, ...validateManagedGroups(graph, managed, controller, state)];
         controller._h3ControllerErrors = errors;
         if (errors.length) {
             console.error("H3 Music Video Controller configuration error:\n" + errors.join("\n"));

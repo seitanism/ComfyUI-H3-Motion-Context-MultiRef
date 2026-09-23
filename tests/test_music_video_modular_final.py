@@ -110,22 +110,22 @@ def test_music_workflow_cache_isolates_active_clip_count_from_all_samplers():
     assert not any(nodes[nid]["type"] == "SamplerCustomAdvanced" for nid in param_dests)
 
 
-def test_music_workflow_has_explicit_last_active_preview_barrier_and_dynamic_20_clip_final():
+def test_music_workflow_has_explicit_last_active_preview_barrier_and_dynamic_40_clip_final():
     data = json.loads(WF.read_text(encoding="utf-8"))
     nodes = {n["id"]: n for n in data["nodes"]}
     links = {l[0]: l for l in data["links"]}
     final = next(n for n in nodes.values() if n["type"] == "MiniMaxH3StreamLiveMusicVideoToVHS")
     barrier = next(n for n in nodes.values() if n["type"] == "MiniMaxH3LastActiveVHSPreviewBarrier")
 
-    assert final["widgets_values_named"]["input_count"] == 20
-    assert final["widgets_values"][0] == 20
-    assert barrier["widgets_values_named"]["input_count"] == 20
-    assert barrier["widgets_values"][0] == 20
-    assert not any(x["name"] == "preview_21" for x in barrier["inputs"])
+    assert final["widgets_values_named"]["input_count"] == 40
+    assert final["widgets_values"][0] == 40
+    assert barrier["widgets_values_named"]["input_count"] == 40
+    assert barrier["widgets_values"][0] == 40
+    assert not any(x["name"] == "preview_41" for x in barrier["inputs"])
     gate_link = links[_input(final, "preview_gate")["link"]]
     assert gate_link[1] == barrier["id"]
 
-    for i in range(1, 21):
+    for i in range(1, 41):
         clip = _input(final, f"clip_{i}")
         assert clip["link"] is not None
         preview = _input(barrier, f"preview_{i}")
@@ -140,6 +140,14 @@ def test_music_controller_frontend_mirrors_only_active_count_into_internal_param
     assert "syncExecutionParameters" in src
     assert "state.active" in src
     assert "expected exactly one cache-isolated Music Video parameter 'active_clips'" in src
+    assert "const MAX_CLIPS = 40;" in src
+    assert "state.active > managedClipCount" in src
+
+    backend = (ROOT / "nodes.py").read_text(encoding="utf-8")
+    controller_block = backend.split("class MiniMaxH3MusicVideoController:", 1)[1].split(
+        "class MiniMaxH3AVExtensionController:", 1
+    )[0]
+    assert "MAX_CLIPS = 40" in controller_block
 
     dynamic = JS_INPUTS.read_text(encoding="utf-8")
     assert "MiniMaxH3StreamLiveMusicVideoToVHS" in dynamic

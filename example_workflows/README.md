@@ -105,7 +105,7 @@ Use the included references or replace them with your own.
 **Master Song**
 The song used by the workflow. Replace it with your own audio when starting a new project.
 
-The workflow contains up to 20 clip sections. Only the number selected by **Active Clips** is used. Changing that count does not alter existing clip-sampler inputs, so cached clips can be reused while newly activated continuation clips are generated. The final streamer and last-active preview barrier both support a standalone dynamic **Input Count / Update inputs** interface; Music Video clip connections must remain a contiguous prefix so their visuals stay aligned to the master-song timeline.
+The workflow contains up to 40 clip sections. Only the number selected by **Active Clips** is used. Changing that count does not alter existing clip-sampler inputs, so cached clips can be reused while newly activated continuation clips are generated. The final streamer and last-active preview barrier both support a standalone dynamic **Input Count / Update inputs** interface; Music Video clip connections must remain a contiguous prefix so their visuals stay aligned to the master-song timeline.
 
 ---
 

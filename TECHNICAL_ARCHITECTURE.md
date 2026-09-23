@@ -171,7 +171,7 @@ This distinction is important for the master-song workflow because an audio VAE 
 1. keeping its public `clip_audio` output at the exact picture duration;
 2. taking the target H3 audio latent length as authoritative;
 3. converting that target length to an exact PCM grid (`target_steps * samples_per_latent`);
-4. taking that grid-sized master-song interval starting exactly at `clip_start_seconds`, using real song lookahead when the rounded 40 Hz endpoint extends beyond the final picture frame and only allowing the small expected PCM boundary pad at a real source endpoint;
+4. taking that grid-sized master-song interval starting exactly at `clip_start_seconds`, using real song lookahead when available and padding a short final interval with silence when the last raw clip crosses the master-song endpoint;
 5. giving the generic VAE wrapper an already aligned PCM length, so its center-crop path is a no-op;
 6. requiring the encoder to return exactly the target number of audio latents.
 
@@ -695,7 +695,7 @@ and each overlap frame is:
 
 The endpoints therefore do not use exact alpha 0 or 1 inside the blended overlap.
 
-Every adjacent clip pair is still blended. For 20 clips there can be 19 seams.
+Every adjacent clip pair is still blended. For 40 clips there can be 39 seams.
 
 ### Output streaming
 
@@ -871,7 +871,7 @@ The AV/Music streamer resolves `%date:yyyy-MM-dd%/MiniMax_H3_` and documented ti
 | H3 Start Canvas Selector | Shared source/generated resolution selector |
 | H3 Stream Final AV Extension to VHS | Decode source/starter + 1–6 live extensions sequentially and stream completed frames directly into VHS without a full final IMAGE movie tensor |
 | H3 Song Audio + Masked Video Context | Insert the exact master-song slice and optionally copy the previous generated video latent tail |
-| H3 Stream Final Music Video to VHS | Decode up to 20 live clip latents sequentially and stream directly into VHS while passing the untouched master song |
+| H3 Stream Final Music Video to VHS | Decode up to 64 live clip latents sequentially and stream directly into VHS while passing the untouched master song; the bundled controller exposes 40 |
 | H3 Final Stream Output Sink | Terminal `VHS_FILENAMES` sink used by Music Video to keep clip-preview scheduling ahead of the all-clips final-stream dependency chain |
 | H3 AV Extension Controller | Start mode, active extension count, audio feather, and preview policy |
 | H3 Music Video Controller | Active clip count and preview policy |

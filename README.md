@@ -9,7 +9,7 @@ MiniMax H3 nodes and workflows for video extension, music videos, motion transfe
 | Workflow | Use it for |
 | --- | --- |
 | [NEW - AV Extension](example_workflows/NEW%20-%20AV%20Extension.json) | Continue an existing video, or generate a T2V/I2V starter and extend it. |
-| [NEW - Music Video](example_workflows/NEW%20-%20Music%20Video.json) | Generate connected clips around one master song, with optional reference images. |
+| [NEW - Music Video](example_workflows/NEW%20-%20Music%20Video.json) | Generate up to 40 connected clips around one master song, with optional reference images. |
 | [NEW - V2V Latent Motion Transfer](example_workflows/NEW%20-%20V2V%20Latent%20Motion%20Transfer%20%28with%20upscale%20and%20de-rope%29.json) | Transfer source motion using fractional H3 V2V denoise, then de-rope, upscale, and refine. |
 | [NEW - 2MP De-Rope Continuation — Working Example](example_workflows/NEW%20-%202MP%20De-Rope%20Continuation%20-%20Working%20Example.json) | Inspect a two-pass continuation with dynamic de-rope seam placement. |
 | [UTILITY - AV Bridge](example_workflows/UTILITY%20-%20AV%20Bridge.json) | Generate a transition between two known video/audio endpoints. |
