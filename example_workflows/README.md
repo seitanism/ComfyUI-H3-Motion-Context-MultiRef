@@ -85,6 +85,38 @@ This workflow additionally uses ComfyUI-MAINodes and the LBH-123-AI MiniMax H3 l
 
 Creates a multi-clip music video around one song.
 
+For new projects, prefer `NEW - Music Video (Compact Loop).json`. It replaces
+the twenty duplicated clip and preview groups with one editable **H3 Music
+Video Clip Plan** and one native ComfyUI loop body. Each JSON item contains a
+`prompt` and optional `seed`. The plan repeats in order until enough clips exist
+to cover the master song plus the five-second ending tail. `End Loop` carries
+the accepted or restored latent into the next iteration and accumulates the
+completed sequence numbers for final assembly from the reviewed MP4 files.
+
+Enter a filesystem-safe name once in **H3 Music Video Project Name**. The same
+name is propagated to the checkpoint set, preview directory, and final output,
+so those locations cannot drift apart while editing the workflow.
+
+**H3 Music Video Checkpoint / Resume** defaults to `resume_from = 1`, which
+generates every sequence and saves each AV latent under
+`output/h3_music_video_checkpoints/<checkpoint_set>/`. To redo from sequence 5,
+keep the same checkpoint set and change `resume_from` to `5`: sequences 1–4 are
+loaded from disk without running their samplers, then sequence 5 onward is
+regenerated and overwrites those fixed slots. Use a distinct checkpoint-set
+name for each project or independent take.
+
+The compact workflow also routes every newly generated clip through **H3 Preview
+Each Music Video Sequence** before `End Loop` starts the following iteration.
+This creates a full-VAE MP4 with the matching master-song slice, displays it in
+the node, and saves it under `output/h3_preview/<project>/`. If a defect is
+visible, press ComfyUI's **Cancel** control; the completed clip checkpoint is
+already on disk. Set `resume_from` to that defective sequence before queuing the
+corrected run. Restored prefix clips are not decoded into previews again.
+After the loop completes, **H3 Assemble Final Video from Sequence MP4s** removes
+the repeated context frames from clips 2 onward, restores the original master
+song, pads the requested silent visual tail, and fades the picture to black.
+The original workflow remains as a compatibility/reference example.
+
 The included workflow comes with a complete example using the files in:
 
 `example_workflows/assets/`

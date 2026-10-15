@@ -10,6 +10,7 @@ MiniMax H3 nodes and workflows for video extension, music videos, motion transfe
 | --- | --- |
 | [NEW - AV Extension](example_workflows/NEW%20-%20AV%20Extension.json) | Continue an existing video, or generate a T2V/I2V starter and extend it. |
 | [NEW - Music Video](example_workflows/NEW%20-%20Music%20Video.json) | Generate connected clips around one master song, with optional reference images. |
+| [NEW - Music Video (Compact Loop)](example_workflows/NEW%20-%20Music%20Video%20%28Compact%20Loop%29.json) | Edit every shot in one JSON plan and reuse one visible generation chain through ComfyUI's native loop. |
 | [NEW - V2V Latent Motion Transfer](example_workflows/NEW%20-%20V2V%20Latent%20Motion%20Transfer%20%28with%20upscale%20and%20de-rope%29.json) | Transfer source motion using fractional H3 V2V denoise, then de-rope, upscale, and refine. |
 | [NEW - 2MP De-Rope Continuation — Working Example](example_workflows/NEW%20-%202MP%20De-Rope%20Continuation%20-%20Working%20Example.json) | Inspect a two-pass continuation with dynamic de-rope seam placement. |
 | [UTILITY - AV Bridge](example_workflows/UTILITY%20-%20AV%20Bridge.json) | Generate a transition between two known video/audio endpoints. |
@@ -34,7 +35,11 @@ Restart ComfyUI and refresh the browser. When testing the Update 9 ZIP, replace 
 
 Install the packs and model files listed for your chosen example in [Workflow prerequisites](WORKFLOW_PREREQUISITES.md). Models are not included. The examples use different external packs; you do not need every pack for every workflow.
 
-The AV/Music controllers select active sections and previews. Their final streamers support **Input Count → Update inputs**. Existing sampler results remain reusable while retained in ComfyUI's cache; these workflows do not provide disk checkpoint/resume across restarts.
+The legacy AV/Music controllers select active sections and previews. Their final streamers support **Input Count → Update inputs**. The compact Music Video workflow derives the required clip count from the master-song duration plus its ending tail and reuses one native **Start Loop / End Loop** generation body. Enter the project name once; the workflow uses it for checkpoints, sequence previews, and the final MP4.
+
+**H3 Music Video Checkpoint / Resume** stores fixed per-sequence AV latents on disk, so a later run can resume from a selected sequence without sampling the accepted prefix again. **H3 Assemble Final Video from Sequence MP4s** then removes the repeated context frames from the reviewed sequence previews, restores the untouched master song, and adds the configured silent visual tail and fade.
+
+Each newly sampled compact-workflow sequence is also decoded and shown as an audio MP4 before the next loop iteration starts. This provides a review point where the queue can be cancelled; a corrected run can then resume from that sequence's fixed checkpoint slot.
 
 Final AV/Music output prefixes support subfolders, including `%date:yyyy-MM-dd%/MiniMax_H3_`. Dates use the server's local clock. VHS still allocates numbered filenames inside ComfyUI's output directory.
 

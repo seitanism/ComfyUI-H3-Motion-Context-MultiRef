@@ -216,6 +216,10 @@ class MiniMaxH3SongMaskedAVContext:
                     "tooltip": "FPS of source_frames when visual context is connected."
                 }),
                 "crop": (["disabled", "center"], {"default": "disabled"}),
+                "is_last_clip": ("BOOLEAN", {
+                    "default": False,
+                    "tooltip": "Allow the final H3 window to extend beyond the master song and pad that part with silence. Keep false for every non-final clip."
+                }),
             },
             "optional": {
                 "vae": ("VAE", {
@@ -247,6 +251,7 @@ class MiniMaxH3SongMaskedAVContext:
         context_length=39,
         source_fps=24.0,
         crop="disabled",
+        is_last_clip=False,
         vae=None,
         source_frames=None,
         source_latent=None,
@@ -315,11 +320,20 @@ class MiniMaxH3SongMaskedAVContext:
         if pcm_pad > 0:
             expected_overhang = max(0, grid_samples - picture_samples)
             tolerance = max(2, int(round(vae_sr * 0.001)))
-            if pcm_pad > expected_overhang + tolerance:
+            final_window_allowance = (
+                sample_boundary_from_seconds(target_frames / FPS, vae_sr)
+                if bool(is_last_clip) else 0
+            )
+            if pcm_pad > expected_overhang + tolerance + final_window_allowance:
                 raise ValueError(
                     "h3_song_audio: master audio is %d samples short of the target H3 audio grid; "
                     "only %d samples are explained by picture-to-40-Hz endpoint rounding"
                     % (pcm_pad, expected_overhang)
+                )
+            if pcm_pad > expected_overhang + tolerance:
+                _LOG.warning(
+                    "h3_song_audio: final clip extends %.3fs beyond the master song; padding silence to complete the H3 window",
+                    pcm_pad / float(vae_sr),
                 )
             encode_slice = torch.nn.functional.pad(encode_slice, (0, pcm_pad))
 

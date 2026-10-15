@@ -9,6 +9,7 @@ def test_example_workflow_catalog_is_tight_and_current():
     assert names == sorted([
         "NEW - 2MP De-Rope Continuation - Working Example.json",
         "NEW - AV Extension.json",
+        "NEW - Music Video (Compact Loop).json",
         "NEW - Music Video.json",
         "NEW - V2V Latent Motion Transfer (with upscale and de-rope).json",
         "OLD - Hybrid Extension.json",
@@ -26,6 +27,7 @@ def test_current_workflows_highlighted_as_new_are_exact():
     assert names == [
         "NEW - 2MP De-Rope Continuation - Working Example.json",
         "NEW - AV Extension.json",
+        "NEW - Music Video (Compact Loop).json",
         "NEW - Music Video.json",
         "NEW - V2V Latent Motion Transfer (with upscale and de-rope).json",
     ]

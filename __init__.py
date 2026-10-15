@@ -12,7 +12,14 @@ except ModuleNotFoundError:
     NODE_CLASS_MAPPINGS = {}
     NODE_DISPLAY_NAME_MAPPINGS = {}
 else:
-    from .nodes import NODE_CLASS_MAPPINGS, NODE_DISPLAY_NAME_MAPPINGS
+    # Pytest may collect this file directly as ``__init__`` rather than as a
+    # package.  In that mode relative imports are impossible; real ComfyUI
+    # always supplies a package name when loading a custom-node directory.
+    if not __package__:
+        NODE_CLASS_MAPPINGS = {}
+        NODE_DISPLAY_NAME_MAPPINGS = {}
+    else:
+        from .nodes import NODE_CLASS_MAPPINGS, NODE_DISPLAY_NAME_MAPPINGS
 
 WEB_DIRECTORY = "./js"
 

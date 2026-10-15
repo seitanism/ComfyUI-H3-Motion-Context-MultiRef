@@ -1,6 +1,6 @@
 # Workflow prerequisites — Update 9
 
-All current examples require this Update 9 pack and a ComfyUI build with MiniMax H3 nodes. Use constant 24 fps sources and H3-compatible model/quantization support. The Python runtime must provide PyTorch, NumPy, safetensors, and torchaudio for audio resampling. VHS output/source audio extraction also needs ffmpeg (system or imageio-ffmpeg). Follow each external pack’s installation instructions for its platform dependencies.
+All current examples require this Update 9 pack and a ComfyUI build with MiniMax H3 nodes. Use constant 24 fps sources and H3-compatible model/quantization support. The Python runtime must provide PyTorch, NumPy, safetensors, torchaudio for audio resampling, and SoundFile for compact music-video assembly. VHS output/source audio extraction and compact music-video assembly also need ffmpeg (system or imageio-ffmpeg). Follow each external pack’s installation instructions for its platform dependencies.
 
 **Version evidence:** versions below come from the supplied workflow metadata. They are reproduction references, not minimum-version guarantees or a claim that every combination was inference-tested for Update 9. CPU regressions were run with Python 3.12, PyTorch 2.14.0+cpu, NumPy 2.5.2, safetensors 0.8.0, and pytest 9.1.1. GPU inference and the external packs require testing in your ComfyUI installation.
 

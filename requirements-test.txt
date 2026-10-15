@@ -3,3 +3,4 @@ torch
 numpy
 safetensors
 pytest
+soundfile

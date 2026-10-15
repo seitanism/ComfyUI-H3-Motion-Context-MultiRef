@@ -9,9 +9,14 @@ IGNORED = {".git", "__pycache__", ".pytest_cache", ".ruff_cache"}
 
 
 def manifest_text():
-    files = sorted(p for p in ROOT.rglob("*") if p.is_file() and p != MANIFEST
-                   and not any(part in IGNORED for part in p.relative_to(ROOT).parts)
-                   and p.suffix != ".pyc")
+    files = sorted(
+        (
+            p for p in ROOT.rglob("*") if p.is_file() and p != MANIFEST
+            and not any(part in IGNORED for part in p.relative_to(ROOT).parts)
+            and p.suffix != ".pyc"
+        ),
+        key=lambda p: p.relative_to(ROOT).as_posix(),
+    )
     return "".join(hashlib.sha256(p.read_bytes()).hexdigest() + "  ./" +
                    p.relative_to(ROOT).as_posix() + "\n" for p in files)
 
@@ -26,7 +31,7 @@ def main():
             raise SystemExit("SHA256SUMS.txt is stale. Run python scripts/checksums.py after final edits.")
         print("All release checksums verified.")
     else:
-        MANIFEST.write_text(text)
+        MANIFEST.write_text(text, newline="\n")
         print(f"Wrote {len(text.splitlines())} checksums.")
 
 

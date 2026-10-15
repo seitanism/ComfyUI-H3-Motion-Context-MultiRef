@@ -12,6 +12,8 @@ No custom object is exposed as a ComfyUI IMAGE output. The internal one-shot seq
 from __future__ import annotations
 
 import inspect
+import itertools
+import math
 import re
 from datetime import datetime
 from pathlib import PurePosixPath
@@ -1145,6 +1147,7 @@ class MiniMaxH3StreamLiveMusicVideoToVHS:
         prompt=None,
         extra_pnginfo=None,
         unique_id=None,
+        tail_seconds=0.0,
         **kwargs,
     ):
         limit = self._clip_limit(input_count, active_clips)
@@ -1189,27 +1192,47 @@ class MiniMaxH3StreamLiveMusicVideoToVHS:
                 "h3_streaming_music: master_audio waveform must be [B,C,L], got %s"
                 % (tuple(getattr(waveform, "shape", ())),)
             )
+        audio_waveform = waveform[:1].detach().to(device="cpu").contiguous()
+        output_frames = final_frames
+        tail_seconds = max(0.0, float(tail_seconds))
+        if tail_seconds > 0:
+            target_frames = math.ceil(
+                (int(audio_waveform.shape[-1]) / sample_rate + tail_seconds) * FPS
+            )
+            if final_frames < target_frames:
+                raise ValueError(
+                    "h3_streaming_music: generated clips are too short for master audio "
+                    f"plus {tail_seconds:g}s tail ({final_frames} < {target_frames} frames)"
+                )
+            output_frames = target_frames
+            target_samples = sample_boundary_from_frames(output_frames, sample_rate, int(FPS))
+            missing = target_samples - int(audio_waveform.shape[-1])
+            if missing > 0:
+                audio_waveform = torch.nn.functional.pad(audio_waveform, (0, missing))
         audio = {
-            "waveform": waveform[:1].detach().to(device="cpu").contiguous(),
+            "waveform": audio_waveform,
             "sample_rate": sample_rate,
         }
 
-        factory = lambda: _generated_frame_generator(
-            video_vae,
-            videos,
-            raw_frames,
-            contexts,
-            video_overlap_frames,
-            "h3_streaming_music",
-        )
-        frames = _OneShotFrameSequence(final_frames, factory)
+        def factory():
+            generated = _generated_frame_generator(
+                video_vae,
+                videos,
+                raw_frames,
+                contexts,
+                video_overlap_frames,
+                "h3_streaming_music",
+            )
+            yield from itertools.islice(generated, output_frames)
+
+        frames = _OneShotFrameSequence(output_frames, factory)
         max_hold = max(_seam_overlaps(raw_frames, contexts, video_overlap_frames))
         _LOG.info(
             "h3_streaming_music: streaming %d clips / %d frames into VHS; untouched master song; "
             "old final RGB buffer %.2f GiB is not allocated; max retained seam %d frames (%.2f GiB)",
             count,
-            final_frames,
-            _rgb_gib(final_frames, height, width),
+            output_frames,
+            _rgb_gib(output_frames, height, width),
             max_hold,
             _rgb_gib(max_hold, height, width),
         )
@@ -1226,3 +1249,210 @@ class MiniMaxH3StreamLiveMusicVideoToVHS:
             extra_pnginfo,
             unique_id,
         )
+
+
+class MiniMaxH3StreamMusicVideoListToVHS:
+    """List-input facade for native Loop / End Loop music-video workflows."""
+
+    MAX_CLIPS = MiniMaxH3StreamLiveMusicVideoToVHS.MAX_CLIPS
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        required = {
+            "clip_latents": ("LATENT", {"forceInput": True}),
+            "video_vae": ("VAE",),
+            "master_audio": ("AUDIO",),
+            "context_frames": ("INT", {"default": 39, "min": 5, "max": 9999}),
+            "video_overlap_frames": ("INT", {"default": 39, "min": 0, "max": 9999}),
+            "tail_seconds": ("FLOAT", {"default": 5.0, "min": 0.0, "max": 60.0, "step": 0.25}),
+        }
+        required.update(_vhs_h264_inputs("video/h3_music_video", False))
+        return {
+            "required": required,
+            "hidden": {
+                "prompt": "PROMPT",
+                "extra_pnginfo": "EXTRA_PNGINFO",
+                "unique_id": "UNIQUE_ID",
+            },
+        }
+
+    RETURN_TYPES = ("VHS_FILENAMES",)
+    RETURN_NAMES = ("Filenames",)
+    FUNCTION = "stream_list_to_vhs"
+    INPUT_IS_LIST = True
+    OUTPUT_NODE = False
+    HAS_INTERMEDIATE_OUTPUT = True
+    CATEGORY = "conditioning/minimax/music video"
+    DESCRIPTION = (
+        "Loop-native low-RAM Music Video output. Accepts the accumulated LATENT list "
+        "from End Loop and reuses the proven one-clip-at-a-time VHS streamer."
+    )
+
+    @staticmethod
+    def _one(value, name):
+        if isinstance(value, list):
+            if not value:
+                raise ValueError(f"h3_streaming_music_list: missing {name}")
+            return value[0]
+        return value
+
+    def stream_list_to_vhs(
+        self,
+        clip_latents,
+        video_vae,
+        master_audio,
+        context_frames=39,
+        video_overlap_frames=39,
+        tail_seconds=5.0,
+        filename_prefix="video/h3_music_video",
+        pix_fmt="yuv420p",
+        crf=19,
+        save_metadata=False,
+        trim_to_audio=False,
+        save_output=True,
+        prompt=None,
+        extra_pnginfo=None,
+        unique_id=None,
+    ):
+        latents = list(clip_latents or [])
+        if not latents:
+            raise ValueError("h3_streaming_music_list: the loop produced no clip latents")
+        if len(latents) > self.MAX_CLIPS:
+            raise ValueError(
+                f"h3_streaming_music_list: at most {self.MAX_CLIPS} clips are supported"
+            )
+
+        base = MiniMaxH3StreamLiveMusicVideoToVHS()
+        clips = {f"clip_{i}": latent for i, latent in enumerate(latents, start=1)}
+        return base.stream_to_vhs(
+            video_vae=self._one(video_vae, "video_vae"),
+            master_audio=self._one(master_audio, "master_audio"),
+            input_count=len(latents),
+            context_frames=self._one(context_frames, "context_frames"),
+            video_overlap_frames=self._one(video_overlap_frames, "video_overlap_frames"),
+            filename_prefix=self._one(filename_prefix, "filename_prefix"),
+            pix_fmt=self._one(pix_fmt, "pix_fmt"),
+            crf=self._one(crf, "crf"),
+            save_metadata=self._one(save_metadata, "save_metadata"),
+            trim_to_audio=self._one(trim_to_audio, "trim_to_audio"),
+            save_output=self._one(save_output, "save_output"),
+            prompt=self._one(prompt, "prompt") if prompt is not None else None,
+            extra_pnginfo=(
+                self._one(extra_pnginfo, "extra_pnginfo")
+                if extra_pnginfo is not None
+                else None
+            ),
+            unique_id=self._one(unique_id, "unique_id") if unique_id is not None else None,
+            tail_seconds=self._one(tail_seconds, "tail_seconds"),
+            **clips,
+        )
+
+
+class MiniMaxH3PreviewMusicVideoClipToVHS:
+    """Decode and show each completed loop clip before the next sampler runs."""
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "clip_latent": ("LATENT",),
+                "clip_number": ("INT", {"forceInput": True}),
+                "resume_from": ("INT", {"forceInput": True}),
+                "enabled": ("BOOLEAN", {"default": True}),
+                "filename_prefix": (
+                    "STRING",
+                    {"default": "h3_preview/music_video"},
+                ),
+                "save_output": ("BOOLEAN", {"default": True}),
+            },
+            "optional": {
+                "video_vae": ("VAE", {"lazy": True}),
+                "clip_audio": ("AUDIO", {"lazy": True}),
+                "project_name": ("STRING", {"forceInput": True}),
+            },
+            "hidden": {
+                "prompt": "PROMPT",
+                "extra_pnginfo": "EXTRA_PNGINFO",
+                "unique_id": "UNIQUE_ID",
+            },
+        }
+
+    RETURN_TYPES = ("LATENT",)
+    RETURN_NAMES = ("reviewed_latent",)
+    FUNCTION = "preview_clip"
+    OUTPUT_NODE = False
+    HAS_INTERMEDIATE_OUTPUT = True
+    CATEGORY = "conditioning/minimax/music video"
+    DESCRIPTION = (
+        "Creates an exact full-VAE MP4 preview with the current song slice after each "
+        "newly generated sequence. Because End Loop consumes this passthrough, the "
+        "preview finishes before the next sequence starts; use ComfyUI Cancel to stop."
+    )
+
+    def check_lazy_status(
+        self,
+        clip_latent,
+        clip_number,
+        resume_from,
+        enabled=True,
+        filename_prefix="h3_preview/music_video",
+        save_output=True,
+        video_vae=None,
+        clip_audio=None,
+        **_kwargs,
+    ):
+        if not bool(enabled) or int(clip_number) < int(resume_from):
+            return []
+        missing = []
+        if video_vae is None:
+            missing.append("video_vae")
+        if clip_audio is None:
+            missing.append("clip_audio")
+        return missing
+
+    def preview_clip(
+        self,
+        clip_latent,
+        clip_number,
+        resume_from,
+        enabled=True,
+        filename_prefix="h3_preview/music_video",
+        save_output=True,
+        video_vae=None,
+        clip_audio=None,
+        project_name=None,
+        prompt=None,
+        extra_pnginfo=None,
+        unique_id=None,
+    ):
+        clip_number = int(clip_number)
+        if not bool(enabled) or clip_number < int(resume_from):
+            return (clip_latent,)
+        if video_vae is None or clip_audio is None:
+            raise ValueError("h3_music_preview: video_vae and clip_audio are required for a generated clip")
+
+        if project_name is not None:
+            from .h3_project_name import normalize_project_name
+            filename_prefix = f"h3_preview/{normalize_project_name(project_name)}"
+        prefix = f"{str(filename_prefix).rstrip('/')}/sequence_{clip_number:04d}"
+        result = MiniMaxH3StreamLiveMusicVideoToVHS().stream_to_vhs(
+            video_vae=video_vae,
+            master_audio=clip_audio,
+            input_count=1,
+            context_frames=39,
+            video_overlap_frames=0,
+            filename_prefix=prefix,
+            pix_fmt="yuv420p",
+            crf=19,
+            save_metadata=False,
+            trim_to_audio=True,
+            save_output=bool(save_output),
+            prompt=prompt,
+            extra_pnginfo=extra_pnginfo,
+            unique_id=unique_id,
+            clip_1=clip_latent,
+        )
+        if not isinstance(result, dict):
+            return (clip_latent,)
+        result["result"] = (clip_latent,)
+        return result

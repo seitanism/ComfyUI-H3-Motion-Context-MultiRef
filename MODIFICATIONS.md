@@ -11,6 +11,17 @@ Low-level implementation details live in [TECHNICAL_ARCHITECTURE.md](TECHNICAL_A
 
 ---
 
+## Unreleased — Compact loop music-video workflow
+
+- Added a native `Start Loop` / `End Loop` music-video workflow with one reusable generation body and an editable JSON shot plan.
+- Clip count is derived from the master-song duration, overlap-aware clip advance, and requested ending tail.
+- Added atomic per-sequence safetensors checkpoints. `resume_from` restores the accepted prefix lazily and regenerates the selected sequence onward.
+- Added per-sequence audio MP4 review before the next loop iteration and low-RAM final assembly from those reviewed files.
+- Added one shared project-name node for checkpoint, preview, and final-output paths.
+- The final H3 audio window may pad silence only when marked as the last clip; non-final short master-audio windows still fail validation.
+
+---
+
 
 ## Update 9 — Audit repairs, exact workflow timing, and compatibility — 2026-09-05
 

@@ -1,0 +1,2752 @@
+{
+  "id": "955a502a-c56f-48a2-bab9-5b2c16834f54",
+  "revision": 0,
+  "last_node_id": 3020,
+  "last_link_id": 63,
+  "nodes": [
+    {
+      "id": 2,
+      "type": "CLIPLoader",
+      "pos": [
+        -2495.6977941894534,
+        -150.64000000000004
+      ],
+      "size": [
+        330,
+        110
+      ],
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            4
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0",
+        "Node name for S&R": "CLIPLoader",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": [
+        "qwen3vl_32b_minimax_h3_int8_convrot.safetensors",
+        "minimax",
+        "default"
+      ],
+      "widgets_values_named": {
+        "clip_name": "qwen3vl_32b_minimax_h3_int8_convrot.safetensors",
+        "type": "minimax",
+        "device": "default"
+      },
+      "title": "Clip 1 - Load CLIP"
+    },
+    {
+      "id": 4,
+      "type": "VAELoader",
+      "pos": [
+        -2492.471127522787,
+        104.35999999999996
+      ],
+      "size": [
+        330,
+        70
+      ],
+      "flags": {},
+      "order": 30,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            22
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0",
+        "Node name for S&R": "VAELoader",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": [
+        "minimax_h3_audio_vae_fp32.safetensors"
+      ],
+      "widgets_values_named": {
+        "vae_name": "minimax_h3_audio_vae_fp32.safetensors"
+      },
+      "title": "Clip 1 - Load VAE"
+    },
+    {
+      "id": 5,
+      "type": "MiniMaxH3SigmaShift",
+      "pos": [
+        -1813.7314110590223,
+        -478.29008291346463
+      ],
+      "size": [
+        300,
+        150
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 58
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            59,
+            60
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0",
+        "Node name for S&R": "MiniMaxH3SigmaShift",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": [
+        12,
+        3
+      ],
+      "widgets_values_named": {
+        "shift_video": 12,
+        "shift_audio": 3
+      }
+    },
+    {
+      "id": 121,
+      "type": "BasicGuider",
+      "pos": [
+        1180,
+        -650
+      ],
+      "size": [
+        270,
+        70
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 59
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            18
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0",
+        "Node name for S&R": "BasicGuider",
+        "h3_fixed_fps": true
+      }
+    },
+    {
+      "id": 102,
+      "type": "ComfyMathExpression",
+      "pos": [
+        -1287.3041511437257,
+        -967.8216043606394
+      ],
+      "size": [
+        350,
+        150
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "values.a",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 2
+        },
+        {
+          "label": "b",
+          "name": "values.b",
+          "shape": 7,
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            13,
+            25,
+            28
+          ]
+        },
+        {
+          "name": "BOOL",
+          "type": "BOOLEAN",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0",
+        "Node name for S&R": "ComfyMathExpression",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": [
+        "max(5, round(a * 24)) + (5 - (max(5, round(a * 24)) % 17)) % 17"
+      ],
+      "widgets_values_named": {
+        "expression": "max(5, round(a * 24)) + (5 - (max(5, round(a * 24)) % 17)) % 17"
+      }
+    },
+    {
+      "id": 3,
+      "type": "VAELoader",
+      "pos": [
+        -2493.546666666667,
+        -6.017744954427088
+      ],
+      "size": [
+        330,
+        70
+      ],
+      "flags": {},
+      "order": 28,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            5,
+            39
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0",
+        "Node name for S&R": "VAELoader",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": [
+        "minimax_h3_video_vae_int8_convrot.safetensors"
+      ],
+      "widgets_values_named": {
+        "vae_name": "minimax_h3_video_vae_int8_convrot.safetensors"
+      },
+      "title": "Clip 1 - Load VAE"
+    },
+    {
+      "id": 1,
+      "type": "UNETLoader",
+      "pos": [
+        -2500,
+        -300
+      ],
+      "size": [
+        330,
+        90
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            49
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0",
+        "Node name for S&R": "UNETLoader",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": [
+        "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+        "default"
+      ],
+      "widgets_values_named": {
+        "unet_name": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+        "weight_dtype": "default"
+      },
+      "title": "Clip 1 - Load Diffusion Model"
+    },
+    {
+      "id": 100,
+      "type": "ResolutionSelector",
+      "pos": [
+        -2539.2393615656356,
+        -954.2938952463794
+      ],
+      "size": [
+        360,
+        160
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "showAdvanced": true,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [
+            11
+          ]
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [
+            12
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0",
+        "Node name for S&R": "ResolutionSelector",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": [
+        "16:9 (Widescreen)",
+        0.4,
+        32
+      ],
+      "widgets_values_named": {
+        "aspect_ratio": "16:9 (Widescreen)",
+        "megapixels": 1,
+        "multiple": 32
+      },
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 940,
+      "type": "LoadAudio",
+      "pos": [
+        -1302.4214348068851,
+        495.69290681083476
+      ],
+      "size": [
+        456.7623046875,
+        150
+      ],
+      "flags": {},
+      "order": 31,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            16,
+            24,
+            46
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0",
+        "Node name for S&R": "LoadAudio",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": [
+        "FO Pouvoir d'achat.mp3",
+        null,
+        null
+      ],
+      "widgets_values_named": {
+        "audio": "FO Pouvoir d'achat.mp3",
+        "upload": null
+      },
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 120,
+      "type": "RandomNoise",
+      "pos": [
+        780,
+        -300
+      ],
+      "size": [
+        270,
+        90
+      ],
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise_seed",
+          "type": "INT",
+          "link": 31,
+          "widget": {
+            "name": "noise_seed"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            17
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0",
+        "Node name for S&R": "RandomNoise",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": [
+        514005817509111,
+        "fixed"
+      ],
+      "widgets_values_named": {
+        "noise_seed": 514005817509111,
+        "control_after_generate": "fixed"
+      }
+    },
+    {
+      "id": 973,
+      "type": "KSamplerSelect",
+      "pos": [
+        -1813.0222819010412,
+        -256.799975585937
+      ],
+      "size": [
+        300.1692791748046,
+        71.77463958740236
+      ],
+      "flags": {},
+      "order": 22,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            19
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0",
+        "Node name for S&R": "KSamplerSelect",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": [
+        "res_multistep"
+      ],
+      "widgets_values_named": {
+        "sampler_name": "res_multistep"
+      },
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 970,
+      "type": "PrimitiveInt",
+      "pos": [
+        -2136.995506591796,
+        -263.48445312499933
+      ],
+      "size": [
+        299.28200000000015,
+        82.88736041259767
+      ],
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            3
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0",
+        "Node name for S&R": "PrimitiveInt",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": [
+        8,
+        "fixed"
+      ],
+      "widgets_values_named": {
+        "value": 8,
+        "fixed": "fixed"
+      },
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 1733,
+      "type": "PrimitiveInt",
+      "pos": [
+        -2127.99991861979,
+        -125.15558268229108
+      ],
+      "size": [
+        300,
+        82
+      ],
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            26,
+            29,
+            34,
+            47
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "PrimitiveInt",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": [
+        39,
+        "fixed"
+      ],
+      "widgets_values_named": {
+        "value": 39,
+        "fixed": "fixed"
+      },
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 977,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        -2160.6446535976743,
+        -468.49687443499676
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 49
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            50
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0",
+        "Node name for S&R": "LoraLoaderModelOnly",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": [
+        "minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors",
+        1
+      ],
+      "widgets_values_named": {
+        "lora_name": "minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors",
+        "strength_model": 1
+      },
+      "title": "Clip 1 - LoraLoaderModelOnly"
+    },
+    {
+      "id": 910,
+      "type": "LoadImage",
+      "pos": [
+        -1307.3104992309015,
+        -588.9914523059381
+      ],
+      "size": [
+        456.7623046875,
+        360
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            7
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0",
+        "Node name for S&R": "LoadImage",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": [
+        "atos_musician_portrait.png",
+        "image"
+      ],
+      "widgets_values_named": {
+        "image": "atos_musician_portrait.png",
+        "upload": "image"
+      }
+    },
+    {
+      "id": 911,
+      "type": "LoadImage",
+      "pos": [
+        -847.3104992309015,
+        -588.9914523059381
+      ],
+      "size": [
+        459.6060546875,
+        360
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            8
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0",
+        "Node name for S&R": "LoadImage",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": [
+        "atos_musician_full.png",
+        "image"
+      ],
+      "widgets_values_named": {
+        "image": "atos_musician_full.png",
+        "upload": "image"
+      }
+    },
+    {
+      "id": 123,
+      "type": "BasicScheduler",
+      "pos": [
+        -1813,
+        -140
+      ],
+      "size": [
+        300,
+        110
+      ],
+      "flags": {},
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 60
+        },
+        {
+          "name": "steps",
+          "type": "INT",
+          "widget": {
+            "name": "steps"
+          },
+          "link": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            20
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.0",
+        "Node name for S&R": "BasicScheduler",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": [
+        "simple",
+        20,
+        1
+      ],
+      "widgets_values_named": {
+        "scheduler": "simple",
+        "steps": 20,
+        "denoise": 1
+      }
+    },
+    {
+      "id": 110,
+      "type": "MiniMaxH3ReferenceToVideo",
+      "pos": [
+        250,
+        -650
+      ],
+      "size": [
+        543.5950102762479,
+        528.802895947945
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 4
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 5
+        },
+        {
+          "name": "audio_vae",
+          "type": "VAE",
+          "link": 6
+        },
+        {
+          "label": "ref_image_0",
+          "name": "ref_images.ref_image_0",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 7
+        },
+        {
+          "label": "ref_image_1",
+          "name": "ref_images.ref_image_1",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 8
+        },
+        {
+          "label": "ref_image_2",
+          "name": "ref_images.ref_image_2",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 9
+        },
+        {
+          "label": "ref_image_3",
+          "name": "ref_images.ref_image_3",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 10
+        },
+        {
+          "label": "ref_image_4",
+          "name": "ref_images.ref_image_4",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "label": "ref_video_0",
+          "name": "ref_videos.ref_video_0",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "label": "ref_video_audio_0",
+          "name": "ref_video_audios.ref_video_audio_0",
+          "shape": 7,
+          "type": "AUDIO",
+          "link": null
+        },
+        {
+          "label": "ref_audio_0",
+          "name": "ref_audios.ref_audio_0",
+          "shape": 7,
+          "type": "AUDIO",
+          "link": null
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": 11
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": 12
+        },
+        {
+          "name": "length",
+          "type": "INT",
+          "widget": {
+            "name": "length"
+          },
+          "link": 13
+        },
+        {
+          "label": "ref_audio_1",
+          "name": "ref_audios.ref_audio_1",
+          "shape": 7,
+          "type": "AUDIO",
+          "link": null
+        },
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "link": 30,
+          "widget": {
+            "name": "prompt"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            1
+          ]
+        },
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            14
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0",
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": [
+        "subject_definitions:\n<Subject 1> is the same performer defined jointly by <Picture 1> for facial identity and <Picture 2> for full-body appearance, wardrobe, body proportions, and distinctive details.\n\nsummary:\n[reference generation] Begin one continuous dreamlike performance in a dim room facing a glowing doorway, with memory already behaving strangely around <Subject 1>.\n\nretention_analysis:\n<Subject 1> (appears throughout [Shot 1]): fully_preserved - preserve facial identity, hair identity, body proportions, wardrobe, colors, and distinctive referenced features while expression, pose, lighting, framing, and movement follow the performance.\n\ndetailed_description:\n[Shot 1] Begin in a dim narrow room with a softly glowing doorway and an indistinct human-shaped blur beyond it. The camera glides backward at chest height and slowly begins a clockwise arc. <Subject 1> (S1) visibly sings with clear readable mouth and jaw movement throughout the vocal phrase: <d>[English] You were young in the doorway, I was tired in your coat. You asked if I was leaving.</d>\n\nA translucent coat-like afterimage drifts around her shoulders without replacing her real wardrobe. The blurred figure raises one hand. The room subtly bends toward the doorway as if perspective itself is listening. <Subject 1> begins turning toward the raised hand while continuing to perform.\n\nEnd with her turn, the camera arc, the raised hand, and the translucent fabric still moving so Clip 2 continues the same physical shot.\n\noverall_soundscape:\nVery subtle room tone, cloth movement, and faint air through the doorway beneath the song.\n\nnon_diegetic_music:\nThe protected master-song audio drives the intimate singing, breathing, body rhythm, and emotional timing.",
+        960,
+        544,
+        362,
+        "match"
+      ],
+      "widgets_values_named": {
+        "prompt": "subject_definitions:\n<Subject 1> is the same performer defined jointly by <Picture 1> for facial identity and <Picture 2> for full-body appearance, wardrobe, body proportions, and distinctive details.\n\nsummary:\n[reference generation] Begin one continuous dreamlike performance in a dim room facing a glowing doorway, with memory already behaving strangely around <Subject 1>.\n\nretention_analysis:\n<Subject 1> (appears throughout [Shot 1]): fully_preserved - preserve facial identity, hair identity, body proportions, wardrobe, colors, and distinctive referenced features while expression, pose, lighting, framing, and movement follow the performance.\n\ndetailed_description:\n[Shot 1] Begin in a dim narrow room with a softly glowing doorway and an indistinct human-shaped blur beyond it. The camera glides backward at chest height and slowly begins a clockwise arc. <Subject 1> (S1) visibly sings with clear readable mouth and jaw movement throughout the vocal phrase: <d>[English] You were young in the doorway, I was tired in your coat. You asked if I was leaving.</d>\n\nA translucent coat-like afterimage drifts around her shoulders without replacing her real wardrobe. The blurred figure raises one hand. The room subtly bends toward the doorway as if perspective itself is listening. <Subject 1> begins turning toward the raised hand while continuing to perform.\n\nEnd with her turn, the camera arc, the raised hand, and the translucent fabric still moving so Clip 2 continues the same physical shot.\n\noverall_soundscape:\nVery subtle room tone, cloth movement, and faint air through the doorway beneath the song.\n\nnon_diegetic_music:\nThe current master-song section drives the intimate singing, breathing, body rhythm, and emotional timing.",
+        "width": 960,
+        "height": 544,
+        "length": 362,
+        "ref_image_size": "match"
+      },
+      "color": "#346434",
+      "bgcolor": "rgba(24,24,27,.9)",
+      "title": "Clip 1 - MiniMax H3 Reference to Video"
+    },
+    {
+      "id": 1755,
+      "type": "MiniMaxH3SongMaskedAVContext",
+      "pos": [
+        750,
+        -650
+      ],
+      "size": [
+        610,
+        230
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "link": 14
+        },
+        {
+          "name": "audio_vae",
+          "type": "VAE",
+          "link": 15
+        },
+        {
+          "name": "master_audio",
+          "type": "AUDIO",
+          "link": 16
+        },
+        {
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE",
+          "link": null
+        },
+        {
+          "name": "source_frames",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "source_latent",
+          "shape": 7,
+          "type": "LATENT",
+          "link": 33
+        },
+        {
+          "name": "clip_start_seconds",
+          "type": "FLOAT",
+          "widget": {
+            "name": "clip_start_seconds"
+          },
+          "link": 32
+        },
+        {
+          "name": "context_length",
+          "type": "INT",
+          "link": 34,
+          "widget": {
+            "name": "context_length"
+          }
+        },
+        {
+          "name": "is_last_clip",
+          "type": "BOOLEAN",
+          "link": 35,
+          "widget": {
+            "name": "is_last_clip"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": [
+            21
+          ]
+        },
+        {
+          "name": "trim_frames",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "clip_audio",
+          "type": "AUDIO",
+          "links": [
+            40
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
+        "ver": "4b484a3e1c7ddc045771042dcdb8b60529f127ff",
+        "Node name for S&R": "MiniMaxH3SongMaskedAVContext",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": [
+        0,
+        0,
+        24,
+        "disabled"
+      ],
+      "widgets_values_named": {
+        "clip_start_seconds": 0,
+        "context_length": 0,
+        "source_fps": 24,
+        "crop": "disabled"
+      }
+    },
+    {
+      "id": 124,
+      "type": "SamplerCustomAdvanced",
+      "pos": [
+        1700,
+        -650
+      ],
+      "size": [
+        300,
+        284.27906976744185
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 17
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 18
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 19
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 20
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 21
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            36
+          ]
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0",
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "h3_fixed_fps": true
+      },
+      "title": "Clip 1 - SamplerCustomAdvanced"
+    },
+    {
+      "id": 2505,
+      "type": "LoadImage",
+      "pos": [
+        -1310.6349588697497,
+        -124.99561919077915
+      ],
+      "size": [
+        632.808203125,
+        383.7501965644991
+      ],
+      "flags": {},
+      "order": 27,
+      "mode": 4,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            9
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0",
+        "Node name for S&R": "LoadImage",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": [
+        "",
+        "image"
+      ],
+      "widgets_values_named": {
+        "image": "",
+        "upload": "image"
+      }
+    },
+    {
+      "id": 2506,
+      "type": "LoadImage",
+      "pos": [
+        -652.1817048735383,
+        -125.15291832565671
+      ],
+      "size": [
+        633.2046875,
+        377.3404773341774
+      ],
+      "flags": {},
+      "order": 26,
+      "mode": 4,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            10
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0",
+        "Node name for S&R": "LoadImage",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": [
+        "",
+        "image"
+      ],
+      "widgets_values_named": {
+        "image": "",
+        "upload": "image"
+      }
+    },
+    {
+      "id": 101,
+      "type": "PrimitiveFloat",
+      "pos": [
+        -1997.6872219179913,
+        -662.0632845788755
+      ],
+      "size": [
+        305.3941833496091,
+        71.43464898681623
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": [
+            2
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0",
+        "Node name for S&R": "PrimitiveFloat",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": [
+        10
+      ],
+      "widgets_values_named": {
+        "value": 10
+      },
+      "color": "#346434",
+      "bgcolor": "rgba(24,24,27,.9)"
+    },
+    {
+      "id": 2507,
+      "type": "MiniMaxH3FinalizeVHSOutput",
+      "pos": [
+        3910,
+        -420
+      ],
+      "size": [
+        330,
+        92
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "filenames",
+          "type": "VHS_FILENAMES",
+          "link": 48
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "aux_id": "seitanism/ComfyUI-H3-Motion-Context-MultiRef",
+        "ver": "update6-preview-order-fix",
+        "Node name for S&R": "MiniMaxH3FinalizeVHSOutput",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": [],
+      "color": "#193d36",
+      "bgcolor": "rgba(16,49,42,.95)",
+      "title": "FINAL OUTPUT"
+    },
+    {
+      "id": 2510,
+      "type": "MiniMaxH3AudioVAECompatibility",
+      "pos": [
+        -3284.157838152504,
+        104.35999999999996
+      ],
+      "size": [
+        330,
+        90
+      ],
+      "flags": {},
+      "order": 29,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio_vae",
+          "type": "VAE",
+          "link": 22
+        }
+      ],
+      "outputs": [
+        {
+          "name": "audio_vae",
+          "type": "VAE",
+          "links": [
+            6,
+            15
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MiniMaxH3AudioVAECompatibility",
+        "h3_fixed_fps": true
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 3000,
+      "type": "MiniMaxH3MusicVideoClipPlan",
+      "pos": [
+        -1400,
+        -700
+      ],
+      "size": [
+        620,
+        520
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "master_audio",
+          "type": "AUDIO",
+          "link": 24
+        },
+        {
+          "name": "frame_count",
+          "type": "INT",
+          "link": 25,
+          "widget": {
+            "name": "frame_count"
+          }
+        },
+        {
+          "name": "context_frames",
+          "type": "INT",
+          "link": 26,
+          "widget": {
+            "name": "context_frames"
+          }
+        },
+        {
+          "name": "tail_seconds",
+          "type": "FLOAT",
+          "link": null,
+          "widget": {
+            "name": "tail_seconds"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "clips",
+          "type": "H3_MUSIC_CLIP_SPEC",
+          "links": [
+            23
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MiniMaxH3MusicVideoClipPlan"
+      },
+      "widgets_values": [
+        "[\n  {\n    \"prompt\": \"r34l1sm\\n\\nsubject_definitions:\\n<Subject 1> is the same adult male street musician defined jointly by <Picture 1> for close facial identity, curly brown hair, beard and microphone relationship, and <Picture 2> for full-body proportions, brown jacket, patterned red-and-beige scarf, dark shirt, worn grey jeans, brown boots, acoustic guitar, microphone stand and street-performance setup. The modern Atos campus plaza, visible Atos branding, glass facade, autumn trees, passing office workers, amplifier, backpack and open guitar case derive from <Picture 2>.\\n\\nsummary:\\n[Reference generation] Sequence 01 of a continuous French protest-song performance: restrained introduction. Maintain a realistic cinematic documentary style outside the Atos campus while the gathering grows through ordinary human reactions.\\n\\nretention_analysis:\\n<Subject 1> (S1, throughout [Shot 1]): fully_preserved — retain the exact recognizable face, hair, beard, age, body build, wardrobe, scarf pattern, guitar and microphone setup from <Picture 1> and <Picture 2>. Expressions, hand positions and posture may evolve only as required by singing and guitar performance. <Picture 1> supplies facial detail but not its close framing. <Picture 2> supplies the full setting, wardrobe, props and spatial relationships. Preserve the Atos campus as a real modern office plaza; do not redesign the architecture, logos or existing street-performance objects. Background employees may react naturally to the song, with stable anatomy and restrained documentary behavior.\\n\\ndetailed_description:\\n[Shot 1] One uninterrupted 10.125-second continuation at 24 fps. Begin from the exact composition and physical state in <Picture 2>. Keep <Subject 1> as the stable visual anchor beside the same microphone, performing the acoustic guitar with credible left-hand chord placement, right-hand strumming and body rhythm. His lips, jaw and breath visibly follow the protected French master-song passage; do not invent additional spoken words. The relevant passage is: <Subject 1> (S1) <d>[French] On nous promet toujours demain, / Des efforts justes, des lendemains.</d>\\n\\nBegin in the wide campus view. The musician plays clean guitar alone while office workers cross behind him. His delivery is calm, dry and observant; only a few passersby notice him. Preserve coherent late-afternoon daylight, natural skin texture, realistic fabric and hair motion, and the recognizable corporate plaza. The visible Atos marks remain environmental background elements rather than animated graphics. Keep the open guitar case, amplifier, backpack and microphone physically stable unless the incoming continuation already moves them. Any office workers remain ordinary adults in plausible work clothing; their reactions must arise gradually and must not pop into existence, clone, flicker or change identity. Avoid banners, subtitles, captions, floating typography, newly invented logos, caricature, fantasy transformations and abrupt crowd multiplication.\\n\\nMaintain temporal consistency in every background reflection and moving person. No employee should cross an impossible distance, reverse direction without cause, pass through another body, or abruptly change clothing between adjacent moments.\\n\\nUse observational framing motivated by the ongoing performance. Camera motion, if inherited from the prior sequence, stays slow and physically plausible, with no teleporting, whip-pan or hidden cut. Maintain consistent screen direction and spatial geography between the musician, microphone, guitar case, listeners and entrance. Keep both hands anatomically correct and continuously connected to believable guitar playing. Singing must remain expressive but not exaggerated: controlled irony in quieter passages, firmer projection in choruses, and grounded collective resolve near the end. Background movement stays secondary and never obscures the singer's readable face for long.\\n\\nEnd with one employee slowing down and turning toward the song. Treat this as a moving boundary, not a freeze or conclusion, so the following sequence can inherit exact motion, pose, light and crowd continuity.\\n\\noverall_soundscape:\\nUse only the protected master-song section for timing, French vocal delivery, guitar, bass, drums and group responses. Add no new dialogue. Very subtle plaza ambience and footsteps may remain beneath the song.\\n\\nnon_diegetic_music:\\nThe protected four-minute master song is fully preserved and controls performance rhythm, intensity and vocal timing.\",\n    \"seed\": 730410000104729\n  },\n  {\n    \"prompt\": \"r34l1sm\\n\\nsubject_definitions:\\n<Subject 1> is the same adult male street musician defined jointly by <Picture 1> for close facial identity, curly brown hair, beard and microphone relationship, and <Picture 2> for full-body proportions, brown jacket, patterned red-and-beige scarf, dark shirt, worn grey jeans, brown boots, acoustic guitar, microphone stand and street-performance setup. The modern Atos campus plaza, visible Atos branding, glass facade, autumn trees, passing office workers, amplifier, backpack and open guitar case derive from <Picture 2>.\\n\\nsummary:\\n[Reference generation] Sequence 02 of a continuous French protest-song performance: introduction turns accusatory. Maintain a realistic cinematic documentary style outside the Atos campus while the gathering grows through ordinary human reactions.\\n\\nretention_analysis:\\n<Subject 1> (S1, throughout [Shot 1]): fully_preserved — retain the exact recognizable face, hair, beard, age, body build, wardrobe, scarf pattern, guitar and microphone setup from <Picture 1> and <Picture 2>. Expressions, hand positions and posture may evolve only as required by singing and guitar performance. <Picture 1> supplies facial detail but not its close framing. <Picture 2> supplies the full setting, wardrobe, props and spatial relationships. Preserve the Atos campus as a real modern office plaza; do not redesign the architecture, logos or existing street-performance objects. Background employees may react naturally to the song, with stable anatomy and restrained documentary behavior.\\n\\ndetailed_description:\\n[Shot 1] One uninterrupted 10.125-second continuation at 24 fps. Continue the protected incoming frames exactly: preserve the preceding pose, guitar rhythm, crowd positions, light direction and ongoing movement; do not restart the performance or introduce a cut. Keep <Subject 1> as the stable visual anchor beside the same microphone, performing the acoustic guitar with credible left-hand chord placement, right-hand strumming and body rhythm. His lips, jaw and breath visibly follow the protected French master-song passage; do not invent additional spoken words. The relevant passage is: <Subject 1> (S1) <d>[French] Mais quand arrive l'heure des comptes, / C'est toujours notre fiche qui a honte.</d>\\n\\nContinue the same performance. Move naturally toward a medium view as the singer raises his eyes from the guitar toward the office entrance. The first listener stops while the other workers continue flowing past. Preserve coherent late-afternoon daylight, natural skin texture, realistic fabric and hair motion, and the recognizable corporate plaza. The visible Atos marks remain environmental background elements rather than animated graphics. Keep the open guitar case, amplifier, backpack and microphone physically stable unless the incoming continuation already moves them. Any office workers remain ordinary adults in plausible work clothing; their reactions must arise gradually and must not pop into existence, clone, flicker or change identity. Avoid banners, subtitles, captions, floating typography, newly invented logos, caricature, fantasy transformations and abrupt crowd multiplication.\\n\\nMaintain temporal consistency in every background reflection and moving person. No employee should cross an impossible distance, reverse direction without cause, pass through another body, or abruptly change clothing between adjacent moments.\\n\\nUse observational framing motivated by the ongoing performance. Camera motion, if inherited from the prior sequence, stays slow and physically plausible, with no teleporting, whip-pan or hidden cut. Maintain consistent screen direction and spatial geography between the musician, microphone, guitar case, listeners and entrance. Keep both hands anatomically correct and continuously connected to believable guitar playing. Singing must remain expressive but not exaggerated: controlled irony in quieter passages, firmer projection in choruses, and grounded collective resolve near the end. Background movement stays secondary and never obscures the singer's readable face for long.\\n\\nEnd with the singer holding the listener's gaze while his strumming continues. Treat this as a moving boundary, not a freeze or conclusion, so the following sequence can inherit exact motion, pose, light and crowd continuity.\\n\\noverall_soundscape:\\nUse only the protected master-song section for timing, French vocal delivery, guitar, bass, drums and group responses. Add no new dialogue. Very subtle plaza ambience and footsteps may remain beneath the song.\\n\\nnon_diegetic_music:\\nThe protected four-minute master song is fully preserved and controls performance rhythm, intensity and vocal timing.\",\n    \"seed\": 730410000209458\n  },\n  {\n    \"prompt\": \"r34l1sm\\n\\nsubject_definitions:\\n<Subject 1> is the same adult male street musician defined jointly by <Picture 1> for close facial identity, curly brown hair, beard and microphone relationship, and <Picture 2> for full-body proportions, brown jacket, patterned red-and-beige scarf, dark shirt, worn grey jeans, brown boots, acoustic guitar, microphone stand and street-performance setup. The modern Atos campus plaza, visible Atos branding, glass facade, autumn trees, passing office workers, amplifier, backpack and open guitar case derive from <Picture 2>.\\n\\nsummary:\\n[Reference generation] Sequence 03 of a continuous French protest-song performance: verse 1 — stalled negotiations. Maintain a realistic cinematic documentary style outside the Atos campus while the gathering grows through ordinary human reactions.\\n\\nretention_analysis:\\n<Subject 1> (S1, throughout [Shot 1]): fully_preserved — retain the exact recognizable face, hair, beard, age, body build, wardrobe, scarf pattern, guitar and microphone setup from <Picture 1> and <Picture 2>. Expressions, hand positions and posture may evolve only as required by singing and guitar performance. <Picture 1> supplies facial detail but not its close framing. <Picture 2> supplies the full setting, wardrobe, props and spatial relationships. Preserve the Atos campus as a real modern office plaza; do not redesign the architecture, logos or existing street-performance objects. Background employees may react naturally to the song, with stable anatomy and restrained documentary behavior.\\n\\ndetailed_description:\\n[Shot 1] One uninterrupted 10.125-second continuation at 24 fps. Continue the protected incoming frames exactly: preserve the preceding pose, guitar rhythm, crowd positions, light direction and ongoing movement; do not restart the performance or introduce a cut. Keep <Subject 1> as the stable visual anchor beside the same microphone, performing the acoustic guitar with credible left-hand chord placement, right-hand strumming and body rhythm. His lips, jaw and breath visibly follow the protected French master-song passage; do not invent additional spoken words. The relevant passage is: <Subject 1> (S1) <d>[French] Des NAO presque au point mort, / Année après année, encore.</d>\\n\\nContinue without resetting the performance. Preserve the first listener exactly as inherited, including face, hairstyle, age, build and clothing. Exactly two additional employees enter the listening area gradually, each remaining a separate stable person: one is an older balding man with glasses, a stocky build and a charcoal-grey overcoat; the other is a woman with a short chin-length blonde bob, a slim build and a mustard-coloured coat. Their faces, hair, silhouettes and clothing are unmistakably different from one another and from every inherited listener. They approach from different positions and stop with clear physical spacing; they never overlap, merge, mirror one another or transform. Do not add any other new listener in this sequence. The singer's irony becomes clearer, expressed through a restrained half-smile and precise French articulation. Preserve coherent late-afternoon daylight, natural skin texture, realistic fabric and hair motion, and the recognizable corporate plaza. The visible Atos marks remain environmental background elements rather than animated graphics. Keep the open guitar case, amplifier, backpack and microphone physically stable unless the incoming continuation already moves them. Any office workers remain ordinary adults in plausible work clothing; their reactions must arise gradually and must not pop into existence, clone, flicker or change identity. Avoid banners, subtitles, captions, floating typography, newly invented logos, caricature, fantasy transformations and abrupt crowd multiplication.\\n\\nMaintain temporal consistency in every background reflection and moving person. No employee should cross an impossible distance, reverse direction without cause, pass through another body, or abruptly change clothing between adjacent moments.\\n\\nUse observational framing motivated by the ongoing performance. Camera motion, if inherited from the prior sequence, stays slow and physically plausible, with no teleporting, whip-pan or hidden cut. Maintain consistent screen direction and spatial geography between the musician, microphone, guitar case, listeners and entrance. Keep both hands anatomically correct and continuously connected to believable guitar playing. Singing must remain expressive but not exaggerated: controlled irony in quieter passages, firmer projection in choruses, and grounded collective resolve near the end. Background movement stays secondary and never obscures the singer's readable face for long.\\n\\nEnd as the three individually recognizable listeners form a loose, naturally spaced line beside the walkway. Treat this as a moving boundary, not a freeze or conclusion, so the following sequence can inherit exact motion, pose, light and crowd continuity.\\n\\noverall_soundscape:\\nUse only the protected master-song section for timing, French vocal delivery, guitar, bass, drums and group responses. Add no new dialogue. Very subtle plaza ambience and footsteps may remain beneath the song.\\n\\nnon_diegetic_music:\\nThe protected four-minute master song is fully preserved and controls performance rhythm, intensity and vocal timing.\",\n    \"seed\": 730410000314187\n  },\n  {\n    \"prompt\": \"r34l1sm\\n\\nsubject_definitions:\\n<Subject 1> is the same adult male street musician defined jointly by <Picture 1> for close facial identity, curly brown hair, beard and microphone relationship, and <Picture 2> for full-body proportions, brown jacket, patterned red-and-beige scarf, dark shirt, worn grey jeans, brown boots, acoustic guitar, microphone stand and street-performance setup. The modern Atos campus plaza, visible Atos branding, glass facade, autumn trees, passing office workers, amplifier, backpack and open guitar case derive from <Picture 2>.\\n\\nsummary:\\n[Reference generation] Sequence 04 of a continuous French protest-song performance: verse 1 — crumbs and selective raises. Maintain a realistic cinematic documentary style outside the Atos campus while the gathering grows through ordinary human reactions.\\n\\nretention_analysis:\\n<Subject 1> (S1, throughout [Shot 1]): fully_preserved — retain the exact recognizable face, hair, beard, age, body build, wardrobe, scarf pattern, guitar and microphone setup from <Picture 1> and <Picture 2>. Expressions, hand positions and posture may evolve only as required by singing and guitar performance. <Picture 1> supplies facial detail but not its close framing. <Picture 2> supplies the full setting, wardrobe, props and spatial relationships. Preserve the Atos campus as a real modern office plaza; do not redesign the architecture, logos or existing street-performance objects. Background employees may react naturally to the song, with stable anatomy and restrained documentary behavior.\\n\\ndetailed_description:\\n[Shot 1] One uninterrupted 10.125-second continuation at 24 fps. Continue the protected incoming frames exactly: preserve the preceding pose, guitar rhythm, crowd positions, light direction and ongoing movement; do not restart the performance or introduce a cut. Keep <Subject 1> as the stable visual anchor beside the same microphone, performing the acoustic guitar with credible left-hand chord placement, right-hand strumming and body rhythm. His lips, jaw and breath visibly follow the protected French master-song passage; do not invent additional spoken words. The relevant passage is: <Subject 1> (S1) <d>[French] Quelques miettes à distribuer, / Mais surtout pas à tout le quartier. / Les augmentations individuelles, / C'est plus pratique, plus personnel.</d>\\n\\nKeep the guitar rhythm steady. Wind lifts the patterned scarf and nearby autumn leaves. The singer gestures briefly with his picking hand between chords, indicating tiny portions, while the listeners exchange knowing looks. Preserve coherent late-afternoon daylight, natural skin texture, realistic fabric and hair motion, and the recognizable corporate plaza. The visible Atos marks remain environmental background elements rather than animated graphics. Keep the open guitar case, amplifier, backpack and microphone physically stable unless the incoming continuation already moves them. Any office workers remain ordinary adults in plausible work clothing; their reactions must arise gradually and must not pop into existence, clone, flicker or change identity. Avoid banners, subtitles, captions, floating typography, newly invented logos, caricature, fantasy transformations and abrupt crowd multiplication.\\n\\nMaintain temporal consistency in every background reflection and moving person. No employee should cross an impossible distance, reverse direction without cause, pass through another body, or abruptly change clothing between adjacent moments.\\n\\nUse observational framing motivated by the ongoing performance. Camera motion, if inherited from the prior sequence, stays slow and physically plausible, with no teleporting, whip-pan or hidden cut. Maintain consistent screen direction and spatial geography between the musician, microphone, guitar case, listeners and entrance. Keep both hands anatomically correct and continuously connected to believable guitar playing. Singing must remain expressive but not exaggerated: controlled irony in quieter passages, firmer projection in choruses, and grounded collective resolve near the end. Background movement stays secondary and never obscures the singer's readable face for long.\\n\\nEnd with the hand returning to the strings and the crowd remaining attentive. Treat this as a moving boundary, not a freeze or conclusion, so the following sequence can inherit exact motion, pose, light and crowd continuity.\\n\\noverall_soundscape:\\nUse only the protected master-song section for timing, French vocal delivery, guitar, bass, drums and group responses. Add no new dialogue. Very subtle plaza ambience and footsteps may remain beneath the song.\\n\\nnon_diegetic_music:\\nThe protected four-minute master song is fully preserved and controls performance rhythm, intensity and vocal timing.\",\n    \"seed\": 730410000418916\n  },\n  {\n    \"prompt\": \"r34l1sm\\n\\nsubject_definitions:\\n<Subject 1> is the same adult male street musician defined jointly by <Picture 1> for close facial identity, curly brown hair, beard and microphone relationship, and <Picture 2> for full-body proportions, brown jacket, patterned red-and-beige scarf, dark shirt, worn grey jeans, brown boots, acoustic guitar, microphone stand and street-performance setup. The modern Atos campus plaza, visible Atos branding, glass facade, autumn trees, passing office workers, amplifier, backpack and open guitar case derive from <Picture 2>.\\n\\nsummary:\\n[Reference generation] Sequence 05 of a continuous French protest-song performance: verse 1 — labelled talents. Maintain a realistic cinematic documentary style outside the Atos campus while the gathering grows through ordinary human reactions.\\n\\nretention_analysis:\\n<Subject 1> (S1, throughout [Shot 1]): fully_preserved — retain the exact recognizable face, hair, beard, age, body build, wardrobe, scarf pattern, guitar and microphone setup from <Picture 1> and <Picture 2>. Expressions, hand positions and posture may evolve only as required by singing and guitar performance. <Picture 1> supplies facial detail but not its close framing. <Picture 2> supplies the full setting, wardrobe, props and spatial relationships. Preserve the Atos campus as a real modern office plaza; do not redesign the architecture, logos or existing street-performance objects. Background employees may react naturally to the song, with stable anatomy and restrained documentary behavior.\\n\\ndetailed_description:\\n[Shot 1] One uninterrupted 10.125-second continuation at 24 fps. Continue the protected incoming frames exactly: preserve the preceding pose, guitar rhythm, crowd positions, light direction and ongoing movement; do not restart the performance or introduce a cut. Keep <Subject 1> as the stable visual anchor beside the same microphone, performing the acoustic guitar with credible left-hand chord placement, right-hand strumming and body rhythm. His lips, jaw and breath visibly follow the protected French master-song passage; do not invent additional spoken words. The relevant passage is: <Subject 1> (S1) <d>[French] On récompense les bons profils, / Les « Talents » bien rangés dans la file.</d>\\n\\nContinue the same physical shot and incoming body motion. Workers passing through the entrance briefly align into an unnaturally neat queue, a visual echo of corporate ranking, while the real musician remains natural and documentary-real. Preserve coherent late-afternoon daylight, natural skin texture, realistic fabric and hair motion, and the recognizable corporate plaza. The visible Atos marks remain environmental background elements rather than animated graphics. Keep the open guitar case, amplifier, backpack and microphone physically stable unless the incoming continuation already moves them. Any office workers remain ordinary adults in plausible work clothing; their reactions must arise gradually and must not pop into existence, clone, flicker or change identity. Avoid banners, subtitles, captions, floating typography, newly invented logos, caricature, fantasy transformations and abrupt crowd multiplication.\\n\\nMaintain temporal consistency in every background reflection and moving person. No employee should cross an impossible distance, reverse direction without cause, pass through another body, or abruptly change clothing between adjacent moments.\\n\\nUse observational framing motivated by the ongoing performance. Camera motion, if inherited from the prior sequence, stays slow and physically plausible, with no teleporting, whip-pan or hidden cut. Maintain consistent screen direction and spatial geography between the musician, microphone, guitar case, listeners and entrance. Keep both hands anatomically correct and continuously connected to believable guitar playing. Singing must remain expressive but not exaggerated: controlled irony in quieter passages, firmer projection in choruses, and grounded collective resolve near the end. Background movement stays secondary and never obscures the singer's readable face for long.\\n\\nEnd as the neat queue loosens and several people turn toward the music. Treat this as a moving boundary, not a freeze or conclusion, so the following sequence can inherit exact motion, pose, light and crowd continuity.\\n\\noverall_soundscape:\\nUse only the protected master-song section for timing, French vocal delivery, guitar, bass, drums and group responses. Add no new dialogue. Very subtle plaza ambience and footsteps may remain beneath the song.\\n\\nnon_diegetic_music:\\nThe protected four-minute master song is fully preserved and controls performance rhythm, intensity and vocal timing.\",\n    \"seed\": 730410000523645\n  },\n  {\n    \"prompt\": \"r34l1sm\\n\\nsubject_definitions:\\n<Subject 1> is the same adult male street musician defined jointly by <Picture 1> for close facial identity, curly brown hair, beard and microphone relationship, and <Picture 2> for full-body proportions, brown jacket, patterned red-and-beige scarf, dark shirt, worn grey jeans, brown boots, acoustic guitar, microphone stand and street-performance setup. The modern Atos campus plaza, visible Atos branding, glass facade, autumn trees, passing office workers, amplifier, backpack and open guitar case derive from <Picture 2>.\\n\\nsummary:\\n[Reference generation] Sequence 06 of a continuous French protest-song performance: pre-chorus — transport concession. Maintain a realistic cinematic documentary style outside the Atos campus while the gathering grows through ordinary human reactions.\\n\\nretention_analysis:\\n<Subject 1> (S1, throughout [Shot 1]): fully_preserved — retain the exact recognizable face, hair, beard, age, body build, wardrobe, scarf pattern, guitar and microphone setup from <Picture 1> and <Picture 2>. Expressions, hand positions and posture may evolve only as required by singing and guitar performance. <Picture 1> supplies facial detail but not its close framing. <Picture 2> supplies the full setting, wardrobe, props and spatial relationships. Preserve the Atos campus as a real modern office plaza; do not redesign the architecture, logos or existing street-performance objects. Background employees may react naturally to the song, with stable anatomy and restrained documentary behavior.\\n\\ndetailed_description:\\n[Shot 1] One uninterrupted 10.125-second continuation at 24 fps. Continue the protected incoming frames exactly: preserve the preceding pose, guitar rhythm, crowd positions, light direction and ongoing movement; do not restart the performance or introduce a cut. Keep <Subject 1> as the stable visual anchor beside the same microphone, performing the acoustic guitar with credible left-hand chord placement, right-hand strumming and body rhythm. His lips, jaw and breath visibly follow the protected French master-song passage; do not invent additional spoken words. The relevant passage is: <Subject 1> (S1) <d>[French] Cinq petits points sur le transport, / Cinquante-cinq pour cent… quel effort !</d>\\n\\nThe drums begin building in the protected soundtrack. The singer leans closer to the microphone with sharper sarcasm. Several listeners lift transit cards or bicycle helmets already in their hands, reacting rather than posing. Preserve coherent late-afternoon daylight, natural skin texture, realistic fabric and hair motion, and the recognizable corporate plaza. The visible Atos marks remain environmental background elements rather than animated graphics. Keep the open guitar case, amplifier, backpack and microphone physically stable unless the incoming continuation already moves them. Any office workers remain ordinary adults in plausible work clothing; their reactions must arise gradually and must not pop into existence, clone, flicker or change identity. Avoid banners, subtitles, captions, floating typography, newly invented logos, caricature, fantasy transformations and abrupt crowd multiplication.\\n\\nMaintain temporal consistency in every background reflection and moving person. No employee should cross an impossible distance, reverse direction without cause, pass through another body, or abruptly change clothing between adjacent moments.\\n\\nUse observational framing motivated by the ongoing performance. Camera motion, if inherited from the prior sequence, stays slow and physically plausible, with no teleporting, whip-pan or hidden cut. Maintain consistent screen direction and spatial geography between the musician, microphone, guitar case, listeners and entrance. Keep both hands anatomically correct and continuously connected to believable guitar playing. Singing must remain expressive but not exaggerated: controlled irony in quieter passages, firmer projection in choruses, and grounded collective resolve near the end. Background movement stays secondary and never obscures the singer's readable face for long.\\n\\nEnd with the singer drawing breath for the first chorus and the listeners facing him. Treat this as a moving boundary, not a freeze or conclusion, so the following sequence can inherit exact motion, pose, light and crowd continuity.\\n\\noverall_soundscape:\\nUse only the protected master-song section for timing, French vocal delivery, guitar, bass, drums and group responses. Add no new dialogue. Very subtle plaza ambience and footsteps may remain beneath the song.\\n\\nnon_diegetic_music:\\nThe protected four-minute master song is fully preserved and controls performance rhythm, intensity and vocal timing.\",\n    \"seed\": 730410000628374\n  },\n  {\n    \"prompt\": \"r34l1sm\\n\\nsubject_definitions:\\n<Subject 1> is the same adult male street musician defined jointly by <Picture 1> for close facial identity, curly brown hair, beard and microphone relationship, and <Picture 2> for full-body proportions, brown jacket, patterned red-and-beige scarf, dark shirt, worn grey jeans, brown boots, acoustic guitar, microphone stand and street-performance setup. The modern Atos campus plaza, visible Atos branding, glass facade, autumn trees, passing office workers, amplifier, backpack and open guitar case derive from <Picture 2>.\\n\\nsummary:\\n[Reference generation] Sequence 07 of a continuous French protest-song performance: first chorus — prices rise. Maintain a realistic cinematic documentary style outside the Atos campus while the gathering grows through ordinary human reactions.\\n\\nretention_analysis:\\n<Subject 1> (S1, throughout [Shot 1]): fully_preserved — retain the exact recognizable face, hair, beard, age, body build, wardrobe, scarf pattern, guitar and microphone setup from <Picture 1> and <Picture 2>. Expressions, hand positions and posture may evolve only as required by singing and guitar performance. <Picture 1> supplies facial detail but not its close framing. <Picture 2> supplies the full setting, wardrobe, props and spatial relationships. Preserve the Atos campus as a real modern office plaza; do not redesign the architecture, logos or existing street-performance objects. Background employees may react naturally to the song, with stable anatomy and restrained documentary behavior.\\n\\ndetailed_description:\\n[Shot 1] One uninterrupted 10.125-second continuation at 24 fps. Continue the protected incoming frames exactly: preserve the preceding pose, guitar rhythm, crowd positions, light direction and ongoing movement; do not restart the performance or introduce a cut. Keep <Subject 1> as the stable visual anchor beside the same microphone, performing the acoustic guitar with credible left-hand chord placement, right-hand strumming and body rhythm. His lips, jaw and breath visibly follow the protected French master-song passage; do not invent additional spoken words. The relevant passage is: <Subject 1> (S1) <d>[French] Pendant qu'les prix montent, nos salaires attendent, / Pendant qu'les factures chaque mois nous surprennent.</d>\\n\\nEnergy opens into the first full-band chorus. Continue the guitar performance with stronger downstrokes. The camera remains among the growing audience, keeping the performer and Atos entrance visible while more employees stop behind the first row. Preserve coherent late-afternoon daylight, natural skin texture, realistic fabric and hair motion, and the recognizable corporate plaza. The visible Atos marks remain environmental background elements rather than animated graphics. Keep the open guitar case, amplifier, backpack and microphone physically stable unless the incoming continuation already moves them. Any office workers remain ordinary adults in plausible work clothing; their reactions must arise gradually and must not pop into existence, clone, flicker or change identity. Avoid banners, subtitles, captions, floating typography, newly invented logos, caricature, fantasy transformations and abrupt crowd multiplication.\\n\\nMaintain temporal consistency in every background reflection and moving person. No employee should cross an impossible distance, reverse direction without cause, pass through another body, or abruptly change clothing between adjacent moments.\\n\\nUse observational framing motivated by the ongoing performance. Camera motion, if inherited from the prior sequence, stays slow and physically plausible, with no teleporting, whip-pan or hidden cut. Maintain consistent screen direction and spatial geography between the musician, microphone, guitar case, listeners and entrance. Keep both hands anatomically correct and continuously connected to believable guitar playing. Singing must remain expressive but not exaggerated: controlled irony in quieter passages, firmer projection in choruses, and grounded collective resolve near the end. Background movement stays secondary and never obscures the singer's readable face for long.\\n\\nEnd with the crowd beginning to move in rhythm. Treat this as a moving boundary, not a freeze or conclusion, so the following sequence can inherit exact motion, pose, light and crowd continuity.\\n\\noverall_soundscape:\\nUse only the protected master-song section for timing, French vocal delivery, guitar, bass, drums and group responses. Add no new dialogue. Very subtle plaza ambience and footsteps may remain beneath the song.\\n\\nnon_diegetic_music:\\nThe protected four-minute master song is fully preserved and controls performance rhythm, intensity and vocal timing.\",\n    \"seed\": 730410000733103\n  },\n  {\n    \"prompt\": \"r34l1sm\\n\\nsubject_definitions:\\n<Subject 1> is the same adult male street musician defined jointly by <Picture 1> for close facial identity, curly brown hair, beard and microphone relationship, and <Picture 2> for full-body proportions, brown jacket, patterned red-and-beige scarf, dark shirt, worn grey jeans, brown boots, acoustic guitar, microphone stand and street-performance setup. The modern Atos campus plaza, visible Atos branding, glass facade, autumn trees, passing office workers, amplifier, backpack and open guitar case derive from <Picture 2>.\\n\\nsummary:\\n[Reference generation] Sequence 08 of a continuous French protest-song performance: first chorus — purchasing power outside. Maintain a realistic cinematic documentary style outside the Atos campus while the gathering grows through ordinary human reactions.\\n\\nretention_analysis:\\n<Subject 1> (S1, throughout [Shot 1]): fully_preserved — retain the exact recognizable face, hair, beard, age, body build, wardrobe, scarf pattern, guitar and microphone setup from <Picture 1> and <Picture 2>. Expressions, hand positions and posture may evolve only as required by singing and guitar performance. <Picture 1> supplies facial detail but not its close framing. <Picture 2> supplies the full setting, wardrobe, props and spatial relationships. Preserve the Atos campus as a real modern office plaza; do not redesign the architecture, logos or existing street-performance objects. Background employees may react naturally to the song, with stable anatomy and restrained documentary behavior.\\n\\ndetailed_description:\\n[Shot 1] One uninterrupted 10.125-second continuation at 24 fps. Continue the protected incoming frames exactly: preserve the preceding pose, guitar rhythm, crowd positions, light direction and ongoing movement; do not restart the performance or introduce a cut. Keep <Subject 1> as the stable visual anchor beside the same microphone, performing the acoustic guitar with credible left-hand chord placement, right-hand strumming and body rhythm. His lips, jaw and breath visibly follow the protected French master-song passage; do not invent additional spoken words. The relevant passage is: <Subject 1> (S1) <d>[French] On nous demande encore de faire des efforts, / Mais le pouvoir d'achat, lui, reste dehors.</d>\\n\\nThe musician sings directly and forcefully. The gathering now creates a clear human threshold outside the corporate entrance: workers remain outdoors with him while the glass doors and lobby stay behind them. Preserve coherent late-afternoon daylight, natural skin texture, realistic fabric and hair motion, and the recognizable corporate plaza. The visible Atos marks remain environmental background elements rather than animated graphics. Keep the open guitar case, amplifier, backpack and microphone physically stable unless the incoming continuation already moves them. Any office workers remain ordinary adults in plausible work clothing; their reactions must arise gradually and must not pop into existence, clone, flicker or change identity. Avoid banners, subtitles, captions, floating typography, newly invented logos, caricature, fantasy transformations and abrupt crowd multiplication.\\n\\nMaintain temporal consistency in every background reflection and moving person. No employee should cross an impossible distance, reverse direction without cause, pass through another body, or abruptly change clothing between adjacent moments.\\n\\nUse observational framing motivated by the ongoing performance. Camera motion, if inherited from the prior sequence, stays slow and physically plausible, with no teleporting, whip-pan or hidden cut. Maintain consistent screen direction and spatial geography between the musician, microphone, guitar case, listeners and entrance. Keep both hands anatomically correct and continuously connected to believable guitar playing. Singing must remain expressive but not exaggerated: controlled irony in quieter passages, firmer projection in choruses, and grounded collective resolve near the end. Background movement stays secondary and never obscures the singer's readable face for long.\\n\\nEnd with a few listeners answering the rhythm through claps. Treat this as a moving boundary, not a freeze or conclusion, so the following sequence can inherit exact motion, pose, light and crowd continuity.\\n\\noverall_soundscape:\\nUse only the protected master-song section for timing, French vocal delivery, guitar, bass, drums and group responses. Add no new dialogue. Very subtle plaza ambience and footsteps may remain beneath the song.\\n\\nnon_diegetic_music:\\nThe protected four-minute master song is fully preserved and controls performance rhythm, intensity and vocal timing.\",\n    \"seed\": 730410000837832\n  },\n  {\n    \"prompt\": \"r34l1sm\\n\\nsubject_definitions:\\n<Subject 1> is the same adult male street musician defined jointly by <Picture 1> for close facial identity, curly brown hair, beard and microphone relationship, and <Picture 2> for full-body proportions, brown jacket, patterned red-and-beige scarf, dark shirt, worn grey jeans, brown boots, acoustic guitar, microphone stand and street-performance setup. The modern Atos campus plaza, visible Atos branding, glass facade, autumn trees, passing office workers, amplifier, backpack and open guitar case derive from <Picture 2>.\\n\\nsummary:\\n[Reference generation] Sequence 09 of a continuous French protest-song performance: first chorus — Force Ouvrière. Maintain a realistic cinematic documentary style outside the Atos campus while the gathering grows through ordinary human reactions.\\n\\nretention_analysis:\\n<Subject 1> (S1, throughout [Shot 1]): fully_preserved — retain the exact recognizable face, hair, beard, age, body build, wardrobe, scarf pattern, guitar and microphone setup from <Picture 1> and <Picture 2>. Expressions, hand positions and posture may evolve only as required by singing and guitar performance. <Picture 1> supplies facial detail but not its close framing. <Picture 2> supplies the full setting, wardrobe, props and spatial relationships. Preserve the Atos campus as a real modern office plaza; do not redesign the architecture, logos or existing street-performance objects. Background employees may react naturally to the song, with stable anatomy and restrained documentary behavior.\\n\\ndetailed_description:\\n[Shot 1] One uninterrupted 10.125-second continuation at 24 fps. Continue the protected incoming frames exactly: preserve the preceding pose, guitar rhythm, crowd positions, light direction and ongoing movement; do not restart the performance or introduce a cut. Keep <Subject 1> as the stable visual anchor beside the same microphone, performing the acoustic guitar with credible left-hand chord placement, right-hand strumming and body rhythm. His lips, jaw and breath visibly follow the protected French master-song passage; do not invent additional spoken words. The relevant passage is: <Subject 1> (S1) <d>[French] Force Ouvrière, on ne lâche rien, / On compte les euros, on connaît le refrain.</d>\\n\\nContinue the chorus in one flowing documentary take. The audience claps in time and mouths the response while the musician keeps believable guitar fingering, stable facial identity and readable French singing. Preserve coherent late-afternoon daylight, natural skin texture, realistic fabric and hair motion, and the recognizable corporate plaza. The visible Atos marks remain environmental background elements rather than animated graphics. Keep the open guitar case, amplifier, backpack and microphone physically stable unless the incoming continuation already moves them. Any office workers remain ordinary adults in plausible work clothing; their reactions must arise gradually and must not pop into existence, clone, flicker or change identity. Avoid banners, subtitles, captions, floating typography, newly invented logos, caricature, fantasy transformations and abrupt crowd multiplication.\\n\\nMaintain temporal consistency in every background reflection and moving person. No employee should cross an impossible distance, reverse direction without cause, pass through another body, or abruptly change clothing between adjacent moments.\\n\\nUse observational framing motivated by the ongoing performance. Camera motion, if inherited from the prior sequence, stays slow and physically plausible, with no teleporting, whip-pan or hidden cut. Maintain consistent screen direction and spatial geography between the musician, microphone, guitar case, listeners and entrance. Keep both hands anatomically correct and continuously connected to believable guitar playing. Singing must remain expressive but not exaggerated: controlled irony in quieter passages, firmer projection in choruses, and grounded collective resolve near the end. Background movement stays secondary and never obscures the singer's readable face for long.\\n\\nEnd with the final chord ringing as the arrangement drops back. Treat this as a moving boundary, not a freeze or conclusion, so the following sequence can inherit exact motion, pose, light and crowd continuity.\\n\\noverall_soundscape:\\nUse only the protected master-song section for timing, French vocal delivery, guitar, bass, drums and group responses. Add no new dialogue. Very subtle plaza ambience and footsteps may remain beneath the song.\\n\\nnon_diegetic_music:\\nThe protected four-minute master song is fully preserved and controls performance rhythm, intensity and vocal timing.\",\n    \"seed\": 730410000942561\n  },\n  {\n    \"prompt\": \"r34l1sm\\n\\nsubject_definitions:\\n<Subject 1> is the same adult male street musician defined jointly by <Picture 1> for close facial identity, curly brown hair, beard and microphone relationship, and <Picture 2> for full-body proportions, brown jacket, patterned red-and-beige scarf, dark shirt, worn grey jeans, brown boots, acoustic guitar, microphone stand and street-performance setup. The modern Atos campus plaza, visible Atos branding, glass facade, autumn trees, passing office workers, amplifier, backpack and open guitar case derive from <Picture 2>.\\n\\nsummary:\\n[Reference generation] Sequence 10 of a continuous French protest-song performance: verse 2 — mutual insurance rises. Maintain a realistic cinematic documentary style outside the Atos campus while the gathering grows through ordinary human reactions.\\n\\nretention_analysis:\\n<Subject 1> (S1, throughout [Shot 1]): fully_preserved — retain the exact recognizable face, hair, beard, age, body build, wardrobe, scarf pattern, guitar and microphone setup from <Picture 1> and <Picture 2>. Expressions, hand positions and posture may evolve only as required by singing and guitar performance. <Picture 1> supplies facial detail but not its close framing. <Picture 2> supplies the full setting, wardrobe, props and spatial relationships. Preserve the Atos campus as a real modern office plaza; do not redesign the architecture, logos or existing street-performance objects. Background employees may react naturally to the song, with stable anatomy and restrained documentary behavior.\\n\\ndetailed_description:\\n[Shot 1] One uninterrupted 10.125-second continuation at 24 fps. Continue the protected incoming frames exactly: preserve the preceding pose, guitar rhythm, crowd positions, light direction and ongoing movement; do not restart the performance or introduce a cut. Keep <Subject 1> as the stable visual anchor beside the same microphone, performing the acoustic guitar with credible left-hand chord placement, right-hand strumming and body rhythm. His lips, jaw and breath visibly follow the protected French master-song passage; do not invent additional spoken words. The relevant passage is: <Subject 1> (S1) <d>[French] Puis vient la mutuelle qui grimpe à son tour, / Toujours plus chère au fil des jours.</d>\\n\\nAs the music returns to cleaner guitars, keep the same location and continuity. The singer's expression darkens. One listener studies an ordinary paper statement already in hand, then lowers it with visible frustration. Preserve coherent late-afternoon daylight, natural skin texture, realistic fabric and hair motion, and the recognizable corporate plaza. The visible Atos marks remain environmental background elements rather than animated graphics. Keep the open guitar case, amplifier, backpack and microphone physically stable unless the incoming continuation already moves them. Any office workers remain ordinary adults in plausible work clothing; their reactions must arise gradually and must not pop into existence, clone, flicker or change identity. Avoid banners, subtitles, captions, floating typography, newly invented logos, caricature, fantasy transformations and abrupt crowd multiplication.\\n\\nMaintain temporal consistency in every background reflection and moving person. No employee should cross an impossible distance, reverse direction without cause, pass through another body, or abruptly change clothing between adjacent moments.\\n\\nUse observational framing motivated by the ongoing performance. Camera motion, if inherited from the prior sequence, stays slow and physically plausible, with no teleporting, whip-pan or hidden cut. Maintain consistent screen direction and spatial geography between the musician, microphone, guitar case, listeners and entrance. Keep both hands anatomically correct and continuously connected to believable guitar playing. Singing must remain expressive but not exaggerated: controlled irony in quieter passages, firmer projection in choruses, and grounded collective resolve near the end. Background movement stays secondary and never obscures the singer's readable face for long.\\n\\nEnd with the singer glancing from the paper back toward the entrance. Treat this as a moving boundary, not a freeze or conclusion, so the following sequence can inherit exact motion, pose, light and crowd continuity.\\n\\noverall_soundscape:\\nUse only the protected master-song section for timing, French vocal delivery, guitar, bass, drums and group responses. Add no new dialogue. Very subtle plaza ambience and footsteps may remain beneath the song.\\n\\nnon_diegetic_music:\\nThe protected four-minute master song is fully preserved and controls performance rhythm, intensity and vocal timing.\",\n    \"seed\": 730410001047290\n  },\n  {\n    \"prompt\": \"r34l1sm\\n\\nsubject_definitions:\\n<Subject 1> is the same adult male street musician defined jointly by <Picture 1> for close facial identity, curly brown hair, beard and microphone relationship, and <Picture 2> for full-body proportions, brown jacket, patterned red-and-beige scarf, dark shirt, worn grey jeans, brown boots, acoustic guitar, microphone stand and street-performance setup. The modern Atos campus plaza, visible Atos branding, glass facade, autumn trees, passing office workers, amplifier, backpack and open guitar case derive from <Picture 2>.\\n\\nsummary:\\n[Reference generation] Sequence 11 of a continuous French protest-song performance: verse 2 — health costs. Maintain a realistic cinematic documentary style outside the Atos campus while the gathering grows through ordinary human reactions.\\n\\nretention_analysis:\\n<Subject 1> (S1, throughout [Shot 1]): fully_preserved — retain the exact recognizable face, hair, beard, age, body build, wardrobe, scarf pattern, guitar and microphone setup from <Picture 1> and <Picture 2>. Expressions, hand positions and posture may evolve only as required by singing and guitar performance. <Picture 1> supplies facial detail but not its close framing. <Picture 2> supplies the full setting, wardrobe, props and spatial relationships. Preserve the Atos campus as a real modern office plaza; do not redesign the architecture, logos or existing street-performance objects. Background employees may react naturally to the song, with stable anatomy and restrained documentary behavior.\\n\\ndetailed_description:\\n[Shot 1] One uninterrupted 10.125-second continuation at 24 fps. Continue the protected incoming frames exactly: preserve the preceding pose, guitar rhythm, crowd positions, light direction and ongoing movement; do not restart the performance or introduce a cut. Keep <Subject 1> as the stable visual anchor beside the same microphone, performing the acoustic guitar with credible left-hand chord placement, right-hand strumming and body rhythm. His lips, jaw and breath visibly follow the protected French master-song passage; do not invent additional spoken words. The relevant passage is: <Subject 1> (S1) <d>[French] Les dépenses de santé prennent l'ascenseur, / Mais les salaires restent au rez-de-chaussée, sans moteur.</d>\\n\\nContinue the performance. Through the glass facade, an elevator moves upward in the background while the people and musician remain firmly at plaza level, making the lyric's contrast visual without becoming fantastical. Preserve coherent late-afternoon daylight, natural skin texture, realistic fabric and hair motion, and the recognizable corporate plaza. The visible Atos marks remain environmental background elements rather than animated graphics. Keep the open guitar case, amplifier, backpack and microphone physically stable unless the incoming continuation already moves them. Any office workers remain ordinary adults in plausible work clothing; their reactions must arise gradually and must not pop into existence, clone, flicker or change identity. Avoid banners, subtitles, captions, floating typography, newly invented logos, caricature, fantasy transformations and abrupt crowd multiplication.\\n\\nMaintain temporal consistency in every background reflection and moving person. No employee should cross an impossible distance, reverse direction without cause, pass through another body, or abruptly change clothing between adjacent moments.\\n\\nUse observational framing motivated by the ongoing performance. Camera motion, if inherited from the prior sequence, stays slow and physically plausible, with no teleporting, whip-pan or hidden cut. Maintain consistent screen direction and spatial geography between the musician, microphone, guitar case, listeners and entrance. Keep both hands anatomically correct and continuously connected to believable guitar playing. Singing must remain expressive but not exaggerated: controlled irony in quieter passages, firmer projection in choruses, and grounded collective resolve near the end. Background movement stays secondary and never obscures the singer's readable face for long.\\n\\nEnd as the elevator leaves frame and the singer sustains the phrase. Treat this as a moving boundary, not a freeze or conclusion, so the following sequence can inherit exact motion, pose, light and crowd continuity.\\n\\noverall_soundscape:\\nUse only the protected master-song section for timing, French vocal delivery, guitar, bass, drums and group responses. Add no new dialogue. Very subtle plaza ambience and footsteps may remain beneath the song.\\n\\nnon_diegetic_music:\\nThe protected four-minute master song is fully preserved and controls performance rhythm, intensity and vocal timing.\",\n    \"seed\": 730410001152019\n  },\n  {\n    \"prompt\": \"r34l1sm\\n\\nsubject_definitions:\\n<Subject 1> is the same adult male street musician defined jointly by <Picture 1> for close facial identity, curly brown hair, beard and microphone relationship, and <Picture 2> for full-body proportions, brown jacket, patterned red-and-beige scarf, dark shirt, worn grey jeans, brown boots, acoustic guitar, microphone stand and street-performance setup. The modern Atos campus plaza, visible Atos branding, glass facade, autumn trees, passing office workers, amplifier, backpack and open guitar case derive from <Picture 2>.\\n\\nsummary:\\n[Reference generation] Sequence 12 of a continuous French protest-song performance: verse 2 — optional spouse pays. Maintain a realistic cinematic documentary style outside the Atos campus while the gathering grows through ordinary human reactions.\\n\\nretention_analysis:\\n<Subject 1> (S1, throughout [Shot 1]): fully_preserved — retain the exact recognizable face, hair, beard, age, body build, wardrobe, scarf pattern, guitar and microphone setup from <Picture 1> and <Picture 2>. Expressions, hand positions and posture may evolve only as required by singing and guitar performance. <Picture 1> supplies facial detail but not its close framing. <Picture 2> supplies the full setting, wardrobe, props and spatial relationships. Preserve the Atos campus as a real modern office plaza; do not redesign the architecture, logos or existing street-performance objects. Background employees may react naturally to the song, with stable anatomy and restrained documentary behavior.\\n\\ndetailed_description:\\n[Shot 1] One uninterrupted 10.125-second continuation at 24 fps. Continue the protected incoming frames exactly: preserve the preceding pose, guitar rhythm, crowd positions, light direction and ongoing movement; do not restart the performance or introduce a cut. Keep <Subject 1> as the stable visual anchor beside the same microphone, performing the acoustic guitar with credible left-hand chord placement, right-hand strumming and body rhythm. His lips, jaw and breath visibly follow the protected French master-song passage; do not invent additional spoken words. The relevant passage is: <Subject 1> (S1) <d>[French] Le conjoint facultatif prend la secousse, / Là où la direction ne met pas un pouce.</d>\\n\\nThe singer delivers the line with controlled indignation. Two listeners standing together react to the statement, one placing a supportive hand on the other's shoulder. Keep all reactions understated and credible. Preserve coherent late-afternoon daylight, natural skin texture, realistic fabric and hair motion, and the recognizable corporate plaza. The visible Atos marks remain environmental background elements rather than animated graphics. Keep the open guitar case, amplifier, backpack and microphone physically stable unless the incoming continuation already moves them. Any office workers remain ordinary adults in plausible work clothing; their reactions must arise gradually and must not pop into existence, clone, flicker or change identity. Avoid banners, subtitles, captions, floating typography, newly invented logos, caricature, fantasy transformations and abrupt crowd multiplication.\\n\\nMaintain temporal consistency in every background reflection and moving person. No employee should cross an impossible distance, reverse direction without cause, pass through another body, or abruptly change clothing between adjacent moments.\\n\\nUse observational framing motivated by the ongoing performance. Camera motion, if inherited from the prior sequence, stays slow and physically plausible, with no teleporting, whip-pan or hidden cut. Maintain consistent screen direction and spatial geography between the musician, microphone, guitar case, listeners and entrance. Keep both hands anatomically correct and continuously connected to believable guitar playing. Singing must remain expressive but not exaggerated: controlled irony in quieter passages, firmer projection in choruses, and grounded collective resolve near the end. Background movement stays secondary and never obscures the singer's readable face for long.\\n\\nEnd with both listeners turning their attention back to the singer. Treat this as a moving boundary, not a freeze or conclusion, so the following sequence can inherit exact motion, pose, light and crowd continuity.\\n\\noverall_soundscape:\\nUse only the protected master-song section for timing, French vocal delivery, guitar, bass, drums and group responses. Add no new dialogue. Very subtle plaza ambience and footsteps may remain beneath the song.\\n\\nnon_diegetic_music:\\nThe protected four-minute master song is fully preserved and controls performance rhythm, intensity and vocal timing.\",\n    \"seed\": 730410001256748\n  },\n  {\n    \"prompt\": \"r34l1sm\\n\\nsubject_definitions:\\n<Subject 1> is the same adult male street musician defined jointly by <Picture 1> for close facial identity, curly brown hair, beard and microphone relationship, and <Picture 2> for full-body proportions, brown jacket, patterned red-and-beige scarf, dark shirt, worn grey jeans, brown boots, acoustic guitar, microphone stand and street-performance setup. The modern Atos campus plaza, visible Atos branding, glass facade, autumn trees, passing office workers, amplifier, backpack and open guitar case derive from <Picture 2>.\\n\\nsummary:\\n[Reference generation] Sequence 13 of a continuous French protest-song performance: pre-chorus — employee gets the bill. Maintain a realistic cinematic documentary style outside the Atos campus while the gathering grows through ordinary human reactions.\\n\\nretention_analysis:\\n<Subject 1> (S1, throughout [Shot 1]): fully_preserved — retain the exact recognizable face, hair, beard, age, body build, wardrobe, scarf pattern, guitar and microphone setup from <Picture 1> and <Picture 2>. Expressions, hand positions and posture may evolve only as required by singing and guitar performance. <Picture 1> supplies facial detail but not its close framing. <Picture 2> supplies the full setting, wardrobe, props and spatial relationships. Preserve the Atos campus as a real modern office plaza; do not redesign the architecture, logos or existing street-performance objects. Background employees may react naturally to the song, with stable anatomy and restrained documentary behavior.\\n\\ndetailed_description:\\n[Shot 1] One uninterrupted 10.125-second continuation at 24 fps. Continue the protected incoming frames exactly: preserve the preceding pose, guitar rhythm, crowd positions, light direction and ongoing movement; do not restart the performance or introduce a cut. Keep <Subject 1> as the stable visual anchor beside the same microphone, performing the acoustic guitar with credible left-hand chord placement, right-hand strumming and body rhythm. His lips, jaw and breath visibly follow the protected French master-song passage; do not invent additional spoken words. The relevant passage is: <Subject 1> (S1) <d>[French] Et pour remettre les comptes d'aplomb, / C'est encore au salarié qu'on présente l'addition.</d>\\n\\nThe drums build harder. A paper is passed through the front row and arrives near the open guitar case, visually resembling a bill without adding legible invented text. The musician looks down briefly and then back up. Preserve coherent late-afternoon daylight, natural skin texture, realistic fabric and hair motion, and the recognizable corporate plaza. The visible Atos marks remain environmental background elements rather than animated graphics. Keep the open guitar case, amplifier, backpack and microphone physically stable unless the incoming continuation already moves them. Any office workers remain ordinary adults in plausible work clothing; their reactions must arise gradually and must not pop into existence, clone, flicker or change identity. Avoid banners, subtitles, captions, floating typography, newly invented logos, caricature, fantasy transformations and abrupt crowd multiplication.\\n\\nMaintain temporal consistency in every background reflection and moving person. No employee should cross an impossible distance, reverse direction without cause, pass through another body, or abruptly change clothing between adjacent moments.\\n\\nUse observational framing motivated by the ongoing performance. Camera motion, if inherited from the prior sequence, stays slow and physically plausible, with no teleporting, whip-pan or hidden cut. Maintain consistent screen direction and spatial geography between the musician, microphone, guitar case, listeners and entrance. Keep both hands anatomically correct and continuously connected to believable guitar playing. Singing must remain expressive but not exaggerated: controlled irony in quieter passages, firmer projection in choruses, and grounded collective resolve near the end. Background movement stays secondary and never obscures the singer's readable face for long.\\n\\nEnd with his expression shifting from irony to open resolve. Treat this as a moving boundary, not a freeze or conclusion, so the following sequence can inherit exact motion, pose, light and crowd continuity.\\n\\noverall_soundscape:\\nUse only the protected master-song section for timing, French vocal delivery, guitar, bass, drums and group responses. Add no new dialogue. Very subtle plaza ambience and footsteps may remain beneath the song.\\n\\nnon_diegetic_music:\\nThe protected four-minute master song is fully preserved and controls performance rhythm, intensity and vocal timing.\",\n    \"seed\": 730410001361477\n  },\n  {\n    \"prompt\": \"r34l1sm\\n\\nsubject_definitions:\\n<Subject 1> is the same adult male street musician defined jointly by <Picture 1> for close facial identity, curly brown hair, beard and microphone relationship, and <Picture 2> for full-body proportions, brown jacket, patterned red-and-beige scarf, dark shirt, worn grey jeans, brown boots, acoustic guitar, microphone stand and street-performance setup. The modern Atos campus plaza, visible Atos branding, glass facade, autumn trees, passing office workers, amplifier, backpack and open guitar case derive from <Picture 2>.\\n\\nsummary:\\n[Reference generation] Sequence 14 of a continuous French protest-song performance: second chorus — collective response. Maintain a realistic cinematic documentary style outside the Atos campus while the gathering grows through ordinary human reactions.\\n\\nretention_analysis:\\n<Subject 1> (S1, throughout [Shot 1]): fully_preserved — retain the exact recognizable face, hair, beard, age, body build, wardrobe, scarf pattern, guitar and microphone setup from <Picture 1> and <Picture 2>. Expressions, hand positions and posture may evolve only as required by singing and guitar performance. <Picture 1> supplies facial detail but not its close framing. <Picture 2> supplies the full setting, wardrobe, props and spatial relationships. Preserve the Atos campus as a real modern office plaza; do not redesign the architecture, logos or existing street-performance objects. Background employees may react naturally to the song, with stable anatomy and restrained documentary behavior.\\n\\ndetailed_description:\\n[Shot 1] One uninterrupted 10.125-second continuation at 24 fps. Continue the protected incoming frames exactly: preserve the preceding pose, guitar rhythm, crowd positions, light direction and ongoing movement; do not restart the performance or introduce a cut. Keep <Subject 1> as the stable visual anchor beside the same microphone, performing the acoustic guitar with credible left-hand chord placement, right-hand strumming and body rhythm. His lips, jaw and breath visibly follow the protected French master-song passage; do not invent additional spoken words. The relevant passage is: <Subject 1> (S1) <d>[French] Pendant qu'les prix montent, nos salaires attendent, / Pendant qu'les factures chaque mois nous surprennent.</d>\\n\\nReturn to full-band intensity. The performer strums with wider motion and the gathered employees now sing the recurring lines with him. Preserve a realistic workplace-plaza atmosphere and the continuous late-afternoon light. Preserve coherent late-afternoon daylight, natural skin texture, realistic fabric and hair motion, and the recognizable corporate plaza. The visible Atos marks remain environmental background elements rather than animated graphics. Keep the open guitar case, amplifier, backpack and microphone physically stable unless the incoming continuation already moves them. Any office workers remain ordinary adults in plausible work clothing; their reactions must arise gradually and must not pop into existence, clone, flicker or change identity. Avoid banners, subtitles, captions, floating typography, newly invented logos, caricature, fantasy transformations and abrupt crowd multiplication.\\n\\nMaintain temporal consistency in every background reflection and moving person. No employee should cross an impossible distance, reverse direction without cause, pass through another body, or abruptly change clothing between adjacent moments.\\n\\nUse observational framing motivated by the ongoing performance. Camera motion, if inherited from the prior sequence, stays slow and physically plausible, with no teleporting, whip-pan or hidden cut. Maintain consistent screen direction and spatial geography between the musician, microphone, guitar case, listeners and entrance. Keep both hands anatomically correct and continuously connected to believable guitar playing. Singing must remain expressive but not exaggerated: controlled irony in quieter passages, firmer projection in choruses, and grounded collective resolve near the end. Background movement stays secondary and never obscures the singer's readable face for long.\\n\\nEnd with the front row leaning into the next response. Treat this as a moving boundary, not a freeze or conclusion, so the following sequence can inherit exact motion, pose, light and crowd continuity.\\n\\noverall_soundscape:\\nUse only the protected master-song section for timing, French vocal delivery, guitar, bass, drums and group responses. Add no new dialogue. Very subtle plaza ambience and footsteps may remain beneath the song.\\n\\nnon_diegetic_music:\\nThe protected four-minute master song is fully preserved and controls performance rhythm, intensity and vocal timing.\",\n    \"seed\": 730410001466206\n  },\n  {\n    \"prompt\": \"r34l1sm\\n\\nsubject_definitions:\\n<Subject 1> is the same adult male street musician defined jointly by <Picture 1> for close facial identity, curly brown hair, beard and microphone relationship, and <Picture 2> for full-body proportions, brown jacket, patterned red-and-beige scarf, dark shirt, worn grey jeans, brown boots, acoustic guitar, microphone stand and street-performance setup. The modern Atos campus plaza, visible Atos branding, glass facade, autumn trees, passing office workers, amplifier, backpack and open guitar case derive from <Picture 2>.\\n\\nsummary:\\n[Reference generation] Sequence 15 of a continuous French protest-song performance: second chorus — expose the retreats. Maintain a realistic cinematic documentary style outside the Atos campus while the gathering grows through ordinary human reactions.\\n\\nretention_analysis:\\n<Subject 1> (S1, throughout [Shot 1]): fully_preserved — retain the exact recognizable face, hair, beard, age, body build, wardrobe, scarf pattern, guitar and microphone setup from <Picture 1> and <Picture 2>. Expressions, hand positions and posture may evolve only as required by singing and guitar performance. <Picture 1> supplies facial detail but not its close framing. <Picture 2> supplies the full setting, wardrobe, props and spatial relationships. Preserve the Atos campus as a real modern office plaza; do not redesign the architecture, logos or existing street-performance objects. Background employees may react naturally to the song, with stable anatomy and restrained documentary behavior.\\n\\ndetailed_description:\\n[Shot 1] One uninterrupted 10.125-second continuation at 24 fps. Continue the protected incoming frames exactly: preserve the preceding pose, guitar rhythm, crowd positions, light direction and ongoing movement; do not restart the performance or introduce a cut. Keep <Subject 1> as the stable visual anchor beside the same microphone, performing the acoustic guitar with credible left-hand chord placement, right-hand strumming and body rhythm. His lips, jaw and breath visibly follow the protected French master-song passage; do not invent additional spoken words. The relevant passage is: <Subject 1> (S1) <d>[French] Quand les reculs se cachent derrière les discours, / On les met en lumière, on les montre au grand jour.</d>\\n\\nContinue the same chorus. Reflections on the glass facade brighten in the sun as the listeners point their attention toward the entrance, then back to one another. The singer remains the visual and emotional anchor. Preserve coherent late-afternoon daylight, natural skin texture, realistic fabric and hair motion, and the recognizable corporate plaza. The visible Atos marks remain environmental background elements rather than animated graphics. Keep the open guitar case, amplifier, backpack and microphone physically stable unless the incoming continuation already moves them. Any office workers remain ordinary adults in plausible work clothing; their reactions must arise gradually and must not pop into existence, clone, flicker or change identity. Avoid banners, subtitles, captions, floating typography, newly invented logos, caricature, fantasy transformations and abrupt crowd multiplication.\\n\\nMaintain temporal consistency in every background reflection and moving person. No employee should cross an impossible distance, reverse direction without cause, pass through another body, or abruptly change clothing between adjacent moments.\\n\\nUse observational framing motivated by the ongoing performance. Camera motion, if inherited from the prior sequence, stays slow and physically plausible, with no teleporting, whip-pan or hidden cut. Maintain consistent screen direction and spatial geography between the musician, microphone, guitar case, listeners and entrance. Keep both hands anatomically correct and continuously connected to believable guitar playing. Singing must remain expressive but not exaggerated: controlled irony in quieter passages, firmer projection in choruses, and grounded collective resolve near the end. Background movement stays secondary and never obscures the singer's readable face for long.\\n\\nEnd with a decisive guitar stroke and a brief collective breath. Treat this as a moving boundary, not a freeze or conclusion, so the following sequence can inherit exact motion, pose, light and crowd continuity.\\n\\noverall_soundscape:\\nUse only the protected master-song section for timing, French vocal delivery, guitar, bass, drums and group responses. Add no new dialogue. Very subtle plaza ambience and footsteps may remain beneath the song.\\n\\nnon_diegetic_music:\\nThe protected four-minute master song is fully preserved and controls performance rhythm, intensity and vocal timing.\",\n    \"seed\": 730410001570935\n  },\n  {\n    \"prompt\": \"r34l1sm\\n\\nsubject_definitions:\\n<Subject 1> is the same adult male street musician defined jointly by <Picture 1> for close facial identity, curly brown hair, beard and microphone relationship, and <Picture 2> for full-body proportions, brown jacket, patterned red-and-beige scarf, dark shirt, worn grey jeans, brown boots, acoustic guitar, microphone stand and street-performance setup. The modern Atos campus plaza, visible Atos branding, glass facade, autumn trees, passing office workers, amplifier, backpack and open guitar case derive from <Picture 2>.\\n\\nsummary:\\n[Reference generation] Sequence 16 of a continuous French protest-song performance: verse 3 — less remote work. Maintain a realistic cinematic documentary style outside the Atos campus while the gathering grows through ordinary human reactions.\\n\\nretention_analysis:\\n<Subject 1> (S1, throughout [Shot 1]): fully_preserved — retain the exact recognizable face, hair, beard, age, body build, wardrobe, scarf pattern, guitar and microphone setup from <Picture 1> and <Picture 2>. Expressions, hand positions and posture may evolve only as required by singing and guitar performance. <Picture 1> supplies facial detail but not its close framing. <Picture 2> supplies the full setting, wardrobe, props and spatial relationships. Preserve the Atos campus as a real modern office plaza; do not redesign the architecture, logos or existing street-performance objects. Background employees may react naturally to the song, with stable anatomy and restrained documentary behavior.\\n\\ndetailed_description:\\n[Shot 1] One uninterrupted 10.125-second continuation at 24 fps. Continue the protected incoming frames exactly: preserve the preceding pose, guitar rhythm, crowd positions, light direction and ongoing movement; do not restart the performance or introduce a cut. Keep <Subject 1> as the stable visual anchor beside the same microphone, performing the acoustic guitar with credible left-hand chord placement, right-hand strumming and body rhythm. His lips, jaw and breath visibly follow the protected French master-song passage; do not invent additional spoken words. The relevant passage is: <Subject 1> (S1) <d>[French] Et maintenant, parlons télétravail, / Trois jours hier, deux jours demain.</d>\\n\\nThe rhythm drives forward. Several workers arriving with backpacks pass behind the crowd, reinforcing the return to commuting. The singer articulates the numbers clearly while maintaining natural guitar performance. Preserve coherent late-afternoon daylight, natural skin texture, realistic fabric and hair motion, and the recognizable corporate plaza. The visible Atos marks remain environmental background elements rather than animated graphics. Keep the open guitar case, amplifier, backpack and microphone physically stable unless the incoming continuation already moves them. Any office workers remain ordinary adults in plausible work clothing; their reactions must arise gradually and must not pop into existence, clone, flicker or change identity. Avoid banners, subtitles, captions, floating typography, newly invented logos, caricature, fantasy transformations and abrupt crowd multiplication.\\n\\nMaintain temporal consistency in every background reflection and moving person. No employee should cross an impossible distance, reverse direction without cause, pass through another body, or abruptly change clothing between adjacent moments.\\n\\nUse observational framing motivated by the ongoing performance. Camera motion, if inherited from the prior sequence, stays slow and physically plausible, with no teleporting, whip-pan or hidden cut. Maintain consistent screen direction and spatial geography between the musician, microphone, guitar case, listeners and entrance. Keep both hands anatomically correct and continuously connected to believable guitar playing. Singing must remain expressive but not exaggerated: controlled irony in quieter passages, firmer projection in choruses, and grounded collective resolve near the end. Background movement stays secondary and never obscures the singer's readable face for long.\\n\\nEnd with one commuter stopping beside the established listeners. Treat this as a moving boundary, not a freeze or conclusion, so the following sequence can inherit exact motion, pose, light and crowd continuity.\\n\\noverall_soundscape:\\nUse only the protected master-song section for timing, French vocal delivery, guitar, bass, drums and group responses. Add no new dialogue. Very subtle plaza ambience and footsteps may remain beneath the song.\\n\\nnon_diegetic_music:\\nThe protected four-minute master song is fully preserved and controls performance rhythm, intensity and vocal timing.\",\n    \"seed\": 730410001675664\n  },\n  {\n    \"prompt\": \"r34l1sm\\n\\nsubject_definitions:\\n<Subject 1> is the same adult male street musician defined jointly by <Picture 1> for close facial identity, curly brown hair, beard and microphone relationship, and <Picture 2> for full-body proportions, brown jacket, patterned red-and-beige scarf, dark shirt, worn grey jeans, brown boots, acoustic guitar, microphone stand and street-performance setup. The modern Atos campus plaza, visible Atos branding, glass facade, autumn trees, passing office workers, amplifier, backpack and open guitar case derive from <Picture 2>.\\n\\nsummary:\\n[Reference generation] Sequence 17 of a continuous French protest-song performance: verse 3 — one more day on the road. Maintain a realistic cinematic documentary style outside the Atos campus while the gathering grows through ordinary human reactions.\\n\\nretention_analysis:\\n<Subject 1> (S1, throughout [Shot 1]): fully_preserved — retain the exact recognizable face, hair, beard, age, body build, wardrobe, scarf pattern, guitar and microphone setup from <Picture 1> and <Picture 2>. Expressions, hand positions and posture may evolve only as required by singing and guitar performance. <Picture 1> supplies facial detail but not its close framing. <Picture 2> supplies the full setting, wardrobe, props and spatial relationships. Preserve the Atos campus as a real modern office plaza; do not redesign the architecture, logos or existing street-performance objects. Background employees may react naturally to the song, with stable anatomy and restrained documentary behavior.\\n\\ndetailed_description:\\n[Shot 1] One uninterrupted 10.125-second continuation at 24 fps. Continue the protected incoming frames exactly: preserve the preceding pose, guitar rhythm, crowd positions, light direction and ongoing movement; do not restart the performance or introduce a cut. Keep <Subject 1> as the stable visual anchor beside the same microphone, performing the acoustic guitar with credible left-hand chord placement, right-hand strumming and body rhythm. His lips, jaw and breath visibly follow the protected French master-song passage; do not invent additional spoken words. The relevant passage is: <Subject 1> (S1) <d>[French] Un jour de plus sur la route, / Comme si l'essence ne coûtait plus rien.</d>\\n\\nContinue from the incoming pose. Beyond the plaza, slow traffic is visible but remains secondary. A listener holding car keys closes their hand around them and gives a weary, ironic look. Preserve coherent late-afternoon daylight, natural skin texture, realistic fabric and hair motion, and the recognizable corporate plaza. The visible Atos marks remain environmental background elements rather than animated graphics. Keep the open guitar case, amplifier, backpack and microphone physically stable unless the incoming continuation already moves them. Any office workers remain ordinary adults in plausible work clothing; their reactions must arise gradually and must not pop into existence, clone, flicker or change identity. Avoid banners, subtitles, captions, floating typography, newly invented logos, caricature, fantasy transformations and abrupt crowd multiplication.\\n\\nMaintain temporal consistency in every background reflection and moving person. No employee should cross an impossible distance, reverse direction without cause, pass through another body, or abruptly change clothing between adjacent moments.\\n\\nUse observational framing motivated by the ongoing performance. Camera motion, if inherited from the prior sequence, stays slow and physically plausible, with no teleporting, whip-pan or hidden cut. Maintain consistent screen direction and spatial geography between the musician, microphone, guitar case, listeners and entrance. Keep both hands anatomically correct and continuously connected to believable guitar playing. Singing must remain expressive but not exaggerated: controlled irony in quieter passages, firmer projection in choruses, and grounded collective resolve near the end. Background movement stays secondary and never obscures the singer's readable face for long.\\n\\nEnd with the singer answering that look through the lyric. Treat this as a moving boundary, not a freeze or conclusion, so the following sequence can inherit exact motion, pose, light and crowd continuity.\\n\\noverall_soundscape:\\nUse only the protected master-song section for timing, French vocal delivery, guitar, bass, drums and group responses. Add no new dialogue. Very subtle plaza ambience and footsteps may remain beneath the song.\\n\\nnon_diegetic_music:\\nThe protected four-minute master song is fully preserved and controls performance rhythm, intensity and vocal timing.\",\n    \"seed\": 730410001780393\n  },\n  {\n    \"prompt\": \"r34l1sm\\n\\nsubject_definitions:\\n<Subject 1> is the same adult male street musician defined jointly by <Picture 1> for close facial identity, curly brown hair, beard and microphone relationship, and <Picture 2> for full-body proportions, brown jacket, patterned red-and-beige scarf, dark shirt, worn grey jeans, brown boots, acoustic guitar, microphone stand and street-performance setup. The modern Atos campus plaza, visible Atos branding, glass facade, autumn trees, passing office workers, amplifier, backpack and open guitar case derive from <Picture 2>.\\n\\nsummary:\\n[Reference generation] Sequence 18 of a continuous French protest-song performance: verse 3 — kilometres and cost. Maintain a realistic cinematic documentary style outside the Atos campus while the gathering grows through ordinary human reactions.\\n\\nretention_analysis:\\n<Subject 1> (S1, throughout [Shot 1]): fully_preserved — retain the exact recognizable face, hair, beard, age, body build, wardrobe, scarf pattern, guitar and microphone setup from <Picture 1> and <Picture 2>. Expressions, hand positions and posture may evolve only as required by singing and guitar performance. <Picture 1> supplies facial detail but not its close framing. <Picture 2> supplies the full setting, wardrobe, props and spatial relationships. Preserve the Atos campus as a real modern office plaza; do not redesign the architecture, logos or existing street-performance objects. Background employees may react naturally to the song, with stable anatomy and restrained documentary behavior.\\n\\ndetailed_description:\\n[Shot 1] One uninterrupted 10.125-second continuation at 24 fps. Continue the protected incoming frames exactly: preserve the preceding pose, guitar rhythm, crowd positions, light direction and ongoing movement; do not restart the performance or introduce a cut. Keep <Subject 1> as the stable visual anchor beside the same microphone, performing the acoustic guitar with credible left-hand chord placement, right-hand strumming and body rhythm. His lips, jaw and breath visibly follow the protected French master-song passage; do not invent additional spoken words. The relevant passage is: <Subject 1> (S1) <d>[French] Un aller, un retour, encore, / Du carburant, des kilomètres dehors. / Plus de trajets, plus de dépenses, / Et devinez qui paie la différence ?</d>\\n\\nThe camera stays grounded near the audience while the performer drives the rhythm. Commuters arriving from different directions merge into the gathering, making the crowd broader without sudden duplication or spectacle. Preserve coherent late-afternoon daylight, natural skin texture, realistic fabric and hair motion, and the recognizable corporate plaza. The visible Atos marks remain environmental background elements rather than animated graphics. Keep the open guitar case, amplifier, backpack and microphone physically stable unless the incoming continuation already moves them. Any office workers remain ordinary adults in plausible work clothing; their reactions must arise gradually and must not pop into existence, clone, flicker or change identity. Avoid banners, subtitles, captions, floating typography, newly invented logos, caricature, fantasy transformations and abrupt crowd multiplication.\\n\\nMaintain temporal consistency in every background reflection and moving person. No employee should cross an impossible distance, reverse direction without cause, pass through another body, or abruptly change clothing between adjacent moments.\\n\\nUse observational framing motivated by the ongoing performance. Camera motion, if inherited from the prior sequence, stays slow and physically plausible, with no teleporting, whip-pan or hidden cut. Maintain consistent screen direction and spatial geography between the musician, microphone, guitar case, listeners and entrance. Keep both hands anatomically correct and continuously connected to believable guitar playing. Singing must remain expressive but not exaggerated: controlled irony in quieter passages, firmer projection in choruses, and grounded collective resolve near the end. Background movement stays secondary and never obscures the singer's readable face for long.\\n\\nEnd with the singer opening one hand toward the crowd on the final question. Treat this as a moving boundary, not a freeze or conclusion, so the following sequence can inherit exact motion, pose, light and crowd continuity.\\n\\noverall_soundscape:\\nUse only the protected master-song section for timing, French vocal delivery, guitar, bass, drums and group responses. Add no new dialogue. Very subtle plaza ambience and footsteps may remain beneath the song.\\n\\nnon_diegetic_music:\\nThe protected four-minute master song is fully preserved and controls performance rhythm, intensity and vocal timing.\",\n    \"seed\": 730410001885122\n  },\n  {\n    \"prompt\": \"r34l1sm\\n\\nsubject_definitions:\\n<Subject 1> is the same adult male street musician defined jointly by <Picture 1> for close facial identity, curly brown hair, beard and microphone relationship, and <Picture 2> for full-body proportions, brown jacket, patterned red-and-beige scarf, dark shirt, worn grey jeans, brown boots, acoustic guitar, microphone stand and street-performance setup. The modern Atos campus plaza, visible Atos branding, glass facade, autumn trees, passing office workers, amplifier, backpack and open guitar case derive from <Picture 2>.\\n\\nsummary:\\n[Reference generation] Sequence 19 of a continuous French protest-song performance: sarcastic pre-chorus. Maintain a realistic cinematic documentary style outside the Atos campus while the gathering grows through ordinary human reactions.\\n\\nretention_analysis:\\n<Subject 1> (S1, throughout [Shot 1]): fully_preserved — retain the exact recognizable face, hair, beard, age, body build, wardrobe, scarf pattern, guitar and microphone setup from <Picture 1> and <Picture 2>. Expressions, hand positions and posture may evolve only as required by singing and guitar performance. <Picture 1> supplies facial detail but not its close framing. <Picture 2> supplies the full setting, wardrobe, props and spatial relationships. Preserve the Atos campus as a real modern office plaza; do not redesign the architecture, logos or existing street-performance objects. Background employees may react naturally to the song, with stable anatomy and restrained documentary behavior.\\n\\ndetailed_description:\\n[Shot 1] One uninterrupted 10.125-second continuation at 24 fps. Continue the protected incoming frames exactly: preserve the preceding pose, guitar rhythm, crowd positions, light direction and ongoing movement; do not restart the performance or introduce a cut. Keep <Subject 1> as the stable visual anchor beside the same microphone, performing the acoustic guitar with credible left-hand chord placement, right-hand strumming and body rhythm. His lips, jaw and breath visibly follow the protected French master-song passage; do not invent additional spoken words. The relevant passage is: <Subject 1> (S1) <d>[French] Moins de télétravail, / Plus de carburant. / Moins de pouvoir d'achat, / Mais soyez contents !</d>\\n\\nUse the stop-start rhythm already present in the master song. On each short line the crowd reacts with restrained, synchronized irony: a look, a small shrug, then stillness. The musician never stops playing. Preserve coherent late-afternoon daylight, natural skin texture, realistic fabric and hair motion, and the recognizable corporate plaza. The visible Atos marks remain environmental background elements rather than animated graphics. Keep the open guitar case, amplifier, backpack and microphone physically stable unless the incoming continuation already moves them. Any office workers remain ordinary adults in plausible work clothing; their reactions must arise gradually and must not pop into existence, clone, flicker or change identity. Avoid banners, subtitles, captions, floating typography, newly invented logos, caricature, fantasy transformations and abrupt crowd multiplication.\\n\\nMaintain temporal consistency in every background reflection and moving person. No employee should cross an impossible distance, reverse direction without cause, pass through another body, or abruptly change clothing between adjacent moments.\\n\\nUse observational framing motivated by the ongoing performance. Camera motion, if inherited from the prior sequence, stays slow and physically plausible, with no teleporting, whip-pan or hidden cut. Maintain consistent screen direction and spatial geography between the musician, microphone, guitar case, listeners and entrance. Keep both hands anatomically correct and continuously connected to believable guitar playing. Singing must remain expressive but not exaggerated: controlled irony in quieter passages, firmer projection in choruses, and grounded collective resolve near the end. Background movement stays secondary and never obscures the singer's readable face for long.\\n\\nEnd on the sarcastic final pose, ready for the spoken break. Treat this as a moving boundary, not a freeze or conclusion, so the following sequence can inherit exact motion, pose, light and crowd continuity.\\n\\noverall_soundscape:\\nUse only the protected master-song section for timing, French vocal delivery, guitar, bass, drums and group responses. Add no new dialogue. Very subtle plaza ambience and footsteps may remain beneath the song.\\n\\nnon_diegetic_music:\\nThe protected four-minute master song is fully preserved and controls performance rhythm, intensity and vocal timing.\",\n    \"seed\": 730410001989851\n  },\n  {\n    \"prompt\": \"r34l1sm\\n\\nsubject_definitions:\\n<Subject 1> is the same adult male street musician defined jointly by <Picture 1> for close facial identity, curly brown hair, beard and microphone relationship, and <Picture 2> for full-body proportions, brown jacket, patterned red-and-beige scarf, dark shirt, worn grey jeans, brown boots, acoustic guitar, microphone stand and street-performance setup. The modern Atos campus plaza, visible Atos branding, glass facade, autumn trees, passing office workers, amplifier, backpack and open guitar case derive from <Picture 2>.\\n\\nsummary:\\n[Reference generation] Sequence 20 of a continuous French protest-song performance: spoken break — transport. Maintain a realistic cinematic documentary style outside the Atos campus while the gathering grows through ordinary human reactions.\\n\\nretention_analysis:\\n<Subject 1> (S1, throughout [Shot 1]): fully_preserved — retain the exact recognizable face, hair, beard, age, body build, wardrobe, scarf pattern, guitar and microphone setup from <Picture 1> and <Picture 2>. Expressions, hand positions and posture may evolve only as required by singing and guitar performance. <Picture 1> supplies facial detail but not its close framing. <Picture 2> supplies the full setting, wardrobe, props and spatial relationships. Preserve the Atos campus as a real modern office plaza; do not redesign the architecture, logos or existing street-performance objects. Background employees may react naturally to the song, with stable anatomy and restrained documentary behavior.\\n\\ndetailed_description:\\n[Shot 1] One uninterrupted 10.125-second continuation at 24 fps. Continue the protected incoming frames exactly: preserve the preceding pose, guitar rhythm, crowd positions, light direction and ongoing movement; do not restart the performance or introduce a cut. Keep <Subject 1> as the stable visual anchor beside the same microphone, performing the acoustic guitar with credible left-hand chord placement, right-hand strumming and body rhythm. His lips, jaw and breath visibly follow the protected French master-song passage; do not invent additional spoken words. The relevant passage is: <Subject 1> (S1) <d>[French] Cinquante à cinquante-cinq pour cent de transport… / Merci patron !</d>\\n\\nThe band drops out. The singer speaks into the microphone with dry precision. The crowd answers together, clearly mouthing « Merci patron ! » with deliberately flat sarcasm; no celebratory gestures. Preserve coherent late-afternoon daylight, natural skin texture, realistic fabric and hair motion, and the recognizable corporate plaza. The visible Atos marks remain environmental background elements rather than animated graphics. Keep the open guitar case, amplifier, backpack and microphone physically stable unless the incoming continuation already moves them. Any office workers remain ordinary adults in plausible work clothing; their reactions must arise gradually and must not pop into existence, clone, flicker or change identity. Avoid banners, subtitles, captions, floating typography, newly invented logos, caricature, fantasy transformations and abrupt crowd multiplication.\\n\\nMaintain temporal consistency in every background reflection and moving person. No employee should cross an impossible distance, reverse direction without cause, pass through another body, or abruptly change clothing between adjacent moments.\\n\\nUse observational framing motivated by the ongoing performance. Camera motion, if inherited from the prior sequence, stays slow and physically plausible, with no teleporting, whip-pan or hidden cut. Maintain consistent screen direction and spatial geography between the musician, microphone, guitar case, listeners and entrance. Keep both hands anatomically correct and continuously connected to believable guitar playing. Singing must remain expressive but not exaggerated: controlled irony in quieter passages, firmer projection in choruses, and grounded collective resolve near the end. Background movement stays secondary and never obscures the singer's readable face for long.\\n\\nEnd in a short held silence with everyone still facing the microphone. Treat this as a moving boundary, not a freeze or conclusion, so the following sequence can inherit exact motion, pose, light and crowd continuity.\\n\\noverall_soundscape:\\nUse only the protected master-song section for timing, French vocal delivery, guitar, bass, drums and group responses. Add no new dialogue. Very subtle plaza ambience and footsteps may remain beneath the song.\\n\\nnon_diegetic_music:\\nThe protected four-minute master song is fully preserved and controls performance rhythm, intensity and vocal timing.\",\n    \"seed\": 730410002094580\n  },\n  {\n    \"prompt\": \"r34l1sm\\n\\nsubject_definitions:\\n<Subject 1> is the same adult male street musician defined jointly by <Picture 1> for close facial identity, curly brown hair, beard and microphone relationship, and <Picture 2> for full-body proportions, brown jacket, patterned red-and-beige scarf, dark shirt, worn grey jeans, brown boots, acoustic guitar, microphone stand and street-performance setup. The modern Atos campus plaza, visible Atos branding, glass facade, autumn trees, passing office workers, amplifier, backpack and open guitar case derive from <Picture 2>.\\n\\nsummary:\\n[Reference generation] Sequence 21 of a continuous French protest-song performance: spoken break — mutual insurance. Maintain a realistic cinematic documentary style outside the Atos campus while the gathering grows through ordinary human reactions.\\n\\nretention_analysis:\\n<Subject 1> (S1, throughout [Shot 1]): fully_preserved — retain the exact recognizable face, hair, beard, age, body build, wardrobe, scarf pattern, guitar and microphone setup from <Picture 1> and <Picture 2>. Expressions, hand positions and posture may evolve only as required by singing and guitar performance. <Picture 1> supplies facial detail but not its close framing. <Picture 2> supplies the full setting, wardrobe, props and spatial relationships. Preserve the Atos campus as a real modern office plaza; do not redesign the architecture, logos or existing street-performance objects. Background employees may react naturally to the song, with stable anatomy and restrained documentary behavior.\\n\\ndetailed_description:\\n[Shot 1] One uninterrupted 10.125-second continuation at 24 fps. Continue the protected incoming frames exactly: preserve the preceding pose, guitar rhythm, crowd positions, light direction and ongoing movement; do not restart the performance or introduce a cut. Keep <Subject 1> as the stable visual anchor beside the same microphone, performing the acoustic guitar with credible left-hand chord placement, right-hand strumming and body rhythm. His lips, jaw and breath visibly follow the protected French master-song passage; do not invent additional spoken words. The relevant passage is: <Subject 1> (S1) <d>[French] La mutuelle augmente… / Merci patron !</d>\\n\\nContinue the exact held arrangement and body positions. The singer delivers the next statement; the crowd gives the same dry response, slightly louder, while a few listeners exchange incredulous looks. Preserve coherent late-afternoon daylight, natural skin texture, realistic fabric and hair motion, and the recognizable corporate plaza. The visible Atos marks remain environmental background elements rather than animated graphics. Keep the open guitar case, amplifier, backpack and microphone physically stable unless the incoming continuation already moves them. Any office workers remain ordinary adults in plausible work clothing; their reactions must arise gradually and must not pop into existence, clone, flicker or change identity. Avoid banners, subtitles, captions, floating typography, newly invented logos, caricature, fantasy transformations and abrupt crowd multiplication.\\n\\nMaintain temporal consistency in every background reflection and moving person. No employee should cross an impossible distance, reverse direction without cause, pass through another body, or abruptly change clothing between adjacent moments.\\n\\nUse observational framing motivated by the ongoing performance. Camera motion, if inherited from the prior sequence, stays slow and physically plausible, with no teleporting, whip-pan or hidden cut. Maintain consistent screen direction and spatial geography between the musician, microphone, guitar case, listeners and entrance. Keep both hands anatomically correct and continuously connected to believable guitar playing. Singing must remain expressive but not exaggerated: controlled irony in quieter passages, firmer projection in choruses, and grounded collective resolve near the end. Background movement stays secondary and never obscures the singer's readable face for long.\\n\\nEnd with the performer turning his head slightly toward another part of the crowd. Treat this as a moving boundary, not a freeze or conclusion, so the following sequence can inherit exact motion, pose, light and crowd continuity.\\n\\noverall_soundscape:\\nUse only the protected master-song section for timing, French vocal delivery, guitar, bass, drums and group responses. Add no new dialogue. Very subtle plaza ambience and footsteps may remain beneath the song.\\n\\nnon_diegetic_music:\\nThe protected four-minute master song is fully preserved and controls performance rhythm, intensity and vocal timing.\",\n    \"seed\": 730410002199309\n  },\n  {\n    \"prompt\": \"r34l1sm\\n\\nsubject_definitions:\\n<Subject 1> is the same adult male street musician defined jointly by <Picture 1> for close facial identity, curly brown hair, beard and microphone relationship, and <Picture 2> for full-body proportions, brown jacket, patterned red-and-beige scarf, dark shirt, worn grey jeans, brown boots, acoustic guitar, microphone stand and street-performance setup. The modern Atos campus plaza, visible Atos branding, glass facade, autumn trees, passing office workers, amplifier, backpack and open guitar case derive from <Picture 2>.\\n\\nsummary:\\n[Reference generation] Sequence 22 of a continuous French protest-song performance: spoken break — remote work. Maintain a realistic cinematic documentary style outside the Atos campus while the gathering grows through ordinary human reactions.\\n\\nretention_analysis:\\n<Subject 1> (S1, throughout [Shot 1]): fully_preserved — retain the exact recognizable face, hair, beard, age, body build, wardrobe, scarf pattern, guitar and microphone setup from <Picture 1> and <Picture 2>. Expressions, hand positions and posture may evolve only as required by singing and guitar performance. <Picture 1> supplies facial detail but not its close framing. <Picture 2> supplies the full setting, wardrobe, props and spatial relationships. Preserve the Atos campus as a real modern office plaza; do not redesign the architecture, logos or existing street-performance objects. Background employees may react naturally to the song, with stable anatomy and restrained documentary behavior.\\n\\ndetailed_description:\\n[Shot 1] One uninterrupted 10.125-second continuation at 24 fps. Continue the protected incoming frames exactly: preserve the preceding pose, guitar rhythm, crowd positions, light direction and ongoing movement; do not restart the performance or introduce a cut. Keep <Subject 1> as the stable visual anchor beside the same microphone, performing the acoustic guitar with credible left-hand chord placement, right-hand strumming and body rhythm. His lips, jaw and breath visibly follow the protected French master-song passage; do not invent additional spoken words. The relevant passage is: <Subject 1> (S1) <d>[French] Un jour de télétravail en moins… / Merci patron !</d>\\n\\nThe singer states the third example. The response now travels across the gathering from one side to the other, still sarcastic and controlled. Preserve realistic mouths and avoid random extra speech. Preserve coherent late-afternoon daylight, natural skin texture, realistic fabric and hair motion, and the recognizable corporate plaza. The visible Atos marks remain environmental background elements rather than animated graphics. Keep the open guitar case, amplifier, backpack and microphone physically stable unless the incoming continuation already moves them. Any office workers remain ordinary adults in plausible work clothing; their reactions must arise gradually and must not pop into existence, clone, flicker or change identity. Avoid banners, subtitles, captions, floating typography, newly invented logos, caricature, fantasy transformations and abrupt crowd multiplication.\\n\\nMaintain temporal consistency in every background reflection and moving person. No employee should cross an impossible distance, reverse direction without cause, pass through another body, or abruptly change clothing between adjacent moments.\\n\\nUse observational framing motivated by the ongoing performance. Camera motion, if inherited from the prior sequence, stays slow and physically plausible, with no teleporting, whip-pan or hidden cut. Maintain consistent screen direction and spatial geography between the musician, microphone, guitar case, listeners and entrance. Keep both hands anatomically correct and continuously connected to believable guitar playing. Singing must remain expressive but not exaggerated: controlled irony in quieter passages, firmer projection in choruses, and grounded collective resolve near the end. Background movement stays secondary and never obscures the singer's readable face for long.\\n\\nEnd as the response fades and the singer waits for the last question. Treat this as a moving boundary, not a freeze or conclusion, so the following sequence can inherit exact motion, pose, light and crowd continuity.\\n\\noverall_soundscape:\\nUse only the protected master-song section for timing, French vocal delivery, guitar, bass, drums and group responses. Add no new dialogue. Very subtle plaza ambience and footsteps may remain beneath the song.\\n\\nnon_diegetic_music:\\nThe protected four-minute master song is fully preserved and controls performance rhythm, intensity and vocal timing.\",\n    \"seed\": 730410002304038\n  },\n  {\n    \"prompt\": \"r34l1sm\\n\\nsubject_definitions:\\n<Subject 1> is the same adult male street musician defined jointly by <Picture 1> for close facial identity, curly brown hair, beard and microphone relationship, and <Picture 2> for full-body proportions, brown jacket, patterned red-and-beige scarf, dark shirt, worn grey jeans, brown boots, acoustic guitar, microphone stand and street-performance setup. The modern Atos campus plaza, visible Atos branding, glass facade, autumn trees, passing office workers, amplifier, backpack and open guitar case derive from <Picture 2>.\\n\\nsummary:\\n[Reference generation] Sequence 23 of a continuous French protest-song performance: spoken break — missing general raise. Maintain a realistic cinematic documentary style outside the Atos campus while the gathering grows through ordinary human reactions.\\n\\nretention_analysis:\\n<Subject 1> (S1, throughout [Shot 1]): fully_preserved — retain the exact recognizable face, hair, beard, age, body build, wardrobe, scarf pattern, guitar and microphone setup from <Picture 1> and <Picture 2>. Expressions, hand positions and posture may evolve only as required by singing and guitar performance. <Picture 1> supplies facial detail but not its close framing. <Picture 2> supplies the full setting, wardrobe, props and spatial relationships. Preserve the Atos campus as a real modern office plaza; do not redesign the architecture, logos or existing street-performance objects. Background employees may react naturally to the song, with stable anatomy and restrained documentary behavior.\\n\\ndetailed_description:\\n[Shot 1] One uninterrupted 10.125-second continuation at 24 fps. Continue the protected incoming frames exactly: preserve the preceding pose, guitar rhythm, crowd positions, light direction and ongoing movement; do not restart the performance or introduce a cut. Keep <Subject 1> as the stable visual anchor beside the same microphone, performing the acoustic guitar with credible left-hand chord placement, right-hand strumming and body rhythm. His lips, jaw and breath visibly follow the protected French master-song passage; do not invent additional spoken words. The relevant passage is: <Subject 1> (S1) <d>[French] Et l'augmentation générale ? / … Allô ?</d>\\n\\nThe singer asks the question and holds still at the microphone. The crowd falls into visibly confused silence; after the pause, one distant person cups a hand near their mouth and answers « … Allô ? ». Preserve coherent late-afternoon daylight, natural skin texture, realistic fabric and hair motion, and the recognizable corporate plaza. The visible Atos marks remain environmental background elements rather than animated graphics. Keep the open guitar case, amplifier, backpack and microphone physically stable unless the incoming continuation already moves them. Any office workers remain ordinary adults in plausible work clothing; their reactions must arise gradually and must not pop into existence, clone, flicker or change identity. Avoid banners, subtitles, captions, floating typography, newly invented logos, caricature, fantasy transformations and abrupt crowd multiplication.\\n\\nMaintain temporal consistency in every background reflection and moving person. No employee should cross an impossible distance, reverse direction without cause, pass through another body, or abruptly change clothing between adjacent moments.\\n\\nUse observational framing motivated by the ongoing performance. Camera motion, if inherited from the prior sequence, stays slow and physically plausible, with no teleporting, whip-pan or hidden cut. Maintain consistent screen direction and spatial geography between the musician, microphone, guitar case, listeners and entrance. Keep both hands anatomically correct and continuously connected to believable guitar playing. Singing must remain expressive but not exaggerated: controlled irony in quieter passages, firmer projection in choruses, and grounded collective resolve near the end. Background movement stays secondary and never obscures the singer's readable face for long.\\n\\nEnd with the musician's restrained smile as the guitar riff returns. Treat this as a moving boundary, not a freeze or conclusion, so the following sequence can inherit exact motion, pose, light and crowd continuity.\\n\\noverall_soundscape:\\nUse only the protected master-song section for timing, French vocal delivery, guitar, bass, drums and group responses. Add no new dialogue. Very subtle plaza ambience and footsteps may remain beneath the song.\\n\\nnon_diegetic_music:\\nThe protected four-minute master song is fully preserved and controls performance rhythm, intensity and vocal timing.\",\n    \"seed\": 730410002408767\n  },\n  {\n    \"prompt\": \"r34l1sm\\n\\nsubject_definitions:\\n<Subject 1> is the same adult male street musician defined jointly by <Picture 1> for close facial identity, curly brown hair, beard and microphone relationship, and <Picture 2> for full-body proportions, brown jacket, patterned red-and-beige scarf, dark shirt, worn grey jeans, brown boots, acoustic guitar, microphone stand and street-performance setup. The modern Atos campus plaza, visible Atos branding, glass facade, autumn trees, passing office workers, amplifier, backpack and open guitar case derive from <Picture 2>.\\n\\nsummary:\\n[Reference generation] Sequence 24 of a continuous French protest-song performance: instrumental break. Maintain a realistic cinematic documentary style outside the Atos campus while the gathering grows through ordinary human reactions.\\n\\nretention_analysis:\\n<Subject 1> (S1, throughout [Shot 1]): fully_preserved — retain the exact recognizable face, hair, beard, age, body build, wardrobe, scarf pattern, guitar and microphone setup from <Picture 1> and <Picture 2>. Expressions, hand positions and posture may evolve only as required by singing and guitar performance. <Picture 1> supplies facial detail but not its close framing. <Picture 2> supplies the full setting, wardrobe, props and spatial relationships. Preserve the Atos campus as a real modern office plaza; do not redesign the architecture, logos or existing street-performance objects. Background employees may react naturally to the song, with stable anatomy and restrained documentary behavior.\\n\\ndetailed_description:\\n[Shot 1] One uninterrupted 10.125-second continuation at 24 fps. Continue the protected incoming frames exactly: preserve the preceding pose, guitar rhythm, crowd positions, light direction and ongoing movement; do not restart the performance or introduce a cut. Keep <Subject 1> as the stable visual anchor beside the same microphone, performing the acoustic guitar with credible left-hand chord placement, right-hand strumming and body rhythm. His lips, jaw and breath visibly follow the protected French master-song passage; do not invent additional spoken words. The relevant passage is: <Subject 1> (S1) <d>[French] Short energetic electric-guitar riff; no new lyric.</d>\\n\\nThe rhythm surges back. Keep the acoustic guitar and established street setup from the references while the protected master track supplies the energetic riff. The musician plays more physically and the crowd closes in around the performance area. Preserve coherent late-afternoon daylight, natural skin texture, realistic fabric and hair motion, and the recognizable corporate plaza. The visible Atos marks remain environmental background elements rather than animated graphics. Keep the open guitar case, amplifier, backpack and microphone physically stable unless the incoming continuation already moves them. Any office workers remain ordinary adults in plausible work clothing; their reactions must arise gradually and must not pop into existence, clone, flicker or change identity. Avoid banners, subtitles, captions, floating typography, newly invented logos, caricature, fantasy transformations and abrupt crowd multiplication.\\n\\nMaintain temporal consistency in every background reflection and moving person. No employee should cross an impossible distance, reverse direction without cause, pass through another body, or abruptly change clothing between adjacent moments.\\n\\nUse observational framing motivated by the ongoing performance. Camera motion, if inherited from the prior sequence, stays slow and physically plausible, with no teleporting, whip-pan or hidden cut. Maintain consistent screen direction and spatial geography between the musician, microphone, guitar case, listeners and entrance. Keep both hands anatomically correct and continuously connected to believable guitar playing. Singing must remain expressive but not exaggerated: controlled irony in quieter passages, firmer projection in choruses, and grounded collective resolve near the end. Background movement stays secondary and never obscures the singer's readable face for long.\\n\\nEnd with the scarf, strumming arm and crowd movement all carrying forward. Treat this as a moving boundary, not a freeze or conclusion, so the following sequence can inherit exact motion, pose, light and crowd continuity.\\n\\noverall_soundscape:\\nUse only the protected master-song section for timing, French vocal delivery, guitar, bass, drums and group responses. Add no new dialogue. Very subtle plaza ambience and footsteps may remain beneath the song.\\n\\nnon_diegetic_music:\\nThe protected four-minute master song is fully preserved and controls performance rhythm, intensity and vocal timing.\",\n    \"seed\": 730410002513496\n  },\n  {\n    \"prompt\": \"r34l1sm\\n\\nsubject_definitions:\\n<Subject 1> is the same adult male street musician defined jointly by <Picture 1> for close facial identity, curly brown hair, beard and microphone relationship, and <Picture 2> for full-body proportions, brown jacket, patterned red-and-beige scarf, dark shirt, worn grey jeans, brown boots, acoustic guitar, microphone stand and street-performance setup. The modern Atos campus plaza, visible Atos branding, glass facade, autumn trees, passing office workers, amplifier, backpack and open guitar case derive from <Picture 2>.\\n\\nsummary:\\n[Reference generation] Sequence 25 of a continuous French protest-song performance: bridge — hidden retreat. Maintain a realistic cinematic documentary style outside the Atos campus while the gathering grows through ordinary human reactions.\\n\\nretention_analysis:\\n<Subject 1> (S1, throughout [Shot 1]): fully_preserved — retain the exact recognizable face, hair, beard, age, body build, wardrobe, scarf pattern, guitar and microphone setup from <Picture 1> and <Picture 2>. Expressions, hand positions and posture may evolve only as required by singing and guitar performance. <Picture 1> supplies facial detail but not its close framing. <Picture 2> supplies the full setting, wardrobe, props and spatial relationships. Preserve the Atos campus as a real modern office plaza; do not redesign the architecture, logos or existing street-performance objects. Background employees may react naturally to the song, with stable anatomy and restrained documentary behavior.\\n\\ndetailed_description:\\n[Shot 1] One uninterrupted 10.125-second continuation at 24 fps. Continue the protected incoming frames exactly: preserve the preceding pose, guitar rhythm, crowd positions, light direction and ongoing movement; do not restart the performance or introduce a cut. Keep <Subject 1> as the stable visual anchor beside the same microphone, performing the acoustic guitar with credible left-hand chord placement, right-hand strumming and body rhythm. His lips, jaw and breath visibly follow the protected French master-song passage; do not invent additional spoken words. The relevant passage is: <Subject 1> (S1) <d>[French] Parce qu'un recul ne porte pas toujours son nom, / Il se glisse parfois dans une décision.</d>\\n\\nHalf-time drums create a more serious mood. The performer sings with less irony and more emotional weight. The surrounding listeners become still, attentive faces filling the depth behind him. Preserve coherent late-afternoon daylight, natural skin texture, realistic fabric and hair motion, and the recognizable corporate plaza. The visible Atos marks remain environmental background elements rather than animated graphics. Keep the open guitar case, amplifier, backpack and microphone physically stable unless the incoming continuation already moves them. Any office workers remain ordinary adults in plausible work clothing; their reactions must arise gradually and must not pop into existence, clone, flicker or change identity. Avoid banners, subtitles, captions, floating typography, newly invented logos, caricature, fantasy transformations and abrupt crowd multiplication.\\n\\nMaintain temporal consistency in every background reflection and moving person. No employee should cross an impossible distance, reverse direction without cause, pass through another body, or abruptly change clothing between adjacent moments.\\n\\nUse observational framing motivated by the ongoing performance. Camera motion, if inherited from the prior sequence, stays slow and physically plausible, with no teleporting, whip-pan or hidden cut. Maintain consistent screen direction and spatial geography between the musician, microphone, guitar case, listeners and entrance. Keep both hands anatomically correct and continuously connected to believable guitar playing. Singing must remain expressive but not exaggerated: controlled irony in quieter passages, firmer projection in choruses, and grounded collective resolve near the end. Background movement stays secondary and never obscures the singer's readable face for long.\\n\\nEnd with the singer looking across the whole gathering. Treat this as a moving boundary, not a freeze or conclusion, so the following sequence can inherit exact motion, pose, light and crowd continuity.\\n\\noverall_soundscape:\\nUse only the protected master-song section for timing, French vocal delivery, guitar, bass, drums and group responses. Add no new dialogue. Very subtle plaza ambience and footsteps may remain beneath the song.\\n\\nnon_diegetic_music:\\nThe protected four-minute master song is fully preserved and controls performance rhythm, intensity and vocal timing.\",\n    \"seed\": 730410002618225\n  },\n  {\n    \"prompt\": \"r34l1sm\\n\\nsubject_definitions:\\n<Subject 1> is the same adult male street musician defined jointly by <Picture 1> for close facial identity, curly brown hair, beard and microphone relationship, and <Picture 2> for full-body proportions, brown jacket, patterned red-and-beige scarf, dark shirt, worn grey jeans, brown boots, acoustic guitar, microphone stand and street-performance setup. The modern Atos campus plaza, visible Atos branding, glass facade, autumn trees, passing office workers, amplifier, backpack and open guitar case derive from <Picture 2>.\\n\\nsummary:\\n[Reference generation] Sequence 26 of a continuous French protest-song performance: bridge — small costs accumulate. Maintain a realistic cinematic documentary style outside the Atos campus while the gathering grows through ordinary human reactions.\\n\\nretention_analysis:\\n<Subject 1> (S1, throughout [Shot 1]): fully_preserved — retain the exact recognizable face, hair, beard, age, body build, wardrobe, scarf pattern, guitar and microphone setup from <Picture 1> and <Picture 2>. Expressions, hand positions and posture may evolve only as required by singing and guitar performance. <Picture 1> supplies facial detail but not its close framing. <Picture 2> supplies the full setting, wardrobe, props and spatial relationships. Preserve the Atos campus as a real modern office plaza; do not redesign the architecture, logos or existing street-performance objects. Background employees may react naturally to the song, with stable anatomy and restrained documentary behavior.\\n\\ndetailed_description:\\n[Shot 1] One uninterrupted 10.125-second continuation at 24 fps. Continue the protected incoming frames exactly: preserve the preceding pose, guitar rhythm, crowd positions, light direction and ongoing movement; do not restart the performance or introduce a cut. Keep <Subject 1> as the stable visual anchor beside the same microphone, performing the acoustic guitar with credible left-hand chord placement, right-hand strumming and body rhythm. His lips, jaw and breath visibly follow the protected French master-song passage; do not invent additional spoken words. The relevant passage is: <Subject 1> (S1) <d>[French] Quelques euros ici, quelques kilomètres là, / Et à la fin du mois, tout ça se paie.</d>\\n\\nContinue the rising bridge. Small everyday objects already carried by commuters—transit cards, keys, a folded statement—are visible across different hands, never presented as artificial symbols. The singer connects them through his gaze. Preserve coherent late-afternoon daylight, natural skin texture, realistic fabric and hair motion, and the recognizable corporate plaza. The visible Atos marks remain environmental background elements rather than animated graphics. Keep the open guitar case, amplifier, backpack and microphone physically stable unless the incoming continuation already moves them. Any office workers remain ordinary adults in plausible work clothing; their reactions must arise gradually and must not pop into existence, clone, flicker or change identity. Avoid banners, subtitles, captions, floating typography, newly invented logos, caricature, fantasy transformations and abrupt crowd multiplication.\\n\\nMaintain temporal consistency in every background reflection and moving person. No employee should cross an impossible distance, reverse direction without cause, pass through another body, or abruptly change clothing between adjacent moments.\\n\\nUse observational framing motivated by the ongoing performance. Camera motion, if inherited from the prior sequence, stays slow and physically plausible, with no teleporting, whip-pan or hidden cut. Maintain consistent screen direction and spatial geography between the musician, microphone, guitar case, listeners and entrance. Keep both hands anatomically correct and continuously connected to believable guitar playing. Singing must remain expressive but not exaggerated: controlled irony in quieter passages, firmer projection in choruses, and grounded collective resolve near the end. Background movement stays secondary and never obscures the singer's readable face for long.\\n\\nEnd with the crowd beginning to raise those hands together. Treat this as a moving boundary, not a freeze or conclusion, so the following sequence can inherit exact motion, pose, light and crowd continuity.\\n\\noverall_soundscape:\\nUse only the protected master-song section for timing, French vocal delivery, guitar, bass, drums and group responses. Add no new dialogue. Very subtle plaza ambience and footsteps may remain beneath the song.\\n\\nnon_diegetic_music:\\nThe protected four-minute master song is fully preserved and controls performance rhythm, intensity and vocal timing.\",\n    \"seed\": 730410002722954\n  },\n  {\n    \"prompt\": \"r34l1sm\\n\\nsubject_definitions:\\n<Subject 1> is the same adult male street musician defined jointly by <Picture 1> for close facial identity, curly brown hair, beard and microphone relationship, and <Picture 2> for full-body proportions, brown jacket, patterned red-and-beige scarf, dark shirt, worn grey jeans, brown boots, acoustic guitar, microphone stand and street-performance setup. The modern Atos campus plaza, visible Atos branding, glass facade, autumn trees, passing office workers, amplifier, backpack and open guitar case derive from <Picture 2>.\\n\\nsummary:\\n[Reference generation] Sequence 27 of a continuous French protest-song performance: bridge — purchasing power is everything. Maintain a realistic cinematic documentary style outside the Atos campus while the gathering grows through ordinary human reactions.\\n\\nretention_analysis:\\n<Subject 1> (S1, throughout [Shot 1]): fully_preserved — retain the exact recognizable face, hair, beard, age, body build, wardrobe, scarf pattern, guitar and microphone setup from <Picture 1> and <Picture 2>. Expressions, hand positions and posture may evolve only as required by singing and guitar performance. <Picture 1> supplies facial detail but not its close framing. <Picture 2> supplies the full setting, wardrobe, props and spatial relationships. Preserve the Atos campus as a real modern office plaza; do not redesign the architecture, logos or existing street-performance objects. Background employees may react naturally to the song, with stable anatomy and restrained documentary behavior.\\n\\ndetailed_description:\\n[Shot 1] One uninterrupted 10.125-second continuation at 24 fps. Continue the protected incoming frames exactly: preserve the preceding pose, guitar rhythm, crowd positions, light direction and ongoing movement; do not restart the performance or introduce a cut. Keep <Subject 1> as the stable visual anchor beside the same microphone, performing the acoustic guitar with credible left-hand chord placement, right-hand strumming and body rhythm. His lips, jaw and breath visibly follow the protected French master-song passage; do not invent additional spoken words. The relevant passage is: <Subject 1> (S1) <d>[French] Transport, santé, énergie, carburant, / Le pouvoir d'achat, c'est tout ça en même temps.</d>\\n\\nThe vocal intensity rises. The musician steps half a pace toward the microphone and the crowd responds as one body, hands lowering into rhythmic claps. Keep the Atos campus architecture recognizable behind them. Preserve coherent late-afternoon daylight, natural skin texture, realistic fabric and hair motion, and the recognizable corporate plaza. The visible Atos marks remain environmental background elements rather than animated graphics. Keep the open guitar case, amplifier, backpack and microphone physically stable unless the incoming continuation already moves them. Any office workers remain ordinary adults in plausible work clothing; their reactions must arise gradually and must not pop into existence, clone, flicker or change identity. Avoid banners, subtitles, captions, floating typography, newly invented logos, caricature, fantasy transformations and abrupt crowd multiplication.\\n\\nMaintain temporal consistency in every background reflection and moving person. No employee should cross an impossible distance, reverse direction without cause, pass through another body, or abruptly change clothing between adjacent moments.\\n\\nUse observational framing motivated by the ongoing performance. Camera motion, if inherited from the prior sequence, stays slow and physically plausible, with no teleporting, whip-pan or hidden cut. Maintain consistent screen direction and spatial geography between the musician, microphone, guitar case, listeners and entrance. Keep both hands anatomically correct and continuously connected to believable guitar playing. Singing must remain expressive but not exaggerated: controlled irony in quieter passages, firmer projection in choruses, and grounded collective resolve near the end. Background movement stays secondary and never obscures the singer's readable face for long.\\n\\nEnd at maximum anticipation before the final chorus. Treat this as a moving boundary, not a freeze or conclusion, so the following sequence can inherit exact motion, pose, light and crowd continuity.\\n\\noverall_soundscape:\\nUse only the protected master-song section for timing, French vocal delivery, guitar, bass, drums and group responses. Add no new dialogue. Very subtle plaza ambience and footsteps may remain beneath the song.\\n\\nnon_diegetic_music:\\nThe protected four-minute master song is fully preserved and controls performance rhythm, intensity and vocal timing.\",\n    \"seed\": 730410002827683\n  },\n  {\n    \"prompt\": \"r34l1sm\\n\\nsubject_definitions:\\n<Subject 1> is the same adult male street musician defined jointly by <Picture 1> for close facial identity, curly brown hair, beard and microphone relationship, and <Picture 2> for full-body proportions, brown jacket, patterned red-and-beige scarf, dark shirt, worn grey jeans, brown boots, acoustic guitar, microphone stand and street-performance setup. The modern Atos campus plaza, visible Atos branding, glass facade, autumn trees, passing office workers, amplifier, backpack and open guitar case derive from <Picture 2>.\\n\\nsummary:\\n[Reference generation] Sequence 28 of a continuous French protest-song performance: final chorus — full collective voice. Maintain a realistic cinematic documentary style outside the Atos campus while the gathering grows through ordinary human reactions.\\n\\nretention_analysis:\\n<Subject 1> (S1, throughout [Shot 1]): fully_preserved — retain the exact recognizable face, hair, beard, age, body build, wardrobe, scarf pattern, guitar and microphone setup from <Picture 1> and <Picture 2>. Expressions, hand positions and posture may evolve only as required by singing and guitar performance. <Picture 1> supplies facial detail but not its close framing. <Picture 2> supplies the full setting, wardrobe, props and spatial relationships. Preserve the Atos campus as a real modern office plaza; do not redesign the architecture, logos or existing street-performance objects. Background employees may react naturally to the song, with stable anatomy and restrained documentary behavior.\\n\\ndetailed_description:\\n[Shot 1] One uninterrupted 10.125-second continuation at 24 fps. Continue the protected incoming frames exactly: preserve the preceding pose, guitar rhythm, crowd positions, light direction and ongoing movement; do not restart the performance or introduce a cut. Keep <Subject 1> as the stable visual anchor beside the same microphone, performing the acoustic guitar with credible left-hand chord placement, right-hand strumming and body rhythm. His lips, jaw and breath visibly follow the protected French master-song passage; do not invent additional spoken words. The relevant passage is: <Subject 1> (S1) <d>[French] Pendant qu'les prix montent, nos salaires attendent, / Pendant qu'les factures chaque mois nous surprennent, / On nous demande encore de faire des efforts, / Mais le pouvoir d'achat, lui, reste dehors.</d>\\n\\nMaximum band intensity. The singer and crowd perform together with believable French mouth movement and forceful rhythm. The gathering now fills the plaza foreground without turning into an implausible stadium crowd. Preserve coherent late-afternoon daylight, natural skin texture, realistic fabric and hair motion, and the recognizable corporate plaza. The visible Atos marks remain environmental background elements rather than animated graphics. Keep the open guitar case, amplifier, backpack and microphone physically stable unless the incoming continuation already moves them. Any office workers remain ordinary adults in plausible work clothing; their reactions must arise gradually and must not pop into existence, clone, flicker or change identity. Avoid banners, subtitles, captions, floating typography, newly invented logos, caricature, fantasy transformations and abrupt crowd multiplication.\\n\\nMaintain temporal consistency in every background reflection and moving person. No employee should cross an impossible distance, reverse direction without cause, pass through another body, or abruptly change clothing between adjacent moments.\\n\\nUse observational framing motivated by the ongoing performance. Camera motion, if inherited from the prior sequence, stays slow and physically plausible, with no teleporting, whip-pan or hidden cut. Maintain consistent screen direction and spatial geography between the musician, microphone, guitar case, listeners and entrance. Keep both hands anatomically correct and continuously connected to believable guitar playing. Singing must remain expressive but not exaggerated: controlled irony in quieter passages, firmer projection in choruses, and grounded collective resolve near the end. Background movement stays secondary and never obscures the singer's readable face for long.\\n\\nEnd with a strong collective response and continuous guitar motion. Treat this as a moving boundary, not a freeze or conclusion, so the following sequence can inherit exact motion, pose, light and crowd continuity.\\n\\noverall_soundscape:\\nUse only the protected master-song section for timing, French vocal delivery, guitar, bass, drums and group responses. Add no new dialogue. Very subtle plaza ambience and footsteps may remain beneath the song.\\n\\nnon_diegetic_music:\\nThe protected four-minute master song is fully preserved and controls performance rhythm, intensity and vocal timing.\",\n    \"seed\": 730410002932412\n  },\n  {\n    \"prompt\": \"r34l1sm\\n\\nsubject_definitions:\\n<Subject 1> is the same adult male street musician defined jointly by <Picture 1> for close facial identity, curly brown hair, beard and microphone relationship, and <Picture 2> for full-body proportions, brown jacket, patterned red-and-beige scarf, dark shirt, worn grey jeans, brown boots, acoustic guitar, microphone stand and street-performance setup. The modern Atos campus plaza, visible Atos branding, glass facade, autumn trees, passing office workers, amplifier, backpack and open guitar case derive from <Picture 2>.\\n\\nsummary:\\n[Reference generation] Sequence 29 of a continuous French protest-song performance: final chorus and outro — FO chant. Maintain a realistic cinematic documentary style outside the Atos campus while the gathering grows through ordinary human reactions.\\n\\nretention_analysis:\\n<Subject 1> (S1, throughout [Shot 1]): fully_preserved — retain the exact recognizable face, hair, beard, age, body build, wardrobe, scarf pattern, guitar and microphone setup from <Picture 1> and <Picture 2>. Expressions, hand positions and posture may evolve only as required by singing and guitar performance. <Picture 1> supplies facial detail but not its close framing. <Picture 2> supplies the full setting, wardrobe, props and spatial relationships. Preserve the Atos campus as a real modern office plaza; do not redesign the architecture, logos or existing street-performance objects. Background employees may react naturally to the song, with stable anatomy and restrained documentary behavior.\\n\\ndetailed_description:\\n[Shot 1] One uninterrupted 10.125-second continuation at 24 fps. Continue the protected incoming frames exactly: preserve the preceding pose, guitar rhythm, crowd positions, light direction and ongoing movement; do not restart the performance or introduce a cut. Keep <Subject 1> as the stable visual anchor beside the same microphone, performing the acoustic guitar with credible left-hand chord placement, right-hand strumming and body rhythm. His lips, jaw and breath visibly follow the protected French master-song passage; do not invent additional spoken words. The relevant passage is: <Subject 1> (S1) <d>[French] Force Ouvrière, on ne lâche rien ! / Pouvoir d'achat ! Ça compte partout ! / FO ! FO ! FO !</d>\\n\\nCarry the final chorus into the outro. The crowd chants with the singer; clapping gradually simplifies as the arrangement strips back. On the final hit everyone holds the shared resolve, then movement settles naturally during the five-second visual tail. Preserve coherent late-afternoon daylight, natural skin texture, realistic fabric and hair motion, and the recognizable corporate plaza. The visible Atos marks remain environmental background elements rather than animated graphics. Keep the open guitar case, amplifier, backpack and microphone physically stable unless the incoming continuation already moves them. Any office workers remain ordinary adults in plausible work clothing; their reactions must arise gradually and must not pop into existence, clone, flicker or change identity. Avoid banners, subtitles, captions, floating typography, newly invented logos, caricature, fantasy transformations and abrupt crowd multiplication.\\n\\nMaintain temporal consistency in every background reflection and moving person. No employee should cross an impossible distance, reverse direction without cause, pass through another body, or abruptly change clothing between adjacent moments.\\n\\nUse observational framing motivated by the ongoing performance. Camera motion, if inherited from the prior sequence, stays slow and physically plausible, with no teleporting, whip-pan or hidden cut. Maintain consistent screen direction and spatial geography between the musician, microphone, guitar case, listeners and entrance. Keep both hands anatomically correct and continuously connected to believable guitar playing. Singing must remain expressive but not exaggerated: controlled irony in quieter passages, firmer projection in choruses, and grounded collective resolve near the end. Background movement stays secondary and never obscures the singer's readable face for long.\\n\\nEnd on the musician beside the microphone and guitar, surrounded by the calm gathered workers, with no added title card and a gentle natural fade toward black. Treat this as a moving boundary, not a freeze or conclusion, so the following sequence can inherit exact motion, pose, light and crowd continuity.\\n\\noverall_soundscape:\\nUse only the protected master-song section for timing, French vocal delivery, guitar, bass, drums and group responses. Add no new dialogue. Very subtle plaza ambience and footsteps may remain beneath the song.\\n\\nnon_diegetic_music:\\nThe protected four-minute master song is fully preserved and controls performance rhythm, intensity and vocal timing.\",\n    \"seed\": 730410003037141\n  }\n]",
+        243,
+        39,
+        5.0
+      ],
+      "title": "EDIT ALL CLIPS HERE"
+    },
+    {
+      "id": 3001,
+      "type": "StartLoop",
+      "pos": [
+        -650,
+        -650
+      ],
+      "size": [
+        310,
+        210
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "list",
+          "type": "H3_MUSIC_CLIP_SPEC",
+          "link": 23
+        }
+      ],
+      "outputs": [
+        {
+          "name": "iteration_index",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "is_first",
+          "type": "BOOLEAN",
+          "links": null
+        },
+        {
+          "name": "is_last",
+          "type": "BOOLEAN",
+          "links": [
+            35
+          ]
+        },
+        {
+          "name": "list_item",
+          "type": "H3_MUSIC_CLIP_SPEC",
+          "links": [
+            27
+          ]
+        },
+        {
+          "name": "current_iteration_value",
+          "type": "LATENT",
+          "links": [
+            33
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "StartLoop"
+      },
+      "widgets_values": [
+        "List",
+        false
+      ],
+      "title": "ONE ITERATION PER CLIP"
+    },
+    {
+      "id": 3002,
+      "type": "MiniMaxH3MusicVideoClipSpec",
+      "pos": [
+        -250,
+        -650
+      ],
+      "size": [
+        330,
+        180
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "H3_MUSIC_CLIP_SPEC",
+          "link": 27
+        },
+        {
+          "name": "frame_count",
+          "type": "INT",
+          "link": 28,
+          "widget": {
+            "name": "frame_count"
+          }
+        },
+        {
+          "name": "context_frames",
+          "type": "INT",
+          "link": 29,
+          "widget": {
+            "name": "context_frames"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "links": [
+            30
+          ]
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "links": [
+            31
+          ]
+        },
+        {
+          "name": "clip_start_seconds",
+          "type": "FLOAT",
+          "links": [
+            32
+          ]
+        },
+        {
+          "name": "clip_number",
+          "type": "INT",
+          "links": [
+            37,
+            41,
+            43
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MiniMaxH3MusicVideoClipSpec"
+      },
+      "widgets_values": [
+        243,
+        39
+      ],
+      "title": "CURRENT CLIP"
+    },
+    {
+      "id": 3003,
+      "type": "EndLoop",
+      "pos": [
+        3050,
+        -420
+      ],
+      "size": [
+        300,
+        180
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "output_value",
+          "type": "INT",
+          "link": 43
+        },
+        {
+          "name": "next_iteration_value",
+          "type": "LATENT",
+          "link": 44
+        }
+      ],
+      "outputs": [
+        {
+          "name": "outputs",
+          "type": "INT",
+          "links": [
+            45
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EndLoop"
+      },
+      "widgets_values": [
+        true
+      ],
+      "title": "ACCUMULATE COMPLETED CLIP NUMBERS"
+    },
+    {
+      "id": 3004,
+      "type": "MiniMaxH3AssembleMusicVideoPreviews",
+      "pos": [
+        3450,
+        -420
+      ],
+      "size": [
+        390,
+        390
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "completed_clips",
+          "type": "INT",
+          "link": 45
+        },
+        {
+          "name": "master_audio",
+          "type": "AUDIO",
+          "link": 46
+        },
+        {
+          "name": "context_frames",
+          "type": "INT",
+          "link": 47,
+          "widget": {
+            "name": "context_frames"
+          }
+        },
+        {
+          "name": "tail_seconds",
+          "type": "FLOAT",
+          "link": null,
+          "widget": {
+            "name": "tail_seconds"
+          }
+        },
+        {
+          "name": "project_name",
+          "type": "STRING",
+          "link": 63
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Filenames",
+          "type": "VHS_FILENAMES",
+          "links": [
+            48
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MiniMaxH3AssembleMusicVideoPreviews"
+      },
+      "widgets_values": [
+        39,
+        5.0,
+        "h3_preview/atos_fo_4min",
+        "video/h3_music_video_final",
+        19
+      ],
+      "title": "FINAL ASSEMBLY — NAME FROM PROJECT NODE"
+    },
+    {
+      "id": 3005,
+      "type": "MiniMaxH3MusicVideoCheckpoint",
+      "pos": [
+        2110,
+        -650
+      ],
+      "size": [
+        390,
+        190
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "generated_latent",
+          "type": "LATENT",
+          "link": 36
+        },
+        {
+          "name": "clip_number",
+          "type": "INT",
+          "link": 37
+        },
+        {
+          "name": "resume_from",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "resume_from"
+          }
+        },
+        {
+          "name": "checkpoint_set",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "checkpoint_set"
+          }
+        },
+        {
+          "name": "project_name",
+          "type": "STRING",
+          "link": 61
+        }
+      ],
+      "outputs": [
+        {
+          "name": "clip_latent",
+          "type": "LATENT",
+          "links": [
+            38
+          ]
+        },
+        {
+          "name": "resume_from",
+          "type": "INT",
+          "links": [
+            42
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MiniMaxH3MusicVideoCheckpoint"
+      },
+      "widgets_values": [
+        1,
+        "atos_fo_4min"
+      ],
+      "title": "CHECKPOINTS — NAME FROM PROJECT NODE"
+    },
+    {
+      "id": 3006,
+      "type": "MiniMaxH3PreviewMusicVideoClipToVHS",
+      "pos": [
+        2550,
+        -650
+      ],
+      "size": [
+        420,
+        250
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip_latent",
+          "type": "LATENT",
+          "link": 38
+        },
+        {
+          "name": "video_vae",
+          "type": "VAE",
+          "link": 39
+        },
+        {
+          "name": "clip_audio",
+          "type": "AUDIO",
+          "link": 40
+        },
+        {
+          "name": "clip_number",
+          "type": "INT",
+          "link": 41
+        },
+        {
+          "name": "resume_from",
+          "type": "INT",
+          "link": 42
+        },
+        {
+          "name": "enabled",
+          "type": "BOOLEAN",
+          "link": null,
+          "widget": {
+            "name": "enabled"
+          }
+        },
+        {
+          "name": "filename_prefix",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "filename_prefix"
+          }
+        },
+        {
+          "name": "save_output",
+          "type": "BOOLEAN",
+          "link": null,
+          "widget": {
+            "name": "save_output"
+          }
+        },
+        {
+          "name": "project_name",
+          "type": "STRING",
+          "link": 62
+        }
+      ],
+      "outputs": [
+        {
+          "name": "reviewed_latent",
+          "type": "LATENT",
+          "links": [
+            44
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MiniMaxH3PreviewMusicVideoClipToVHS"
+      },
+      "widgets_values": [
+        true,
+        "h3_preview/atos_fo_4min",
+        true
+      ],
+      "title": "PREVIEW EACH SEQUENCE — NAME FROM PROJECT NODE"
+    },
+    {
+      "id": 3010,
+      "type": "MiniMaxH3MotionCache",
+      "pos": [
+        -800,
+        500
+      ],
+      "size": [
+        300,
+        226
+      ],
+      "flags": {},
+      "order": 32,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 51
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            52
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MiniMaxH3MotionCache"
+      },
+      "widgets_values": [
+        0.2,
+        1,
+        4,
+        2,
+        0.15,
+        0.95,
+        8,
+        false
+      ],
+      "title": "1 — MOTION CACHE"
+    },
+    {
+      "id": 3011,
+      "type": "MiniMaxH3MemoryEfficientSageAttentionPatch",
+      "pos": [
+        -430,
+        500
+      ],
+      "size": [
+        330,
+        64
+      ],
+      "flags": {},
+      "order": 34,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 52
+        }
+      ],
+      "outputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            53
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MiniMaxH3MemoryEfficientSageAttentionPatch"
+      },
+      "title": "2 — H3 MEMORY-EFFICIENT SAGE"
+    },
+    {
+      "id": 3012,
+      "type": "PathchSageAttentionKJ",
+      "pos": [
+        -30,
+        500
+      ],
+      "size": [
+        280,
+        82
+      ],
+      "flags": {},
+      "order": 35,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 53
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            54
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PathchSageAttentionKJ"
+      },
+      "widgets_values": [
+        "auto",
+        true
+      ],
+      "title": "3 — SAGE KJ"
+    },
+    {
+      "id": 3013,
+      "type": "MiniMaxChunkFeedForward",
+      "pos": [
+        320,
+        500
+      ],
+      "size": [
+        320,
+        82
+      ],
+      "flags": {},
+      "order": 36,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 54
+        }
+      ],
+      "outputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            55
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MiniMaxChunkFeedForward"
+      },
+      "widgets_values": [
+        2,
+        4096
+      ],
+      "title": "4 — CHUNK FEED FORWARD"
+    },
+    {
+      "id": 3014,
+      "type": "ModelPatchTorchSettings",
+      "pos": [
+        710,
+        500
+      ],
+      "size": [
+        320,
+        58
+      ],
+      "flags": {},
+      "order": 37,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 55
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            56
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ModelPatchTorchSettings"
+      },
+      "widgets_values": [
+        false
+      ],
+      "title": "5 — TORCH SETTINGS"
+    },
+    {
+      "id": 3015,
+      "type": "SolAttnPatch",
+      "pos": [
+        1100,
+        500
+      ],
+      "size": [
+        300,
+        298
+      ],
+      "flags": {},
+      "order": 38,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 56
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            57
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SolAttnPatch"
+      },
+      "widgets_values": [
+        1.3,
+        0.2,
+        0.9,
+        4096,
+        true,
+        "exact_kv_and_rows",
+        false,
+        "2d_frame",
+        false,
+        false,
+        "0,-1"
+      ],
+      "title": "6 — SOL-ATTN"
+    },
+    {
+      "id": 3016,
+      "type": "VedaSparseAttention",
+      "pos": [
+        1470,
+        500
+      ],
+      "size": [
+        350,
+        228
+      ],
+      "flags": {},
+      "order": 39,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 57
+        }
+      ],
+      "outputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            58
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VedaSparseAttention"
+      },
+      "widgets_values": [
+        "minimax_h3_r2va_veda_preview_fp8.safetensors",
+        "32",
+        "32",
+        "",
+        "",
+        false
+      ],
+      "title": "7 — VEDA (MUST BE LAST)"
+    },
+    {
+      "id": 3019,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        -690,
+        500
+      ],
+      "size": [
+        390,
+        130
+      ],
+      "flags": {},
+      "order": 33,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 50
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            51
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "h3-realism-people-t2v-i2v-r2v.safetensors",
+        0.7
+      ],
+      "title": "2 — REALISM PEOPLE LORA (0.7)"
+    },
+    {
+      "id": 3020,
+      "type": "MiniMaxH3MusicVideoProjectName",
+      "pos": [
+        -1220,
+        1320
+      ],
+      "size": [
+        410,
+        110
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "project_name",
+          "type": "STRING",
+          "widget": {
+            "name": "project_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "project_name",
+          "type": "STRING",
+          "links": [
+            61,
+            62,
+            63
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MiniMaxH3MusicVideoProjectName"
+      },
+      "widgets_values": [
+        "atos_fo2_4min"
+      ],
+      "title": "PROJECT NAME — ENTER ONCE HERE",
+      "color": "#1f5d4f",
+      "bgcolor": "#163d35"
+    }
+  ],
+  "links": [
+    [
+      1,
+      110,
+      0,
+      121,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      2,
+      101,
+      0,
+      102,
+      0,
+      "FLOAT"
+    ],
+    [
+      3,
+      970,
+      0,
+      123,
+      1,
+      "INT"
+    ],
+    [
+      4,
+      2,
+      0,
+      110,
+      0,
+      "CLIP"
+    ],
+    [
+      5,
+      3,
+      0,
+      110,
+      1,
+      "VAE"
+    ],
+    [
+      6,
+      2510,
+      0,
+      110,
+      2,
+      "VAE"
+    ],
+    [
+      7,
+      910,
+      0,
+      110,
+      3,
+      "IMAGE"
+    ],
+    [
+      8,
+      911,
+      0,
+      110,
+      4,
+      "IMAGE"
+    ],
+    [
+      9,
+      2505,
+      0,
+      110,
+      5,
+      "IMAGE"
+    ],
+    [
+      10,
+      2506,
+      0,
+      110,
+      6,
+      "IMAGE"
+    ],
+    [
+      11,
+      100,
+      0,
+      110,
+      11,
+      "INT"
+    ],
+    [
+      12,
+      100,
+      1,
+      110,
+      12,
+      "INT"
+    ],
+    [
+      13,
+      102,
+      1,
+      110,
+      13,
+      "INT"
+    ],
+    [
+      14,
+      110,
+      1,
+      1755,
+      0,
+      "LATENT"
+    ],
+    [
+      15,
+      2510,
+      0,
+      1755,
+      1,
+      "VAE"
+    ],
+    [
+      16,
+      940,
+      0,
+      1755,
+      2,
+      "AUDIO"
+    ],
+    [
+      17,
+      120,
+      0,
+      124,
+      0,
+      "NOISE"
+    ],
+    [
+      18,
+      121,
+      0,
+      124,
+      1,
+      "GUIDER"
+    ],
+    [
+      19,
+      973,
+      0,
+      124,
+      2,
+      "SAMPLER"
+    ],
+    [
+      20,
+      123,
+      0,
+      124,
+      3,
+      "SIGMAS"
+    ],
+    [
+      21,
+      1755,
+      0,
+      124,
+      4,
+      "LATENT"
+    ],
+    [
+      22,
+      4,
+      0,
+      2510,
+      0,
+      "VAE"
+    ],
+    [
+      23,
+      3000,
+      0,
+      3001,
+      0,
+      "H3_MUSIC_CLIP_SPEC"
+    ],
+    [
+      24,
+      940,
+      0,
+      3000,
+      0,
+      "AUDIO"
+    ],
+    [
+      25,
+      102,
+      1,
+      3000,
+      1,
+      "INT"
+    ],
+    [
+      26,
+      1733,
+      0,
+      3000,
+      2,
+      "INT"
+    ],
+    [
+      27,
+      3001,
+      3,
+      3002,
+      0,
+      "H3_MUSIC_CLIP_SPEC"
+    ],
+    [
+      28,
+      102,
+      1,
+      3002,
+      1,
+      "INT"
+    ],
+    [
+      29,
+      1733,
+      0,
+      3002,
+      2,
+      "INT"
+    ],
+    [
+      30,
+      3002,
+      0,
+      110,
+      15,
+      "STRING"
+    ],
+    [
+      31,
+      3002,
+      1,
+      120,
+      0,
+      "INT"
+    ],
+    [
+      32,
+      3002,
+      2,
+      1755,
+      6,
+      "FLOAT"
+    ],
+    [
+      33,
+      3001,
+      4,
+      1755,
+      5,
+      "LATENT"
+    ],
+    [
+      34,
+      1733,
+      0,
+      1755,
+      7,
+      "INT"
+    ],
+    [
+      35,
+      3001,
+      2,
+      1755,
+      8,
+      "BOOLEAN"
+    ],
+    [
+      36,
+      124,
+      0,
+      3005,
+      0,
+      "LATENT"
+    ],
+    [
+      37,
+      3002,
+      3,
+      3005,
+      1,
+      "INT"
+    ],
+    [
+      38,
+      3005,
+      0,
+      3006,
+      0,
+      "LATENT"
+    ],
+    [
+      39,
+      3,
+      0,
+      3006,
+      1,
+      "VAE"
+    ],
+    [
+      40,
+      1755,
+      2,
+      3006,
+      2,
+      "AUDIO"
+    ],
+    [
+      41,
+      3002,
+      3,
+      3006,
+      3,
+      "INT"
+    ],
+    [
+      42,
+      3005,
+      1,
+      3006,
+      4,
+      "INT"
+    ],
+    [
+      43,
+      3002,
+      3,
+      3003,
+      0,
+      "INT"
+    ],
+    [
+      44,
+      3006,
+      0,
+      3003,
+      1,
+      "LATENT"
+    ],
+    [
+      45,
+      3003,
+      0,
+      3004,
+      0,
+      "INT"
+    ],
+    [
+      46,
+      940,
+      0,
+      3004,
+      1,
+      "AUDIO"
+    ],
+    [
+      47,
+      1733,
+      0,
+      3004,
+      2,
+      "INT"
+    ],
+    [
+      48,
+      3004,
+      0,
+      2507,
+      0,
+      "VHS_FILENAMES"
+    ],
+    [
+      49,
+      1,
+      0,
+      977,
+      0,
+      "MODEL"
+    ],
+    [
+      50,
+      977,
+      0,
+      3019,
+      0,
+      "MODEL"
+    ],
+    [
+      51,
+      3019,
+      0,
+      3010,
+      0,
+      "MODEL"
+    ],
+    [
+      52,
+      3010,
+      0,
+      3011,
+      0,
+      "MODEL"
+    ],
+    [
+      53,
+      3011,
+      0,
+      3012,
+      0,
+      "MODEL"
+    ],
+    [
+      54,
+      3012,
+      0,
+      3013,
+      0,
+      "MODEL"
+    ],
+    [
+      55,
+      3013,
+      0,
+      3014,
+      0,
+      "MODEL"
+    ],
+    [
+      56,
+      3014,
+      0,
+      3015,
+      0,
+      "MODEL"
+    ],
+    [
+      57,
+      3015,
+      0,
+      3016,
+      0,
+      "MODEL"
+    ],
+    [
+      58,
+      3016,
+      0,
+      5,
+      0,
+      "MODEL"
+    ],
+    [
+      59,
+      5,
+      0,
+      121,
+      0,
+      "MODEL"
+    ],
+    [
+      60,
+      5,
+      0,
+      123,
+      0,
+      "MODEL"
+    ],
+    [
+      61,
+      3020,
+      0,
+      3005,
+      4,
+      "STRING"
+    ],
+    [
+      62,
+      3020,
+      0,
+      3006,
+      8,
+      "STRING"
+    ],
+    [
+      63,
+      3020,
+      0,
+      3004,
+      4,
+      "STRING"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "SHARED MODELS / REFERENCES",
+      "bounding": [
+        -2500,
+        -1000,
+        1050,
+        1500
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "EDITABLE CLIP PLAN",
+      "bounding": [
+        -1450,
+        -850,
+        720,
+        750
+      ],
+      "color": "#765d1d",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "ONE LOOP BODY — REUSED FOR EVERY CLIP",
+      "bounding": [
+        -700,
+        -850,
+        3750,
+        900
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 4,
+      "title": "FINAL LOW-RAM STREAM",
+      "bounding": [
+        3100,
+        -650,
+        1050,
+        600
+      ],
+      "color": "#2f6f4e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 5,
+      "title": "MINIMAX OPTIMIZATION CHAIN — DO NOT REORDER",
+      "bounding": [
+        -900,
+        350,
+        2800,
+        600
+      ],
+      "color": "#6b3f7d",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.259374246010006,
+      "offset": [
+        4719.909247619631,
+        2466.8261847304016
+      ]
+    },
+    "frontendVersion": "1.49.6",
+    "VHS_latentpreview": true,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true,
+    "ue_links": [],
+    "links_added_by_ue": []
+  },
+  "version": 0.4
+}

@@ -11,7 +11,7 @@ CUSTOM = "UTILITY - Custom Keyframes.json"
 
 
 def _load(name):
-    data = json.loads((WF / name).read_text())
+    data = json.loads((WF / name).read_text(encoding="utf-8"))
     return data, {n["id"]: n for n in data["nodes"]}, {l[0]: l for l in data["links"]}
 
 

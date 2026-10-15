@@ -70,9 +70,18 @@ from .h3_song_audio_context import MiniMaxH3SongMaskedAVContext
 from .h3_streaming_vhs import (
     MiniMaxH3StreamLiveExtensionAVToVHS,
     MiniMaxH3StreamLiveMusicVideoToVHS,
+    MiniMaxH3StreamMusicVideoListToVHS,
+    MiniMaxH3PreviewMusicVideoClipToVHS,
     MiniMaxH3LastActiveVHSPreviewBarrier,
     MiniMaxH3FinalizeVHSOutput,
 )
+from .h3_preview_assembler import MiniMaxH3AssembleMusicVideoPreviews
+from .h3_music_video_plan import (
+    MiniMaxH3MusicVideoClipPlan,
+    MiniMaxH3MusicVideoClipSpec,
+)
+from .h3_music_video_checkpoint import MiniMaxH3MusicVideoCheckpoint
+from .h3_project_name import MiniMaxH3MusicVideoProjectName
 from .h3_auto_crop32 import MiniMaxH3CropTo32, MiniMaxH3StartCanvasSelector
 from .h3_timing import crossfade_plan
 from .h3_v2v_fractional import H3V2VGranularFractionalDenoise
@@ -1743,6 +1752,9 @@ NODE_CLASS_MAPPINGS = {
     "MiniMaxH3SourceAudioPolicy": MiniMaxH3SourceAudioPolicy,
     "MiniMaxH3StreamLiveExtensionAVToVHS": MiniMaxH3StreamLiveExtensionAVToVHS,
     "MiniMaxH3StreamLiveMusicVideoToVHS": MiniMaxH3StreamLiveMusicVideoToVHS,
+    "MiniMaxH3StreamMusicVideoListToVHS": MiniMaxH3StreamMusicVideoListToVHS,
+    "MiniMaxH3PreviewMusicVideoClipToVHS": MiniMaxH3PreviewMusicVideoClipToVHS,
+    "MiniMaxH3AssembleMusicVideoPreviews": MiniMaxH3AssembleMusicVideoPreviews,
     "MiniMaxH3LastActiveVHSPreviewBarrier": MiniMaxH3LastActiveVHSPreviewBarrier,
     "MiniMaxH3FinalizeVHSOutput": MiniMaxH3FinalizeVHSOutput,
     "MiniMaxH3AssembleInterior": MiniMaxH3AssembleInterior,
@@ -1755,6 +1767,10 @@ NODE_CLASS_MAPPINGS = {
     "MiniMaxH3AVStartModeParam": MiniMaxH3AVStartModeParam,
     "MiniMaxH3AVSourceAudioModeParam": MiniMaxH3AVSourceAudioModeParam,
     "MiniMaxH3MusicVideoController": MiniMaxH3MusicVideoController,
+    "MiniMaxH3MusicVideoClipPlan": MiniMaxH3MusicVideoClipPlan,
+    "MiniMaxH3MusicVideoClipSpec": MiniMaxH3MusicVideoClipSpec,
+    "MiniMaxH3MusicVideoCheckpoint": MiniMaxH3MusicVideoCheckpoint,
+    "MiniMaxH3MusicVideoProjectName": MiniMaxH3MusicVideoProjectName,
     "MiniMaxH3ExtensionStartMode": MiniMaxH3ExtensionStartMode,
     "MiniMaxH3OptionalStartFrame": MiniMaxH3OptionalStartFrame,
     "H3V2VGranularFractionalDenoise": H3V2VGranularFractionalDenoise,
@@ -1782,6 +1798,9 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "MiniMaxH3SourceAudioPolicy": "H3 Source Audio Policy",
     "MiniMaxH3StreamLiveExtensionAVToVHS": "H3 Stream AV Extensions to VHS",
     "MiniMaxH3StreamLiveMusicVideoToVHS": "H3 Stream Final Music Video to VHS",
+    "MiniMaxH3StreamMusicVideoListToVHS": "H3 Stream Music Video List to VHS",
+    "MiniMaxH3PreviewMusicVideoClipToVHS": "H3 Preview Each Music Video Sequence",
+    "MiniMaxH3AssembleMusicVideoPreviews": "H3 Assemble Final Video from Sequence MP4s",
     "MiniMaxH3LastActiveVHSPreviewBarrier": "H3 Last Active VHS Preview Barrier",
     "MiniMaxH3FinalizeVHSOutput": "H3 Final Stream Output Sink",
     "MiniMaxH3AssembleInterior": "H3 Assemble Interior Insert",
@@ -1794,6 +1813,10 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "MiniMaxH3AVStartModeParam": "H3 AV Start Mode (Controller Internal)",
     "MiniMaxH3AVSourceAudioModeParam": "H3 AV Source Audio Mode (Controller Internal)",
     "MiniMaxH3MusicVideoController": "H3 Music Video Controller",
+    "MiniMaxH3MusicVideoClipPlan": "H3 Music Video Clip Plan",
+    "MiniMaxH3MusicVideoClipSpec": "H3 Music Video Current Clip",
+    "MiniMaxH3MusicVideoCheckpoint": "H3 Music Video Checkpoint / Resume",
+    "MiniMaxH3MusicVideoProjectName": "H3 Music Video Project Name",
     "MiniMaxH3ExtensionStartMode": "H3 Extension Start Mode",
     "MiniMaxH3OptionalStartFrame": "H3 Optional Starter First Frame",
     "H3V2VGranularFractionalDenoise": "H3 V2V Granular Fractional Denoise",
