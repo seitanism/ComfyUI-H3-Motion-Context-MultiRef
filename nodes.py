@@ -1798,3 +1798,11 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "MiniMaxH3OptionalStartFrame": "H3 Optional Starter First Frame",
     "H3V2VGranularFractionalDenoise": "H3 V2V Granular Fractional Denoise",
 }
+
+# H3 Motion Context Noise (latent 0 protection + context noise)
+from .h3_motion_context_noise import (
+    NODE_CLASS_MAPPINGS as _MCN_CLASSES,
+    NODE_DISPLAY_NAME_MAPPINGS as _MCN_NAMES,
+)
+NODE_CLASS_MAPPINGS.update(_MCN_CLASSES)
+NODE_DISPLAY_NAME_MAPPINGS.update(_MCN_NAMES)
