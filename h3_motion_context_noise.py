@@ -27,9 +27,10 @@ degradation_protection switch:
 3. Context noise. The held latents get part of the sampler's noise instead of
    being handed over fully clean, fading to none at the join. H3's partial
    masks do this: a mask value m puts a held latent at m x the current noise
-   level. The ethanfel fade (default) is ethanfel's drift_control recipe: full
-   weight, a 4-latent taper to clean at the join, and at every step the values
-   are scaled by next sigma / current sigma.
+   level. The linear fade (default) ramps from noise_strength on the first held
+   latent down to 0 at the join. The ethanfel fade is ethanfel's drift_control
+   recipe: full weight, a 4-latent taper to clean at the join, and at every
+   step the values are scaled by next sigma / current sigma.
 
 After sampling, the real held latents are put back into the output, so the join
 and anything that reads the head stay exactly as before.
@@ -53,7 +54,7 @@ except ImportError:  # standalone tests
 
 _LOG = logging.getLogger("h3_motion_context_noise")
 WHO = "H3 Motion Context Noise"
-FADES = ["ethanfel", "linear", "ease"]
+FADES = ["linear", "ease", "ethanfel"]
 _FOLDER_RE = re.compile(r"^[A-Za-z0-9_\-]+(/[A-Za-z0-9_\-]+)*$")
 
 
@@ -277,9 +278,9 @@ class MiniMaxH3MotionContextNoise:
                 "noise_strength": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.05,
                                              "tooltip": "Noise on the first held latent (1 = the same noise level as "
                                                         "the new frames). Fades to 0 at the join."}),
-                "fade": (FADES, {"default": "ethanfel", "tooltip": "ethanfel = his drift_control recipe: full weight, "
-                                 "a 4-latent taper to clean at the join, scaled by next/current sigma every step. "
-                                 "linear / ease = a straight / eased ramp over the held latents."}),
+                "fade": (FADES, {"default": "linear", "tooltip": "linear / ease = a straight / eased ramp over the held "
+                                 "latents. ethanfel = his drift_control recipe: full weight, a 4-latent taper to "
+                                 "clean at the join, scaled by next/current sigma every step."}),
                 "source_shot": ("INT", {"default": 1, "min": 1, "max": 100000, "tooltip": "Which caught shot's "
                                         "latent 0 to lock in. 1 = the clean start of the chain. Set it to the first "
                                         "shot of a new scene after a scene change."}),
@@ -294,7 +295,7 @@ class MiniMaxH3MotionContextNoise:
         }
 
     def apply(self, latent, model, degradation_protection=True, latent_0_protection=True, context_noise=True,
-              noise_strength=1.0, fade="ethanfel", source_shot=1, catch_folder="h3_latent0_catch",
+              noise_strength=1.0, fade="linear", source_shot=1, catch_folder="h3_latent0_catch",
               source_latent=None):
         parts, nested = _streams(latent)
         video = parts[0]
